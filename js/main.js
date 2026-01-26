@@ -40,27 +40,28 @@ window.addEventListener('scroll', () => {
 });
 
 // Form submission handler (placeholder - integrate with actual backend)
-const leadForm = document.querySelector('.lead-form');
+const leadForm = document.querySelector('.guide-download-form');
 if (leadForm) {
     leadForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        const name = this.querySelector('input[type="text"]').value;
         const email = this.querySelector('input[type="email"]').value;
 
         // Placeholder - replace with actual form submission logic
-        console.log('Email submitted:', email);
+        console.log('Guide download requested:', { name, email });
 
         // Show success message
         const button = this.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        button.textContent = 'Thank you!';
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="bi bi-check-circle me-2"></i>Guide Sent to Your Email!';
         button.disabled = true;
 
         setTimeout(() => {
-            button.textContent = originalText;
+            button.innerHTML = originalHTML;
             button.disabled = false;
             this.reset();
-        }, 3000);
+        }, 4000);
     });
 }
 

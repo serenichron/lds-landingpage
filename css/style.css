@@ -448,21 +448,174 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Lead Magnet Section */
 .lead-magnet-section {
-    background: var(--white);
+    background: linear-gradient(135deg, #f8fdfd 0%, #e8f6f7 100%);
 }
 
-.lead-form .form-control {
-    border: 2px solid #dee2e6;
+.guide-download-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Guide Cover */
+.guide-cover-wrapper {
+    perspective: 1000px;
+}
+
+.guide-cover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: rotateY(-5deg);
+    transition: transform 0.3s ease;
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.guide-cover:hover {
+    transform: rotateY(0deg);
+}
+
+.guide-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.2), transparent);
+    border-radius: 8px 0 0 8px;
+}
+
+.guide-cover-inner {
+    color: var(--white);
+    text-align: center;
+}
+
+.guide-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+}
+
+.guide-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 1.5rem 0 0.5rem;
+    line-height: 1.2;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.guide-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    backdrop-filter: blur(10px);
+}
+
+.guide-icon-wrapper i {
+    font-size: 2.5rem;
+    color: var(--white);
+}
+
+.guide-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Guide Form Content */
+.guide-form-content {
     padding: 1rem;
 }
 
-.lead-form .form-control:focus {
+.guide-benefits {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.benefit-item:last-child {
+    margin-bottom: 0;
+}
+
+.benefit-item i {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.guide-download-form .form-control {
+    border: 2px solid #dee2e6;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.guide-download-form .form-control:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(10, 126, 140, 0.15);
 }
 
-.lead-form .btn {
-    border-radius: 0 50px 50px 0;
+.guide-download-form .btn {
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .guide-download-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .guide-cover {
+        transform: rotateY(0deg);
+        max-width: 280px;
+        padding: 2rem 1.5rem;
+    }
+
+    .guide-title {
+        font-size: 1.5rem;
+    }
+
+    .guide-subtitle {
+        font-size: 1rem;
+    }
+
+    .guide-form-content {
+        padding: 0;
+        margin-top: 2rem;
+    }
 }
 
 /* Footer */
