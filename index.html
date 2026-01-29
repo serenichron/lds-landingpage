@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transform Your Institution's Online Learning | Learning Design Solutions</title>
-    <meta name="description" content="Help your institution reach global learners with pedagogically sound online programmes. Expert guidance from classroom to online excellence.">
+    <title>Scale Your Online Programmes Without Scaling Your Team | Learning Design Solutions</title>
+    <meta name="description" content="Strategic partner for HE institutions launching pedagogically rigorous online programmes. From strategy to delivery at commercial speed.">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     <style>
         :root {
             /* Brand Colors */
-            --lds-navy: #1e3a8a;
+            --lds-navy: #122159;
             --lds-green: #84cc16;
             --lds-orange: #f97316;
             --lds-dark: #1f2937;
@@ -80,8 +80,14 @@
             border-bottom: 3px solid var(--lds-green);
         }
 
-        .navbar-brand img {
-            height: 45px;
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--lds-white) !important;
+        }
+
+        .navbar-brand span {
+            color: var(--lds-green);
         }
 
         .nav-link {
@@ -134,7 +140,7 @@
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
             color: var(--lds-white);
             padding: var(--section-padding) 0;
             position: relative;
@@ -213,62 +219,25 @@
             color: var(--lds-white);
         }
 
-        /* Problem Cards */
-        .problem-card {
+        /* Challenge Cards */
+        .challenge-card {
             background-color: var(--lds-white);
-            border: 2px solid #e5e7eb;
+            border-left: 4px solid var(--lds-orange);
             padding: 2rem;
             height: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
-            position: relative;
         }
 
-        .problem-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background-color: var(--lds-orange);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--lds-navy);
+        .challenge-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .problem-card:hover::before {
-            opacity: 1;
-        }
-
-        .problem-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Quote Section */
-        .quote-section {
-            background-color: var(--lds-light);
-            border-left: 6px solid var(--lds-green);
-            padding: 3rem;
-            margin: 3rem 0;
-        }
-
-        .quote-text {
-            font-size: 1.5rem;
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--lds-dark);
-            margin-bottom: 1rem;
-        }
-
-        .quote-author {
-            font-weight: 600;
+        .challenge-card h3 {
             color: var(--lds-navy);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         /* Stat Boxes */
@@ -315,6 +284,7 @@
 
         .process-step h3 {
             margin-bottom: 0.75rem;
+            color: var(--lds-navy);
         }
 
         /* Comparison Lists */
@@ -349,6 +319,20 @@
             color: var(--lds-orange);
         }
 
+        /* Image Styles */
+        .section-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 4px solid var(--lds-navy);
+        }
+
+        .section-image-sm {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
         /* Credentials */
         .credential-badge {
             background-color: var(--lds-white);
@@ -369,7 +353,7 @@
 
         .form-control:focus, .form-select:focus {
             border-color: var(--lds-navy);
-            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+            box-shadow: 0 0 0 3px rgba(18, 33, 89, 0.1);
         }
 
         .form-label {
@@ -424,25 +408,31 @@
             color: var(--lds-green);
         }
 
-        /* Logo Carousel */
-        .logo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            align-items: center;
-            opacity: 0.6;
+        /* Client Logos */
+        .client-logos {
+            padding: 3rem 0;
+            background-color: var(--lds-light);
         }
 
-        .logo-grid img {
-            max-width: 120px;
+        .client-logos img {
+            max-width: 100%;
             height: auto;
-            filter: grayscale(100%);
-            transition: all 0.3s;
+            opacity: 0.7;
+            transition: opacity 0.3s;
         }
 
-        .logo-grid img:hover {
-            filter: grayscale(0%);
+        .client-logos img:hover {
             opacity: 1;
+        }
+
+        /* Quote Highlight */
+        .quote-highlight {
+            border-left: 6px solid var(--lds-green);
+            background-color: var(--lds-light);
+            padding: 2.5rem;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--lds-dark);
         }
 
         /* Responsive */
@@ -468,10 +458,6 @@
                 font-size: 1.125rem;
             }
 
-            .quote-text {
-                font-size: 1.25rem;
-            }
-
             .stat-number {
                 font-size: 2.5rem;
             }
@@ -487,6 +473,14 @@
                 transform: translateX(-50%);
                 top: 0;
             }
+
+            .section-image {
+                height: 300px;
+            }
+
+            .section-image-sm {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -496,7 +490,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="images/lds-logo-horizontal-white.png" alt="Learning Design Solutions" style="height: 40px;">
+                Learning<span>Design</span>Solutions
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -504,12 +498,11 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#approach">Our Approach</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#results">Case Studies</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#guide">Free Guide</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-primary btn-sm" href="#contact">Book a Consultation</a>
+                        <a class="btn btn-primary btn-sm" href="#contact">Book Consultation</a>
                     </li>
                 </ul>
             </div>
@@ -521,12 +514,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 hero-content">
-                    <div class="hero-badge">For Higher Education Leaders</div>
-                    <h1>You know your institution needs to reach more learners online. But putting lectures online isn't enough.</h1>
-                    <p class="lead">Transform your teaching approach for the online world. Reach global audiences without losing academic quality.</p>
+                    <div class="hero-badge">For Higher Education Institutions</div>
+                    <h1>Launch Quality Online Programmes at Commercial Speed</h1>
+                    <p class="lead">Your internal team can't scale fast enough. We provide the capacity, expertise, and speed you need—without compromising academic standards.</p>
                     <div class="d-flex gap-3 flex-wrap">
-                        <a href="#contact" class="btn btn-primary btn-lg">Book a Consultation</a>
-                        <a href="#guide" class="btn btn-outline-primary btn-lg" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">Get Free Guide</a>
+                        <a href="#contact" class="btn btn-primary btn-lg">Book Strategy Call</a>
+                        <a href="#approach" class="btn btn-outline-primary btn-lg" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">See Our Approach</a>
                     </div>
                     <div class="accent-bars mt-4">
                         <div class="accent-bar green"></div>
@@ -545,7 +538,7 @@
                         <div class="col-6">
                             <div class="stat-box" style="background-color: rgba(255,255,255,0.1);">
                                 <div class="stat-number" style="color: var(--lds-green);">20+</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.9);">Institutions Served</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.9);">Institutions</div>
                             </div>
                         </div>
                     </div>
@@ -554,111 +547,210 @@
         </div>
     </section>
 
-    <!-- Problem Identification -->
+    <!-- Client Logos -->
+    <section class="client-logos">
+        <div class="container">
+            <div class="text-center mb-4">
+                <p class="text-muted mb-3"><strong>Trusted by leading institutions</strong></p>
+            </div>
+            <div class="text-center">
+                <img src="https://images.squarespace-cdn.com/content/v1/607f1cfdc0b18a1f60a00da5/8b308fc1-27d9-4ad7-a02d-d9752caef92f/lds-client-logo-set.png"
+                     alt="Clients including Dyson, ICAS, Glasgow Caledonian University, Heriot-Watt University, Future Learn, and Reels"
+                     style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Challenges -->
     <section class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Do These Challenges Sound Familiar?</h2>
-                <p class="lead text-muted">You're not alone. Most institutions face these same barriers.</p>
+                <h2>Strategic Challenges We Solve</h2>
+                <p class="lead text-muted">Common barriers to launching online programmes at scale</p>
             </div>
 
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">⏰</div>
-                        <h3>Too Slow to Launch</h3>
-                        <p>You have ambitious plans for online programmes, but your internal team can't move fast enough to meet commercial deadlines.</p>
+                    <div class="challenge-card">
+                        <h3>Limited Internal Capacity</h3>
+                        <p>Your digital learning team supports the entire institution. They can't deliver large-scale programmes on commercial timescales.</p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">👥</div>
-                        <h3>Limited Capacity</h3>
-                        <p>Your digital learning team is supporting the entire university. They simply don't have the resources for large-scale programme development.</p>
+                    <div class="challenge-card">
+                        <h3>Slow Time to Market</h3>
+                        <p>By the time you launch, competitors have captured market share. You need speed without sacrificing quality.</p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">🎯</div>
-                        <h3>Quality Concerns</h3>
-                        <p>You worry that rushing online delivery will damage your institution's reputation. You need quality, not just speed.</p>
+                    <div class="challenge-card">
+                        <h3>Academic Transformation Gap</h3>
+                        <p>Recording lectures isn't enough. Your academics need guidance on rethinking pedagogy for online delivery.</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">📚</div>
-                        <h3>Resistant Academics</h3>
-                        <p>Some lecturers don't understand why teaching online requires a different approach. They want to just "put lectures online".</p>
-                    </div>
+            <div class="row mt-5 align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+                         alt="University lecture hall transformation"
+                         class="section-image">
                 </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">🌍</div>
-                        <h3>Missing the Market</h3>
-                        <p>Your competitors are reaching global audiences online while you're stuck serving only local, on-campus students.</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="problem-card">
-                        <div class="problem-icon">❓</div>
-                        <h3>Don't Know Where to Start</h3>
-                        <p>You know you need to transform, but you're not sure how to do it whilst maintaining your academic standards.</p>
-                    </div>
+                <div class="col-lg-6">
+                    <h3>The Core Issue: Academic Transformation</h3>
+                    <p>Most institutions approach online learning as a technical challenge. They invest in platforms and recording equipment.</p>
+                    <p><strong>But the real challenge is pedagogical.</strong></p>
+                    <p>Effective online learning requires rethinking your entire approach to teaching. How you structure content, engage learners, and assess outcomes must change.</p>
+                    <p class="mb-0">That's where we come in. We help you make this transformation whilst maintaining the academic rigour your institution is known for.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What Links Them -->
-    <section class="section-padding-sm bg-light-custom">
+    <!-- What We Do -->
+    <section id="approach" class="section-padding bg-navy">
         <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 style="color: var(--lds-white);">Academic Transformation Enabled by Technology</h2>
+                    <p style="color: rgba(255,255,255,0.9);" class="lead">Not just course building. Strategic programme design.</p>
+                    <p style="color: rgba(255,255,255,0.9);">We're not a technical agency. We're education experts who understand higher education culture, standards, and stakeholder management.</p>
+
+                    <div class="mt-4">
+                        <h4 style="color: var(--lds-green);">What Makes Us Different</h4>
+                        <ul class="comparison-list" style="color: rgba(255,255,255,0.9);">
+                            <li>Founded and led by a former Associate Professor with 30 years in HE</li>
+                            <li>Grounded in educational theory (not just best practices)</li>
+                            <li>Scalable teams that deliver at commercial speed</li>
+                            <li>AI-enhanced workflow that speeds development without sacrificing quality</li>
+                            <li>Your academics remain in control of their content throughout</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                         alt="Collaborative team working on educational programme design"
+                         class="section-image" style="border-color: var(--lds-green);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>How We Work Together</h2>
+                <p class="lead">Clear stages from strategy to launch</p>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <h2 class="text-center mb-4">What All These Challenges Have in Common</h2>
-                    <p class="lead text-center mb-4">They stem from a fundamental misunderstanding about what online learning actually requires.</p>
-                    <p>Most institutions think going online is a technical challenge. They believe if they have the right platform and record some lectures, they're done.</p>
-                    <p><strong>But online learning isn't about technology. It's about academic transformation.</strong></p>
-                    <p>The way you've been teaching in classrooms for decades doesn't translate directly online. You need to completely rethink your approach to teaching and learning—and most academics don't realise this until it's too late.</p>
-                    <p class="mb-0">That's where Learning Design Solutions comes in. We help you make that transformation whilst maintaining the academic rigour your institution is known for.</p>
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Strategy & Consultation</h3>
+                        <p>We start by understanding your institution's goals, market position, and constraints. Together we develop a strategic approach tailored to your context.</p>
+                        <p class="text-muted mb-0"><em>Deliverable: Strategic roadmap and implementation plan</em></p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Pilot & Validation</h3>
+                        <p>Before full-scale development, we create a pilot module or course. This proves the approach, gathers feedback, and secures buy-in from stakeholders.</p>
+                        <p class="text-muted mb-0"><em>Deliverable: Fully developed pilot course ready for testing</em></p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Programme Design & Development</h3>
+                        <p>Our learning designers collaborate with your subject experts to transform content. We use AI-assisted co-design to maintain quality whilst meeting your timescales.</p>
+                        <p class="text-muted mb-0"><em>Deliverable: Complete course designs and learning materials</em></p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Build & Media Production</h3>
+                        <p>We build courses in your existing VLE/LMS, create professional media, and deliver production-ready programmes. No handover gaps or unfinished work.</p>
+                        <p class="text-muted mb-0"><em>Deliverable: Fully built programmes ready for student enrolment</em></p>
+                    </div>
+
+                    <div class="text-center mt-5 p-5" style="background-color: var(--lds-light);">
+                        <h3 class="mb-3">Typical Timeline</h3>
+                        <p class="lead mb-4">Pilot: 6-8 weeks • Full Programme: 3-6 months</p>
+                        <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Empathy Quote -->
-    <section class="section-padding">
+    <!-- Case Study Highlight -->
+    <section id="results" class="section-padding bg-light-custom">
         <div class="container">
-            <div class="quote-section">
-                <p class="quote-text">"We know we need to reach online learners. We have the strategy approved. But we're frustrated watching our plans move so slowly whilst our capacity stays the same."</p>
-                <p class="quote-author">— Programme Director at a UK University</p>
+            <div class="text-center mb-5">
+                <h2>Proven Track Record</h2>
+                <p class="lead">Large-scale transformations for leading institutions</p>
             </div>
-            <div class="text-center mt-5">
-                <p class="lead mb-4"><strong>If this sounds like your situation, you're in the right place.</strong></p>
-                <p>There's a clear path forward—one that lets you move quickly without sacrificing quality.</p>
-                <a href="#contact" class="btn btn-primary btn-lg">Let's Talk About Your Situation</a>
+
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
+                         alt="Financial professional studying online"
+                         class="section-image">
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-badge" style="background-color: var(--lds-navy); color: var(--lds-green);">Case Study</div>
+                    <h3>Institute of Chartered Accountants of Scotland (ICAS)</h3>
+                    <p class="lead">Complete curriculum transformation from classroom-based to digital-first delivery</p>
+                    <p><strong>Challenge:</strong> ICAS needed to transform their entire professional qualification programme from traditional classroom teaching to scalable online delivery.</p>
+                    <p><strong>Solution:</strong> 2.5-year strategic partnership to redesign and build complete curriculum.</p>
+                    <p><strong>Result:</strong> Revolutionary transformation of both online and classroom teaching. The project changed how ICAS thinks about education delivery across all formats.</p>
+                    <a href="/case-studies/icas" class="btn btn-outline-primary">Read Full Case Study</a>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                        <h4>Walbrook Institute</h4>
+                        <p>Private HE institution. Fast decision-making enabled rapid programme launch in competitive market.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                        <h4>Heriot-Watt University</h4>
+                        <p>Shifted from self-paced to cohort-based model. Improved engagement and completion rates.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                        <h4>Dyson Institute</h4>
+                        <p>CPD pilot programme for innovative engineering education provider.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Andrew / Credibility -->
-    <section id="about" class="section-padding bg-navy">
+    <!-- About Andrew -->
+    <section id="about" class="section-padding">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                    <img src="images/andrew-doig.jpg" alt="Andrew Doig" class="img-fluid" style="max-width: 300px; border: 4px solid var(--lds-green);">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
+                         alt="Andrew Doig, Founder"
+                         class="img-fluid"
+                         style="max-width: 300px; border: 4px solid var(--lds-green);">
                 </div>
                 <div class="col-lg-8">
-                    <h2 style="color: var(--lds-white);">Who's Guiding You?</h2>
-                    <h3 style="color: var(--lds-green);">Andrew Doig</h3>
-                    <p><strong>Not just a consultant. A fellow academic who understands your world.</strong></p>
-                    <p>I've spent 30 years in education—as a classroom teacher, university lecturer, and Associate Professor. I've published research, managed programmes, and worked inside the academic system.</p>
-                    <p>Since 2015, I've helped over 20 higher education institutions successfully transform their teaching for online delivery. Universities like Birmingham, York, Glasgow, and chartered institutes like ICAS.</p>
-                    <p class="mb-4">I understand what higher education IS. I know the pressures you face. And I know how to translate classroom excellence into online excellence without losing what makes your institution special.</p>
+                    <h2>Led by an Academic, Built for Institutions</h2>
+                    <h3 style="color: var(--lds-green);">Andrew Doig, Founder</h3>
+                    <p class="lead">I understand higher education because I've lived it for 30 years.</p>
+                    <p>I've been a classroom teacher, university lecturer, and Associate Professor. I've published research, managed programmes, and navigated institutional politics.</p>
+                    <p>Since 2015, I've helped over 20 higher education institutions transform their teaching for online delivery—from Russell Group universities to chartered institutes and corporate providers.</p>
+                    <p class="mb-4">I speak your language. I understand your stakeholders. I know what rigorous programme design looks like. And I know how to scale it.</p>
 
                     <div class="row g-3">
                         <div class="col-md-4">
@@ -682,165 +774,8 @@
         </div>
     </section>
 
-    <!-- What's Really Happening -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2>What's Really Holding You Back</h2>
-                <p class="lead">It's not about technology. It's about transformation.</p>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="text-center p-4" style="background-color: var(--lds-light);">
-                                <div class="display-1 mb-3" style="color: var(--lds-orange);">1</div>
-                                <h4>You Try In-House</h4>
-                                <p class="mb-0">Your team attempts to develop courses internally to save money.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center p-4" style="background-color: var(--lds-light);">
-                                <div class="display-1 mb-3" style="color: var(--lds-orange);">2</div>
-                                <h4>Capacity Issues Appear</h4>
-                                <p class="mb-0">Your team is stretched too thin. Quality drops. Deadlines slip.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center p-4" style="background-color: var(--lds-light);">
-                                <div class="display-1 mb-3" style="color: var(--lds-orange);">3</div>
-                                <h4>Opportunities Are Lost</h4>
-                                <p class="mb-0">Whilst you struggle, competitors launch programmes and capture your market.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-5 p-5" style="background-color: var(--lds-navy); color: var(--lds-white);">
-                        <h3 class="mb-3" style="color: var(--lds-green);">The Solution</h3>
-                        <p class="lead mb-0">Partner with experts who can scale quickly whilst maintaining your academic standards. Get your programmes online at commercial speed without compromising quality.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Approach -->
-    <section id="approach" class="section-padding bg-light-custom">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2>Our Approach: Academic Transformation Enabled by Technology</h2>
-                <p class="lead">We don't just build courses. We transform teaching.</p>
-            </div>
-
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
-                    <h3>What Makes Us Different</h3>
-                    <p>We're not a technical agency that builds courses. We're education experts who understand pedagogy first, technology second.</p>
-                    <p><strong>Our approach combines:</strong></p>
-                    <ul class="comparison-list mt-4">
-                        <li>Deep understanding of higher education culture and standards</li>
-                        <li>Evidence-based learning design grounded in educational theory</li>
-                        <li>Scalable teams that can deliver at commercial speed</li>
-                        <li>AI-assisted co-design that speeds development without sacrificing quality</li>
-                        <li>Collaboration that keeps academics in control of their content</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <div class="p-5" style="background-color: var(--lds-navy); color: var(--lds-white);">
-                        <h3 class="mb-4" style="color: var(--lds-green);">The "Backwash Effect"</h3>
-                        <p>Something remarkable happens when institutions work with us:</p>
-                        <p><strong>Academics who transform their teaching for online delivery often improve their classroom teaching too.</strong></p>
-                        <p class="mb-0">You don't just get better online courses. You get better teaching across your entire institution.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works / Process -->
-    <section id="process" class="section-padding">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2>How We Work Together</h2>
-                <p class="lead">A clear, proven process from strategy to launch</p>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Consulting & Strategy Development</h3>
-                        <p>We start by understanding your institution's goals, culture, and constraints. Together, we create a strategic approach that fits your context and budget.</p>
-                        <p class="text-muted mb-0"><em>Some institutions stop here and implement internally. That's fine—you'll have a clear roadmap.</em></p>
-                    </div>
-
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Piloting & Testing Strategic Approach</h3>
-                        <p>Before committing to full development, we create a pilot module or course. This lets you test the approach, gather feedback, and prove the model works.</p>
-                        <p class="text-muted mb-0"><em>Most institutions see the quality at this stage and ask us to continue to full development.</em></p>
-                    </div>
-
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Course Planning & Authoring</h3>
-                        <p>Our learning designers work directly with your academics to transform their expertise into engaging online learning experiences. We use an AI-assisted co-design process that speeds development whilst keeping academics in control.</p>
-                    </div>
-
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Course Build & Media Development</h3>
-                        <p>Our team builds the courses in your chosen platform, creates professional media, and ensures everything meets your quality standards. You get production-ready courses, not rough drafts.</p>
-                    </div>
-
-                    <div class="text-center mt-5 p-5" style="background-color: var(--lds-light);">
-                        <h3 class="mb-3">Ready to Get Started?</h3>
-                        <p class="lead mb-4">The first step is a conversation about your specific situation.</p>
-                        <a href="#contact" class="btn btn-primary btn-lg">Book Your Consultation</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Results / Case Studies Teaser -->
-    <section id="results" class="section-padding bg-navy">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 style="color: var(--lds-white);">Institutions We've Helped Transform</h2>
-                <p class="lead" style="color: rgba(255,255,255,0.9);">From pilots to full programme redesigns</p>
-            </div>
-
-            <div class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: rgba(255,255,255,0.1);">
-                        <h3 style="color: var(--lds-green);">ICAS</h3>
-                        <p style="color: rgba(255,255,255,0.9);">Transformed their entire curriculum from classroom-based to digital-first, revolutionising both online and classroom delivery.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: rgba(255,255,255,0.1);">
-                        <h3 style="color: var(--lds-green);">Walbrook Institute</h3>
-                        <p style="color: rgba(255,255,255,0.9);">Private HE institution - fast decision-making led to rapid programme launch in competitive market.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: rgba(255,255,255,0.1);">
-                        <h3 style="color: var(--lds-green);">Heriot-Watt University</h3>
-                        <p style="color: rgba(255,255,255,0.9);">Shifted from "anytime access" to cohort-based model with higher engagement and completion.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem;">We've also worked with: University of Birmingham • University of York • Glasgow University • Dyson Institute • and more</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- What This Is / Isn't -->
-    <section class="section-padding">
+    <!-- Is This Right -->
+    <section class="section-padding bg-light-custom">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Is This Right for Your Institution?</h2>
@@ -849,47 +784,48 @@
 
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-light); border-left: 4px solid var(--lds-green);">
-                        <h3 class="mb-4">This Is for You If:</h3>
+                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-left: 4px solid var(--lds-green);">
+                        <h3 class="mb-4">You're a Good Fit If:</h3>
                         <ul class="comparison-list">
-                            <li>You're a private university, chartered institute, or HE-adjacent organisation with strategic funding</li>
-                            <li>You have ambitious online learning goals but limited internal capacity</li>
-                            <li>You want to move quickly without sacrificing academic quality</li>
-                            <li>You value partnership and collaboration, not just outsourcing</li>
-                            <li>You're ready to invest in transformation, not just course production</li>
-                            <li>You want programmes that reach global audiences whilst maintaining your institutional identity</li>
+                            <li>You're a private university, chartered institute, or well-funded HE organisation</li>
+                            <li>You have clear strategic goals for online programme delivery</li>
+                            <li>You need to move quickly without compromising academic quality</li>
+                            <li>You value partnership over simple outsourcing</li>
+                            <li>You're ready to invest in proper transformation, not shortcuts</li>
+                            <li>You want to maintain your institutional identity and standards</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-light); border-left: 4px solid var(--lds-orange);">
-                        <h3 class="mb-4">This Isn't for You If:</h3>
+                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-left: 4px solid var(--lds-orange);">
+                        <h3 class="mb-4">We're Not the Right Fit If:</h3>
                         <ul class="comparison-list negative">
-                            <li>You just want someone to record your lectures and put them online</li>
+                            <li>You only want to record lectures and upload them</li>
                             <li>You're looking for the cheapest option available</li>
-                            <li>You're not willing to rethink your teaching approach for online delivery</li>
-                            <li>You only want technical course building without strategic guidance</li>
-                            <li>You have very slow procurement processes and can't move forward for 12+ months</li>
-                            <li>You're expecting instant results without putting in the collaborative work</li>
+                            <li>You need work to start immediately without strategic planning</li>
+                            <li>You have very slow procurement (12+ months to contract)</li>
+                            <li>You only want technical course building without pedagogy guidance</li>
+                            <li>You're not willing to invest in doing this properly</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-5">
-                <p class="lead"><strong>If you're in the first column, let's talk.</strong></p>
-                <a href="#contact" class="btn btn-primary btn-lg">Book a Consultation</a>
+                <div class="quote-highlight">
+                    "The institutions that succeed with online learning invest in the transformation, not just the technology."
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section-padding bg-light-custom">
+    <section class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Common Questions</h2>
-                <p class="lead">What institutions typically ask us</p>
+                <p class="lead">What programme directors typically ask</p>
             </div>
 
             <div class="row justify-content-center">
@@ -898,13 +834,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    How quickly can we launch online programmes with your help?
+                                    How quickly can we launch with your support?
                                 </button>
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>It depends on the scale of your project, but we can scale our team quickly to meet your deadlines. For privately funded institutions with clear decision-making, we can move from consultation to pilot in 6-8 weeks. Full programme development typically takes 3-6 months depending on size.</p>
-                                    <p class="mb-0">The key difference: we have the capacity to meet commercial timescales that internal teams simply can't match.</p>
+                                    <p>For privately funded institutions, we can move from consultation to pilot in 6-8 weeks. Full programme development typically takes 3-6 months.</p>
+                                    <p class="mb-0">The key advantage: we scale our team to meet your deadlines. We have the capacity to deliver at commercial speed that internal teams cannot match.</p>
                                 </div>
                             </div>
                         </div>
@@ -912,12 +848,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Do you work with our existing platform or require us to change?
+                                    Do you work with our existing platform?
                                 </button>
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p class="mb-0">We work with your existing VLE/LMS. We're platform-agnostic. Whether you use Moodle, Canvas, Blackboard, or something else, we build in your chosen environment. We're not here to force technology changes—we're here to help you use what you have more effectively.</p>
+                                    <p class="mb-0">Yes. We're platform-agnostic. Whether you use Moodle, Canvas, Blackboard, or another VLE, we build in your environment. We don't force technology changes—we help you use what you have more effectively.</p>
                                 </div>
                             </div>
                         </div>
@@ -925,13 +861,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Will our academics remain in control of their content?
+                                    Will our academics maintain control of content?
                                 </button>
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Absolutely. We don't extract content and do what we want with it. We work collaboratively with your subject matter experts throughout the process. They retain ownership and control.</p>
-                                    <p class="mb-0">Think of us as expert guides who help your academics translate their expertise into effective online formats. It's a partnership, not a takeover.</p>
+                                    <p>Absolutely. We collaborate with your subject experts throughout the process. They retain ownership and academic authority.</p>
+                                    <p class="mb-0">We're expert guides who help your academics translate their expertise into effective online formats. It's partnership, not extraction.</p>
                                 </div>
                             </div>
                         </div>
@@ -939,13 +875,14 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    How do you maintain academic quality whilst moving quickly?
+                                    What does it cost?
                                 </button>
                             </h2>
                             <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Our approach is grounded in educational theory—constructive alignment, Bloom's Taxonomy, and evidence-based learning design. We don't sacrifice rigour for speed.</p>
-                                    <p class="mb-0">We move quickly because we have scalable teams and efficient processes, including AI-assisted co-design. But every course is pedagogically sound and maintains your academic standards.</p>
+                                    <p>Every project is different. Costs depend on scale, complexity, media requirements, and timescales.</p>
+                                    <p>Typical projects range from £50,000 for a pilot programme to £500,000+ for full curriculum transformation.</p>
+                                    <p class="mb-0">The first consultation is free. We'll discuss your needs and provide a clear, transparent proposal.</p>
                                 </div>
                             </div>
                         </div>
@@ -953,14 +890,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    What does it cost to work with Learning Design Solutions?
+                                    How do you maintain quality whilst moving quickly?
                                 </button>
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Every project is different. Costs depend on the scale of transformation, number of courses, level of media production, and your timescales.</p>
-                                    <p>Typical projects range from £50,000 for a pilot programme to £500,000+ for full curriculum transformation.</p>
-                                    <p class="mb-0">The first consultation is free. We'll discuss your situation and provide a clear proposal with transparent pricing.</p>
+                                    <p>Our approach is grounded in educational theory—constructive alignment, Bloom's Taxonomy, and evidence-based design.</p>
+                                    <p class="mb-0">We move quickly because we have efficient processes and scalable teams, including AI-assisted workflows. But every course meets rigorous academic standards.</p>
                                 </div>
                             </div>
                         </div>
@@ -968,13 +904,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    Can we start with just consulting and decide later about full development?
+                                    Can we start with just consulting?
                                 </button>
                             </h2>
                             <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Yes! Many institutions start with just strategic consulting. You get a clear roadmap and can choose to implement internally or continue working with us.</p>
-                                    <p class="mb-0">The pilot stage is also designed as a decision point—you can test the approach before committing to full programme development.</p>
+                                    <p>Yes. Many institutions start with strategic consulting only. You get a clear roadmap and can choose to implement internally or continue with us.</p>
+                                    <p class="mb-0">The pilot stage is also designed as a decision point—test the approach before committing to full development.</p>
                                 </div>
                             </div>
                         </div>
@@ -984,96 +920,41 @@
         </div>
     </section>
 
-    <!-- Lead Magnet / Guide -->
-    <section id="guide" class="section-padding bg-navy">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="hero-badge">Free Guide</div>
-                    <h2 style="color: var(--lds-white);">5 Hidden Challenges in Translating Classroom Teaching to Online Learning</h2>
-                    <p style="color: rgba(255,255,255,0.9);" class="lead">Most institutions make these mistakes when moving online. Learn what successful transformations have in common.</p>
-                    <ul style="color: rgba(255,255,255,0.9);">
-                        <li>Why simply recording lectures doesn't work</li>
-                        <li>The common mistakes with rewards and penalties</li>
-                        <li>How to break the cycle of poor engagement</li>
-                        <li>What academics need to know before they start</li>
-                        <li>Questions to ask before committing to online delivery</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <div class="p-5" style="background-color: var(--lds-white);">
-                        <h3 class="mb-4">Download Your Free Guide</h3>
-                        <form id="leadMagnetForm">
-                            <div class="mb-3">
-                                <label for="guideName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="guideName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="guideEmail" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="guideEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="guideInstitution" class="form-label">Institution</label>
-                                <input type="text" class="form-control" id="guideInstitution">
-                            </div>
-                            <div class="mb-3">
-                                <label for="guideRole" class="form-label">Your Role</label>
-                                <select class="form-select" id="guideRole">
-                                    <option value="">Select your role</option>
-                                    <option value="programme-director">Programme Director</option>
-                                    <option value="dean">Dean</option>
-                                    <option value="digital-learning">Digital Learning Manager</option>
-                                    <option value="cpd">CPD Coordinator</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="guideConsent" required>
-                                <label class="form-check-label" for="guideConsent">
-                                    I agree to receive emails from Learning Design Solutions. You can unsubscribe at any time.
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 btn-lg">Download Free Guide</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Consultation Booking -->
-    <section id="contact" class="section-padding">
+    <!-- Contact -->
+    <section id="contact" class="section-padding bg-navy">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="text-center mb-5">
-                        <h2>Ready to Transform Your Online Learning?</h2>
-                        <p class="lead">Book a free consultation to discuss your institution's specific needs</p>
+                        <h2 style="color: var(--lds-white);">Ready to Discuss Your Programme?</h2>
+                        <p class="lead" style="color: rgba(255,255,255,0.9);">Book a free strategic consultation</p>
                     </div>
 
                     <div class="row g-5">
                         <div class="col-lg-6">
-                            <h3 class="mb-4">What Happens Next:</h3>
-                            <div class="process-step">
-                                <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">1</div>
-                                <h4>Book Your Call</h4>
-                                <p>Fill in the form or email us directly. We'll schedule a time that works for you.</p>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">2</div>
-                                <h4>Discovery Conversation</h4>
-                                <p>We'll discuss your goals, challenges, and timescales. No pressure, just clarity.</p>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">3</div>
-                                <h4>Clear Proposal</h4>
-                                <p>If there's a good fit, we'll create a tailored proposal. If not, we'll tell you honestly.</p>
+                            <div style="color: rgba(255,255,255,0.9);">
+                                <h3 class="mb-4" style="color: var(--lds-green);">What Happens Next:</h3>
+                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
+                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">1</div>
+                                    <h4>Schedule Your Call</h4>
+                                    <p>Complete the form or email us directly. We'll find a time that works for you.</p>
+                                </div>
+                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
+                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">2</div>
+                                    <h4>Strategic Discussion</h4>
+                                    <p>We'll discuss your goals, timeline, and constraints. No pressure—just clarity on what's possible.</p>
+                                </div>
+                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
+                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">3</div>
+                                    <h4>Tailored Proposal</h4>
+                                    <p>If there's a good fit, we'll create a detailed proposal. If not, we'll tell you honestly.</p>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-lg-6">
-                            <div class="p-4" style="background-color: var(--lds-light);">
-                                <h3 class="mb-4">Get in Touch</h3>
+                            <div class="p-4" style="background-color: var(--lds-white);">
+                                <h3 class="mb-4">Book Your Consultation</h3>
                                 <form id="contactForm">
                                     <div class="mb-3">
                                         <label for="contactName" class="form-label">Name</label>
@@ -1088,16 +969,26 @@
                                         <input type="text" class="form-control" id="contactInstitution" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="contactMessage" class="form-label">Tell us about your situation</label>
-                                        <textarea class="form-control" id="contactMessage" rows="4" placeholder="What are you trying to achieve? What's your main challenge?" required></textarea>
+                                        <label for="contactRole" class="form-label">Your Role</label>
+                                        <select class="form-select" id="contactRole" required>
+                                            <option value="">Select your role</option>
+                                            <option value="programme-director">Programme Director</option>
+                                            <option value="dean">Dean</option>
+                                            <option value="digital-learning">Digital Learning Manager</option>
+                                            <option value="cpd">CPD Coordinator</option>
+                                            <option value="other">Other</option>
+                                        </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Book Your Consultation</button>
+                                    <div class="mb-3">
+                                        <label for="contactMessage" class="form-label">What are you looking to achieve?</label>
+                                        <textarea class="form-control" id="contactMessage" rows="3" placeholder="Tell us about your programme goals..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Book Consultation</button>
                                 </form>
 
                                 <div class="mt-4 pt-4" style="border-top: 2px solid #e5e7eb;">
                                     <p class="mb-2"><strong>Or contact us directly:</strong></p>
                                     <p class="mb-1">Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
-                                    <p class="mb-0">Phone: +44 (0)XXXX XXXXXX</p>
                                 </div>
                             </div>
                         </div>
@@ -1112,31 +1003,30 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <img src="images/lds-logo-stacked-white.png" alt="Learning Design Solutions" style="height: 60px; margin-bottom: 1rem;">
-                    <p>Transforming higher education for the online world through pedagogically sound, academically rigorous programme design.</p>
+                    <h4 style="color: var(--lds-green); font-weight: 700;">Learning<span style="color: var(--lds-white);">Design</span>Solutions</h4>
+                    <p class="mt-3">Strategic partner for higher education institutions launching pedagogically rigorous online programmes.</p>
                 </div>
                 <div class="col-lg-2">
-                    <h5 style="color: var(--lds-green);">Quick Links</h5>
+                    <h5 style="color: var(--lds-green);">Navigation</h5>
                     <ul class="list-unstyled">
                         <li><a href="#approach">Our Approach</a></li>
-                        <li><a href="#process">How It Works</a></li>
-                        <li><a href="#results">Results</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#results">Case Studies</a></li>
                         <li><a href="#about">About</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h5 style="color: var(--lds-green);">Resources</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#guide">Free Guide</a></li>
                         <li><a href="/case-studies">Case Studies</a></li>
                         <li><a href="/blog">Blog</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
-                    <h5 style="color: var(--lds-green);">Get in Touch</h5>
+                    <h5 style="color: var(--lds-green);">Get Started</h5>
                     <p>Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
-                    <p>Ready to start? <a href="#contact" style="color: var(--lds-green); font-weight: 600;">Book a consultation →</a></p>
+                    <p><a href="#contact" style="color: var(--lds-green); font-weight: 600;">Book a consultation →</a></p>
                 </div>
             </div>
             <div class="row mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
@@ -1145,7 +1035,6 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="/privacy" style="font-size: 0.875rem; margin-left: 1rem;">Privacy Policy</a>
-                    <a href="/terms" style="font-size: 0.875rem; margin-left: 1rem;">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -1169,16 +1058,10 @@
             });
         });
 
-        // Form submissions (replace with your actual form handling)
-        document.getElementById('leadMagnetForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you! Your guide will be sent to your email shortly.');
-            // Add your form submission logic here
-        });
-
+        // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you! We\'ll be in touch within 24 hours to schedule your consultation.');
+            alert('Thank you! We\'ll contact you within 24 hours to schedule your consultation.');
             // Add your form submission logic here
         });
     </script>
