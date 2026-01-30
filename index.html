@@ -558,6 +558,132 @@
             color: var(--lds-navy);
         }
 
+        /* Plan Steps */
+        .plan-step {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background-color: var(--lds-white);
+            position: relative;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .plan-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .plan-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--lds-green) 0%, #65a30d 100%);
+            color: var(--lds-navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: var(--font-display);
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 6px 20px rgba(132, 204, 22, 0.3);
+        }
+
+        .plan-step h3 {
+            color: var(--lds-navy);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-step p {
+            color: var(--lds-dark);
+            margin-bottom: 0;
+        }
+
+        /* Opt-in Section */
+        .optin-wrapper {
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .optin-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132, 204, 22, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .optin-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .optin-badge {
+            display: inline-block;
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            padding: 0.5rem 1.25rem;
+            font-weight: 800;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .optin-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .optin-benefits li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            color: rgba(255,255,255,0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.0625rem;
+        }
+
+        .optin-benefits li:last-child {
+            border-bottom: none;
+        }
+
+        .optin-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--lds-green);
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .optin-form-box {
+            background-color: var(--lds-white);
+            padding: 3rem;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+        }
+
+        .optin-form-box h3 {
+            color: var(--lds-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .optin-cta-text {
+            background-color: var(--lds-green);
+            color: var(--lds-navy);
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             :root {
@@ -871,7 +997,8 @@
                     </ul>
 
                     <p><strong>The Result:</strong></p>
-                    <p class="mb-0">ICAS now delivers their entire qualification online with the same academic rigour. The project changed how they think about education across all their programmes.</p>
+                    <p class="mb-3">ICAS now delivers their entire qualification online with the same academic rigour. The project changed how they think about education across all their programmes.</p>
+                    <p><a href="/case-studies/icas" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read the full case study →</a></p>
                 </div>
             </div>
 
@@ -880,27 +1007,115 @@
                     <div class="case-study-card">
                         <h4>Walbrook Institute</h4>
                         <p>Private HE institution. Strategic partnership enabled rapid programme launch in competitive market. Built complete online MBA programme in 5 months.</p>
-                        <a href="/case-studies/walbrook-institute" class="btn btn-outline-primary mt-3">Read case study →</a>
+                        <p class="mt-3 mb-0"><a href="/case-studies/walbrook-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="case-study-card">
                         <h4>Heriot-Watt University</h4>
                         <p>Transformed existing self-paced courses into cohort-based model. Improved student engagement and completion rates significantly.</p>
-                        <a href="/case-studies/heriot-watt-university" class="btn btn-outline-primary mt-3">Read case study →</a>
+                        <p class="mt-3 mb-0"><a href="/case-studies/heriot-watt-university" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="case-study-card">
                         <h4>Dyson Institute</h4>
                         <p>Pilot CPD programme for innovative engineering education provider. Validated approach before full-scale development.</p>
-                        <a href="/case-studies/dyson-institute" class="btn btn-outline-primary mt-3">Read case study →</a>
+                        <p class="mt-3 mb-0"><a href="/case-studies/dyson-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-5">
-                <a href="/case-studies" class="btn btn-primary btn-lg">See All Case Studies</a>
+                <p class="mb-0"><a href="/case-studies" style="color: var(--lds-navy); font-weight: 700; font-size: 1.125rem; text-decoration: underline;">See all case studies →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Plan -->
+    <section class="section-padding bg-light-custom">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Here's how we work together</h2>
+                <p class="lead text-muted">A simple 4-step process from first conversation to launched programme</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="plan-step">
+                        <div class="plan-number">1</div>
+                        <h3>Book a call</h3>
+                        <p>Schedule a free 30-minute strategy call. We'll discuss your goals, timeline, and what success looks like for your institution.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="plan-step">
+                        <div class="plan-number">2</div>
+                        <h3>We design your programme</h3>
+                        <p>Our team works with your academics to design complete course structures, content, and assessments aligned with your learning outcomes.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="plan-step">
+                        <div class="plan-number">3</div>
+                        <h3>We build everything</h3>
+                        <p>We produce all videos, create interactive activities, build content in your VLE, and prepare all student-facing materials.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="plan-step">
+                        <div class="plan-number">4</div>
+                        <h3>You enrol students</h3>
+                        <p>Launch your programme with confidence. Your courses are ready, your team is trained, and students can start learning immediately.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#contact" class="btn btn-primary btn-lg">Start the Conversation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Andrew -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
+                         alt="Andrew Doig, Founder"
+                         class="img-fluid"
+                         style="max-width: 320px; border: 5px solid var(--lds-green);">
+                </div>
+                <div class="col-lg-8">
+                    <h2>Led by an academic who understands your institution</h2>
+                    <h3 style="color: var(--lds-green);">Andrew Doig, Founder</h3>
+                    <p class="lead">30 years in higher education. I know your world.</p>
+                    <p>I've been a classroom teacher, university lecturer, and Associate Professor. I've published research, managed degree programmes, and navigated institutional politics.</p>
+                    <p>I understand what "rigorous programme design" actually means. I know why academics are sceptical of online learning. I speak your language.</p>
+                    <p class="mb-4">Since 2015, I've helped 20+ institutions—from Russell Group universities to chartered institutes—transform their teaching for online delivery without losing academic quality.</p>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="credential-badge">
+                                30 Years in<br>Education
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="credential-badge">
+                                Former Associate<br>Professor
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="credential-badge">
+                                Senior Fellow<br>HE Academy
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -949,46 +1164,6 @@
                                     <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.9375rem;">Direct contact:</p>
                                     <p class="mb-0" style="color: var(--lds-white); font-weight: 600;">info@learningdesignsolutions.co.uk</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Andrew -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
-                         alt="Andrew Doig, Founder"
-                         class="img-fluid"
-                         style="max-width: 320px; border: 5px solid var(--lds-green);">
-                </div>
-                <div class="col-lg-8">
-                    <h2>Led by an academic who understands your institution</h2>
-                    <h3 style="color: var(--lds-green);">Andrew Doig, Founder</h3>
-                    <p class="lead">30 years in higher education. I know your world.</p>
-                    <p>I've been a classroom teacher, university lecturer, and Associate Professor. I've published research, managed degree programmes, and navigated institutional politics.</p>
-                    <p>I understand what "rigorous programme design" actually means. I know why academics are sceptical of online learning. I speak your language.</p>
-                    <p class="mb-4">Since 2015, I've helped 20+ institutions—from Russell Group universities to chartered institutes—transform their teaching for online delivery without losing academic quality.</p>
-
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                30 Years in<br>Education
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                Former Associate<br>Professor
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                Senior Fellow<br>HE Academy
                             </div>
                         </div>
                     </div>
@@ -1142,50 +1317,55 @@
     </section>
 
     <!-- Opt-in: Digital Transformation Playbook -->
-    <section class="section-padding bg-light-custom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=800&fit=crop"
+    <section class="optin-wrapper section-padding">
+        <div class="container optin-content">
+            <div class="row align-items-center justify-content-center g-5">
+                <div class="col-lg-5 col-md-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=650&fit=crop"
                          alt="Digital Transformation Playbook for 2026"
                          class="img-fluid"
-                         style="box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); max-height: 500px; object-fit: cover;">
+                         style="box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); max-width: 380px;">
                 </div>
-                <div class="col-lg-7">
-                    <div class="ps-lg-5">
-                        <h2 class="mb-3">Free guide: Digital transformation playbook for 2026</h2>
-                        <p class="lead mb-4">The complete roadmap for taking your programmes online. Used by 20+ institutions.</p>
-                        <p class="mb-4">Inside this guide you'll discover:</p>
-                        <ul class="mb-4" style="list-style: none; padding-left: 0;">
-                            <li class="mb-2">✓ How to build institutional buy-in for online learning</li>
-                            <li class="mb-2">✓ The 4-stage implementation timeline</li>
-                            <li class="mb-2">✓ Budget planning templates</li>
-                            <li class="mb-2">✓ Quality assurance frameworks</li>
-                            <li class="mb-2">✓ Real case studies from leading institutions</li>
-                        </ul>
 
-                        <div class="p-4" style="background-color: var(--lds-white); border-left: 6px solid var(--lds-green);">
-                            <h3 class="h4 mb-4">Get your free copy</h3>
-                            <form id="optinForm">
-                                <div class="mb-3">
-                                    <label for="optinName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="optinName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="optinEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="optinEmail" required>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gdprConsent" required>
-                                        <label class="form-check-label" for="gdprConsent" style="font-size: 0.9375rem;">
-                                            I agree to receive emails from Learning Design Solutions. You can unsubscribe at any time. View our <a href="/privacy">privacy policy</a>.
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-lg w-100">Download Free Guide</button>
-                            </form>
+                <div class="col-lg-6">
+                    <div class="optin-badge">FREE GUIDE • 2026 EDITION</div>
+                    <h2 style="color: var(--lds-white); font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem;">Digital transformation playbook for higher education</h2>
+                    <p class="lead" style="color: rgba(255,255,255,0.95); font-size: 1.375rem; margin-bottom: 2rem;">The complete roadmap for taking your programmes online. Trusted by 20+ leading institutions.</p>
+
+                    <ul class="optin-benefits">
+                        <li>How to build institutional buy-in for online learning</li>
+                        <li>The 4-stage implementation timeline</li>
+                        <li>Budget planning templates and cost calculators</li>
+                        <li>Quality assurance frameworks</li>
+                        <li>Real case studies from Russell Group universities</li>
+                    </ul>
+
+                    <div class="optin-form-box mt-4">
+                        <div class="optin-cta-text">
+                            Download your free copy now
                         </div>
+
+                        <form id="optinForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" id="optinName" placeholder="Your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control form-control-lg" id="optinEmail" placeholder="Your email address" required>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gdprConsent" required>
+                                    <label class="form-check-label" for="gdprConsent" style="font-size: 0.875rem; color: #6b7280;">
+                                        I agree to receive emails from Learning Design Solutions. You can unsubscribe at any time. View our <a href="/privacy" style="color: var(--lds-navy); text-decoration: underline;">privacy policy</a>.
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100" style="font-size: 1.125rem; padding: 1.25rem;">Download Free Guide</button>
+                        </form>
+
+                        <p class="text-center mt-3 mb-0" style="font-size: 0.875rem; color: #6b7280;">
+                            No spam. Only practical strategies and insights.
+                        </p>
                     </div>
                 </div>
             </div>
