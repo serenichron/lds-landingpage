@@ -307,12 +307,10 @@
             border-top-color: var(--lds-green);
         }
 
-        .barrier-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--lds-orange);
-            font-family: var(--font-display);
-            margin-bottom: 1rem;
+        .barrier-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         .barrier-card h3 {
@@ -559,18 +557,37 @@
         }
 
         /* Plan Steps */
+        .plan-section-bg {
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-section-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132, 204, 22, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
         .plan-step {
             text-align: center;
             padding: 2.5rem 2rem;
-            background-color: var(--lds-white);
+            background-color: rgba(255, 255, 255, 0.05);
             position: relative;
             transition: all 0.3s;
             height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .plan-step:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--lds-green);
         }
 
         .plan-number {
@@ -586,17 +603,17 @@
             font-weight: 900;
             font-family: var(--font-display);
             margin: 0 auto 1.5rem;
-            box-shadow: 0 6px 20px rgba(132, 204, 22, 0.3);
+            box-shadow: 0 6px 20px rgba(132, 204, 22, 0.4);
         }
 
         .plan-step h3 {
-            color: var(--lds-navy);
+            color: var(--lds-white);
             font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
         .plan-step p {
-            color: var(--lds-dark);
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 0;
         }
 
@@ -825,7 +842,7 @@
             <div class="row g-4 mb-5">
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <div class="barrier-number">01</div>
+                        <span class="barrier-icon">👥</span>
                         <h3>Your team can't scale</h3>
                         <p>Your digital learning team supports the entire university. They have the skills but not the capacity to deliver full programmes on commercial timescales.</p>
                     </div>
@@ -833,7 +850,7 @@
 
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <div class="barrier-number">02</div>
+                        <span class="barrier-icon">🚀</span>
                         <h3>Competitors are moving faster</h3>
                         <p>By the time internal approval processes finish and resources are assigned, your competitors have already launched and captured market share.</p>
                     </div>
@@ -841,7 +858,7 @@
 
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <div class="barrier-number">03</div>
+                        <span class="barrier-icon">🎥</span>
                         <h3>Recording lectures isn't enough</h3>
                         <p>Your academics know their subjects but don't know how to restructure content for online learners. Simply uploading lectures doesn't work.</p>
                     </div>
@@ -1033,11 +1050,11 @@
     </section>
 
     <!-- The Plan -->
-    <section class="section-padding bg-light-custom">
-        <div class="container">
+    <section class="plan-section-bg section-padding">
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="text-center mb-5">
-                <h2>Here's how we work together</h2>
-                <p class="lead text-muted">A simple 4-step process from first conversation to launched programme</p>
+                <h2 style="color: var(--lds-white);">Here's how we work together</h2>
+                <p class="lead" style="color: rgba(255,255,255,0.8);">A simple 4-step process from first conversation to launched programme</p>
             </div>
 
             <div class="row g-4">
@@ -1319,20 +1336,20 @@
     <!-- Opt-in: Digital Transformation Playbook -->
     <section class="optin-wrapper section-padding">
         <div class="container optin-content">
-            <div class="row align-items-center justify-content-center g-5">
-                <div class="col-lg-5 col-md-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=650&fit=crop"
+            <div class="row align-items-stretch g-5">
+                <div class="col-lg-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=600&fit=crop"
                          alt="Digital Transformation Playbook for 2026"
                          class="img-fluid"
-                         style="box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); max-width: 380px;">
+                         style="box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); max-width: 320px;">
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="optin-badge">FREE GUIDE • 2026 EDITION</div>
-                    <h2 style="color: var(--lds-white); font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem;">Digital transformation playbook for higher education</h2>
-                    <p class="lead" style="color: rgba(255,255,255,0.95); font-size: 1.375rem; margin-bottom: 2rem;">The complete roadmap for taking your programmes online. Trusted by 20+ leading institutions.</p>
+                    <h2 style="color: var(--lds-white); font-size: 2.5rem; line-height: 1.2; margin-bottom: 1rem;">Digital transformation playbook for higher education</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.125rem; margin-bottom: 2rem;">The complete roadmap for taking your programmes online. Trusted by 20+ leading institutions.</p>
 
-                    <ul class="optin-benefits">
+                    <ul class="optin-benefits mb-4">
                         <li>How to build institutional buy-in for online learning</li>
                         <li>The 4-stage implementation timeline</li>
                         <li>Budget planning templates and cost calculators</li>
@@ -1340,19 +1357,19 @@
                         <li>Real case studies from Russell Group universities</li>
                     </ul>
 
-                    <div class="optin-form-box mt-4">
+                    <div class="optin-form-box">
                         <div class="optin-cta-text">
-                            Download your free copy now
+                            Get your free copy
                         </div>
 
                         <form id="optinForm">
                             <div class="mb-3">
-                                <input type="text" class="form-control form-control-lg" id="optinName" placeholder="Your name" required>
+                                <input type="text" class="form-control" id="optinName" placeholder="Name" required style="padding: 0.875rem 1rem;">
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control form-control-lg" id="optinEmail" placeholder="Your email address" required>
+                                <input type="email" class="form-control" id="optinEmail" placeholder="Email" required style="padding: 0.875rem 1rem;">
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="gdprConsent" required>
                                     <label class="form-check-label" for="gdprConsent" style="font-size: 0.875rem; color: #6b7280;">
@@ -1360,10 +1377,10 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg w-100" style="font-size: 1.125rem; padding: 1.25rem;">Download Free Guide</button>
+                            <button type="submit" class="btn btn-primary w-100" style="font-size: 1.0625rem; padding: 1rem; background-color: var(--lds-orange); border: none;">Download Free Guide</button>
                         </form>
 
-                        <p class="text-center mt-3 mb-0" style="font-size: 0.875rem; color: #6b7280;">
+                        <p class="text-center mt-3 mb-0" style="font-size: 0.875rem; color: #9ca3af;">
                             No spam. Only practical strategies and insights.
                         </p>
                     </div>
