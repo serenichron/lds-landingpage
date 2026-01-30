@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scale Your Online Programmes Without Scaling Your Team | Learning Design Solutions</title>
-    <meta name="description" content="Strategic partner for HE institutions launching pedagogically rigorous online programmes. From strategy to delivery at commercial speed.">
+    <title>Build Complete Online Courses Faster | Learning Design Solutions</title>
+    <meta name="description" content="We design and build ready-to-launch online courses for HE institutions. From strategy to students enrolled in 3-6 months.">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,7 +12,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -26,13 +26,13 @@
 
             /* Typography */
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Libre Baskerville', serif;
+            --font-display: 'Merriweather', serif;
 
             /* Spacing */
-            --section-padding: 5rem;
-            --section-padding-sm: 3rem;
+            --section-padding: 6rem;
+            --section-padding-sm: 4rem;
 
-            /* Sharp corners - NO rounding */
+            /* Sharp corners */
             --border-radius: 0;
         }
 
@@ -48,42 +48,39 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 3.75rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.75rem;
+            letter-spacing: -0.01em;
         }
 
         h3 {
-            font-size: 1.75rem;
-        }
-
-        .display-heading {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            line-height: 1.1;
-            font-weight: 700;
+            font-size: 1.875rem;
         }
 
         /* Navigation */
         .navbar {
             background-color: var(--lds-navy);
-            padding: 1rem 0;
-            border-bottom: 3px solid var(--lds-green);
+            padding: 1.25rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .navbar-brand {
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--lds-white) !important;
+            font-family: var(--font-body);
         }
 
         .navbar-brand span {
@@ -104,10 +101,11 @@
         /* Buttons */
         .btn {
             font-weight: 600;
-            padding: 0.875rem 2rem;
+            padding: 1rem 2.5rem;
             border: none;
             transition: all 0.3s ease;
             text-transform: none;
+            font-size: 1.0625rem;
         }
 
         .btn-primary {
@@ -118,7 +116,7 @@
         .btn-primary:hover {
             background-color: #ea580c;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+            box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
         }
 
         .btn-outline-primary {
@@ -134,7 +132,7 @@
         }
 
         .btn-lg {
-            padding: 1.125rem 2.5rem;
+            padding: 1.25rem 3rem;
             font-size: 1.125rem;
         }
 
@@ -147,14 +145,15 @@
             overflow: hidden;
         }
 
-        .hero-section::before {
+        .hero-section::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(132, 204, 22, 0.1) 100%);
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132, 204, 22, 0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero-content {
@@ -166,40 +165,42 @@
             display: inline-block;
             background-color: var(--lds-green);
             color: var(--lds-navy);
-            padding: 0.5rem 1.25rem;
-            font-weight: 700;
-            font-size: 0.875rem;
+            padding: 0.625rem 1.5rem;
+            font-weight: 800;
+            font-size: 0.8125rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             margin-bottom: 1.5rem;
         }
 
         .hero-section h1 {
             color: var(--lds-white);
             margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
         .hero-section .lead {
-            font-size: 1.375rem;
+            font-size: 1.5rem;
             opacity: 0.95;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
-        /* Color Accent Bars */
+        /* Accent Bars */
         .accent-bars {
             display: flex;
-            gap: 0.5rem;
-            margin-top: 2rem;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
         }
 
         .accent-bar {
-            height: 4px;
+            height: 5px;
             flex: 1;
         }
 
         .accent-bar.green { background-color: var(--lds-green); }
         .accent-bar.orange { background-color: var(--lds-orange); }
-        .accent-bar.navy { background-color: var(--lds-navy); }
+        .accent-bar.navy { background-color: #1e3a8a; }
 
         /* Section Styles */
         .section-padding {
@@ -219,71 +220,197 @@
             color: var(--lds-white);
         }
 
-        /* Challenge Cards */
-        .challenge-card {
-            background-color: var(--lds-white);
-            border-left: 4px solid var(--lds-orange);
-            padding: 2rem;
-            height: 100%;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
+        /* Logo Ribbon Animation */
+        .logo-ribbon {
+            background-color: var(--lds-light);
+            padding: 2rem 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 3px solid var(--lds-green);
+            border-bottom: 3px solid var(--lds-green);
         }
 
-        .challenge-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transform: translateY(-4px);
+        .logo-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
         }
 
-        .challenge-card h3 {
-            color: var(--lds-navy);
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-item img {
+            height: 60px;
+            width: auto;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+
+        .logo-item:hover img {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* Stat Boxes */
         .stat-box {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-left: 4px solid var(--lds-green);
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--lds-orange);
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--lds-green);
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: var(--lds-dark);
+            font-size: 1.0625rem;
+            color: rgba(255,255,255,0.9);
             font-weight: 500;
+        }
+
+        /* Barrier Cards */
+        .barrier-card {
+            background-color: var(--lds-white);
+            padding: 2.5rem;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--lds-orange);
+        }
+
+        .barrier-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            transform: translateY(-6px);
+            border-top-color: var(--lds-green);
+        }
+
+        .barrier-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--lds-orange);
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+        }
+
+        .barrier-card h3 {
+            color: var(--lds-navy);
+            font-size: 1.625rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Offer Box */
+        .offer-box {
+            background: linear-gradient(135deg, var(--lds-green) 0%, #65a30d 100%);
+            color: var(--lds-navy);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg) translate(50%, -50%);
+        }
+
+        .offer-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-box li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .offer-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: 900;
+            font-size: 1.25rem;
         }
 
         /* Process Steps */
         .process-step {
             position: relative;
-            padding-left: 5rem;
-            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: var(--lds-white);
+            border-left: 6px solid var(--lds-navy);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
         }
 
-        .step-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 60px;
-            height: 60px;
+        .process-step:hover {
+            border-left-color: var(--lds-green);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-badge {
+            display: inline-block;
             background-color: var(--lds-navy);
             color: var(--lds-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
+            padding: 0.5rem 1.25rem;
             font-weight: 800;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
         }
 
         .process-step h3 {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--lds-navy);
+        }
+
+        .process-step .deliverable {
+            background-color: var(--lds-light);
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            border-left: 3px solid var(--lds-green);
+        }
+
+        .process-step .deliverable strong {
             color: var(--lds-navy);
         }
 
@@ -295,10 +422,11 @@
         }
 
         .comparison-list li {
-            padding: 1rem 0;
-            padding-left: 2rem;
+            padding: 1.125rem 0;
+            padding-left: 2.5rem;
             position: relative;
             border-bottom: 1px solid #e5e7eb;
+            font-weight: 500;
         }
 
         .comparison-list li:last-child {
@@ -310,8 +438,8 @@
             position: absolute;
             left: 0;
             color: var(--lds-green);
-            font-weight: 700;
-            font-size: 1.25rem;
+            font-weight: 900;
+            font-size: 1.5rem;
         }
 
         .comparison-list.negative li::before {
@@ -322,58 +450,72 @@
         /* Image Styles */
         .section-image {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
-            border: 4px solid var(--lds-navy);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
-        .section-image-sm {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
+        /* Case Study Card */
+        .case-study-card {
+            background-color: var(--lds-white);
+            padding: 2.5rem;
+            border-top: 6px solid var(--lds-green);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+
+        .case-study-card h4 {
+            color: var(--lds-navy);
+            margin-bottom: 1rem;
         }
 
         /* Credentials */
         .credential-badge {
             background-color: var(--lds-white);
-            border: 2px solid var(--lds-navy);
-            padding: 1rem 1.5rem;
+            border: 3px solid var(--lds-navy);
+            padding: 1.25rem 1.5rem;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--lds-navy);
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
+            transition: all 0.3s;
+        }
+
+        .credential-badge:hover {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
         }
 
         /* Form Styles */
         .form-control, .form-select {
-            padding: 0.875rem 1rem;
-            font-size: 1rem;
+            padding: 1rem 1.25rem;
+            font-size: 1.0625rem;
             border: 2px solid #d1d5db;
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--lds-navy);
-            box-shadow: 0 0 0 3px rgba(18, 33, 89, 0.1);
+            box-shadow: 0 0 0 4px rgba(18, 33, 89, 0.1);
         }
 
         .form-label {
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.625rem;
             color: var(--lds-dark);
         }
 
         /* FAQ Accordion */
         .accordion-item {
             border: 2px solid #e5e7eb;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .accordion-button {
             background-color: var(--lds-white);
             color: var(--lds-dark);
             font-weight: 600;
-            font-size: 1.125rem;
-            padding: 1.25rem 1.5rem;
+            font-size: 1.1875rem;
+            padding: 1.5rem 2rem;
         }
 
         .accordion-button:not(.collapsed) {
@@ -387,7 +529,7 @@
         }
 
         .accordion-body {
-            padding: 1.5rem;
+            padding: 2rem;
             font-size: 1.0625rem;
         }
 
@@ -395,7 +537,7 @@
         footer {
             background-color: var(--lds-dark);
             color: rgba(255, 255, 255, 0.8);
-            padding: 3rem 0 2rem;
+            padding: 4rem 0 2rem;
         }
 
         footer a {
@@ -408,46 +550,25 @@
             color: var(--lds-green);
         }
 
-        /* Client Logos */
-        .client-logos {
-            padding: 3rem 0;
+        /* Highlight Box */
+        .highlight-box {
             background-color: var(--lds-light);
-        }
-
-        .client-logos img {
-            max-width: 100%;
-            height: auto;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .client-logos img:hover {
-            opacity: 1;
-        }
-
-        /* Quote Highlight */
-        .quote-highlight {
-            border-left: 6px solid var(--lds-green);
-            background-color: var(--lds-light);
-            padding: 2.5rem;
+            border-left: 6px solid var(--lds-orange);
+            padding: 2rem 2.5rem;
             font-size: 1.25rem;
-            font-style: italic;
-            color: var(--lds-dark);
+            font-weight: 500;
+            color: var(--lds-navy);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             :root {
-                --section-padding: 3rem;
-                --section-padding-sm: 2rem;
+                --section-padding: 4rem;
+                --section-padding-sm: 3rem;
             }
 
             h1 {
                 font-size: 2.5rem;
-            }
-
-            .display-heading {
-                font-size: 2.75rem;
             }
 
             h2 {
@@ -455,31 +576,23 @@
             }
 
             .hero-section .lead {
-                font-size: 1.125rem;
+                font-size: 1.25rem;
             }
 
             .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .process-step {
-                padding-left: 0;
-                padding-top: 4rem;
-            }
-
-            .step-number {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 0;
+                font-size: 3rem;
             }
 
             .section-image {
                 height: 300px;
             }
 
-            .section-image-sm {
-                height: 250px;
+            .logo-item {
+                padding: 0 2rem;
+            }
+
+            .logo-item img {
+                height: 45px;
             }
         }
     </style>
@@ -497,12 +610,12 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#approach">Our Approach</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#results">Case Studies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#what-you-get">What You Get</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Our Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-primary btn-sm" href="#contact">Book Consultation</a>
+                        <a class="btn btn-primary btn-sm" href="#contact">Book a Call</a>
                     </li>
                 </ul>
             </div>
@@ -513,126 +626,164 @@
     <section class="hero-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 hero-content">
-                    <div class="hero-badge">For Higher Education Institutions</div>
-                    <h1>Launch Quality Online Programmes at Commercial Speed</h1>
-                    <p class="lead">Your internal team can't scale fast enough. We provide the capacity, expertise, and speed you need—without compromising academic standards.</p>
-                    <div class="d-flex gap-3 flex-wrap">
+                <div class="col-lg-8 hero-content">
+                    <div class="hero-badge">For HE Institutions</div>
+                    <h1>We Build Ready-to-Launch Online Courses While Your Team Focuses on Strategy</h1>
+                    <p class="lead">Get from first call to students enrolled in 3-6 months. We design, build, and deliver complete online courses in your existing platform.</p>
+                    <div class="d-flex gap-3 flex-wrap mt-4">
                         <a href="#contact" class="btn btn-primary btn-lg">Book Strategy Call</a>
-                        <a href="#approach" class="btn btn-outline-primary btn-lg" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">See Our Approach</a>
+                        <a href="#what-you-get" class="btn btn-outline-primary btn-lg" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">See What You Get</a>
                     </div>
-                    <div class="accent-bars mt-4">
+                    <div class="accent-bars">
                         <div class="accent-bar green"></div>
                         <div class="accent-bar orange"></div>
                         <div class="accent-bar navy"></div>
                     </div>
                 </div>
-                <div class="col-lg-5 text-center mt-5 mt-lg-0">
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <div class="stat-box" style="background-color: rgba(255,255,255,0.1);">
-                                <div class="stat-number" style="color: var(--lds-green);">30</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.9);">Years in Education</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="stat-box" style="background-color: rgba(255,255,255,0.1);">
-                                <div class="stat-number" style="color: var(--lds-green);">20+</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.9);">Institutions</div>
-                            </div>
-                        </div>
+                <div class="col-lg-4 text-center mt-5 mt-lg-0">
+                    <div class="stat-box mb-3">
+                        <div class="stat-number">3-6</div>
+                        <div class="stat-label">Months to Launch</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Institutions Served</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Client Logos -->
-    <section class="client-logos">
-        <div class="container">
-            <div class="text-center mb-4">
-                <p class="text-muted mb-3"><strong>Trusted by leading institutions</strong></p>
+    <!-- Animated Logo Ribbon -->
+    <div class="logo-ribbon">
+        <div class="logo-track">
+            <!-- First set of logos -->
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">DYSON</span>
             </div>
-            <div class="text-center">
-                <img src="https://images.squarespace-cdn.com/content/v1/607f1cfdc0b18a1f60a00da5/8b308fc1-27d9-4ad7-a02d-d9752caef92f/lds-client-logo-set.png"
-                     alt="Clients including Dyson, ICAS, Glasgow Caledonian University, Heriot-Watt University, Future Learn, and Reels"
-                     style="max-width: 100%; height: auto;">
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">ICAS</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">GCU</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">HERIOT-WATT</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">FUTURELEARN</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">WALBROOK</span>
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">DYSON</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">ICAS</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">GCU</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">HERIOT-WATT</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">FUTURELEARN</span>
+            </div>
+            <div class="logo-item">
+                <span style="font-weight: 700; font-size: 1.5rem; color: var(--lds-dark);">WALBROOK</span>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Strategic Challenges -->
+    <!-- Three Barriers -->
     <section class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Strategic Challenges We Solve</h2>
-                <p class="lead text-muted">Common barriers to launching online programmes at scale</p>
+                <h2>Three Barriers Stopping You From Launching Online Programmes</h2>
+                <p class="lead text-muted">And why most institutions struggle despite having great ideas</p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="challenge-card">
-                        <h3>Limited Internal Capacity</h3>
-                        <p>Your digital learning team supports the entire institution. They can't deliver large-scale programmes on commercial timescales.</p>
+            <div class="row g-4 mb-5">
+                <div class="col-lg-4">
+                    <div class="barrier-card">
+                        <div class="barrier-number">01</div>
+                        <h3>Your Team Can't Scale</h3>
+                        <p>Your digital learning team supports the entire university. They have the skills but not the capacity to deliver full programmes on commercial timescales.</p>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="challenge-card">
-                        <h3>Slow Time to Market</h3>
-                        <p>By the time you launch, competitors have captured market share. You need speed without sacrificing quality.</p>
+                <div class="col-lg-4">
+                    <div class="barrier-card">
+                        <div class="barrier-number">02</div>
+                        <h3>Competitors Are Moving Faster</h3>
+                        <p>By the time internal approval processes finish and resources are assigned, your competitors have already launched and captured market share.</p>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="challenge-card">
-                        <h3>Academic Transformation Gap</h3>
-                        <p>Recording lectures isn't enough. Your academics need guidance on rethinking pedagogy for online delivery.</p>
+                <div class="col-lg-4">
+                    <div class="barrier-card">
+                        <div class="barrier-number">03</div>
+                        <h3>Recording Lectures Isn't Enough</h3>
+                        <p>Your academics know their subjects but don't know how to restructure content for online learners. Simply uploading lectures doesn't work.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5 align-items-center">
+            <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
-                         alt="University lecture hall transformation"
+                         alt="Empty university lecture hall"
                          class="section-image">
                 </div>
                 <div class="col-lg-6">
-                    <h3>The Core Issue: Academic Transformation</h3>
-                    <p>Most institutions approach online learning as a technical challenge. They invest in platforms and recording equipment.</p>
-                    <p><strong>But the real challenge is pedagogical.</strong></p>
-                    <p>Effective online learning requires rethinking your entire approach to teaching. How you structure content, engage learners, and assess outcomes must change.</p>
-                    <p class="mb-0">That's where we come in. We help you make this transformation whilst maintaining the academic rigour your institution is known for.</p>
+                    <h3>Here's What Actually Needs to Happen</h3>
+                    <p class="lead">Online learning isn't a technical challenge. It's a teaching challenge.</p>
+                    <p>Most institutions invest in recording equipment and learning platforms. But the real work is transforming how your academics think about teaching.</p>
+                    <p>Classroom methods don't translate directly online. Content structure, learner engagement, and assessment all need rethinking.</p>
+                    <p class="mb-0"><strong>That's exactly what we do.</strong> We guide your academics through this transformation whilst building everything they need to launch.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What We Do -->
-    <section id="approach" class="section-padding bg-navy">
+    <!-- What You Actually Get -->
+    <section id="what-you-get" class="section-padding bg-navy">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h2 style="color: var(--lds-white);">Academic Transformation Enabled by Technology</h2>
-                    <p style="color: rgba(255,255,255,0.9);" class="lead">Not just course building. Strategic programme design.</p>
-                    <p style="color: rgba(255,255,255,0.9);">We're not a technical agency. We're education experts who understand higher education culture, standards, and stakeholder management.</p>
+            <div class="text-center mb-5">
+                <h2 style="color: var(--lds-white);">What You Actually Get: Ready-to-Launch Online Courses</h2>
+                <p class="lead" style="color: rgba(255,255,255,0.9);">Not PowerPoints. Not advice. Complete courses that students can enrol in tomorrow.</p>
+            </div>
 
-                    <div class="mt-4">
-                        <h4 style="color: var(--lds-green);">What Makes Us Different</h4>
-                        <ul class="comparison-list" style="color: rgba(255,255,255,0.9);">
-                            <li>Founded and led by a former Associate Professor with 30 years in HE</li>
-                            <li>Grounded in educational theory (not just best practices)</li>
-                            <li>Scalable teams that deliver at commercial speed</li>
-                            <li>AI-enhanced workflow that speeds development without sacrificing quality</li>
-                            <li>Your academics remain in control of their content throughout</li>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                         alt="Team collaborating on course design"
+                         class="section-image">
+                </div>
+                <div class="col-lg-6">
+                    <div class="offer-box">
+                        <h3>Every Course We Build Includes:</h3>
+                        <ul>
+                            <li>Complete course design: modules, lessons, activities, assessments</li>
+                            <li>Professional video content: instructor videos, explainer animations, screen recordings</li>
+                            <li>Interactive learning activities: discussions, case studies, simulations, group work</li>
+                            <li>All content built inside your existing VLE (Moodle, Canvas, Blackboard, etc.)</li>
+                            <li>Student resources: readings, templates, guides, reference materials</li>
+                            <li>Assessment materials: quizzes, assignments, rubrics, marking guides</li>
+                            <li>Everything tested and ready for students to start learning</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-                         alt="Collaborative team working on educational programme design"
-                         class="section-image" style="border-color: var(--lds-green);">
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="highlight-box" style="background-color: rgba(132, 204, 22, 0.2); border-color: var(--lds-green); color: var(--lds-white);">
+                        <strong>You don't need to hire new staff. You don't need to buy new platforms. You don't need to train your team.</strong> We bring everything needed to design, build, and launch your programmes while your academics stay focused on their research and teaching.
+                    </div>
                 </div>
             </div>
         </div>
@@ -642,92 +793,109 @@
     <section id="process" class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>How We Work Together</h2>
-                <p class="lead">Clear stages from strategy to launch</p>
+                <h2>From First Call to Students Enrolled: Our Four-Stage Process</h2>
+                <p class="lead text-muted">Clear stages with specific deliverables at each step</p>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Strategy & Consultation</h3>
-                        <p>We start by understanding your institution's goals, market position, and constraints. Together we develop a strategic approach tailored to your context.</p>
-                        <p class="text-muted mb-0"><em>Deliverable: Strategic roadmap and implementation plan</em></p>
+                        <span class="step-badge">STAGE 1 • 2-3 WEEKS</span>
+                        <h3>Strategy & Planning</h3>
+                        <p>We meet with your team to understand your institution's goals, target learners, and existing resources. Together we map out exactly what needs to be built and in what order.</p>
+                        <div class="deliverable">
+                            <strong>You get:</strong> Strategic roadmap showing all courses to be built, timeline, resources needed, and implementation plan
+                        </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Pilot & Validation</h3>
-                        <p>Before full-scale development, we create a pilot module or course. This proves the approach, gathers feedback, and secures buy-in from stakeholders.</p>
-                        <p class="text-muted mb-0"><em>Deliverable: Fully developed pilot course ready for testing</em></p>
+                        <span class="step-badge">STAGE 2 • 4-6 WEEKS</span>
+                        <h3>Pilot Course Development</h3>
+                        <p>Before committing to full programme development, we build one complete course. This proves the approach works, gives your academics hands-on experience, and lets you test with real students.</p>
+                        <div class="deliverable">
+                            <strong>You get:</strong> One fully designed and built course ready to launch, plus learnings about what works for your institution
+                        </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Programme Design & Development</h3>
-                        <p>Our learning designers collaborate with your subject experts to transform content. We use AI-assisted co-design to maintain quality whilst meeting your timescales.</p>
-                        <p class="text-muted mb-0"><em>Deliverable: Complete course designs and learning materials</em></p>
+                        <span class="step-badge">STAGE 3 • 8-12 WEEKS</span>
+                        <h3>Full Programme Design</h3>
+                        <p>Our learning designers work directly with your subject experts to transform their knowledge into structured online courses. We use AI-assisted design to speed up the process whilst maintaining quality.</p>
+                        <div class="deliverable">
+                            <strong>You get:</strong> Complete course designs for all modules: structures, scripts, storyboards, activity designs, assessment specifications
+                        </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Build & Media Production</h3>
-                        <p>We build courses in your existing VLE/LMS, create professional media, and deliver production-ready programmes. No handover gaps or unfinished work.</p>
-                        <p class="text-muted mb-0"><em>Deliverable: Fully built programmes ready for student enrolment</em></p>
+                        <span class="step-badge">STAGE 4 • 6-10 WEEKS</span>
+                        <h3>Build, Test, and Launch</h3>
+                        <p>We produce all videos, build everything in your VLE, create all supporting materials, and test with your team. You get production-ready courses, not works in progress.</p>
+                        <div class="deliverable">
+                            <strong>You get:</strong> Complete online programme built in your platform with all content, videos, activities, and assessments ready for student enrolment
+                        </div>
                     </div>
 
                     <div class="text-center mt-5 p-5" style="background-color: var(--lds-light);">
-                        <h3 class="mb-3">Typical Timeline</h3>
-                        <p class="lead mb-4">Pilot: 6-8 weeks • Full Programme: 3-6 months</p>
-                        <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                        <h3 class="mb-3">Typical Timeline: 3-6 Months from Start to Launch</h3>
+                        <p class="lead mb-4">Pilot programme: 6-8 weeks • Full programme: 3-6 months</p>
+                        <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Timeline</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Case Study Highlight -->
+    <!-- Case Study -->
     <section id="results" class="section-padding bg-light-custom">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Proven Track Record</h2>
-                <p class="lead">Large-scale transformations for leading institutions</p>
+                <h2>Real Results: Complete Curriculum Transformations</h2>
+                <p class="lead">Large-scale projects for leading institutions</p>
             </div>
 
             <div class="row g-5 align-items-center mb-5">
                 <div class="col-lg-6">
                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-                         alt="Financial professional studying online"
+                         alt="Professional accountant working on laptop"
                          class="section-image">
                 </div>
                 <div class="col-lg-6">
-                    <div class="hero-badge" style="background-color: var(--lds-navy); color: var(--lds-green);">Case Study</div>
-                    <h3>Institute of Chartered Accountants of Scotland (ICAS)</h3>
-                    <p class="lead">Complete curriculum transformation from classroom-based to digital-first delivery</p>
-                    <p><strong>Challenge:</strong> ICAS needed to transform their entire professional qualification programme from traditional classroom teaching to scalable online delivery.</p>
-                    <p><strong>Solution:</strong> 2.5-year strategic partnership to redesign and build complete curriculum.</p>
-                    <p><strong>Result:</strong> Revolutionary transformation of both online and classroom teaching. The project changed how ICAS thinks about education delivery across all formats.</p>
-                    <a href="/case-studies/icas" class="btn btn-outline-primary">Read Full Case Study</a>
+                    <div class="hero-badge" style="background-color: var(--lds-navy); color: var(--lds-green);">Featured Project</div>
+                    <h3>ICAS: Full Curriculum Redesign</h3>
+                    <p class="lead">Institute of Chartered Accountants of Scotland</p>
+
+                    <p><strong>The Challenge:</strong></p>
+                    <p>ICAS needed to transform their entire professional qualification from classroom-based delivery to scalable online learning.</p>
+
+                    <p><strong>What We Delivered:</strong></p>
+                    <ul>
+                        <li>Complete redesign of full curriculum over 2.5 years</li>
+                        <li>Digital-first courses that work for both online and classroom</li>
+                        <li>All content, videos, activities, and assessments built and ready</li>
+                    </ul>
+
+                    <p><strong>The Result:</strong></p>
+                    <p class="mb-0">ICAS now delivers their entire qualification online with the same academic rigour. The project changed how they think about education across all their programmes.</p>
                 </div>
             </div>
 
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                    <div class="case-study-card">
                         <h4>Walbrook Institute</h4>
-                        <p>Private HE institution. Fast decision-making enabled rapid programme launch in competitive market.</p>
+                        <p>Private HE institution. Strategic partnership enabled rapid programme launch in competitive market. Built complete online MBA programme in 5 months.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                    <div class="case-study-card">
                         <h4>Heriot-Watt University</h4>
-                        <p>Shifted from self-paced to cohort-based model. Improved engagement and completion rates.</p>
+                        <p>Transformed existing self-paced courses into cohort-based model. Improved student engagement and completion rates significantly.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 text-center" style="background-color: var(--lds-white); border-top: 4px solid var(--lds-green);">
+                    <div class="case-study-card">
                         <h4>Dyson Institute</h4>
-                        <p>CPD pilot programme for innovative engineering education provider.</p>
+                        <p>Pilot CPD programme for innovative engineering education provider. Validated approach before full-scale development.</p>
                     </div>
                 </div>
             </div>
@@ -742,20 +910,20 @@
                     <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
                          alt="Andrew Doig, Founder"
                          class="img-fluid"
-                         style="max-width: 300px; border: 4px solid var(--lds-green);">
+                         style="max-width: 320px; border: 5px solid var(--lds-green);">
                 </div>
                 <div class="col-lg-8">
-                    <h2>Led by an Academic, Built for Institutions</h2>
+                    <h2>Led by an Academic Who Understands Your Institution</h2>
                     <h3 style="color: var(--lds-green);">Andrew Doig, Founder</h3>
-                    <p class="lead">I understand higher education because I've lived it for 30 years.</p>
-                    <p>I've been a classroom teacher, university lecturer, and Associate Professor. I've published research, managed programmes, and navigated institutional politics.</p>
-                    <p>Since 2015, I've helped over 20 higher education institutions transform their teaching for online delivery—from Russell Group universities to chartered institutes and corporate providers.</p>
-                    <p class="mb-4">I speak your language. I understand your stakeholders. I know what rigorous programme design looks like. And I know how to scale it.</p>
+                    <p class="lead">30 years in higher education. I know your world.</p>
+                    <p>I've been a classroom teacher, university lecturer, and Associate Professor. I've published research, managed degree programmes, and navigated institutional politics.</p>
+                    <p>I understand what "rigorous programme design" actually means. I know why academics are sceptical of online learning. I speak your language.</p>
+                    <p class="mb-4">Since 2015, I've helped 20+ institutions—from Russell Group universities to chartered institutes—transform their teaching for online delivery without losing academic quality.</p>
 
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="credential-badge">
-                                30 Years<br>in Education
+                                30 Years in<br>Education
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -774,47 +942,47 @@
         </div>
     </section>
 
-    <!-- Is This Right -->
+    <!-- Who This Is For -->
     <section class="section-padding bg-light-custom">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Is This Right for Your Institution?</h2>
-                <p class="lead">We work best with certain types of organisations</p>
+                <h2>Who We Work With (and Who We Don't)</h2>
+                <p class="lead">We're selective about the institutions we partner with</p>
             </div>
 
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-left: 4px solid var(--lds-green);">
-                        <h3 class="mb-4">You're a Good Fit If:</h3>
+                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-top: 6px solid var(--lds-green);">
+                        <h3 class="mb-4">This Is Right for You If:</h3>
                         <ul class="comparison-list">
-                            <li>You're a private university, chartered institute, or well-funded HE organisation</li>
-                            <li>You have clear strategic goals for online programme delivery</li>
-                            <li>You need to move quickly without compromising academic quality</li>
-                            <li>You value partnership over simple outsourcing</li>
-                            <li>You're ready to invest in proper transformation, not shortcuts</li>
-                            <li>You want to maintain your institutional identity and standards</li>
+                            <li>You're a private university, chartered institute, or well-funded organisation</li>
+                            <li>You have clear goals and can make decisions in weeks, not years</li>
+                            <li>You need full courses built, not just advice or templates</li>
+                            <li>You value quality and are willing to invest properly</li>
+                            <li>You want your academics involved throughout, not sidelined</li>
+                            <li>You need to launch within 3-6 months, not 18-24 months</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-left: 4px solid var(--lds-orange);">
-                        <h3 class="mb-4">We're Not the Right Fit If:</h3>
+                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-top: 6px solid var(--lds-orange);">
+                        <h3 class="mb-4">This Isn't Right If:</h3>
                         <ul class="comparison-list negative">
                             <li>You only want to record lectures and upload them</li>
                             <li>You're looking for the cheapest option available</li>
-                            <li>You need work to start immediately without strategic planning</li>
-                            <li>You have very slow procurement (12+ months to contract)</li>
-                            <li>You only want technical course building without pedagogy guidance</li>
-                            <li>You're not willing to invest in doing this properly</li>
+                            <li>Your procurement process takes 12+ months</li>
+                            <li>You just want advice or training, not actual course building</li>
+                            <li>You expect perfect courses without academic involvement</li>
+                            <li>You're not ready to rethink how online teaching works</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-5">
-                <div class="quote-highlight">
-                    "The institutions that succeed with online learning invest in the transformation, not just the technology."
+                <div class="highlight-box">
+                    The institutions that succeed with online learning invest properly in both the transformation and the execution. We help with both.
                 </div>
             </div>
         </div>
@@ -824,8 +992,7 @@
     <section class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Common Questions</h2>
-                <p class="lead">What programme directors typically ask</p>
+                <h2>Questions Programme Directors Ask Us</h2>
             </div>
 
             <div class="row justify-content-center">
@@ -834,13 +1001,14 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    How quickly can we launch with your support?
+                                    How much does this cost?
                                 </button>
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>For privately funded institutions, we can move from consultation to pilot in 6-8 weeks. Full programme development typically takes 3-6 months.</p>
-                                    <p class="mb-0">The key advantage: we scale our team to meet your deadlines. We have the capacity to deliver at commercial speed that internal teams cannot match.</p>
+                                    <p>Every project is different. Costs depend on how many courses you need, what media is required, and your timeline.</p>
+                                    <p><strong>Typical range:</strong> £50,000 for a pilot programme to £500,000+ for complete curriculum transformation.</p>
+                                    <p class="mb-0">First consultation is free. We'll discuss your specific needs and provide a transparent, detailed proposal.</p>
                                 </div>
                             </div>
                         </div>
@@ -848,12 +1016,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Do you work with our existing platform?
+                                    Do you work with our existing VLE?
                                 </button>
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p class="mb-0">Yes. We're platform-agnostic. Whether you use Moodle, Canvas, Blackboard, or another VLE, we build in your environment. We don't force technology changes—we help you use what you have more effectively.</p>
+                                    <p class="mb-0">Yes. We're platform-agnostic. Whether you use Moodle, Canvas, Blackboard, or another system, we build courses directly in your environment. We don't force technology changes—we work with what you have.</p>
                                 </div>
                             </div>
                         </div>
@@ -861,13 +1029,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Will our academics maintain control of content?
+                                    Will our academics stay involved?
                                 </button>
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Absolutely. We collaborate with your subject experts throughout the process. They retain ownership and academic authority.</p>
-                                    <p class="mb-0">We're expert guides who help your academics translate their expertise into effective online formats. It's partnership, not extraction.</p>
+                                    <p>Absolutely. Your subject experts work with our learning designers throughout the entire process. They maintain academic control whilst we handle the instructional design and production work.</p>
+                                    <p class="mb-0">Think of it as collaboration, not outsourcing. Your academics keep ownership of content—we're expert guides who know how to make it work online.</p>
                                 </div>
                             </div>
                         </div>
@@ -875,14 +1043,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    What does it cost?
+                                    How do you maintain quality whilst moving fast?
                                 </button>
                             </h2>
                             <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Every project is different. Costs depend on scale, complexity, media requirements, and timescales.</p>
-                                    <p>Typical projects range from £50,000 for a pilot programme to £500,000+ for full curriculum transformation.</p>
-                                    <p class="mb-0">The first consultation is free. We'll discuss your needs and provide a clear, transparent proposal.</p>
+                                    <p>Our approach is grounded in educational theory: constructive alignment, Bloom's Taxonomy, evidence-based learning design. Quality is built into our process, not added at the end.</p>
+                                    <p class="mb-0">We move quickly because we have scalable teams and efficient workflows (including AI-assisted design). But every course meets rigorous academic standards before launch.</p>
                                 </div>
                             </div>
                         </div>
@@ -890,13 +1057,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    How do you maintain quality whilst moving quickly?
+                                    Can we start with just one course?
                                 </button>
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Our approach is grounded in educational theory—constructive alignment, Bloom's Taxonomy, and evidence-based design.</p>
-                                    <p class="mb-0">We move quickly because we have efficient processes and scalable teams, including AI-assisted workflows. But every course meets rigorous academic standards.</p>
+                                    <p>Yes. Many institutions start with a pilot—one course to prove the approach works. This gives you a finished course to test with real students before committing to full programme development.</p>
+                                    <p class="mb-0">After the pilot, you can choose to continue with us or implement the rest internally. Most institutions choose to continue once they see the quality and speed we deliver.</p>
                                 </div>
                             </div>
                         </div>
@@ -904,13 +1071,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    Can we start with just consulting?
+                                    What if we only want strategy, not course building?
                                 </button>
                             </h2>
                             <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Yes. Many institutions start with strategic consulting only. You get a clear roadmap and can choose to implement internally or continue with us.</p>
-                                    <p class="mb-0">The pilot stage is also designed as a decision point—test the approach before committing to full development.</p>
+                                    <p class="mb-0">That's fine. Some institutions engage us only for strategic consulting. You get a clear roadmap and can implement internally. Most institutions realise during the strategy phase that they need execution support too—but starting with just consulting is a valid option.</p>
                                 </div>
                             </div>
                         </div>
@@ -926,35 +1092,35 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="text-center mb-5">
-                        <h2 style="color: var(--lds-white);">Ready to Discuss Your Programme?</h2>
-                        <p class="lead" style="color: rgba(255,255,255,0.9);">Book a free strategic consultation</p>
+                        <h2 style="color: var(--lds-white);">Ready to Launch Your Online Programme?</h2>
+                        <p class="lead" style="color: rgba(255,255,255,0.9);">Book a free strategy call. We'll discuss your goals and show you exactly what's possible.</p>
                     </div>
 
                     <div class="row g-5">
                         <div class="col-lg-6">
                             <div style="color: rgba(255,255,255,0.9);">
-                                <h3 class="mb-4" style="color: var(--lds-green);">What Happens Next:</h3>
-                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
-                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">1</div>
-                                    <h4>Schedule Your Call</h4>
-                                    <p>Complete the form or email us directly. We'll find a time that works for you.</p>
+                                <h3 class="mb-4" style="color: var(--lds-green);">What Happens on the Call:</h3>
+
+                                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">1. We Learn About Your Goals</h4>
+                                    <p class="mb-0">What programmes do you want online? Who are your target learners? What's your timeline?</p>
                                 </div>
-                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
-                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">2</div>
-                                    <h4>Strategic Discussion</h4>
-                                    <p>We'll discuss your goals, timeline, and constraints. No pressure—just clarity on what's possible.</p>
+
+                                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">2. We Map Out a Realistic Plan</h4>
+                                    <p class="mb-0">Based on your needs, we'll outline what needs to be built, realistic timelines, and resource requirements.</p>
                                 </div>
-                                <div class="process-step" style="color: rgba(255,255,255,0.9);">
-                                    <div class="step-number" style="background-color: var(--lds-green); color: var(--lds-navy);">3</div>
-                                    <h4>Tailored Proposal</h4>
-                                    <p>If there's a good fit, we'll create a detailed proposal. If not, we'll tell you honestly.</p>
+
+                                <div class="mb-0">
+                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">3. You Decide Next Steps</h4>
+                                    <p class="mb-0">If there's a good fit, we'll send a detailed proposal. If not, we'll tell you honestly and point you in the right direction.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-6">
                             <div class="p-4" style="background-color: var(--lds-white);">
-                                <h3 class="mb-4">Book Your Consultation</h3>
+                                <h3 class="mb-4">Book Your Strategy Call</h3>
                                 <form id="contactForm">
                                     <div class="mb-3">
                                         <label for="contactName" class="form-label">Name</label>
@@ -980,15 +1146,15 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="contactMessage" class="form-label">What are you looking to achieve?</label>
-                                        <textarea class="form-control" id="contactMessage" rows="3" placeholder="Tell us about your programme goals..." required></textarea>
+                                        <label for="contactMessage" class="form-label">What do you want to build?</label>
+                                        <textarea class="form-control" id="contactMessage" rows="3" placeholder="e.g., Online MBA programme, Professional qualification courses..." required></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Book Consultation</button>
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Book Call Now</button>
                                 </form>
 
                                 <div class="mt-4 pt-4" style="border-top: 2px solid #e5e7eb;">
-                                    <p class="mb-2"><strong>Or contact us directly:</strong></p>
-                                    <p class="mb-1">Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
+                                    <p class="mb-2"><strong>Or email us directly:</strong></p>
+                                    <p class="mb-0">Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
                                 </div>
                             </div>
                         </div>
@@ -1003,15 +1169,15 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h4 style="color: var(--lds-green); font-weight: 700;">Learning<span style="color: var(--lds-white);">Design</span>Solutions</h4>
-                    <p class="mt-3">Strategic partner for higher education institutions launching pedagogically rigorous online programmes.</p>
+                    <h4 style="color: var(--lds-green); font-weight: 800; font-family: var(--font-body);">Learning<span style="color: var(--lds-white);">Design</span>Solutions</h4>
+                    <p class="mt-3">We design and build ready-to-launch online courses for higher education institutions.</p>
                 </div>
                 <div class="col-lg-2">
                     <h5 style="color: var(--lds-green);">Navigation</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#approach">Our Approach</a></li>
-                        <li><a href="#process">Process</a></li>
-                        <li><a href="#results">Case Studies</a></li>
+                        <li><a href="#what-you-get">What You Get</a></li>
+                        <li><a href="#process">Our Process</a></li>
+                        <li><a href="#results">Results</a></li>
                         <li><a href="#about">About</a></li>
                     </ul>
                 </div>
@@ -1026,7 +1192,7 @@
                 <div class="col-lg-3">
                     <h5 style="color: var(--lds-green);">Get Started</h5>
                     <p>Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
-                    <p><a href="#contact" style="color: var(--lds-green); font-weight: 600;">Book a consultation →</a></p>
+                    <p><a href="#contact" style="color: var(--lds-green); font-weight: 700;">Book a call →</a></p>
                 </div>
             </div>
             <div class="row mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
@@ -1044,7 +1210,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1061,8 +1227,7 @@
         // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you! We\'ll contact you within 24 hours to schedule your consultation.');
-            // Add your form submission logic here
+            alert('Thank you! We\'ll email you within 24 hours to schedule your call.');
         });
     </script>
 </body>
