@@ -369,45 +369,107 @@
             font-size: 1.25rem;
         }
 
-        /* Process Steps */
+        /* Process Steps - Timeline Style */
+        .process-timeline {
+            position: relative;
+            padding-left: 80px;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 40px;
+            bottom: 40px;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--lds-navy) 0%, var(--lds-green) 100%);
+        }
+
         .process-step {
             position: relative;
-            padding: 2.5rem;
+            padding: 2rem 2.5rem;
             background-color: var(--lds-white);
-            border-left: 6px solid var(--lds-navy);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
         }
 
         .process-step:hover {
-            border-left-color: var(--lds-green);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateX(8px);
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--lds-white);
+            border: 4px solid var(--lds-navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--lds-navy);
+            font-family: var(--font-display);
+            z-index: 2;
+        }
+
+        .process-step:nth-child(1)::before { content: '1'; }
+        .process-step:nth-child(2)::before { content: '2'; }
+        .process-step:nth-child(3)::before { content: '3'; }
+        .process-step:nth-child(4)::before { content: '4'; }
+
+        .process-step:hover::before {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+            border-color: var(--lds-green);
         }
 
         .step-badge {
             display: inline-block;
             background-color: var(--lds-navy);
             color: var(--lds-white);
-            padding: 0.5rem 1.25rem;
-            font-weight: 800;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
+            padding: 0.375rem 1rem;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.5px;
         }
 
         .process-step h3 {
             margin-bottom: 1rem;
             color: var(--lds-navy);
+            font-size: 1.75rem;
+        }
+
+        .process-step p {
+            color: var(--lds-dark);
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
         }
 
         .process-step .deliverable {
             background-color: var(--lds-light);
-            padding: 1rem 1.5rem;
-            margin-top: 1rem;
-            border-left: 3px solid var(--lds-green);
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--lds-green);
         }
 
         .process-step .deliverable strong {
             color: var(--lds-navy);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step .deliverable p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
         }
 
         .timeline-band {
@@ -949,43 +1011,47 @@
                 <p class="lead text-muted">Clear stages with specific deliverables at each step</p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="process-step">
-                        <span class="step-badge">STAGE 1 • 2-3 WEEKS</span>
-                        <h3>Strategy and planning</h3>
-                        <p>We meet with your team to understand your institution's goals, target learners, and existing resources. Together we map out exactly what needs to be built and in what order.</p>
-                        <div class="deliverable">
-                            <strong>You get:</strong> Strategic roadmap showing all courses to be built, timeline, resources needed, and implementation plan
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="process-timeline">
+                        <div class="process-step">
+                            <span class="step-badge">STAGE 1 • 2-3 WEEKS</span>
+                            <h3>Strategy and planning</h3>
+                            <p>We meet with your team to understand your institution's goals, target learners, and existing resources. Together we map out exactly what needs to be built and in what order.</p>
+                            <div class="deliverable">
+                                <strong>You get:</strong>
+                                <p>Strategic roadmap showing all courses to be built, timeline, resources needed, and implementation plan</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="process-step">
-                        <span class="step-badge">STAGE 3 • 8-12 WEEKS</span>
-                        <h3>Full programme design</h3>
-                        <p>Our learning designers work directly with your subject experts to transform their knowledge into structured online courses. We use AI-assisted design to speed up the process whilst maintaining quality.</p>
-                        <div class="deliverable">
-                            <strong>You get:</strong> Complete course designs for all modules: structures, scripts, storyboards, activity designs, assessment specifications
+                        <div class="process-step">
+                            <span class="step-badge">STAGE 2 • 4-6 WEEKS</span>
+                            <h3>Pilot course development</h3>
+                            <p>Before committing to full programme development, we build one complete course. This proves the approach works, gives your academics hands-on experience, and lets you test with real students.</p>
+                            <div class="deliverable">
+                                <strong>You get:</strong>
+                                <p>One fully designed and built course ready to launch, plus learnings about what works for your institution</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-6">
-                    <div class="process-step">
-                        <span class="step-badge">STAGE 2 • 4-6 WEEKS</span>
-                        <h3>Pilot course development</h3>
-                        <p>Before committing to full programme development, we build one complete course. This proves the approach works, gives your academics hands-on experience, and lets you test with real students.</p>
-                        <div class="deliverable">
-                            <strong>You get:</strong> One fully designed and built course ready to launch, plus learnings about what works for your institution
+                        <div class="process-step">
+                            <span class="step-badge">STAGE 3 • 8-12 WEEKS</span>
+                            <h3>Full programme design</h3>
+                            <p>Our learning designers work directly with your subject experts to transform their knowledge into structured online courses. We use AI-assisted design to speed up the process whilst maintaining quality.</p>
+                            <div class="deliverable">
+                                <strong>You get:</strong>
+                                <p>Complete course designs for all modules: structures, scripts, storyboards, activity designs, assessment specifications</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="process-step">
-                        <span class="step-badge">STAGE 4 • 6-10 WEEKS</span>
-                        <h3>Build, test, and launch</h3>
-                        <p>We produce all videos, build everything in your VLE, create all supporting materials, and test with your team. You get production-ready courses, not works in progress.</p>
-                        <div class="deliverable">
-                            <strong>You get:</strong> Complete online programme built in your platform with all content, videos, activities, and assessments ready for student enrolment
+                        <div class="process-step">
+                            <span class="step-badge">STAGE 4 • 6-10 WEEKS</span>
+                            <h3>Build, test, and launch</h3>
+                            <p>We produce all videos, build everything in your VLE, create all supporting materials, and test with your team. You get production-ready courses, not works in progress.</p>
+                            <div class="deliverable">
+                                <strong>You get:</strong>
+                                <p>Complete online programme built in your platform with all content, videos, activities, and assessments ready for student enrolment</p>
+                            </div>
                         </div>
                     </div>
                 </div>
