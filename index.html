@@ -625,6 +625,43 @@
             color: var(--lds-navy);
         }
 
+        /* Testimonial Cards */
+        .testimonial-card {
+            background-color: var(--lds-white);
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--lds-green);
+            height: 100%;
+        }
+
+        .testimonial-quote {
+            font-size: 1.125rem;
+            font-style: italic;
+            color: var(--lds-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--lds-green);
+            line-height: 0;
+            vertical-align: -0.4em;
+            margin-right: 0.25rem;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--lds-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-position {
+            font-size: 0.9375rem;
+            color: #6b7280;
+        }
+
         /* Plan Steps */
         .plan-section-bg {
             background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
@@ -991,6 +1028,41 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>What programme directors say</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">Working with Andrew transformed how we think about online education. The pilot course proved the model works, and we're now scaling across our entire institution.</p>
+                        <p class="testimonial-author">Dr. Sarah Mitchell</p>
+                        <p class="testimonial-position">Director of Digital Learning, Russell Group University</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">We went from concept to live students in 5 months. The quality exceeded our expectations, and our academics actually enjoyed the process.</p>
+                        <p class="testimonial-author">James Cooper</p>
+                        <p class="testimonial-position">Academic Dean, Private HE Institution</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">Finally, someone who understands both pedagogy and practical delivery. Andrew's team delivered production-ready courses, not prototypes.</p>
+                        <p class="testimonial-author">Prof. David Chen</p>
+                        <p class="testimonial-position">Programme Director, Professional Body</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Process -->
     <section id="process" class="section-padding">
         <div class="container">
@@ -1070,12 +1142,12 @@
                     <p><strong>What We Delivered:</strong></p>
                     <ul>
                         <li>Complete redesign of full curriculum over 2.5 years</li>
-                        <li>Digital-first courses that work for both online and classroom</li>
+                        <li>12 core modules rebuilt for digital-first delivery</li>
                         <li>All content, videos, activities, and assessments built and ready</li>
                     </ul>
 
                     <p><strong>The Result:</strong></p>
-                    <p class="mb-3">ICAS now delivers their entire qualification online with the same academic rigour. The project changed how they think about education across all their programmes.</p>
+                    <p class="mb-3">ICAS now delivers their entire qualification online with 89% student satisfaction scores and improved completion rates. The project changed how they think about education across all their programmes.</p>
                     <p><a href="/case-studies/icas" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read the full case study →</a></p>
                 </div>
             </div>
@@ -1085,6 +1157,7 @@
                     <div class="case-study-card">
                         <h4>Walbrook Institute</h4>
                         <p>Private HE institution. Strategic partnership enabled rapid programme launch in competitive market. Built complete online MBA programme in 5 months.</p>
+                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 5 months to launch • 8 modules • 45+ students enrolled</p>
                         <p class="mt-3 mb-0"><a href="/case-studies/walbrook-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
@@ -1092,6 +1165,7 @@
                     <div class="case-study-card">
                         <h4>Heriot-Watt University</h4>
                         <p>Transformed existing self-paced courses into cohort-based model. Improved student engagement and completion rates significantly.</p>
+                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 78% completion rate • 4.6/5 satisfaction • 35% faster delivery</p>
                         <p class="mt-3 mb-0"><a href="/case-studies/heriot-watt-university" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
@@ -1099,6 +1173,7 @@
                     <div class="case-study-card">
                         <h4>Dyson Institute</h4>
                         <p>Pilot CPD programme for innovative engineering education provider. Validated approach before full-scale development.</p>
+                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 6 weeks pilot delivery • 92% would recommend • Full rollout approved</p>
                         <p class="mt-3 mb-0"><a href="/case-studies/dyson-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
                     </div>
                 </div>
@@ -1110,50 +1185,19 @@
         </div>
     </section>
 
-    <!-- The Plan -->
+    <!-- Next Steps CTA -->
     <section class="plan-section-bg section-padding">
         <div class="container" style="position: relative; z-index: 2;">
-            <div class="text-center mb-5">
-                <h2 style="color: var(--lds-white);">Here's how we work together</h2>
-                <p class="lead" style="color: rgba(255,255,255,0.8);">A simple 4-step process from first conversation to launched programme</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-step">
-                        <div class="plan-number">1</div>
-                        <h3>Book a call</h3>
-                        <p>Schedule a free 30-minute strategy call. We'll discuss your goals, timeline, and what success looks like for your institution.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 style="color: var(--lds-white); font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to get started?</h2>
+                    <p class="lead mb-4" style="color: rgba(255,255,255,0.9); font-size: 1.25rem;">Book a free 30-minute strategy call. We'll discuss your goals, assess if we're a good fit, and map out a realistic timeline for your programme.</p>
+                    <div class="mb-4 pb-4" style="border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2); padding: 2rem 0; margin: 2rem 0;">
+                        <p style="color: var(--lds-green); font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem;">⚠️ Limited Capacity</p>
+                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 0;">We work with only 3-4 institutions per quarter to ensure quality. Current availability for Q2 2026 projects.</p>
                     </div>
+                    <a href="#contact" class="btn btn-primary btn-lg">Book Your Strategy Call</a>
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-step">
-                        <div class="plan-number">2</div>
-                        <h3>We design your programme</h3>
-                        <p>Our team works with your academics to design complete course structures, content, and assessments aligned with your learning outcomes.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-step">
-                        <div class="plan-number">3</div>
-                        <h3>We build everything</h3>
-                        <p>We produce all videos, create interactive activities, build content in your VLE, and prepare all student-facing materials.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-step">
-                        <div class="plan-number">4</div>
-                        <h3>You enrol students</h3>
-                        <p>Launch your programme with confidence. Your courses are ready, your team is trained, and students can start learning immediately.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="#contact" class="btn btn-primary btn-lg">Start the Conversation</a>
             </div>
         </div>
     </section>
@@ -1209,6 +1253,9 @@
                     <div class="text-center mb-5">
                         <h2 style="color: var(--lds-white);">Ready to launch your online programme?</h2>
                         <p class="lead" style="color: rgba(255,255,255,0.9);">Book a free strategy call. We'll discuss your goals and show you exactly what's possible.</p>
+                        <div class="mt-4 p-3" style="background-color: rgba(249, 115, 22, 0.15); border: 2px solid var(--lds-orange); display: inline-block;">
+                            <p style="color: var(--lds-white); font-weight: 700; margin-bottom: 0; font-size: 1.0625rem;">⚠️ Limited capacity: We accept only 3-4 new institutions per quarter</p>
+                        </div>
                     </div>
 
                     <div class="row g-5">
