@@ -370,24 +370,43 @@
         }
 
         /* Process Steps */
+        .process-section-bg {
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-section-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132, 204, 22, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
         .process-step {
             position: relative;
             padding: 2.5rem;
-            background-color: var(--lds-white);
-            border-left: 6px solid var(--lds-navy);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 6px solid var(--lds-green);
             margin-bottom: 2rem;
             transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .process-step:hover {
-            border-left-color: var(--lds-green);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px);
         }
 
         .step-badge {
             display: inline-block;
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
+            background-color: var(--lds-green);
+            color: var(--lds-navy);
             padding: 0.5rem 1.25rem;
             font-weight: 800;
             font-size: 0.875rem;
@@ -396,18 +415,23 @@
 
         .process-step h3 {
             margin-bottom: 1rem;
-            color: var(--lds-navy);
+            color: var(--lds-white);
+        }
+
+        .process-step p {
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .process-step .deliverable {
-            background-color: var(--lds-light);
+            background-color: rgba(132, 204, 22, 0.15);
             padding: 1rem 1.5rem;
             margin-top: 1rem;
             border-left: 3px solid var(--lds-green);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .process-step .deliverable strong {
-            color: var(--lds-navy);
+            color: var(--lds-white);
         }
 
         /* Comparison Lists */
@@ -923,11 +947,11 @@
     </section>
 
     <!-- Process -->
-    <section id="process" class="section-padding">
-        <div class="container">
+    <section id="process" class="process-section-bg section-padding">
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="text-center mb-5">
-                <h2>From first call to students enrolled: Our four-stage process</h2>
-                <p class="lead text-muted">Clear stages with specific deliverables at each step</p>
+                <h2 style="color: var(--lds-white);">From first call to students enrolled: Our four-stage process</h2>
+                <p class="lead" style="color: rgba(255,255,255,0.8);">Clear stages with specific deliverables at each step</p>
             </div>
 
             <div class="row g-4">
@@ -974,9 +998,9 @@
 
             <div class="row mt-5">
                 <div class="col-12">
-                    <div class="text-center p-5" style="background-color: var(--lds-light);">
-                        <h3 class="mb-3">Typical timeline: 3-6 months from start to launch</h3>
-                        <p class="lead mb-4">Pilot programme: 6-8 weeks • Full programme: 3-6 months</p>
+                    <div class="text-center p-5" style="background-color: rgba(132, 204, 22, 0.15); border: 3px solid var(--lds-green);">
+                        <h3 class="mb-3" style="color: var(--lds-white); font-size: 2rem;">Typical timeline: 3-6 months from start to launch</h3>
+                        <p class="mb-4" style="color: rgba(255,255,255,0.85); font-size: 1.125rem;">Pilot programme: 6-8 weeks • Full programme: 3-6 months</p>
                         <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Timeline</a>
                     </div>
                 </div>
@@ -1044,7 +1068,7 @@
             </div>
 
             <div class="text-center mt-5">
-                <p class="mb-0"><a href="/case-studies" style="color: var(--lds-navy); font-weight: 700; font-size: 1.125rem; text-decoration: underline;">See all case studies →</a></p>
+                <a href="/case-studies" class="btn btn-outline-primary btn-lg">See All Case Studies</a>
             </div>
         </div>
     </section>
