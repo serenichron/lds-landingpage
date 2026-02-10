@@ -122,6 +122,12 @@ Captures: Name, Email, Institution, Message
 - No jQuery required (vanilla JavaScript)
 - All CSS embedded in `<head>` for single-file deployment
 
+## Preview Link
+
+🔗 **Live Preview:** https://serenichron.github.io/lds-landingpage/
+
+This GitHub Pages deployment allows Andrew to preview the landing page before Squarespace integration.
+
 ## Deployment to Squarespace
 
 This page was designed to be embedded in Squarespace. Options:
@@ -134,6 +140,7 @@ This page was designed to be embedded in Squarespace. Options:
 - May need to extract CSS to separate file depending on Squarespace limitations
 - Navigation might need adjustment to match existing site nav
 - Forms should connect to Squarespace form handlers or external service (e.g., Mailchimp, HubSpot)
+- See `../SQUARESPACE_INTEGRATION.md` for full integration plan and API options
 
 ## Bootstrap Customization Philosophy
 
