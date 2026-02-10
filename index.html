@@ -852,7 +852,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" style="height: 50px;">
+                <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" style="height: 70px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -901,19 +901,6 @@
                     <div class="stat-box">
                         <div class="stat-number">20+</div>
                         <div class="stat-label">Institutions Served</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Section -->
-    <section class="bg-navy section-padding-sm">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="ratio ratio-16x9" style="box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
-                        <iframe src="https://www.youtube.com/embed/u6BeEAfHEsE" title="Learning Design Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -976,9 +963,20 @@
 
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
-                         alt="Empty university lecture hall"
-                         class="section-image">
+                    <div id="video-placeholder" style="position: relative; cursor: pointer; background: var(--lds-navy); border-radius: 8px; overflow: hidden; aspect-ratio: 16/9;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="38" stroke="white" stroke-width="3" opacity="0.8"/>
+                                <path d="M32 25L55 40L32 55V25Z" fill="white" opacity="0.9"/>
+                            </svg>
+                            <p style="color: white; margin-top: 1rem; font-weight: 600;">Click to play video</p>
+                        </div>
+                    </div>
+                    <div id="video-container" style="display: none;">
+                        <div class="ratio ratio-16x9">
+                            <iframe id="video-iframe" src="" title="Learning Design Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="highlight-box" style="background-color: var(--lds-white); border-color: var(--lds-navy); padding: 2.5rem;">
@@ -1532,7 +1530,7 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h4 style="color: var(--lds-green); font-weight: 800; font-family: var(--font-body);">Learning<span style="color: var(--lds-white);">Design</span>Solutions</h4>
+                    <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" style="height: 60px; margin-bottom: 1rem;">
                     <p class="mt-3">We design and build ready-to-launch online courses for higher education institutions.</p>
                 </div>
                 <div class="col-lg-2">
@@ -1591,6 +1589,20 @@
         document.getElementById('optinForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you! Check your email for the Academic Transformation Playbook 2026.');
+        });
+
+        // Lazy load video on click
+        document.getElementById('video-placeholder').addEventListener('click', function() {
+            const placeholder = document.getElementById('video-placeholder');
+            const container = document.getElementById('video-container');
+            const iframe = document.getElementById('video-iframe');
+            
+            // Load the video
+            iframe.src = 'https://www.youtube.com/embed/u6BeEAfHEsE?autoplay=1';
+            
+            // Hide placeholder, show video
+            placeholder.style.display = 'none';
+            container.style.display = 'block';
         });
     </script>
 </body>
