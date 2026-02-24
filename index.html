@@ -9,850 +9,24 @@
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            /* Brand Colors */
-            --lds-navy: #122159;
-            --lds-green: #84cc16;
-            --lds-orange: #f97316;
-            --lds-dark: #1f2937;
-            --lds-light: #f9fafb;
-            --lds-white: #ffffff;
-
-            /* Typography */
-            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Merriweather', serif;
-
-            /* Spacing */
-            --section-padding: 6rem;
-            --section-padding-sm: 4rem;
-
-            /* Sharp corners */
-            --border-radius: 0;
-        }
-
-        * {
-            border-radius: var(--border-radius) !important;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--lds-dark);
-            font-size: 1.125rem;
-            line-height: 1.7;
-            max-width: 1920px;
-            margin: 0 auto;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 3.75rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-        }
-
-        h2 {
-            font-size: 2.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        h3 {
-            font-size: 1.875rem;
-        }
-
-        /* Navigation */
-        .navbar {
-            background-color: var(--lds-navy);
-            padding: 1.25rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--lds-white) !important;
-            font-family: var(--font-body);
-        }
-
-        .navbar-brand span {
-            color: var(--lds-green);
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            padding: 0.5rem 1rem !important;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: var(--lds-green) !important;
-        }
-
-        /* Buttons */
-        .btn {
-            font-weight: 600;
-            padding: 1rem 2.5rem;
-            border: none;
-            transition: all 0.3s ease;
-            text-transform: none;
-            font-size: 1.0625rem;
-        }
-
-        .btn-primary {
-            background-color: var(--lds-orange);
-            color: var(--lds-white);
-        }
-
-        .btn-primary:hover {
-            background-color: #ea580c;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
-        }
-
-        .btn-outline-primary {
-            border: 2px solid var(--lds-navy);
-            color: var(--lds-navy);
-            background-color: transparent;
-        }
-
-        .btn-outline-primary:hover {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-            transform: translateY(-2px);
-        }
-
-        .btn-lg {
-            padding: 1.25rem 3rem;
-            font-size: 1.125rem;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
-            color: var(--lds-white);
-            padding: var(--section-padding) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(132, 204, 22, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background-color: var(--lds-green);
-            color: var(--lds-navy);
-            padding: 0.625rem 1.5rem;
-            font-weight: 800;
-            font-size: 0.8125rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-section h1 {
-            color: var(--lds-white);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero-section .lead {
-            font-size: 1.5rem;
-            opacity: 0.95;
-            margin-bottom: 2.5rem;
-            font-weight: 400;
-        }
-
-        /* Accent Bars */
-        .accent-bars {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 2.5rem;
-        }
-
-        .accent-bar {
-            height: 5px;
-            flex: 1;
-        }
-
-        .accent-bar.green { background-color: var(--lds-green); }
-        .accent-bar.orange { background-color: var(--lds-orange); }
-        .accent-bar.navy { background-color: #1e3a8a; }
-
-        /* Section Styles */
-        .section-padding {
-            padding: var(--section-padding) 0;
-        }
-
-        .section-padding-sm {
-            padding: var(--section-padding-sm) 0;
-        }
-
-        .bg-light-custom {
-            background-color: var(--lds-light);
-        }
-
-        .bg-navy {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-        }
-
-        /* Logo Ribbon Animation */
-        .logo-ribbon {
-            background-color: var(--lds-light);
-            padding: 2rem 0;
-            overflow: hidden;
-            position: relative;
-            border-top: 3px solid var(--lds-green);
-            border-bottom: 3px solid var(--lds-green);
-        }
-
-        .logo-track {
-            display: flex;
-            animation: scroll 30s linear infinite;
-            width: fit-content;
-        }
-
-        .logo-track:hover {
-            animation-play-state: paused;
-        }
-
-        .logo-item {
-            flex-shrink: 0;
-            padding: 0 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-item img {
-            height: 60px;
-            width: auto;
-            opacity: 0.7;
-            transition: all 0.3s;
-            filter: grayscale(100%);
-        }
-
-        .logo-item:hover img {
-            opacity: 1;
-            filter: grayscale(0%);
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Stat Boxes */
-        .stat-box {
-            text-align: center;
-            padding: 2.5rem;
-            background-color: rgba(255,255,255,0.1);
-            border-left: 4px solid var(--lds-green);
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--lds-green);
-            line-height: 1;
-            margin-bottom: 0.75rem;
-            font-family: var(--font-display);
-        }
-
-        .stat-label {
-            font-size: 1.0625rem;
-            color: rgba(255,255,255,0.9);
-            font-weight: 500;
-        }
-
-        /* Barrier Cards */
-        .barrier-card {
-            background-color: var(--lds-white);
-            padding: 2.5rem;
-            height: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--lds-orange);
-        }
-
-        .barrier-card:hover {
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-            transform: translateY(-6px);
-            border-top-color: var(--lds-green);
-        }
-
-        .barrier-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .barrier-card h3 {
-            color: var(--lds-navy);
-            font-size: 1.625rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Offer Box */
-        .offer-box {
-            background: linear-gradient(135deg, var(--lds-green) 0%, #65a30d 100%);
-            color: var(--lds-navy);
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(45deg) translate(50%, -50%);
-        }
-
-        .offer-box h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .offer-box ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .offer-box li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-weight: 500;
-        }
-
-        .offer-box li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            font-weight: 900;
-            font-size: 1.25rem;
-        }
-
-        /* Process Steps - Timeline Style */
-        .process-timeline {
-            position: relative;
-            padding-left: 80px;
-        }
-
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 40px;
-            bottom: 40px;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--lds-navy) 0%, var(--lds-green) 100%);
-        }
-
-        .process-step {
-            position: relative;
-            padding: 2rem 2.5rem;
-            background-color: var(--lds-white);
-            margin-bottom: 3rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-        }
-
-        .process-step:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transform: translateX(8px);
-        }
-
-        .process-step::before {
-            content: '';
-            position: absolute;
-            left: -80px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
-            background-color: var(--lds-white);
-            border: 4px solid var(--lds-navy);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            font-weight: 900;
-            color: var(--lds-navy);
-            font-family: var(--font-display);
-            z-index: 2;
-        }
-
-        .process-step:nth-child(1)::before { content: '🎯'; }
-        .process-step:nth-child(2)::before { content: '🧪'; }
-        .process-step:nth-child(3)::before { content: '✏️'; }
-        .process-step:nth-child(4)::before { content: '🚀'; }
-
-        .process-step:hover::before {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-            border-color: var(--lds-green);
-        }
-
-        .step-badge {
-            display: inline-block;
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-            padding: 0.375rem 1rem;
-            font-weight: 700;
-            font-size: 0.8125rem;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.5px;
-        }
-
-        .process-step h3 {
-            margin-bottom: 1rem;
-            color: var(--lds-navy);
-            font-size: 1.75rem;
-        }
-
-        .process-step p {
-            color: var(--lds-dark);
-            margin-bottom: 1.25rem;
-            line-height: 1.7;
-        }
-
-        .process-step p:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-band {
-            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
-            position: relative;
-            overflow: hidden;
-            padding: 3rem;
-            border: 3px solid var(--lds-green);
-        }
-
-        .timeline-band::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(132, 204, 22, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        /* Comparison Lists */
-        .comparison-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .comparison-list li {
-            padding: 1.125rem 0;
-            padding-left: 2.5rem;
-            position: relative;
-            border-bottom: 1px solid #e5e7eb;
-            font-weight: 500;
-        }
-
-        .comparison-list li:last-child {
-            border-bottom: none;
-        }
-
-        .comparison-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--lds-green);
-            font-weight: 900;
-            font-size: 1.5rem;
-        }
-
-        .comparison-list.negative li::before {
-            content: '✗';
-            color: var(--lds-orange);
-        }
-
-        /* Image Styles */
-        .section-image {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Case Study Card */
-        .case-study-card {
-            background-color: var(--lds-white);
-            padding: 2.5rem;
-            border-top: 6px solid var(--lds-green);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-        }
-
-        .case-study-card h4 {
-            color: var(--lds-navy);
-            margin-bottom: 1rem;
-        }
-
-        /* Credentials */
-        .credential-badge {
-            background-color: var(--lds-white);
-            border: 3px solid var(--lds-navy);
-            padding: 1.25rem 1.5rem;
-            text-align: center;
-            font-weight: 700;
-            color: var(--lds-navy);
-            font-size: 0.9375rem;
-            transition: all 0.3s;
-        }
-
-        .credential-badge:hover {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-        }
-
-        /* Form Styles */
-        .form-control, .form-select {
-            padding: 1rem 1.25rem;
-            font-size: 1.0625rem;
-            border: 2px solid #d1d5db;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--lds-navy);
-            box-shadow: 0 0 0 4px rgba(18, 33, 89, 0.1);
-        }
-
-        .form-label {
-            font-weight: 600;
-            margin-bottom: 0.625rem;
-            color: var(--lds-dark);
-        }
-
-        /* FAQ Accordion */
-        .accordion-item {
-            border: 2px solid #e5e7eb;
-            margin-bottom: 1.25rem;
-        }
-
-        .accordion-button {
-            background-color: var(--lds-white);
-            color: var(--lds-dark);
-            font-weight: 600;
-            font-size: 1.1875rem;
-            padding: 1.5rem 2rem;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border-color: var(--lds-navy);
-        }
-
-        .accordion-body {
-            padding: 2rem;
-            font-size: 1.0625rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--lds-dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 4rem 0 2rem;
-        }
-
-        footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: var(--lds-green);
-        }
-
-        /* Highlight Box */
-        .highlight-box {
-            background-color: var(--lds-light);
-            border-left: 6px solid var(--lds-orange);
-            padding: 2rem 2.5rem;
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--lds-navy);
-        }
-
-        /* Testimonial Cards */
-        .testimonial-card {
-            background-color: var(--lds-white);
-            padding: 2.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--lds-green);
-            height: 100%;
-        }
-
-        .testimonial-quote {
-            font-size: 1.125rem;
-            font-style: italic;
-            color: var(--lds-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .testimonial-quote::before {
-            content: '"';
-            font-size: 3rem;
-            color: var(--lds-green);
-            line-height: 0;
-            vertical-align: -0.4em;
-            margin-right: 0.25rem;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--lds-navy);
-            margin-bottom: 0.25rem;
-        }
-
-        .testimonial-position {
-            font-size: 0.9375rem;
-            color: #6b7280;
-        }
-
-        /* Plan Steps */
-        .plan-section-bg {
-            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .plan-section-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -20%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(132, 204, 22, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .plan-step {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            position: relative;
-            transition: all 0.3s;
-            height: 100%;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .plan-step:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: var(--lds-green);
-        }
-
-        .plan-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--lds-green) 0%, #65a30d 100%);
-            color: var(--lds-navy);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 900;
-            font-family: var(--font-display);
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 6px 20px rgba(132, 204, 22, 0.4);
-        }
-
-        .plan-step h3 {
-            color: var(--lds-white);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .plan-step p {
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 0;
-        }
-
-        /* Opt-in Section */
-        .optin-wrapper {
-            background: linear-gradient(135deg, var(--lds-navy) 0%, #1e3a8a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .optin-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(132, 204, 22, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .optin-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .optin-badge {
-            display: inline-block;
-            background-color: var(--lds-orange);
-            color: var(--lds-white);
-            padding: 0.5rem 1.25rem;
-            font-weight: 800;
-            font-size: 0.8125rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .optin-benefits {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-        }
-
-        .optin-benefits li {
-            padding: 1rem 0;
-            padding-left: 2.5rem;
-            position: relative;
-            color: rgba(255,255,255,0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 1.0625rem;
-        }
-
-        .optin-benefits li:last-child {
-            border-bottom: none;
-        }
-
-        .optin-benefits li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--lds-green);
-            font-weight: 900;
-            font-size: 1.5rem;
-        }
-
-        .optin-form-box {
-            background-color: var(--lds-white);
-            padding: 3rem;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-        }
-
-        .optin-form-box h3 {
-            color: var(--lds-navy);
-            margin-bottom: 1.5rem;
-        }
-
-        .optin-cta-text {
-            background-color: var(--lds-green);
-            color: var(--lds-navy);
-            padding: 1.5rem;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            :root {
-                --section-padding: 4rem;
-                --section-padding-sm: 3rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .hero-section .lead {
-                font-size: 1.25rem;
-            }
-
-            .stat-number {
-                font-size: 3rem;
-            }
-
-            .section-image {
-                height: 300px;
-            }
-
-            .logo-item {
-                padding: 0 2rem;
-            }
-
-            .logo-item img {
-                height: 40px;
-            }
-        }
-    </style>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" style="height: 70px;">
+                <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -876,20 +50,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8 hero-content">
-                    <div class="hero-badge">For HE Institutions</div>
-                    <h1>We build ready-to-launch online courses that represent your unique academic identity</h1>
+                    <h1>We build <span style="white-space: nowrap">ready-to-launch</span> online courses that represent your unique academic identity</h1>
                     <p class="lead">Get from first call to students enrolled in 3-6 months. Working with your academic teams, we design, build, and deliver complete online courses in your existing platform—your content, your identity, your IP.</p>
                     <div class="d-flex gap-3 flex-wrap mt-4">
                         <a href="#contact" class="btn btn-primary btn-lg">Book Strategy Call</a>
-                        <a href="#optin" class="btn btn-outline-primary btn-lg" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">Get Free Guide</a>
-                    </div>
-                    <div class="accent-bars">
-                        <div class="accent-bar green"></div>
-                        <div class="accent-bar orange"></div>
-                        <div class="accent-bar navy"></div>
+                        <a href="#optin" class="btn btn-outline-white btn-lg">Get Free Guide</a>
                     </div>
                 </div>
-                <div class="col-lg-4 text-center mt-5 mt-lg-0">
+                <div class="col-lg-4 text-center mt-5 mt-lg-0 hero-stats">
                     <div class="stat-box mb-3">
                         <div class="stat-number">3-6</div>
                         <div class="stat-label">Months to Launch</div>
@@ -908,7 +76,7 @@
     </section>
 
     <!-- Animated Logo Ribbon -->
-    <div class="logo-ribbon">
+    <section class="logo-ribbon">
         <div class="logo-track">
             <!-- First set of logos -->
             <div class="logo-item"><img src="images/client-logo-1.png" alt="Dyson"></div>
@@ -925,10 +93,10 @@
             <div class="logo-item"><img src="images/client-logo-5.png" alt="Heriot-Watt University"></div>
             <div class="logo-item"><img src="images/client-logo-6.png" alt="FutureLearn"></div>
         </div>
-    </div>
+    </section>
 
     <!-- Three Barriers -->
-    <section class="section-padding">
+    <section id="problem" class="section-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Three barriers stopping you from launching online programmes</h2>
@@ -938,52 +106,65 @@
             <div class="row g-4 mb-5">
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <span class="barrier-icon">👥</span>
-                        <h3>Your team can't scale</h3>
-                        <p>Your digital learning team supports the entire university. They have the skills but not the capacity to deliver full programmes on commercial timescales.</p>
+                        <div class="barrier-card-inner" style="background-image: url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80');">
+                            <div class="barrier-card-front">
+                                <i class="bi bi-people-fill barrier-icon" aria-hidden="true"></i>
+                                <h3>Your team can't scale</h3>
+                            </div>
+                            <div class="barrier-card-back">
+                                <p>Your digital learning team supports the entire university. They have the skills but not the capacity to deliver full programmes on commercial timescales.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <span class="barrier-icon">🚀</span>
-                        <h3>Competitors are moving faster</h3>
-                        <p>By the time internal approval processes finish and resources are assigned, your competitors have already launched and captured market share.</p>
+                        <div class="barrier-card-inner" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80');">
+                            <div class="barrier-card-front">
+                                <i class="bi bi-lightning-charge-fill barrier-icon" aria-hidden="true"></i>
+                                <h3>Competitors are moving faster</h3>
+                            </div>
+                            <div class="barrier-card-back">
+                                <p>By the time internal approval processes finish and resources are assigned, your competitors have already launched and captured market share.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="barrier-card">
-                        <span class="barrier-icon">🎥</span>
-                        <h3>Recording lectures isn't enough</h3>
-                        <p>Your academics know their subjects but don't know how to restructure content for online learners. Simply uploading lectures doesn't work.</p>
+                        <div class="barrier-card-inner" style="background-image: url('https://images.unsplash.com/photo-1654723011680-0e037c2a4f18?w=800&q=80');">
+                            <div class="barrier-card-front">
+                                <i class="bi bi-mortarboard-fill barrier-icon" aria-hidden="true"></i>
+                                <h3>Recording lectures isn't enough</h3>
+                            </div>
+                            <div class="barrier-card-back">
+                                <p>Your academics know their subjects but don't know how to restructure content for online learners. Simply uploading lectures doesn't work.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div id="video-placeholder" style="position: relative; cursor: pointer; background: var(--lds-navy); border-radius: 8px; overflow: hidden; aspect-ratio: 16/9;">
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="40" cy="40" r="38" stroke="white" stroke-width="3" opacity="0.8"/>
-                                <path d="M32 25L55 40L32 55V25Z" fill="white" opacity="0.9"/>
-                            </svg>
-                            <p style="color: white; margin-top: 1rem; font-weight: 600;">Click to play video</p>
-                        </div>
-                    </div>
-                    <div id="video-container" style="display: none;">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="video-wrapper">
                         <div class="ratio ratio-16x9">
-                            <iframe id="video-iframe" src="" title="Learning Design Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe id="video-iframe" src="https://www.youtube.com/embed/u6BeEAfHEsE?si=Hllm4ERxM6mFFzyC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div id="video-placeholder" class="video-placeholder">
+                            <i class="bi bi-play-circle-fill video-play-btn" aria-hidden="true"></i>
+                            <span class="video-label">Watch: Our Approach</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="highlight-box" style="background-color: var(--lds-white); border-color: var(--lds-navy); padding: 2.5rem;">
-                        <h3 style="color: var(--lds-navy); margin-bottom: 1.25rem; font-size: 1.875rem;">Online learning isn't a technical challenge. It's a teaching challenge.</h3>
-                        <p style="margin-bottom: 0; font-size: 1.125rem; font-weight: 500;">Most institutions buy recording equipment. Smart institutions invest in Academic Transformation.</p>
+                    <div class="problem-reframe">
+                        <h3>Online learning isn't a technical challenge. It's a teaching challenge.</h3>
                     </div>
-                    <p class="mt-4">Classroom methods don't translate directly online. Content structure, learner engagement, and assessment all need rethinking.</p>
+                    <p>Most institutions buy recording equipment. Smart institutions invest in Academic Transformation.</p>
+                    <p>Classroom methods don't translate directly online. Content structure, learner engagement, and assessment all need rethinking.</p>
                     <p class="mb-0"><strong>That's exactly what we do.</strong> We guide your academics through this transformation whilst building everything they need to launch.</p>
                 </div>
             </div>
@@ -991,7 +172,7 @@
             <!-- Cost of Inaction -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <div style="background-color: #fff3e0; border-left: 6px solid var(--lds-orange); padding: 2.5rem 3rem;">
+                    <div style="background-color: var(--lds-white); border-left: 6px solid var(--lds-orange); padding: 2.5rem 3rem; box-shadow: 0 4px 24px rgba(0,0,0,0.07);">
                         <h3 style="color: var(--lds-navy); margin-bottom: 1.5rem;">The cost of waiting</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
@@ -1014,39 +195,75 @@
     </section>
 
     <!-- What You Actually Get -->
-    <section id="what-you-get" class="section-padding bg-navy">
+    <section id="what-you-get" class="section-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 style="color: var(--lds-white);">What you actually get: Ready-to-launch online courses</h2>
                 <p class="lead" style="color: rgba(255,255,255,0.9);">Not PowerPoints. Not advice. Complete courses that students can enrol in tomorrow.</p>
             </div>
 
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-                         alt="Team collaborating on course design"
-                         class="section-image">
+            <div class="row g-0 mb-5">
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-layout-text-window-reverse deliverable-icon" aria-hidden="true"></i>
+                        <h4>Course Design</h4>
+                        <p>Modules, lessons, activities, and assessments — complete architecture built from scratch.</p>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="offer-box">
-                        <h3>Every course we build includes:</h3>
-                        <ul>
-                            <li>Complete course design: modules, lessons, activities, assessments</li>
-                            <li><strong>AI-enabled learning design</strong>: reducing resource requirements while maintaining quality</li>
-                            <li>Professional video content: instructor videos, explainer animations, screen recordings</li>
-                            <li>Interactive learning activities: discussions, case studies, simulations, group work</li>
-                            <li>All content built inside your existing VLE (Moodle, Canvas, Blackboard, etc.)</li>
-                            <li>Student resources: readings, templates, guides, reference materials</li>
-                            <li>Assessment materials: quizzes, assignments, rubrics, marking guides</li>
-                            <li>Everything tested and ready for students to start learning</li>
-                        </ul>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-stars deliverable-icon" aria-hidden="true"></i>
+                        <h4>AI-Enabled Design</h4>
+                        <p>Reducing resource requirements while maintaining the quality your institution demands.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-camera-video-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>Professional Video</h4>
+                        <p>Instructor videos, explainer animations, and screen recordings — production-ready.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-chat-square-dots-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>Interactive Activities</h4>
+                        <p>Discussions, case studies, simulations, and group work that drive real engagement.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-display-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>VLE Integration</h4>
+                        <p>Everything built inside your existing platform — Moodle, Canvas, Blackboard, and more.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-book-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>Student Resources</h4>
+                        <p>Readings, templates, guides, and reference materials your learners will actually use.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-clipboard-check-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>Assessment Suite</h4>
+                        <p>Quizzes, assignments, rubrics, and marking guides — everything your academics need.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="deliverable-item">
+                        <i class="bi bi-patch-check-fill deliverable-icon" aria-hidden="true"></i>
+                        <h4>Launch Ready</h4>
+                        <p>Fully tested and quality-assured — students can start learning from day one.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col-12">
-                    <div class="highlight-box" style="background-color: rgba(132, 204, 22, 0.2); border-color: var(--lds-green); color: var(--lds-white);">
+                    <div class="highlight-box highlight-box--glass">
                         <strong>You don't need to hire new staff. You don't need to buy new platforms. You don't need to train your team.</strong> We bring everything needed to design, build, and launch your programmes while your academics stay focused on their research and teaching.
                     </div>
                 </div>
@@ -1055,42 +272,78 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="section-padding">
+    <section id="testimonials" class="section-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>What programme directors say</h2>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">Working with Andrew transformed how we think about online education. The pilot course proved the model works, and we're now scaling across our entire institution.</p>
-                        <p class="testimonial-author">Dr. Sarah Mitchell</p>
-                        <p class="testimonial-position">Director of Digital Learning, Russell Group University</p>
+            <div class="row align-items-end g-0">
+
+                <!-- Portrait + dots: 1/3 (desktop only) -->
+                <div class="col-lg-4 d-none d-lg-flex testimonial-portrait-col">
+                    <img src="images/testimonial-person.png" alt="Programme director" class="testimonial-portrait">
+                    <div class="testimonial-dots">
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">We went from concept to live students in 5 months. The quality exceeded our expectations, and our academics actually enjoyed the process.</p>
-                        <p class="testimonial-author">James Cooper</p>
-                        <p class="testimonial-position">Academic Dean, Private HE Institution</p>
+                <!-- Carousel: 2/3 -->
+                <div class="col-lg-8">
+                    <div class="testimonial-carousel-wrapper">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-touch="true">
+                            <div class="carousel-inner">
+
+                                <!-- Slide 1: T1 -->
+                                <div class="carousel-item active">
+                                    <div class="testimonial-card">
+                                        <p class="testimonial-quote">Working with Andrew transformed how we think about online education. The pilot course proved the model works, and we're now scaling across our entire institution.</p>
+                                        <p class="testimonial-author">Dr. Sarah Mitchell</p>
+                                        <p class="testimonial-position">Director of Digital Learning, Russell Group University</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2: T2 -->
+                                <div class="carousel-item">
+                                    <div class="testimonial-card">
+                                        <p class="testimonial-quote">We went from concept to live students in 5 months. The quality exceeded our expectations, and our academics actually enjoyed the process.</p>
+                                        <p class="testimonial-author">James Cooper</p>
+                                        <p class="testimonial-position">Academic Dean, Private HE Institution</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3: T3 -->
+                                <div class="carousel-item">
+                                    <div class="testimonial-card">
+                                        <p class="testimonial-quote">Finally, someone who understands both pedagogy and practical delivery. Andrew's team delivered production-ready courses, not prototypes.</p>
+                                        <p class="testimonial-author">Prof. David Chen</p>
+                                        <p class="testimonial-position">Programme Director, Professional Body</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation arrows below carousel -->
+                    <div class="testimonial-nav justify-content-center justify-content-lg-start">
+                        <button class="testimonial-nav-btn" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" aria-label="Previous testimonials">
+                            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="testimonial-nav-btn" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" aria-label="Next testimonials">
+                            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">Finally, someone who understands both pedagogy and practical delivery. Andrew's team delivered production-ready courses, not prototypes.</p>
-                        <p class="testimonial-author">Prof. David Chen</p>
-                        <p class="testimonial-position">Programme Director, Professional Body</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Process -->
-    <section id="process" class="section-padding">
+    <section id="process" class="section-light bg-light-custom">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>From first call to students enrolled: Our four-stage process</h2>
@@ -1098,111 +351,149 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-10">
+                <div class="col">
                     <div class="process-timeline">
-                        <div class="process-step">
-                            <span class="step-badge">STAGE 1 | Duration: 2-3 weeks</span>
-                            <h3>Strategy and planning</h3>
-                            <p>We meet with your team to understand your institution's goals, target learners, and existing resources. Through structured workshops, we identify opportunities and map out exactly what needs to be built.</p>
-                            <p>You receive a strategic roadmap showing all courses to be built, timeline with key milestones, and resource requirements. This becomes your blueprint for the entire project.</p>
+
+                        <div class="process-step-row">
+                            <div class="step-icon">
+                                <i class="bi bi-map" aria-hidden="true"></i>
+                            </div>
+                            <div class="process-step" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80');">
+                                <span class="step-badge">STAGE 1 | Duration: 2-3 weeks</span>
+                                <h3>Strategy and planning</h3>
+                                <p>We meet with your team to understand your institution's goals, target learners, and existing resources. Through structured workshops, we identify opportunities and map out exactly what needs to be built.</p>
+                                <p>You receive a strategic roadmap showing all courses to be built, timeline with key milestones, and resource requirements. This becomes your blueprint for the entire project.</p>
+                            </div>
                         </div>
 
-                        <div class="process-step">
-                            <span class="step-badge">STAGE 2 | Duration: 4-6 weeks</span>
-                            <h3>Pilot course development</h3>
-                            <p>Before committing to full programme development, we build one complete course. This proves the approach works and gives your academics hands-on experience with real students.</p>
-                            <p>You receive one fully designed and built course ready to launch, complete with all videos, activities, and assessments. This pilot becomes proof of concept before scaling to full programme development.</p>
+                        <div class="process-step-row">
+                            <div class="step-icon">
+                                <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                            </div>
+                            <div class="process-step" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80');">
+                                <span class="step-badge">STAGE 2 | Duration: 4-6 weeks</span>
+                                <h3>Pilot course development</h3>
+                                <p>Before committing to full programme development, we build one complete course. This proves the approach works and gives your academics hands-on experience with real students.</p>
+                                <p>You receive one fully designed and built course ready to launch, complete with all videos, activities, and assessments. This pilot becomes proof of concept before scaling to full programme development.</p>
+                            </div>
                         </div>
 
-                        <div class="process-step">
-                            <span class="step-badge">STAGE 3 | Duration: 8-12 weeks</span>
-                            <h3>Full programme design</h3>
-                            <p>Our learning designers work with your subject experts to transform their knowledge into structured online courses. Through collaborative design sessions, we capture your academics' expertise and restructure it for online delivery using AI-assisted design.</p>
-                            <p>You receive complete course designs for all modules: content structures, video scripts, storyboards, activity designs, and assessment specifications. Every element is aligned to learning outcomes and quality assured against academic standards.</p>
+                        <div class="process-step-row">
+                            <div class="step-icon">
+                                <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                            </div>
+                            <div class="process-step" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80');">
+                                <span class="step-badge">STAGE 3 | Duration: 8-12 weeks</span>
+                                <h3>Full programme design</h3>
+                                <p>Our learning designers work with your subject experts to transform their knowledge into structured online courses. Through collaborative design sessions, we capture your academics' expertise and restructure it for online delivery using AI-assisted design.</p>
+                                <p>You receive complete course designs for all modules: content structures, video scripts, storyboards, activity designs, and assessment specifications. Every element is aligned to learning outcomes and quality assured against academic standards.</p>
+                            </div>
                         </div>
 
-                        <div class="process-step">
-                            <span class="step-badge">STAGE 4 | Duration: 6-10 weeks</span>
-                            <h3>Build, test, and launch</h3>
-                            <p>We produce all videos, build everything in your VLE, and create all supporting materials. Our production team handles filming, editing, graphic design, and platform configuration. Your academics review and approve everything before launch.</p>
-                            <p>You receive a complete online programme in your platform with all content, videos, activities, and assessments ready for student enrolment. Your team receives training on managing and updating the courses.</p>
+                        <div class="process-step-row">
+                            <div class="step-icon">
+                                <i class="bi bi-rocket-takeoff-fill" aria-hidden="true"></i>
+                            </div>
+                            <div class="process-step" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80');">
+                                <span class="step-badge">STAGE 4 | Duration: 6-10 weeks</span>
+                                <h3>Build, test, and launch</h3>
+                                <p>We produce all videos, build everything in your VLE, and create all supporting materials. Our production team handles filming, editing, graphic design, and platform configuration. Your academics review and approve everything before launch.</p>
+                                <p>You receive a complete online programme in your platform with all content, videos, activities, and assessments ready for student enrolment. Your team receives training on managing and updating the courses.</p>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="timeline-band text-center" style="position: relative; z-index: 1;">
-                        <h3 class="mb-3" style="color: var(--lds-white); font-size: 2rem;">Typical timeline: 3-6 months from start to launch</h3>
-                        <p class="mb-4" style="color: rgba(255,255,255,0.85); font-size: 1.125rem;">Pilot programme: 6-8 weeks • Full programme: 3-6 months</p>
-                        <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Timeline</a>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- Process CTA -->
+    <section id="process-cta">
+        <div class="container">
+            <div class="text-center">
+                <h3>Typical timeline: 3-6 months from start to launch</h3>
+                <p>Pilot programme: 6-8 weeks<br class="d-sm-none"><span class="d-none d-sm-inline"> &bull;</span> Full programme: 3-6 months</p>
+                <a href="#contact" class="btn btn-primary btn-lg">Discuss Your Timeline</a>
             </div>
         </div>
     </section>
 
     <!-- Case Study -->
-    <section id="results" class="section-padding bg-light-custom">
+    <section id="results" class="section-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Real results: Complete curriculum transformations</h2>
                 <p class="lead">Large-scale projects for leading institutions</p>
             </div>
 
-            <div class="row g-5 align-items-center mb-5">
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-                         alt="Professional accountant working on laptop"
-                         class="section-image">
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-badge" style="background-color: var(--lds-navy); color: var(--lds-green);">Featured Project</div>
-                    <h3>ICAS: Full curriculum redesign</h3>
-                    <p class="lead">Institute of Chartered Accountants of Scotland</p>
+            <div class="results-grid">
 
-                    <p><strong>The Challenge:</strong></p>
-                    <p>ICAS needed to transform their entire professional qualification from classroom-based delivery to scalable online learning.</p>
-
-                    <p><strong>What We Delivered:</strong></p>
-                    <ul>
-                        <li>Complete redesign of full curriculum over 2.5 years</li>
-                        <li>12 core modules rebuilt for digital-first delivery</li>
-                        <li>All content, videos, activities, and assessments built and ready</li>
-                    </ul>
-
-                    <p><strong>The Result:</strong></p>
-                    <p class="mb-3">ICAS now delivers their entire qualification online with 89% student satisfaction scores and improved completion rates. The project changed how they think about education across all their programmes.</p>
-                    <p><a href="/case-studies/icas" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read the full case study →</a></p>
-                </div>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="case-study-card">
-                        <h4>Walbrook Institute</h4>
-                        <p>Private HE institution. Strategic partnership enabled rapid programme launch in competitive market. Built complete online MBA programme in 5 months.</p>
-                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 5 months to launch • 8 modules • 45+ students enrolled</p>
-                        <p class="mt-3 mb-0"><a href="/case-studies/walbrook-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
+                <!-- Featured card -->
+                <div class="results-featured" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80');">
+                    <div class="results-featured-inner">
+                        <span class="results-badge">Featured Project</span>
+                        <h3>ICAS: Full curriculum redesign</h3>
+                        <p class="results-org">Institute of Chartered Accountants of Scotland</p>
+                        <div class="results-glass">
+                            <div class="row g-4">
+                                <div class="col-lg-4">
+                                    <p class="results-glass-label">The Challenge:</p>
+                                    <p>ICAS needed to transform their entire professional qualification from classroom-based delivery to scalable online learning.</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p class="results-glass-label">What We Delivered:</p>
+                                    <ul>
+                                        <li>Complete redesign of full curriculum over 2.5 years</li>
+                                        <li>12 core modules rebuilt for digital-first delivery</li>
+                                        <li>All content, videos, activities, and assessments built and ready</li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p class="results-glass-label">The Result:</p>
+                                    <p>ICAS now delivers their entire qualification online with 89% student satisfaction scores and improved completion rates. The project changed how they think about education across all their programmes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/case-studies/icas" class="results-link">Read the full case study</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="case-study-card">
-                        <h4>Heriot-Watt University</h4>
-                        <p>Transformed existing self-paced courses into cohort-based model. Improved student engagement and completion rates significantly.</p>
-                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 78% completion rate • 4.6/5 satisfaction • 35% faster delivery</p>
-                        <p class="mt-3 mb-0"><a href="/case-studies/heriot-watt-university" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
+
+                <!-- 3 smaller cards -->
+                <div class="results-cards">
+                    <div class="results-card" style="background-image: url('https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80');">
+                        <div class="results-card-inner">
+                            <div class="results-card-glass">
+                                <h4>Walbrook Institute</h4>
+                                <p>Private HE institution. Strategic partnership enabled rapid programme launch in competitive market. Built complete online MBA programme in 5 months.</p>
+                                <p class="results-metrics">Key metrics: 5 months to launch &bull; 8 modules &bull; 45+ students enrolled</p>
+                                <a href="/case-studies/walbrook-institute" class="results-link">Read case study</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results-card" style="background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80');">
+                        <div class="results-card-inner">
+                            <div class="results-card-glass">
+                                <h4>Heriot-Watt University</h4>
+                                <p>Transformed existing self-paced courses into cohort-based model. Improved student engagement and completion rates significantly.</p>
+                                <p class="results-metrics">Key metrics: 78% completion rate &bull; 4.6/5 satisfaction &bull; 35% faster delivery</p>
+                                <a href="/case-studies/heriot-watt-university" class="results-link">Read case study</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results-card" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80');">
+                        <div class="results-card-inner">
+                            <div class="results-card-glass">
+                                <h4>Dyson Institute</h4>
+                                <p>Pilot CPD programme for innovative engineering education provider. Validated approach before full-scale development.</p>
+                                <p class="results-metrics">Key metrics: 6 weeks pilot delivery &bull; 92% would recommend &bull; Full rollout approved</p>
+                                <a href="/case-studies/dyson-institute" class="results-link">Read case study</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="case-study-card">
-                        <h4>Dyson Institute</h4>
-                        <p>Pilot CPD programme for innovative engineering education provider. Validated approach before full-scale development.</p>
-                        <p style="color: var(--lds-green); font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">Key metrics: 6 weeks pilot delivery • 92% would recommend • Full rollout approved</p>
-                        <p class="mt-3 mb-0"><a href="/case-studies/dyson-institute" style="color: var(--lds-navy); font-weight: 600; text-decoration: underline;">Read case study →</a></p>
-                    </div>
-                </div>
+
             </div>
 
             <div class="text-center mt-5">
@@ -1212,15 +503,16 @@
     </section>
 
     <!-- Next Steps CTA -->
-    <section class="plan-section-bg section-padding">
-        <div class="container" style="position: relative; z-index: 2;">
+    <section class="plan-section-bg section-light">
+        <div class="container plan-cta-container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 style="color: var(--lds-white); font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to get started?</h2>
-                    <p class="lead mb-4" style="color: rgba(255,255,255,0.9); font-size: 1.25rem;">Book a free 30-minute strategy call. We'll discuss your goals, assess if we're a good fit, and map out a realistic timeline for your programme.</p>
-                    <div class="mb-4 pb-4" style="border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2); padding: 2rem 0; margin: 2rem 0;">
-                        <p style="color: var(--lds-green); font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem;">⚠️ Limited Capacity</p>
-                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 0;">We work with only 3-4 institutions per quarter to ensure quality. Current availability for Q2 2026 projects.</p>
+                    <h2 class="plan-cta-title">Ready to get started?</h2>
+                    <p class="plan-cta-lead">Book a free 30-minute strategy call. We'll discuss your goals, assess if we're a good fit, and map out a realistic timeline for your programme.</p>
+                    <div class="cta-capacity-notice">
+                        <i class="bi bi-hourglass-split mb-0" aria-hidden="true"></i>
+                        <p class="cta-capacity-title">Limited Capacity</p>
+                        <p class="cta-capacity-text">We work with only 3-4 institutions per quarter to ensure quality. Current availability for Q2 2026 projects.</p>
                     </div>
                     <a href="#contact" class="btn btn-primary btn-lg">Book Your Strategy Call</a>
                 </div>
@@ -1229,96 +521,96 @@
     </section>
 
     <!-- About Andrew -->
-    <section id="about" class="section-padding">
+    <section id="about" class="section-light">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQGoH4Box45Ezw/profile-displayphoto-shrink_400_400/B4EZTR34gGGwAk-/0/1738687875613?e=1771459200&v=beta&t=uqlM-8heLmIBByXB_VIJiYQ7HCJwqU9ItPrVeLf3wQ0"
+            <div class="row align-items-start">
+                <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
                          alt="Andrew Doig, Founder & Director"
-                         class="img-fluid"
-                         style="max-width: 320px; border: 5px solid var(--lds-green);">
+                         class="about-photo mb-4">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="credential-badge">30 Years in Education</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="credential-badge">Former Associate Professor</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="credential-badge">Senior Fellow HE Academy</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-8">
                     <h2>Expert learning design consultancy with deep academic expertise</h2>
-                    <h3 style="color: var(--lds-green);">Andrew Doig, Founder & Director</h3>
-                    <p class="lead">Learning design consultant and digital education strategist with 30 years in higher education.</p>
+                    <h3 class="about-name">Andrew Doig</h3>
+                    <p class="about-role">Founder &amp; Director</p>
+                    <p class="lead about-lead">Learning design consultant and digital education strategist with 30 years in higher education.</p>
 
                     <p>As Director of Learning Design Solutions, Andrew works with universities, professional bodies, and training providers to transform their education models for the digital era. His expertise spans online programme design, micro-credentials, MOOCs, faculty training, and digital learning strategy.</p>
 
                     <p>With extensive experience as a classroom teacher, university lecturer, and Associate Professor, Andrew understands institutional challenges first-hand. He's published research, managed degree programmes, and navigated academic politics—bringing insider knowledge to every project.</p>
 
-                    <p class="mb-4">Recent clients include ICAS (Institute of Chartered Accountants of Scotland), where Andrew led the Academic Transformation of their Chartered Accountant qualification, Dyson Institute of Engineering and Technology, Heriot-Watt University, and Glasgow Caledonian University.</p>
-
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                30 Years in<br>Education
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                Former Associate<br>Professor
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="credential-badge">
-                                Senior Fellow<br>HE Academy
-                            </div>
-                        </div>
-                    </div>
+                    <p>Recent clients include ICAS (Institute of Chartered Accountants of Scotland), where Andrew led the Academic Transformation of their Chartered Accountant qualification, Dyson Institute of Engineering and Technology, Heriot-Watt University, and Glasgow Caledonian University.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="section-padding bg-navy">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="text-center mb-5">
-                        <h2 style="color: var(--lds-white);">Ready to launch your online programme?</h2>
-                        <p class="lead" style="color: rgba(255,255,255,0.9);">Book a free strategy call. We'll discuss your goals and show you exactly what's possible.</p>
-                        <div class="mt-4 p-3" style="background-color: rgba(249, 115, 22, 0.15); border: 2px solid var(--lds-orange); display: inline-block;">
-                            <p style="color: var(--lds-white); font-weight: 700; margin-bottom: 0; font-size: 1.0625rem;">⚠️ Limited capacity: We accept only 3-4 new institutions per quarter</p>
+    <section id="contact" class="contact-section section-light">
+        <div class="container contact-container">
+            <div class="text-center mb-5">
+                <h2 class="contact-title">Ready to launch your online programme?</h2>
+                <p class="contact-lead">Book a free strategy call. We'll discuss your goals and show you exactly what's possible.</p>
+                <div class="contact-capacity-badge">
+                    <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+                    <span class="contact-capacity-label">Limited capacity:</span>
+                    <span class="contact-capacity-text">We accept only 3-4 new institutions per quarter</span>
+                </div>
+            </div>
+
+            <div class="row g-5">
+                <!-- Left: What happens on the call -->
+                <div class="col-lg-6">
+                    <h3 class="contact-steps-title">What happens on the call:</h3>
+
+                    <div class="contact-step">
+                        <span class="contact-step-num">1</span>
+                        <div>
+                            <h4 class="contact-step-heading">We learn about your goals</h4>
+                            <p class="contact-step-text">What programmes do you want online? Who are your target learners? What's your timeline?</p>
                         </div>
                     </div>
 
-                    <div class="row g-5">
-                        <div class="col-lg-6">
-                            <div style="color: rgba(255,255,255,0.9);">
-                                <h3 class="mb-4" style="color: var(--lds-green);">What happens on the call:</h3>
-
-                                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
-                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">1. We learn about your goals</h4>
-                                    <p class="mb-0">What programmes do you want online? Who are your target learners? What's your timeline?</p>
-                                </div>
-
-                                <div class="mb-4 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
-                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">2. We map out a realistic plan</h4>
-                                    <p class="mb-0">Based on your needs, we'll outline what needs to be built, realistic timelines, and resource requirements.</p>
-                                </div>
-
-                                <div class="mb-0">
-                                    <h4 class="h5 mb-2" style="color: var(--lds-white);">3. You decide next steps</h4>
-                                    <p class="mb-0">If there's a good fit, we'll send a detailed proposal. If not, we'll tell you honestly and point you in the right direction.</p>
-                                </div>
-                            </div>
+                    <div class="contact-step">
+                        <span class="contact-step-num">2</span>
+                        <div>
+                            <h4 class="contact-step-heading">We map out a realistic plan</h4>
+                            <p class="contact-step-text">Based on your needs, we'll outline what needs to be built, realistic timelines, and resource requirements.</p>
                         </div>
+                    </div>
 
-                        <div class="col-lg-6">
-                            <div class="p-5 text-center" style="background-color: rgba(132, 204, 22, 0.15); border: 3px solid var(--lds-green);">
-                                <h3 class="mb-4" style="color: var(--lds-white);">Get in touch</h3>
-                                <p class="lead mb-4" style="color: rgba(255,255,255,0.9);">Schedule a call or email us directly.</p>
+                    <div class="contact-step">
+                        <span class="contact-step-num">3</span>
+                        <div>
+                            <h4 class="contact-step-heading">You decide next steps</h4>
+                            <p class="contact-step-text">If there's a good fit, we'll send a detailed proposal. If not, we'll tell you honestly and point you in the right direction.</p>
+                        </div>
+                    </div>
+                </div>
 
-                                <a href="mailto:info@learningdesignsolutions.co.uk" class="btn btn-primary btn-lg mb-4 w-100">Email Us</a>
-                                <a href="#" class="btn btn-outline-primary btn-lg w-100" style="background-color: rgba(255,255,255,0.1); border-color: var(--lds-white); color: var(--lds-white);">Book Strategy Call</a>
+                <!-- Right: Get in touch -->
+                <div class="col-lg-6">
+                    <div class="contact-glass">
+                        <h3 class="contact-glass-title">Get in touch</h3>
+                        <p class="contact-glass-lead">Schedule a call or email us directly.</p>
 
-                                <div class="mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.3);">
-                                    <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.9375rem;">Direct contact:</p>
-                                    <p class="mb-0" style="color: var(--lds-white); font-weight: 600;">info@learningdesignsolutions.co.uk</p>
-                                </div>
-                            </div>
+                        <a href="mailto:info@learningdesignsolutions.co.uk" class="btn btn-primary btn-lg mb-3 w-100">Email Us</a>
+                        <a href="#" class="btn btn-outline-white btn-lg w-100">Book Strategy Call</a>
+
+                        <div class="contact-email-footer">
+                            <p class="contact-email-label">Direct contact:</p>
+                            <p class="contact-email-address">info@learningdesignsolutions.co.uk</p>
                         </div>
                     </div>
                 </div>
@@ -1327,63 +619,65 @@
     </section>
 
     <!-- Who This Is For -->
-    <section class="section-padding bg-light-custom">
+    <section class="section-light bg-light-custom">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Who we work with (and who we don't)</h2>
                 <p class="lead">We're selective about the institutions we partner with</p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-top: 6px solid var(--lds-green);">
-                        <h3 class="mb-4">This is right for you if:</h3>
-                        <ul class="comparison-list">
-                            <li>You're a public or private HEI with ambitions for quality online programmes</li>
-                            <li>You have clear goals and can make decisions efficiently</li>
-                            <li>You need full courses built with expert design support</li>
-                            <li>You value quality and are willing to invest properly</li>
-                            <li>You want to work with your academics to develop intellectual content while minimising their workload through expert design</li>
-                            <li>You need to launch within 3-6 months</li>
-                        </ul>
+            <div class="fit-grid">
+                <!-- YES -->
+                <div class="fit-card fit-card--yes">
+                    <div class="fit-card-header">
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                        <h3>This is right for you if:</h3>
                     </div>
+                    <ul class="fit-list">
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You're a public or private HEI with ambitions for quality online programmes</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You have clear goals and can make decisions efficiently</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You need full courses built with expert design support</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You value quality and are willing to invest properly</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You want to work with your academics to develop intellectual content while minimising their workload through expert design</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>You need to launch within 3-6 months</span></li>
+                    </ul>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="p-4 h-100" style="background-color: var(--lds-white); border-top: 6px solid var(--lds-orange);">
-                        <h3 class="mb-4">This isn't right if:</h3>
-                        <ul class="comparison-list negative">
-                            <li>You only want to record lectures and upload them</li>
-                            <li>You're looking for the cheapest option available</li>
-                            <li>You expect perfect courses without academic involvement</li>
-                            <li>You're not ready to rethink how online teaching works</li>
-                        </ul>
+                <!-- NO -->
+                <div class="fit-card fit-card--no">
+                    <div class="fit-card-header">
+                        <i class="bi bi-x-circle-fill" aria-hidden="true"></i>
+                        <h3>This isn't right if:</h3>
                     </div>
+                    <ul class="fit-list">
+                        <li><i class="bi bi-x-lg" aria-hidden="true"></i><span>You only want to record lectures and upload them</span></li>
+                        <li><i class="bi bi-x-lg" aria-hidden="true"></i><span>You're looking for the cheapest option available</span></li>
+                        <li><i class="bi bi-x-lg" aria-hidden="true"></i><span>You expect perfect courses without academic involvement</span></li>
+                        <li><i class="bi bi-x-lg" aria-hidden="true"></i><span>You're not ready to rethink how online teaching works</span></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="text-center mt-5">
-                <div class="highlight-box">
-                    The institutions that succeed with online learning invest properly in both the transformation and the execution. We help with both.
-                </div>
+            <div class="fit-closing">
+                The institutions that succeed with online learning invest properly in both the transformation and the execution. We help with both.
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section-padding">
+    <section class="section-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Questions programme directors ask us</h2>
             </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
+            <div class="row">
+                <div class="col">
                     <div class="accordion" id="faqAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    How much does this cost?
+                                    <span class="faq-num">01</span>How much does this cost?
                                 </button>
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
@@ -1398,7 +692,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Do you work with our existing VLE?
+                                    <span class="faq-num">02</span>Do you work with our existing VLE?
                                 </button>
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -1411,7 +705,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Will our academics stay involved?
+                                    <span class="faq-num">03</span>Will our academics stay involved?
                                 </button>
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -1425,7 +719,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    How do you maintain quality whilst moving fast?
+                                    <span class="faq-num">04</span>How do you maintain quality whilst moving fast?
                                 </button>
                             </h2>
                             <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -1439,7 +733,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    Can we start with just one course?
+                                    <span class="faq-num">05</span>Can we start with just one course?
                                 </button>
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -1453,7 +747,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    What if we only want strategy, not course building?
+                                    <span class="faq-num">06</span>What if we only want strategy, not course building?
                                 </button>
                             </h2>
                             <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -1469,56 +763,30 @@
     </section>
 
     <!-- Opt-in: Academic Transformation Playbook -->
-    <section id="optin" class="optin-wrapper section-padding">
+    <section id="optin" class="optin-wrapper">
         <div class="container optin-content">
-            <div class="row align-items-stretch g-5">
+            <div class="row align-items-center g-5">
                 <div class="col-lg-4 text-center">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=600&fit=crop"
                          alt="Academic Transformation Playbook for 2026"
-                         class="img-fluid"
-                         style="box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); max-width: 320px;">
+                         class="optin-book-img img-fluid">
                 </div>
 
                 <div class="col-lg-8">
                     <div class="optin-badge">FREE GUIDE • 2026 EDITION</div>
-                    <h2 style="color: var(--lds-white); font-size: 2.5rem; line-height: 1.2; margin-bottom: 1rem;">Academic Transformation Playbook for higher education</h2>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1.125rem; margin-bottom: 2rem;">The complete roadmap for Academic Transformation. Trusted by 20+ leading institutions to successfully launch online programmes.</p>
+                    <h2 class="optin-title">Academic Transformation Playbook for higher education</h2>
+                    <p class="optin-lead">The complete roadmap for Academic Transformation. Trusted by 20+ leading institutions to successfully launch online programmes.</p>
 
-                    <ul class="optin-benefits mb-4">
-                        <li>How to build institutional buy-in for online learning</li>
-                        <li>The 4-stage implementation timeline</li>
-                        <li>Budget planning templates and cost calculators</li>
-                        <li>Quality assurance frameworks</li>
-                        <li>Real case studies from Russell Group universities</li>
+                    <ul class="optin-benefits">
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>How to build institutional buy-in for online learning</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>The 4-stage implementation timeline</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Budget planning templates and cost calculators</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Quality assurance frameworks</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Real case studies from Russell Group universities</span></li>
                     </ul>
 
-                    <div class="optin-form-box">
-                        <div class="optin-cta-text">
-                            Get your free copy
-                        </div>
-
-                        <form id="optinForm">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="optinName" placeholder="Name" required style="padding: 0.875rem 1rem;">
-                            </div>
-                            <div class="mb-3">
-                                <input type="email" class="form-control" id="optinEmail" placeholder="Email" required style="padding: 0.875rem 1rem;">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gdprConsent" required>
-                                    <label class="form-check-label" for="gdprConsent" style="font-size: 0.875rem; color: #6b7280;">
-                                        I agree to receive emails from Learning Design Solutions. You can unsubscribe at any time. View our <a href="/privacy" style="color: var(--lds-navy); text-decoration: underline;">privacy policy</a>.
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100" style="font-size: 1.0625rem; padding: 1rem; background-color: var(--lds-orange); border: none;">Download Free Guide</button>
-                        </form>
-
-                        <p class="text-center mt-3 mb-0" style="font-size: 0.875rem; color: #9ca3af;">
-                            No spam. Only practical strategies and insights.
-                        </p>
-                    </div>
+                    <!-- Form plugin will be inserted here -->
+                    <div id="optin-form-plugin"></div>
                 </div>
             </div>
         </div>
@@ -1527,82 +795,52 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" style="height: 60px; margin-bottom: 1rem;">
-                    <p class="mt-3">We design and build ready-to-launch online courses for higher education institutions.</p>
+            <div class="row g-5">
+                <!-- Brand -->
+                <div class="col-lg-5">
+                    <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions" class="footer-logo mb-4">
+                    <p class="footer-tagline">We design and build ready-to-launch online courses for higher education institutions.</p>
                 </div>
-                <div class="col-lg-2">
-                    <h5 style="color: var(--lds-green);">Navigation</h5>
-                    <ul class="list-unstyled">
+
+                <!-- Navigation -->
+                <div class="col-lg-3 col-6">
+                    <h5 class="footer-heading">Navigation</h5>
+                    <ul class="footer-links">
                         <li><a href="#what-you-get">What You Get</a></li>
                         <li><a href="#process">Our Process</a></li>
                         <li><a href="#results">Results</a></li>
                         <li><a href="#about">About</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5 style="color: var(--lds-green);">Resources</h5>
-                    <ul class="list-unstyled">
                         <li><a href="/case-studies">Case Studies</a></li>
                         <li><a href="/blog">Blog</a></li>
-                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3">
-                    <h5 style="color: var(--lds-green);">Get Started</h5>
-                    <p>Email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
-                    <p><a href="#contact" style="color: var(--lds-green); font-weight: 700;">Book a call →</a></p>
+
+                <!-- Contact -->
+                <div class="col-lg-4 col-6">
+                    <h5 class="footer-heading">Get Started</h5>
+                    <a href="mailto:info@learningdesignsolutions.co.uk" class="footer-email d-block mb-4">info@learningdesignsolutions.co.uk</a>
+                    <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
                 </div>
             </div>
-            <div class="row mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
-                <div class="col-md-6">
-                    <p class="mb-0" style="font-size: 0.875rem;">&copy; 2026 Learning Design Solutions. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="/privacy" style="font-size: 0.875rem; margin-left: 1rem;">Privacy Policy</a>
-                </div>
+
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Learning Design Solutions. All rights reserved.</p>
+                <a href="/privacy">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 10L8 5L13 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
     <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Opt-in form submission
-        document.getElementById('optinForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you! Check your email for the Academic Transformation Playbook 2026.');
-        });
-
-        // Lazy load video on click
-        document.getElementById('video-placeholder').addEventListener('click', function() {
-            const placeholder = document.getElementById('video-placeholder');
-            const container = document.getElementById('video-container');
-            const iframe = document.getElementById('video-iframe');
-            
-            // Load the video
-            iframe.src = 'https://www.youtube.com/embed/u6BeEAfHEsE?autoplay=1';
-            
-            // Hide placeholder, show video
-            placeholder.style.display = 'none';
-            container.style.display = 'block';
-        });
-    </script>
+    <!-- Custom Scripts -->
+    <script src="js/main.js" defer></script>
 </body>
 </html>
