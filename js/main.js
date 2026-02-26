@@ -1,138 +1,99 @@
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-
-        // Don't prevent default for accordion or collapse triggers
-        if (href === '#' || this.hasAttribute('data-bs-toggle')) {
-            return;
-        }
-
-        e.preventDefault();
-        const target = document.querySelector(href);
-
-        if (target) {
-            const navHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.offsetTop - navHeight - 20;
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
+// Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
-        }
-    });
-});
+        });
 
-// Navbar shadow on scroll
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+        // Glass overlay: fade out on click and trigger autoplay
+        document.getElementById('video-placeholder').addEventListener('click', function() {
+            const placeholder = document.getElementById('video-placeholder');
+            const iframe = document.getElementById('video-iframe');
 
-    if (currentScroll > 50) {
-        navbar.classList.add('shadow');
-    } else {
-        navbar.classList.remove('shadow');
+            iframe.src = 'https://www.youtube.com/embed/u6BeEAfHEsE?si=Hllm4ERxM6mFFzyC&autoplay=1';
+            placeholder.style.opacity = '0';
+            placeholder.style.pointerEvents = 'none';
+        });
+
+// Testimonial carousel: fixed height + dots sync
+(function () {
+    const carousel = document.getElementById('testimonialCarousel');
+    if (!carousel) return;
+
+    const inner = carousel.querySelector('.carousel-inner');
+    const items = carousel.querySelectorAll('.carousel-item');
+    const dots  = document.querySelectorAll('.testimonial-dots button');
+
+    // Measure tallest slide and lock carousel-inner to that height
+    function fixHeight() {
+        inner.style.height = '';
+        let max = 0;
+        items.forEach(function (item) {
+            const isActive = item.classList.contains('active');
+            if (!isActive) {
+                item.style.display    = 'block';
+                item.style.visibility = 'hidden';
+                item.style.position   = 'static';
+            }
+            max = Math.max(max, item.offsetHeight);
+            if (!isActive) {
+                item.style.display    = '';
+                item.style.visibility = '';
+                item.style.position   = '';
+            }
+        });
+        inner.style.height = max + 'px';
     }
 
-    lastScroll = currentScroll;
-});
+    fixHeight();
+    window.addEventListener('resize', fixHeight, { passive: true });
+    if (document.fonts) { document.fonts.ready.then(fixHeight); }
 
-// Form submission handler (placeholder - integrate with actual backend)
-const leadForm = document.querySelector('.guide-download-form');
-if (leadForm) {
-    leadForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-
-        // Placeholder - replace with actual form submission logic
-        console.log('Guide download requested:', { name, email });
-
-        // Show success message
-        const button = this.querySelector('button[type="submit"]');
-        const originalHTML = button.innerHTML;
-        button.innerHTML = '<i class="bi bi-check-circle me-2"></i>Guide Sent to Your Email!';
-        button.disabled = true;
-
-        setTimeout(() => {
-            button.innerHTML = originalHTML;
-            button.disabled = false;
-            this.reset();
-        }, 4000);
+    // Sync external dots active state
+    carousel.addEventListener('slid.bs.carousel', function (e) {
+        dots.forEach(function (dot, i) {
+            dot.classList.toggle('active', i === e.to);
+        });
     });
-}
+})();
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+// Back to top button
+(function () {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    function handleVisibility() {
+        if (window.scrollY > window.innerHeight * 0.7) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
         }
+    }
+    window.addEventListener('scroll', handleVisibility, { passive: true });
+    handleVisibility();
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-}, observerOptions);
+})();
 
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.pain-card, .methodology-card, .process-card, .result-card, .case-study-card');
-
-    animatedElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(el);
-    });
-});
-
-// CTA button tracking (placeholder - integrate with actual analytics)
-document.querySelectorAll('.btn-primary').forEach(button => {
-    button.addEventListener('click', function() {
-        const buttonText = this.textContent.trim();
-        console.log('CTA clicked:', buttonText);
-        // Add analytics tracking here (e.g., Google Analytics, Mixpanel, etc.)
-    });
-});
-
-// Navbar collapse on mobile after clicking link
-const navLinks = document.querySelectorAll('.nav-link');
-const navbarCollapse = document.querySelector('.navbar-collapse');
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-            bsCollapse.hide();
+// Navbar: compact + opaque on scroll
+(function () {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    function handleScroll() {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
-    });
-});
-
-// Add active state to nav links based on scroll position
-window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section[id]');
-    const navHeight = navbar.offsetHeight;
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - navHeight - 100;
-        const sectionHeight = section.offsetHeight;
-
-        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // run once on load in case page is already scrolled
+})();
