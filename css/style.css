@@ -98,7 +98,7 @@
 
         .navbar.scrolled {
             padding: 0.3rem 0;
-            background-color: rgba(18, 33, 89, 0.78);
+            background-color: rgba(18, 33, 89, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom-color: rgba(132, 204, 22, 0.25);
@@ -384,7 +384,7 @@
         /* Logo Ribbon Animation */
         .logo-ribbon {
             background-color: var(--lds-light);
-            padding: 2rem 0;
+            padding: 1.2rem 0;
             overflow: hidden;
             position: relative;
             border-top: 3px solid var(--lds-green);
