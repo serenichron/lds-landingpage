@@ -857,6 +857,19 @@
             margin-bottom: 2rem;
         }
 
+<<<<<<< Updated upstream
+=======
+        @media (max-width: 768px){
+            .process-step{
+                margin-top: 0!important;
+            }
+
+            .process-step-row{
+                pointer-events: none!important;
+            }
+        }
+
+>>>>>>> Stashed changes
         /* Comparison Lists */
         .comparison-list {
             list-style: none;
@@ -1351,6 +1364,13 @@
             box-shadow: 0 4px 28px rgba(18, 33, 89, 0.10);
         }
 
+<<<<<<< Updated upstream
+=======
+        #faqAccordion .accordion-body{
+            border-bottom: 1px solid var(--lds-green);
+        }
+
+>>>>>>> Stashed changes
         .accordion-item {
             border: none;
             border-bottom: 1px solid #e5e7eb;
@@ -1415,6 +1435,15 @@
             color: var(--lds-dark);
         }
 
+<<<<<<< Updated upstream
+=======
+        @media (max-width: 768px){
+            .accordion-body{
+                padding: 20px 35px;
+            }
+        }
+
+>>>>>>> Stashed changes
         /* Footer */
         footer {
             background-color: var(--lds-navy);
@@ -1680,6 +1709,13 @@
             height: 100%;
         }
 
+<<<<<<< Updated upstream
+=======
+        #testimonialCarousel .carousel-item{
+            height: 100%;
+        }
+
+>>>>>>> Stashed changes
         .testimonial-quote {
             font-size: 1.125rem;
             font-style: italic;
