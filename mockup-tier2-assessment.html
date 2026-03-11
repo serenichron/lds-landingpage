@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Transformation Readiness Assessment — Learning Design Solutions</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN SYSTEM
+        ============================================================ */
+        :root {
+            --lds-navy: #122159;
+            --lds-navy-deep: #0b163a;
+            --lds-green: #84cc16;
+            --lds-green-dark: #65a30d;
+            --lds-orange: #f97316;
+            --lds-orange-dark: #ea6c0a;
+            --lds-dark: #1f2937;
+            --lds-light: #f9fafb;
+            --lds-white: #ffffff;
+            --lds-grey-100: #f3f4f6;
+            --lds-grey-200: #e5e7eb;
+            --lds-grey-400: #9ca3af;
+            --lds-grey-600: #4b5563;
+            --lds-grey-700: #374151;
+
+            /* Score colours */
+            --score-red: #ef4444;
+            --score-red-bg: #fef2f2;
+            --score-red-border: #fecaca;
+            --score-amber: #f97316;
+            --score-amber-bg: #fff7ed;
+            --score-amber-border: #fed7aa;
+            --score-yellow-green: #84cc16;
+            --score-yellow-green-bg: #f7fee7;
+            --score-yellow-green-border: #d9f99d;
+            --score-green: #16a34a;
+            --score-green-bg: #f0fdf4;
+            --score-green-border: #bbf7d0;
+
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Merriweather', serif;
+        }
+
+        /* Sharp corners globally */
+        *, *::before, *::after {
+            border-radius: 0 !important;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--lds-dark);
+            background-color: var(--lds-white);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           TYPOGRAPHY
+        ============================================================ */
+        .font-display {
+            font-family: var(--font-display);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+        }
+
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
+        .assessment-nav {
+            background-color: var(--lds-navy);
+            border-bottom: 3px solid var(--lds-green);
+        }
+
+        .assessment-nav__brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--lds-white);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .assessment-nav__brand:hover {
+            color: var(--lds-green);
+        }
+
+        .assessment-nav__breadcrumb {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 0.02em;
+        }
+
+        .assessment-nav__breadcrumb a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+        }
+
+        .assessment-nav__breadcrumb a:hover {
+            color: var(--lds-green);
+        }
+
+        .assessment-nav__breadcrumb .sep {
+            margin: 0 0.4rem;
+            opacity: 0.4;
+        }
+
+        .assessment-nav__breadcrumb .current {
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .assessment-hero {
+            background-color: var(--lds-navy);
+            padding: 5rem 0 4.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle texture — left-edge accent line */
+        .assessment-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--lds-green);
+        }
+
+        .assessment-hero__badge {
+            display: inline-block;
+            background-color: var(--lds-green);
+            color: var(--lds-navy-deep);
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-hero__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.85rem, 4vw, 2.8rem);
+            line-height: 1.15;
+            color: var(--lds-white);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .assessment-hero__subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.65;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-hero__trust {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.02em;
+        }
+
+        .assessment-hero__trust i {
+            color: var(--lds-green);
+            margin-right: 0.4rem;
+        }
+
+        /* ============================================================
+           HOW IT WORKS
+        ============================================================ */
+        .how-it-works {
+            background-color: var(--lds-light);
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--lds-grey-200);
+        }
+
+        .how-it-works__step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.1rem;
+        }
+
+        .how-it-works__icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background-color: var(--lds-navy);
+            color: var(--lds-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .how-it-works__step-title {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--lds-navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .how-it-works__step-desc {
+            font-size: 0.87rem;
+            color: var(--lds-grey-600);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .how-it-works__divider {
+            width: 1px;
+            background-color: var(--lds-grey-200);
+            align-self: stretch;
+            margin: 0 1.5rem;
+        }
+
+        /* ============================================================
+           ASSESSMENT FORM SECTION
+        ============================================================ */
+        .assessment-section {
+            background-color: var(--lds-white);
+            padding: 4rem 0 5rem;
+        }
+
+        .assessment-form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Progress bar */
+        .assessment-progress {
+            margin-bottom: 3rem;
+        }
+
+        .assessment-progress__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.6rem;
+        }
+
+        .assessment-progress__label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--lds-grey-600);
+        }
+
+        .assessment-progress__count {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--lds-navy);
+        }
+
+        .assessment-progress__track {
+            height: 5px;
+            background-color: var(--lds-grey-200);
+            overflow: hidden;
+        }
+
+        .assessment-progress__fill {
+            height: 100%;
+            background-color: var(--lds-green);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Question blocks */
+        .question-block {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--lds-grey-200);
+        }
+
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+
+        .question-block__meta {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .question-block__number {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--lds-grey-400);
+        }
+
+        .question-block__dimension {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--lds-navy);
+            background-color: var(--lds-grey-100);
+            padding: 0.2rem 0.6rem;
+            border-left: 3px solid var(--lds-navy);
+        }
+
+        .question-block__text {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.45;
+            color: var(--lds-dark);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Option cards */
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+        }
+
+        @media (max-width: 767px) {
+            .option-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .option-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .option-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-card__label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 1rem 0.75rem;
+            border: 2px solid var(--lds-grey-200);
+            background-color: var(--lds-white);
+            cursor: pointer;
+            transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.15s ease;
+            text-align: center;
+            user-select: none;
+        }
+
+        .option-card__label:hover {
+            border-color: var(--lds-navy);
+            background-color: var(--lds-grey-100);
+        }
+
+        .option-card__score {
+            font-size: 1.4rem;
+            font-weight: 800;
+            font-family: var(--font-body);
+            line-height: 1;
+        }
+
+        .option-card__text {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            color: var(--lds-grey-600);
+            line-height: 1.3;
+        }
+
+        .option-card__check {
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        /* Score-specific colours (unselected) */
+        .option-card--1 .option-card__score { color: var(--score-red); }
+        .option-card--2 .option-card__score { color: var(--score-amber); }
+        .option-card--3 .option-card__score { color: #ca8a04; }
+        .option-card--4 .option-card__score { color: var(--score-green); }
+
+        /* Selected states */
+        .option-card input[type="radio"]:checked + .option-card__label {
+            transform: scale(1.02);
+        }
+
+        .option-card--1 input[type="radio"]:checked + .option-card__label {
+            background-color: var(--score-red-bg);
+            border-color: var(--score-red);
+        }
+
+        .option-card--2 input[type="radio"]:checked + .option-card__label {
+            background-color: var(--score-amber-bg);
+            border-color: var(--score-amber);
+        }
+
+        .option-card--3 input[type="radio"]:checked + .option-card__label {
+            background-color: #fefce8;
+            border-color: #ca8a04;
+        }
+
+        .option-card--4 input[type="radio"]:checked + .option-card__label {
+            background-color: var(--score-green-bg);
+            border-color: var(--score-green);
+        }
+
+        .option-card input[type="radio"]:checked + .option-card__label .option-card__check {
+            display: block;
+        }
+
+        .option-card input[type="radio"]:checked + .option-card__label .option-card__text {
+            color: var(--lds-dark);
+        }
+
+        /* Submit button area */
+        .assessment-submit-area {
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .btn-submit-assessment {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding: 1rem 2.5rem;
+            cursor: pointer;
+            transition: background-color 0.18s ease, opacity 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .btn-submit-assessment:hover:not(:disabled) {
+            background-color: var(--lds-orange-dark);
+            color: var(--lds-white);
+        }
+
+        .btn-submit-assessment:disabled {
+            background-color: var(--lds-grey-200);
+            color: var(--lds-grey-400);
+            cursor: not-allowed;
+        }
+
+        .submit-hint {
+            font-size: 0.82rem;
+            color: var(--lds-grey-400);
+            margin-top: 0.75rem;
+        }
+
+        /* ============================================================
+           RESULTS SECTION
+        ============================================================ */
+        .results-section {
+            display: none;
+        }
+
+        .results-section.is-visible {
+            display: block;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Overall score panel */
+        .results-overall {
+            background-color: var(--lds-navy);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results-overall::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--lds-green);
+        }
+
+        .results-overall__score-number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(4rem, 10vw, 7rem);
+            color: var(--lds-white);
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        .results-overall__score-denom {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: rgba(255,255,255,0.4);
+            letter-spacing: -0.02em;
+        }
+
+        .results-overall__category-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-overall__category-badge--early {
+            background-color: var(--score-amber);
+            color: white;
+        }
+
+        .results-overall__category-badge--building {
+            background-color: #eab308;
+            color: #1a1a00;
+        }
+
+        .results-overall__category-badge--positioned {
+            background-color: var(--lds-green);
+            color: var(--lds-navy-deep);
+        }
+
+        .results-overall__category-badge--ready {
+            background-color: var(--score-green);
+            color: white;
+        }
+
+        .results-overall__category-name {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--lds-white);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .results-overall__category-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.97rem;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        /* Dimension breakdown */
+        .results-dimensions {
+            background-color: var(--lds-light);
+            padding: 4rem 0;
+        }
+
+        .results-dimensions__title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--lds-navy);
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--lds-navy);
+        }
+
+        .dimension-item {
+            background-color: var(--lds-white);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--lds-grey-200);
+            transition: border-color 0.3s ease;
+        }
+
+        .dimension-item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .dimension-item__name {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--lds-dark);
+            letter-spacing: 0.01em;
+        }
+
+        .dimension-item__score-text {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--lds-grey-600);
+        }
+
+        .dimension-bar-track {
+            height: 8px;
+            background-color: var(--lds-grey-200);
+            overflow: hidden;
+            margin-bottom: 0.85rem;
+        }
+
+        .dimension-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dimension-bar-fill--low { background-color: var(--score-red); }
+        .dimension-bar-fill--medium { background-color: var(--score-amber); }
+        .dimension-bar-fill--high { background-color: #ca8a04; }
+        .dimension-bar-fill--excellent { background-color: var(--score-green); }
+
+        .dimension-item--low { border-left-color: var(--score-red); }
+        .dimension-item--medium { border-left-color: var(--score-amber); }
+        .dimension-item--high { border-left-color: #ca8a04; }
+        .dimension-item--excellent { border-left-color: var(--score-green); }
+
+        .dimension-item__recommendation {
+            font-size: 0.85rem;
+            color: var(--lds-grey-600);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .dimension-item__recommendation strong {
+            color: var(--lds-navy);
+        }
+
+        /* Results CTA */
+        .results-cta {
+            background-color: var(--lds-navy);
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .results-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--lds-orange);
+        }
+
+        .results-cta__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--lds-white);
+            margin-bottom: 1rem;
+        }
+
+        .results-cta__text {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.97rem;
+            line-height: 1.65;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-cta-primary {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            border: none;
+            font-weight: 700;
+            font-size: 0.97rem;
+            padding: 0.9rem 2rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.18s ease;
+        }
+
+        .btn-cta-primary:hover {
+            background-color: var(--lds-orange-dark);
+            color: var(--lds-white);
+        }
+
+        .results-cta__email {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 1rem;
+        }
+
+        .results-cta__email a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: underline;
+        }
+
+        .results-cta__email a:hover {
+            color: var(--lds-green);
+        }
+
+        /* Save results */
+        .save-results-section {
+            background-color: var(--lds-grey-100);
+            padding: 2rem 0;
+            border-top: 1px solid var(--lds-grey-200);
+        }
+
+        .btn-save-results {
+            background-color: transparent;
+            border: 2px solid var(--lds-navy);
+            color: var(--lds-navy);
+            font-weight: 600;
+            font-size: 0.87rem;
+            padding: 0.6rem 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.18s ease, color 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-save-results:hover {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+        }
+
+        .save-results-feedback {
+            font-size: 0.82rem;
+            color: var(--score-green);
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .save-results-feedback.is-visible {
+            display: inline-flex;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .assessment-footer {
+            background-color: var(--lds-dark);
+            padding: 1.5rem 0;
+            border-top: 3px solid var(--lds-navy);
+        }
+
+        .assessment-footer__copy {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.45);
+            margin: 0;
+        }
+
+        .assessment-footer__back {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.15s ease;
+        }
+
+        .assessment-footer__back:hover {
+            color: var(--lds-green);
+        }
+
+        /* ============================================================
+           UTILITIES
+        ============================================================ */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-grey-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0,0,0,0) !important;
+            border: 0 !important;
+        }
+
+        /* Focus visible */
+        .option-card__label:focus-visible,
+        .btn-submit-assessment:focus-visible,
+        .btn-cta-primary:focus-visible,
+        .btn-save-results:focus-visible {
+            outline: 3px solid var(--lds-orange);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+    ============================================================ -->
+    <nav class="assessment-nav py-3" aria-label="Site navigation">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <a href="index.html" class="assessment-nav__brand">Learning Design Solutions</a>
+                <nav class="assessment-nav__breadcrumb" aria-label="Breadcrumb">
+                    <a href="index.html">Resources</a>
+                    <span class="sep" aria-hidden="true">&rsaquo;</span>
+                    <span class="current">Readiness Assessment</span>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="assessment-hero" aria-labelledby="hero-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="assessment-hero__badge" aria-label="Free assessment, 5 minutes">FREE ASSESSMENT &middot; 5 MINUTES</div>
+                    <h1 class="assessment-hero__title" id="hero-title">
+                        How Ready Is Your Institution for Online Programme Development?
+                    </h1>
+                    <p class="assessment-hero__subtitle">
+                        Answer 8 questions to assess your academic transformation readiness. Get a personalised score with actionable recommendations.
+                    </p>
+                    <p class="assessment-hero__trust">
+                        <i class="bi bi-building" aria-hidden="true"></i>
+                        Based on insights from 20+ institutional partnerships
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+    ============================================================ -->
+    <section class="how-it-works" aria-labelledby="how-it-works-heading">
+        <div class="container">
+            <p class="section-label" id="how-it-works-heading">How it works</p>
+            <div class="d-flex flex-column flex-md-row gap-4 gap-md-0">
+
+                <div class="how-it-works__step flex-fill">
+                    <div class="how-it-works__icon" aria-hidden="true">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+                    <div>
+                        <p class="how-it-works__step-title">Answer 8 Questions</p>
+                        <p class="how-it-works__step-desc">Rate your institution across six key dimensions of online learning readiness.</p>
+                    </div>
+                </div>
+
+                <div class="how-it-works__divider d-none d-md-block" aria-hidden="true"></div>
+
+                <div class="how-it-works__step flex-fill">
+                    <div class="how-it-works__icon" aria-hidden="true">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div>
+                        <p class="how-it-works__step-title">Get Your Score</p>
+                        <p class="how-it-works__step-desc">Receive an instant readiness assessment with dimension-by-dimension breakdown.</p>
+                    </div>
+                </div>
+
+                <div class="how-it-works__divider d-none d-md-block" aria-hidden="true"></div>
+
+                <div class="how-it-works__step flex-fill">
+                    <div class="how-it-works__icon" aria-hidden="true">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <div>
+                        <p class="how-it-works__step-title">Talk It Through</p>
+                        <p class="how-it-works__step-desc">Optionally walk through your results with Andrew in a free 30-minute call.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ASSESSMENT FORM
+    ============================================================ -->
+    <section class="assessment-section" aria-labelledby="assessment-form-heading">
+        <div class="container">
+            <div class="assessment-form-wrapper">
+
+                <div class="assessment-progress" role="status" aria-live="polite" aria-label="Assessment progress">
+                    <div class="assessment-progress__header">
+                        <span class="assessment-progress__label">Your progress</span>
+                        <span class="assessment-progress__count" id="progress-count">0 of 8 answered</span>
+                    </div>
+                    <div class="assessment-progress__track" aria-hidden="true">
+                        <div class="assessment-progress__fill" id="progress-fill"></div>
+                    </div>
+                </div>
+
+                <h2 class="visually-hidden" id="assessment-form-heading">Assessment Questions</h2>
+
+                <form id="assessment-form" novalidate>
+
+                    <!-- Q1 -->
+                    <div class="question-block" data-question="1">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q1</span>
+                            <span class="question-block__dimension">Strategic Clarity</span>
+                        </div>
+                        <p class="question-block__text">Does your institution have a documented strategy for online learning?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 1 — Strategic Clarity">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q1" value="1" id="q1-1">
+                                <label class="option-card__label" for="q1-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q1" value="2" id="q1-2">
+                                <label class="option-card__label" for="q1-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q1" value="3" id="q1-3">
+                                <label class="option-card__label" for="q1-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q1" value="4" id="q1-4">
+                                <label class="option-card__label" for="q1-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="question-block" data-question="2">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q2</span>
+                            <span class="question-block__dimension">Strategic Clarity</span>
+                        </div>
+                        <p class="question-block__text">Is there senior leadership buy-in and budget allocated for online programme development?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 2 — Strategic Clarity">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q2" value="1" id="q2-1">
+                                <label class="option-card__label" for="q2-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q2" value="2" id="q2-2">
+                                <label class="option-card__label" for="q2-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q2" value="3" id="q2-3">
+                                <label class="option-card__label" for="q2-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q2" value="4" id="q2-4">
+                                <label class="option-card__label" for="q2-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="question-block" data-question="3">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q3</span>
+                            <span class="question-block__dimension">Academic Design Capability</span>
+                        </div>
+                        <p class="question-block__text">Does your team have experience designing courses specifically for online delivery (not repurposing lectures)?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 3 — Academic Design Capability">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q3" value="1" id="q3-1">
+                                <label class="option-card__label" for="q3-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q3" value="2" id="q3-2">
+                                <label class="option-card__label" for="q3-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q3" value="3" id="q3-3">
+                                <label class="option-card__label" for="q3-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q3" value="4" id="q3-4">
+                                <label class="option-card__label" for="q3-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="question-block" data-question="4">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q4</span>
+                            <span class="question-block__dimension">Production Capacity</span>
+                        </div>
+                        <p class="question-block__text">Do you have access to video production, interactive content development, and assessment design resources?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 4 — Production Capacity">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q4" value="1" id="q4-1">
+                                <label class="option-card__label" for="q4-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q4" value="2" id="q4-2">
+                                <label class="option-card__label" for="q4-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q4" value="3" id="q4-3">
+                                <label class="option-card__label" for="q4-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q4" value="4" id="q4-4">
+                                <label class="option-card__label" for="q4-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="question-block" data-question="5">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q5</span>
+                            <span class="question-block__dimension">Platform Readiness</span>
+                        </div>
+                        <p class="question-block__text">Is your VLE/LMS configured and supported for the kind of online learning experience you want to deliver?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 5 — Platform Readiness">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q5" value="1" id="q5-1">
+                                <label class="option-card__label" for="q5-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q5" value="2" id="q5-2">
+                                <label class="option-card__label" for="q5-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q5" value="3" id="q5-3">
+                                <label class="option-card__label" for="q5-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q5" value="4" id="q5-4">
+                                <label class="option-card__label" for="q5-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="question-block" data-question="6">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q6</span>
+                            <span class="question-block__dimension">Quality Assurance</span>
+                        </div>
+                        <p class="question-block__text">Do you have established quality frameworks or benchmarks specifically for online courses?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 6 — Quality Assurance">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q6" value="1" id="q6-1">
+                                <label class="option-card__label" for="q6-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q6" value="2" id="q6-2">
+                                <label class="option-card__label" for="q6-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q6" value="3" id="q6-3">
+                                <label class="option-card__label" for="q6-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q6" value="4" id="q6-4">
+                                <label class="option-card__label" for="q6-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div class="question-block" data-question="7">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q7</span>
+                            <span class="question-block__dimension">Timeline &amp; Resources</span>
+                        </div>
+                        <p class="question-block__text">Is your target launch timeline realistic given your current team capacity?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 7 — Timeline and Resources">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q7" value="1" id="q7-1">
+                                <label class="option-card__label" for="q7-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q7" value="2" id="q7-2">
+                                <label class="option-card__label" for="q7-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q7" value="3" id="q7-3">
+                                <label class="option-card__label" for="q7-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q7" value="4" id="q7-4">
+                                <label class="option-card__label" for="q7-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q8 -->
+                    <div class="question-block" data-question="8">
+                        <div class="question-block__meta">
+                            <span class="question-block__number">Q8</span>
+                            <span class="question-block__dimension">Timeline &amp; Resources</span>
+                        </div>
+                        <p class="question-block__text">Have you mapped the full scope of work required (content, media, assessment, platform build, QA)?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 8 — Timeline and Resources">
+                            <div class="option-card option-card--1">
+                                <input type="radio" name="q8" value="1" id="q8-1">
+                                <label class="option-card__label" for="q8-1">
+                                    <span class="option-card__score">1</span>
+                                    <span class="option-card__text">Not at all</span>
+                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--2">
+                                <input type="radio" name="q8" value="2" id="q8-2">
+                                <label class="option-card__label" for="q8-2">
+                                    <span class="option-card__score">2</span>
+                                    <span class="option-card__text">Early stages</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--3">
+                                <input type="radio" name="q8" value="3" id="q8-3">
+                                <label class="option-card__label" for="q8-3">
+                                    <span class="option-card__score">3</span>
+                                    <span class="option-card__text">Partially in place</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <div class="option-card option-card--4">
+                                <input type="radio" name="q8" value="4" id="q8-4">
+                                <label class="option-card__label" for="q8-4">
+                                    <span class="option-card__score">4</span>
+                                    <span class="option-card__text">Fully established</span>
+                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="assessment-submit-area">
+                        <button type="submit" class="btn-submit-assessment" id="submit-btn" disabled aria-describedby="submit-hint">
+                            <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
+                            See My Results
+                        </button>
+                        <p class="submit-hint" id="submit-hint">Answer all 8 questions to unlock your results.</p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         RESULTS SECTION
+    ============================================================ -->
+    <div class="results-section" id="results-section" aria-live="polite" aria-label="Your assessment results">
+
+        <!-- Overall Score -->
+        <section class="results-overall" aria-labelledby="results-score-heading">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-md-4 text-center text-md-start">
+                        <p class="section-label" style="color: rgba(255,255,255,0.4);">Your overall score</p>
+                        <div>
+                            <span class="results-overall__score-number" id="result-score-number">--</span>
+                            <span class="results-overall__score-denom">/32</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="results-overall__category-badge" id="result-category-badge"></div>
+                        <h2 class="results-overall__category-name" id="result-category-name"></h2>
+                        <p class="results-overall__category-desc" id="result-category-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dimension Breakdown -->
+        <section class="results-dimensions" aria-labelledby="dimension-breakdown-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h3 class="results-dimensions__title" id="dimension-breakdown-heading">Dimension-by-Dimension Breakdown</h3>
+
+                        <div id="dimension-results">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="results-cta" aria-labelledby="results-cta-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h2 class="results-cta__title" id="results-cta-heading">Want to Walk Through Your Results?</h2>
+                        <p class="results-cta__text">
+                            Book a free 30-minute strategy call with Andrew. He'll review your scores, discuss your specific challenges, and map out what an engagement could look like.
+                        </p>
+                        <p class="results-cta__text">
+                            No sales pressure — just a helpful conversation with someone who's done this 20+ times.
+                        </p>
+                        <a href="#" class="btn-cta-primary">
+                            <i class="bi bi-calendar-check" aria-hidden="true"></i>
+                            Book a Strategy Call
+                        </a>
+                        <p class="results-cta__email">
+                            Or email us: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Save Results -->
+        <section class="save-results-section" aria-label="Save your results">
+            <div class="container">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <span class="section-label mb-0" style="color: var(--lds-grey-600);">Save your results</span>
+                    <button class="btn-save-results" id="save-results-btn" aria-label="Copy results summary to clipboard">
+                        <i class="bi bi-clipboard" aria-hidden="true"></i>
+                        Copy to clipboard
+                    </button>
+                    <span class="save-results-feedback" id="save-results-feedback" role="status">
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                        Copied to clipboard
+                    </span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="assessment-footer" role="contentinfo">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <p class="assessment-footer__copy">&copy; 2026 Learning Design Solutions</p>
+                <a href="index.html" class="assessment-footer__back">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                    Back to main site
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ============================================================
+        // DATA: Questions and dimensions
+        // ============================================================
+
+        const QUESTIONS = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'];
+        const TOTAL_QUESTIONS = QUESTIONS.length;
+
+        const DIMENSIONS = [
+            {
+                id: 'strategic',
+                name: 'Strategic Clarity',
+                questions: ['q1', 'q2'],
+                max: 8,
+                recommendations: function (score) {
+                    if (score <= 3) return 'Your institution would benefit from developing a formal online learning strategy before beginning development.';
+                    if (score <= 5) return 'Strategy is emerging. Consider a focused consultancy engagement to crystallise goals and build the business case.';
+                    if (score <= 7) return 'Good strategic foundation. Ensure budget and timeline are formally approved.';
+                    return 'Excellent. Clear strategic direction and leadership support are in place.';
+                }
+            },
+            {
+                id: 'academic-design',
+                name: 'Academic Design Capability',
+                questions: ['q3'],
+                max: 4,
+                recommendations: function (score) {
+                    if (score === 1) return 'This is the most critical gap. Online pedagogy is fundamentally different from classroom teaching — specialist expertise is essential.';
+                    if (score === 2) return 'Some awareness exists but dedicated learning design capability is needed for quality outcomes.';
+                    if (score === 3) return 'Good capability. Additional specialist support could accelerate development.';
+                    return 'Strong internal capability. External support may still add value for scale and fresh perspective.';
+                }
+            },
+            {
+                id: 'production',
+                name: 'Production Capacity',
+                questions: ['q4'],
+                max: 4,
+                recommendations: function (score) {
+                    if (score === 1) return 'No production resources in place. This will need to be outsourced or built.';
+                    if (score === 2) return 'Basic resources available. Professional media production will significantly improve quality.';
+                    if (score === 3) return 'Reasonable capacity. May need augmentation for large-scale projects.';
+                    return 'Well-resourced. Focus on efficient deployment.';
+                }
+            },
+            {
+                id: 'platform',
+                name: 'Platform Readiness',
+                questions: ['q5'],
+                max: 4,
+                recommendations: function (score) {
+                    if (score === 1) return 'VLE needs significant configuration work before it can support quality online learning.';
+                    if (score === 2) return 'Platform exists but may need enhancement for the experience you want.';
+                    if (score === 3) return 'Platform is mostly ready. Configuration and testing needed.';
+                    return 'Platform is well-configured and supported.';
+                }
+            },
+            {
+                id: 'quality',
+                name: 'Quality Assurance',
+                questions: ['q6'],
+                max: 4,
+                recommendations: function (score) {
+                    if (score === 1) return 'No online-specific quality frameworks. This is a risk area — quality can slip without clear benchmarks.';
+                    if (score === 2) return 'Some quality processes exist. Formalising these for online specifically will protect your brand.';
+                    if (score === 3) return 'Good frameworks. Ensure they cover online-specific considerations.';
+                    return 'Comprehensive quality assurance in place.';
+                }
+            },
+            {
+                id: 'timeline',
+                name: 'Timeline & Resources',
+                questions: ['q7', 'q8'],
+                max: 8,
+                recommendations: function (score) {
+                    if (score <= 3) return 'Significant risk of timeline overrun. The scope of work is likely underestimated.';
+                    if (score <= 5) return 'Some planning done but gaps likely remain. A detailed scoping exercise is recommended.';
+                    if (score <= 7) return 'Good planning. Validate assumptions with someone who\'s done this before.';
+                    return 'Realistic and well-planned. Proceed with confidence.';
+                }
+            }
+        ];
+
+        const SCORE_CATEGORIES = [
+            {
+                min: 8,  max: 14,
+                name: 'Early Stage',
+                badgeClass: 'results-overall__category-badge--early',
+                description: 'Your institution is at the beginning of its online learning journey. Significant groundwork is needed before launching programmes.'
+            },
+            {
+                min: 15, max: 22,
+                name: 'Building Foundations',
+                badgeClass: 'results-overall__category-badge--building',
+                description: 'You have some elements in place but gaps remain. A structured approach will help you move forward efficiently.'
+            },
+            {
+                min: 23, max: 28,
+                name: 'Well Positioned',
+                badgeClass: 'results-overall__category-badge--positioned',
+                description: 'Strong foundations are in place. With targeted support in your weaker areas, you could launch programmes confidently.'
+            },
+            {
+                min: 29, max: 32,
+                name: 'Launch Ready',
+                badgeClass: 'results-overall__category-badge--ready',
+                description: 'Your institution has excellent readiness across all dimensions. You may benefit from specialist support to accelerate timelines.'
+            }
+        ];
+
+        // ============================================================
+        // STATE
+        // ============================================================
+
+        const answers = {};
+
+        // ============================================================
+        // DOM REFS
+        // ============================================================
+
+        const form = document.getElementById('assessment-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitHint = document.getElementById('submit-hint');
+        const progressFill = document.getElementById('progress-fill');
+        const progressCount = document.getElementById('progress-count');
+        const resultsSection = document.getElementById('results-section');
+        const saveBtn = document.getElementById('save-results-btn');
+        const saveFeedback = document.getElementById('save-results-feedback');
+
+        // ============================================================
+        // HELPERS
+        // ============================================================
+
+        function getAnsweredCount() {
+            return Object.keys(answers).length;
+        }
+
+        function allAnswered() {
+            return getAnsweredCount() === TOTAL_QUESTIONS;
+        }
+
+        function getDimensionBarClass(score, max) {
+            const pct = score / max;
+            if (pct <= 0.35) return 'dimension-bar-fill--low';
+            if (pct <= 0.6)  return 'dimension-bar-fill--medium';
+            if (pct <= 0.85) return 'dimension-bar-fill--high';
+            return 'dimension-bar-fill--excellent';
+        }
+
+        function getDimensionItemClass(score, max) {
+            const pct = score / max;
+            if (pct <= 0.35) return 'dimension-item--low';
+            if (pct <= 0.6)  return 'dimension-item--medium';
+            if (pct <= 0.85) return 'dimension-item--high';
+            return 'dimension-item--excellent';
+        }
+
+        function getScoreCategory(totalScore) {
+            return SCORE_CATEGORIES.find(c => totalScore >= c.min && totalScore <= c.max) || SCORE_CATEGORIES[0];
+        }
+
+        function getTotalScore() {
+            return QUESTIONS.reduce(function (sum, q) {
+                return sum + (answers[q] || 0);
+            }, 0);
+        }
+
+        function getDimensionScore(dimension) {
+            return dimension.questions.reduce(function (sum, q) {
+                return sum + (answers[q] || 0);
+            }, 0);
+        }
+
+        // ============================================================
+        // PROGRESS UPDATE
+        // ============================================================
+
+        function updateProgress() {
+            const count = getAnsweredCount();
+            const pct = (count / TOTAL_QUESTIONS) * 100;
+            progressFill.style.width = pct + '%';
+            progressCount.textContent = count + ' of ' + TOTAL_QUESTIONS + ' answered';
+
+            if (allAnswered()) {
+                submitBtn.disabled = false;
+                submitHint.textContent = 'All questions answered. Ready to see your results.';
+            } else {
+                submitBtn.disabled = true;
+                const remaining = TOTAL_QUESTIONS - count;
+                submitHint.textContent = remaining + ' question' + (remaining > 1 ? 's' : '') + ' remaining.';
+            }
+        }
+
+        // ============================================================
+        // EVENT: Answer selection
+        // ============================================================
+
+        form.addEventListener('change', function (e) {
+            if (e.target.type === 'radio') {
+                const name = e.target.name;
+                answers[name] = parseInt(e.target.value, 10);
+                updateProgress();
+            }
+        });
+
+        // ============================================================
+        // EVENT: Form submit
+        // ============================================================
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!allAnswered()) return;
+            showResults();
+        });
+
+        // ============================================================
+        // RESULTS RENDERING
+        // ============================================================
+
+        function showResults() {
+            const total = getTotalScore();
+            const category = getScoreCategory(total);
+
+            // Overall score
+            document.getElementById('result-score-number').textContent = total;
+
+            const badge = document.getElementById('result-category-badge');
+            badge.className = 'results-overall__category-badge ' + category.badgeClass;
+            badge.textContent = category.name;
+
+            document.getElementById('result-category-name').textContent = category.name;
+            document.getElementById('result-category-desc').textContent = category.description;
+
+            // Dimensions
+            renderDimensions();
+
+            // Show results
+            resultsSection.classList.add('is-visible');
+
+            // Smooth scroll to results
+            setTimeout(function () {
+                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
+            // Animate bars after a short delay (allow DOM to paint)
+            setTimeout(function () {
+                animateDimensionBars();
+            }, 400);
+        }
+
+        function renderDimensions() {
+            const container = document.getElementById('dimension-results');
+            container.innerHTML = '';
+
+            DIMENSIONS.forEach(function (dim) {
+                const score = getDimensionScore(dim);
+                const pct = (score / dim.max) * 100;
+                const itemClass = getDimensionItemClass(score, dim.max);
+                const barClass = getDimensionBarClass(score, dim.max);
+                const recommendation = dim.recommendations(score);
+                const scoreLabel = dim.max === 4 ? score + '/4' : score + '/8';
+
+                const el = document.createElement('div');
+                el.className = 'dimension-item ' + itemClass;
+                el.setAttribute('data-bar-pct', pct);
+
+                el.innerHTML = [
+                    '<div class="dimension-item__header">',
+                        '<span class="dimension-item__name">' + escapeHtml(dim.name) + '</span>',
+                        '<span class="dimension-item__score-text">' + scoreLabel + '</span>',
+                    '</div>',
+                    '<div class="dimension-bar-track" aria-hidden="true">',
+                        '<div class="dimension-bar-fill ' + barClass + '" style="width: 0%"></div>',
+                    '</div>',
+                    '<p class="dimension-item__recommendation">' + escapeHtml(recommendation) + '</p>'
+                ].join('');
+
+                container.appendChild(el);
+            });
+        }
+
+        function animateDimensionBars() {
+            const items = document.querySelectorAll('.dimension-item');
+            items.forEach(function (item, index) {
+                const pct = parseFloat(item.getAttribute('data-bar-pct'));
+                const fill = item.querySelector('.dimension-bar-fill');
+                // Stagger
+                setTimeout(function () {
+                    fill.style.width = pct + '%';
+                }, index * 100);
+            });
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        // ============================================================
+        // SAVE RESULTS
+        // ============================================================
+
+        saveBtn.addEventListener('click', function () {
+            const total = getTotalScore();
+            const category = getScoreCategory(total);
+
+            const dimensionSummary = DIMENSIONS.map(function (dim) {
+                const score = getDimensionScore(dim);
+                return dim.name + ' ' + score + '/' + dim.max;
+            }).join(', ');
+
+            const text = [
+                'Academic Transformation Readiness Assessment',
+                'Score: ' + total + '/32 — ' + category.name,
+                'Dimensions: ' + dimensionSummary,
+                'Assessed via Learning Design Solutions (learningdesignsolutions.co.uk)'
+            ].join('\n');
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function () {
+                    showCopiedFeedback();
+                }).catch(function () {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        });
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                document.execCommand('copy');
+                showCopiedFeedback();
+            } catch (e) {
+                // Silent fail — clipboard access not available
+            }
+            document.body.removeChild(ta);
+        }
+
+        function showCopiedFeedback() {
+            saveFeedback.classList.add('is-visible');
+            setTimeout(function () {
+                saveFeedback.classList.remove('is-visible');
+            }, 3000);
+        }
+
+        // ============================================================
+        // FIX: Correct the radio name typo in Q2 option 3
+        // (The HTML has name="q3" on q2's third option — fix via JS)
+        // ============================================================
+        (function fixRadioNames() {
+            document.querySelectorAll('input[type="radio"]').forEach(function (input) {
+                const question = input.closest('.question-block');
+                if (!question) return;
+                const qNum = question.getAttribute('data-question');
+                const expectedName = 'q' + qNum;
+                if (input.name !== expectedName) {
+                    input.name = expectedName;
+                }
+            });
+        })();
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        updateProgress();
+
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Hidden Pitfalls That Derail Online Learning Projects in Higher Education — Learning Design Solutions</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --lds-navy:   #122159;
+            --lds-green:  #84cc16;
+            --lds-orange: #f97316;
+            --lds-dark:   #1f2937;
+            --lds-light:  #f9fafb;
+            --lds-white:  #ffffff;
+            --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Merriweather', serif;
+        }
+
+        /* Sharp corners everywhere */
+        *,
+        *::before,
+        *::after {
+            border-radius: 0 !important;
+        }
+
+        /* ============================================================
+           BASE
+        ============================================================ */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--lds-dark);
+            background-color: var(--lds-white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            line-height: 1.25;
+        }
+
+        /* ============================================================
+           ARTICLE WIDTH CONSTRAINT
+        ============================================================ */
+        .article-body {
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================================
+           SITE NAVIGATION
+        ============================================================ */
+        .site-nav {
+            background-color: var(--lds-navy);
+            padding: 0.875rem 0;
+            border-bottom: 3px solid var(--lds-green);
+        }
+
+        .site-nav__logo {
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .site-nav__logo span {
+            color: var(--lds-green);
+        }
+
+        .site-nav__breadcrumb {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .site-nav__breadcrumb a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-nav__breadcrumb a:hover {
+            color: var(--lds-green);
+        }
+
+        .site-nav__breadcrumb .separator {
+            margin: 0 0.5rem;
+        }
+
+        /* ============================================================
+           HERO SECTION
+        ============================================================ */
+        .article-hero {
+            background: linear-gradient(155deg, var(--lds-navy) 0%, #0d1a40 55%, #1a2e6b 100%);
+            padding: 5rem 0 4.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle geometric texture */
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(132,204,22,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(132,204,22,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .article-hero__reading-badge {
+            display: inline-block;
+            background-color: var(--lds-green);
+            color: var(--lds-dark);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.875rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .article-hero__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            color: var(--lds-white);
+            line-height: 1.15;
+            margin-bottom: 1.75rem;
+            max-width: 740px;
+        }
+
+        .article-hero__author-line {
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-hero__author-line strong {
+            color: var(--lds-white);
+        }
+
+        .article-hero__subtitle {
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.55);
+            font-style: italic;
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================================
+           INTRO PARAGRAPH
+        ============================================================ */
+        .article-intro {
+            background-color: var(--lds-white);
+            padding: 4rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .article-intro__text {
+            font-size: 1.1875rem;
+            color: var(--lds-dark);
+            line-height: 1.8;
+        }
+
+        /* ============================================================
+           PITFALL SECTIONS — ALTERNATING BACKGROUNDS
+        ============================================================ */
+        .pitfall-section {
+            padding: 4.5rem 1.5rem;
+            border-top: 3px solid #e5e7eb;
+        }
+
+        .pitfall-section--white {
+            background-color: var(--lds-white);
+        }
+
+        .pitfall-section--light {
+            background-color: var(--lds-light);
+        }
+
+        /* Pitfall number */
+        .pitfall-section__number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 4rem;
+            color: var(--lds-green);
+            opacity: 0.45;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.04em;
+        }
+
+        /* Pitfall header row */
+        .pitfall-section__header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .pitfall-section__icon {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--lds-navy);
+            color: var(--lds-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-top: 0.35rem;
+        }
+
+        .pitfall-section__title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+            color: var(--lds-navy);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Body paragraphs inside pitfall */
+        .pitfall-section__body p {
+            margin-bottom: 1.25rem;
+            color: var(--lds-dark);
+        }
+
+        .pitfall-section__body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ============================================================
+           PULLQUOTE
+        ============================================================ */
+        .pitfall-pullquote {
+            border-left: 5px solid var(--lds-green);
+            padding: 1.25rem 1.75rem;
+            margin: 2rem 0;
+            background-color: rgba(132,204,22,0.05);
+        }
+
+        .pitfall-pullquote__text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--lds-navy);
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        /* ============================================================
+           STAT CALLOUT (NAVY)
+        ============================================================ */
+        .stat-callout {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+            padding: 2rem 2.25rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--lds-orange);
+        }
+
+        .stat-callout__text {
+            font-family: var(--font-display);
+            font-size: 1.1875rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ============================================================
+           HIGHLIGHT BOX (LIGHT + GREEN BORDER)
+        ============================================================ */
+        .highlight-box {
+            background-color: #f0fdf4;
+            border-left: 5px solid var(--lds-green);
+            padding: 1.375rem 1.75rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box__text {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--lds-dark);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           SHORT CALLOUT (PLAIN)
+        ============================================================ */
+        .inline-callout {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--lds-navy);
+            border-left: 5px solid var(--lds-green);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background-color: rgba(132,204,22,0.06);
+        }
+
+        /* ============================================================
+           CTA SECTION
+        ============================================================ */
+        .article-cta {
+            background-color: var(--lds-navy);
+            padding: 5rem 1.5rem;
+            border-top: 4px solid var(--lds-green);
+        }
+
+        .article-cta__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            color: var(--lds-white);
+            margin-bottom: 1.25rem;
+        }
+
+        .article-cta__text {
+            font-size: 1.0625rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 1rem;
+            line-height: 1.75;
+        }
+
+        .article-cta__text:last-of-type {
+            margin-bottom: 2.5rem;
+        }
+
+        /* Buttons */
+        .btn-lds-primary {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.875rem 2rem;
+            border: 2px solid var(--lds-orange);
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-lds-primary:hover {
+            background-color: #ea6c0a;
+            border-color: #ea6c0a;
+            color: var(--lds-white);
+        }
+
+        .btn-lds-outline-white {
+            background-color: transparent;
+            color: var(--lds-white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.875rem 2rem;
+            border: 2px solid rgba(255,255,255,0.55);
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s, border-color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-lds-outline-white:hover {
+            background-color: rgba(255,255,255,0.08);
+            border-color: var(--lds-white);
+            color: var(--lds-white);
+        }
+
+        /* ============================================================
+           SITE FOOTER
+        ============================================================ */
+        .site-footer {
+            background-color: var(--lds-dark);
+            padding: 1.75rem 0;
+            border-top: 2px solid rgba(255,255,255,0.08);
+        }
+
+        .site-footer__copy {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.45);
+            margin: 0;
+        }
+
+        .site-footer__back-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer__back-link:hover {
+            color: var(--lds-green);
+        }
+
+        /* ============================================================
+           RESPONSIVE ADJUSTMENTS
+        ============================================================ */
+        @media (max-width: 767.98px) {
+            .article-hero {
+                padding: 3rem 0 3rem;
+            }
+
+            .pitfall-section {
+                padding: 3rem 1rem;
+            }
+
+            .pitfall-section__number {
+                font-size: 3rem;
+            }
+
+            .article-cta {
+                padding: 3.5rem 1rem;
+            }
+
+            .article-cta__button-group {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .stat-callout {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .article-cta__button-group {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         SITE NAVIGATION
+    ============================================================ -->
+    <nav class="site-nav" aria-label="Site navigation">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="index.html" class="site-nav__logo">
+                    Learning Design <span>Solutions</span>
+                </a>
+                <span class="site-nav__breadcrumb" aria-label="Breadcrumb">
+                    <a href="index.html">Resources</a>
+                    <span class="separator" aria-hidden="true">→</span>
+                    <span>Article</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ============================================================
+             HERO SECTION
+        ============================================================ -->
+        <header class="article-hero" role="banner">
+            <div class="container">
+                <div class="article-body">
+                    <div class="article-hero__reading-badge" aria-label="5 minute read, ungated content">
+                        5 Min Read &middot; Ungated
+                    </div>
+                    <h1 class="article-hero__title">
+                        5 Hidden Pitfalls That Derail Online Learning Projects in Higher Education
+                    </h1>
+                    <p class="article-hero__author-line">
+                        By <strong>Andrew Doig</strong> &middot; Founder, Learning Design Solutions &middot; 30 years in HE
+                    </p>
+                    <p class="article-hero__subtitle">
+                        What we've learned from working with 20+ institutions on academic transformation
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================================================
+             INTRO PARAGRAPH
+        ============================================================ -->
+        <section class="article-intro" aria-label="Introduction">
+            <div class="container">
+                <div class="article-body">
+                    <p class="article-intro__text">
+                        Every year, universities and professional bodies invest significant resources into taking their programmes online. And every year, many of these projects fall short — not because of technology failures, but because of fundamental misunderstandings about what online learning actually requires. After 30 years in higher education and having led academic transformation projects for institutions like ICAS, Dyson Institute, and Walbrook, here are the five pitfalls we see most often.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PITFALL 01
+        ============================================================ -->
+        <section class="pitfall-section pitfall-section--white" aria-labelledby="pitfall-1-title">
+            <div class="container">
+                <div class="article-body">
+                    <div class="pitfall-section__number" aria-hidden="true">01</div>
+                    <div class="pitfall-section__header">
+                        <div class="pitfall-section__icon" aria-hidden="true">
+                            <i class="bi bi-camera-video"></i>
+                        </div>
+                        <h2 class="pitfall-section__title" id="pitfall-1-title">
+                            Recording Lectures and Calling It Online Learning
+                        </h2>
+                    </div>
+                    <div class="pitfall-section__body">
+                        <p>
+                            The most common mistake we see: an institution decides to 'go online' by recording existing lectures and uploading them to the VLE. The assumption is that what works in a lecture theatre will work on a screen. It doesn't.
+                        </p>
+                        <p>
+                            Online learning is a fundamentally different pedagogical experience. Students aren't sitting in a room with social cues, peer pressure to stay engaged, and a lecturer reading the room. They're alone, often distracted, and need entirely different kinds of engagement — structured activities, purposeful interactions, and content designed specifically for the medium.
+                        </p>
+                        <p>
+                            This isn't digital transformation. It's academic transformation — rethinking how teaching and learning work when the classroom disappears.
+                        </p>
+                        <blockquote class="pitfall-pullquote" aria-label="Key insight">
+                            <p class="pitfall-pullquote__text">
+                                "Taking courses online isn't a technology project. It's a teaching project."
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PITFALL 02
+        ============================================================ -->
+        <section class="pitfall-section pitfall-section--light" aria-labelledby="pitfall-2-title">
+            <div class="container">
+                <div class="article-body">
+                    <div class="pitfall-section__number" aria-hidden="true">02</div>
+                    <div class="pitfall-section__header">
+                        <div class="pitfall-section__icon" aria-hidden="true">
+                            <i class="bi bi-rulers"></i>
+                        </div>
+                        <h2 class="pitfall-section__title" id="pitfall-2-title">
+                            Underestimating the Design Work by a Factor of Ten
+                        </h2>
+                    </div>
+                    <div class="pitfall-section__body">
+                        <p>
+                            Most institutions budget for 'some content development' when what they actually need is a complete course architecture: learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, and quality assurance testing. The design work for a single online module typically requires 3&ndash;5x the effort of preparing the equivalent face-to-face teaching. For a full programme, multiply that across every module.
+                        </p>
+                        <p>
+                            We've seen projects stall not because of lack of ambition, but because the initial scoping dramatically underestimated what 'building an online course' actually involves.
+                        </p>
+                        <aside class="stat-callout" aria-label="Key statistic">
+                            <p class="stat-callout__text">
+                                A single online module typically requires 3&ndash;5x the effort of preparing equivalent face-to-face teaching.
+                            </p>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PITFALL 03
+        ============================================================ -->
+        <section class="pitfall-section pitfall-section--white" aria-labelledby="pitfall-3-title">
+            <div class="container">
+                <div class="article-body">
+                    <div class="pitfall-section__number" aria-hidden="true">03</div>
+                    <div class="pitfall-section__header">
+                        <div class="pitfall-section__icon" aria-hidden="true">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h2 class="pitfall-section__title" id="pitfall-3-title">
+                            Overloading Internal Teams Who Are Already Stretched
+                        </h2>
+                    </div>
+                    <div class="pitfall-section__body">
+                        <p>
+                            Your internal learning design team — if you have one — is already supporting the entire institution. Asking them to also lead a major online programme development, on top of their existing responsibilities, leads to one outcome: burnout, missed deadlines, and compromised quality.
+                        </p>
+                        <p>
+                            The capacity problem isn't about capability. Your team may be excellent. It's about bandwidth. Large-scale academic transformation requires dedicated, focused resource that most institutions simply cannot free up internally without sacrificing something else.
+                        </p>
+                        <div class="highlight-box" role="note" aria-label="Key question to consider">
+                            <p class="highlight-box__text">
+                                "The question isn't 'can our team do this?' — it's 'can our team do this AND everything else?'"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PITFALL 04
+        ============================================================ -->
+        <section class="pitfall-section pitfall-section--light" aria-labelledby="pitfall-4-title">
+            <div class="container">
+                <div class="article-body">
+                    <div class="pitfall-section__number" aria-hidden="true">04</div>
+                    <div class="pitfall-section__header">
+                        <div class="pitfall-section__icon" aria-hidden="true">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h2 class="pitfall-section__title" id="pitfall-4-title">
+                            Losing Your Institutional Identity in the Online Version
+                        </h2>
+                    </div>
+                    <div class="pitfall-section__body">
+                        <p>
+                            Your institution has a teaching philosophy, an academic culture, a distinct identity that students and the market recognise. When courses go online through generic templates or outsourced to vendors who don't understand academia, that identity gets lost.
+                        </p>
+                        <p>
+                            The online version of your programme should feel unmistakably yours. Your content. Your academic voice. Your intellectual property. Your pedagogical approach. Not a white-label product that could belong to any institution.
+                        </p>
+                        <blockquote class="pitfall-pullquote" aria-label="Key insight">
+                            <p class="pitfall-pullquote__text">
+                                "Your content. Your identity. Your IP."
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PITFALL 05
+        ============================================================ -->
+        <section class="pitfall-section pitfall-section--white" aria-labelledby="pitfall-5-title">
+            <div class="container">
+                <div class="article-body">
+                    <div class="pitfall-section__number" aria-hidden="true">05</div>
+                    <div class="pitfall-section__header">
+                        <div class="pitfall-section__icon" aria-hidden="true">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h2 class="pitfall-section__title" id="pitfall-5-title">
+                            Building for a Platform Instead of Building for Learners
+                        </h2>
+                    </div>
+                    <div class="pitfall-section__body">
+                        <p>
+                            We see institutions make technology decisions first — choosing or upgrading their VLE — and then trying to fit the learning design around the platform's capabilities. This is backwards.
+                        </p>
+                        <p>
+                            The pedagogy should drive the technology, not the other way around. A well-designed online course can work on virtually any modern VLE. The platform is a delivery mechanism, not the product. When you start with 'what does Moodle support?' instead of 'what do our learners need?', you end up with courses that are technically functional but pedagogically mediocre.
+                        </p>
+                        <div class="inline-callout" role="note" aria-label="Guiding principle">
+                            Pedagogy first. Platform second. Always.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CTA SECTION
+        ============================================================ -->
+        <section class="article-cta" aria-labelledby="cta-title">
+            <div class="container">
+                <div class="article-body">
+                    <h2 class="article-cta__title" id="cta-title">Recognise Any of These?</h2>
+                    <p class="article-cta__text">
+                        If your institution is facing one or more of these challenges, you're not alone. Most of the 20+ institutions we've worked with started in exactly this position.
+                    </p>
+                    <p class="article-cta__text">
+                        The good news: these pitfalls are entirely avoidable with the right approach and the right expertise alongside your team.
+                    </p>
+                    <div class="article-cta__button-group">
+                        <a href="#" class="btn-lds-primary">Talk to Andrew</a>
+                        <a href="mockup-tier2-assessment.html" class="btn-lds-outline-white">Take the Readiness Assessment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================
+         SITE FOOTER
+    ============================================================ -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <p class="site-footer__copy">
+                    &copy; 2026 Learning Design Solutions. All rights reserved.
+                </p>
+                <a href="index.html" class="site-footer__back-link">
+                    &larr; Back to main site
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
