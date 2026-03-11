@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDS Lead Magnet Strategy | Serenichron × Learning Design Solutions</title>
+    <meta name="description" content="A three-tier lead magnet funnel strategy for Learning Design Solutions, moving from newsletter subscribers to qualified strategy calls.">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           DESIGN TOKENS — LDS Brand System
+        ========================================================= */
+        :root {
+            --lds-navy: #122159;
+            --lds-navy-deep: #0c1840;
+            --lds-navy-mid: #1a3070;
+            --lds-green: #84cc16;
+            --lds-green-dark: #65a30d;
+            --lds-orange: #f97316;
+            --lds-orange-dark: #ea6f0e;
+            --lds-dark: #1f2937;
+            --lds-light: #f9fafb;
+            --lds-white: #ffffff;
+            --lds-muted: #6b7280;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Merriweather', serif;
+            --border-radius: 0;
+            --section-padding: 6rem;
+        }
+
+        /* SHARP CORNERS — brand non-negotiable */
+        * {
+            border-radius: 0 !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--lds-dark);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--lds-white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.1rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1.875rem;
+        }
+
+        @media (max-width: 767.98px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.4rem; }
+        }
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+        .strategy-nav {
+            background-color: var(--lds-navy);
+            padding: 1rem 0;
+            border-bottom: 3px solid var(--lds-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .strategy-nav__brand {
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--lds-white);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .strategy-nav__brand span {
+            color: var(--lds-green);
+        }
+
+        .strategy-nav__badge {
+            display: inline-block;
+            background-color: rgba(249, 115, 22, 0.15);
+            border: 1px solid var(--lds-orange);
+            color: var(--lds-orange);
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .strategy-nav__back {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .strategy-nav__back:hover {
+            color: var(--lds-green);
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+        .btn {
+            font-family: var(--font-body);
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: 2px solid transparent;
+            transition: all 0.25s ease;
+            text-transform: none;
+            font-size: 1rem;
+            letter-spacing: 0;
+        }
+
+        .btn-orange {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            border-color: var(--lds-orange);
+        }
+
+        .btn-orange:hover {
+            background-color: var(--lds-orange-dark);
+            border-color: var(--lds-orange-dark);
+            color: var(--lds-white);
+        }
+
+        .btn-outline-green {
+            border: 2px solid var(--lds-green);
+            color: var(--lds-green);
+            background-color: transparent;
+        }
+
+        .btn-outline-green:hover {
+            background-color: var(--lds-green);
+            color: var(--lds-navy);
+        }
+
+        .btn-outline-white {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--lds-white);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.88);
+            border-color: rgba(255, 255, 255, 1);
+            color: var(--lds-navy);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        /* =========================================================
+           TIER BADGE — reusable section label
+        ========================================================= */
+        .tier-badge {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tier-badge--green {
+            background-color: var(--lds-green);
+            color: var(--lds-navy);
+        }
+
+        .tier-badge--orange {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+        }
+
+        .tier-badge--navy {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: var(--lds-green);
+            border: 1px solid rgba(132, 204, 22, 0.4);
+        }
+
+        .tier-badge--light {
+            background-color: rgba(18, 33, 89, 0.08);
+            color: var(--lds-navy);
+            border: 1px solid rgba(18, 33, 89, 0.2);
+        }
+
+        /* =========================================================
+           SECTION BASE STYLES
+        ========================================================= */
+        .section-navy {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+            padding: var(--section-padding) 0;
+            position: relative;
+        }
+
+        .section-light {
+            background-color: var(--lds-light);
+            padding: var(--section-padding) 0;
+        }
+
+        .section-white {
+            background-color: var(--lds-white);
+            padding: var(--section-padding) 0;
+        }
+
+        /* =========================================================
+           HERO SECTION
+        ========================================================= */
+        .strategy-hero {
+            background-color: var(--lds-navy);
+            background-image:
+                radial-gradient(circle at 80% 20%, rgba(132, 204, 22, 0.10) 0%, transparent 55%),
+                radial-gradient(circle at 10% 80%, rgba(249, 115, 22, 0.07) 0%, transparent 45%);
+            padding: calc(var(--section-padding) + 1rem) 0 var(--section-padding);
+            color: var(--lds-white);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--lds-green);
+        }
+
+        .strategy-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.012) 0px,
+                rgba(255, 255, 255, 0.012) 1px,
+                transparent 1px,
+                transparent 80px
+            );
+            pointer-events: none;
+        }
+
+        .strategy-hero__content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .strategy-hero__doc-label {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid var(--lds-green);
+        }
+
+        .strategy-hero__title {
+            font-size: 3.1rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .strategy-hero__title { font-size: 2.1rem; }
+        }
+
+        .strategy-hero__subtitle {
+            font-size: 1.375rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 2rem;
+            font-family: var(--font-body);
+        }
+
+        .strategy-hero__intro {
+            font-size: 1.1rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 680px;
+            margin-bottom: 3rem;
+        }
+
+        /* =========================================================
+           FUNNEL FLOW DIAGRAM (Hero)
+        ========================================================= */
+        .funnel-flow-horizontal {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+            row-gap: 1rem;
+        }
+
+        .funnel-flow-horizontal__step {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .funnel-step-node {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            position: relative;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+            transition: background-color 0.25s, border-color 0.25s;
+        }
+
+        .funnel-step-node--green {
+            background-color: rgba(132, 204, 22, 0.15);
+            border-color: rgba(132, 204, 22, 0.5);
+            color: var(--lds-green);
+        }
+
+        .funnel-step-node--orange {
+            background-color: rgba(249, 115, 22, 0.15);
+            border-color: rgba(249, 115, 22, 0.5);
+            color: var(--lds-orange);
+        }
+
+        .funnel-flow-arrow {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 1.2rem;
+            padding: 0 0.5rem;
+            line-height: 1;
+        }
+
+        @media (max-width: 575.98px) {
+            .funnel-step-node { font-size: 0.75rem; padding: 0.6rem 1rem; }
+        }
+
+        /* =========================================================
+           CORE INSIGHT — COMPARISON CARDS
+        ========================================================= */
+        .comparison-card {
+            border: 2px solid;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.25s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .comparison-card--current {
+            border-color: rgba(239, 68, 68, 0.3);
+            background-color: rgba(239, 68, 68, 0.03);
+        }
+
+        .comparison-card--proposed {
+            border-color: rgba(132, 204, 22, 0.5);
+            background-color: rgba(132, 204, 22, 0.03);
+        }
+
+        .comparison-card__label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .comparison-card--current .comparison-card__label {
+            color: rgba(239, 68, 68, 0.8);
+            border-bottom: 2px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .comparison-card--proposed .comparison-card__label {
+            color: var(--lds-green-dark);
+            border-bottom: 2px solid rgba(132, 204, 22, 0.4);
+        }
+
+        .comparison-card__title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comparison-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-list__icon {
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .comparison-card--current .comparison-list__icon {
+            color: rgba(239, 68, 68, 0.7);
+        }
+
+        .comparison-card--proposed .comparison-list__icon {
+            color: var(--lds-green-dark);
+        }
+
+        .comparison-card__end-goal {
+            margin-top: 1.5rem;
+            padding: 0.875rem 1rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .comparison-card--current .comparison-card__end-goal {
+            background-color: rgba(239, 68, 68, 0.07);
+            border-left: 3px solid rgba(239, 68, 68, 0.4);
+            color: rgba(239, 68, 68, 0.85);
+        }
+
+        .comparison-card--proposed .comparison-card__end-goal {
+            background-color: rgba(132, 204, 22, 0.08);
+            border-left: 3px solid var(--lds-green);
+            color: var(--lds-green-dark);
+        }
+
+        /* =========================================================
+           PITFALL ITEMS — TIER 1
+        ========================================================= */
+        .pitfall-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.75rem;
+            background-color: var(--lds-white);
+            border: 1px solid rgba(18, 33, 89, 0.1);
+            border-left: 4px solid var(--lds-navy);
+            margin-bottom: 1rem;
+            transition: border-left-color 0.25s, box-shadow 0.25s;
+        }
+
+        .pitfall-item:hover {
+            border-left-color: var(--lds-orange);
+            box-shadow: 4px 0 0 var(--lds-orange), 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .pitfall-item__number {
+            flex-shrink: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pitfall-item__icon {
+            flex-shrink: 0;
+            width: 2.75rem;
+            height: 2.75rem;
+            background-color: rgba(18, 33, 89, 0.06);
+            color: var(--lds-navy);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.25s, color 0.25s;
+        }
+
+        .pitfall-item:hover .pitfall-item__icon {
+            background-color: rgba(249, 115, 22, 0.1);
+            color: var(--lds-orange);
+        }
+
+        .pitfall-item__content {
+            flex: 1;
+        }
+
+        .pitfall-item__title {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--lds-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .pitfall-item__subtitle {
+            font-size: 0.9375rem;
+            color: var(--lds-muted);
+            margin: 0;
+        }
+
+        /* =========================================================
+           ASSESSMENT DIMENSIONS — TIER 2
+        ========================================================= */
+        .assessment-dimension-card {
+            background-color: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 1.5rem;
+            height: 100%;
+            transition: background-color 0.25s, border-color 0.25s;
+        }
+
+        .assessment-dimension-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(132, 204, 22, 0.4);
+        }
+
+        .assessment-dimension-card__number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(132, 204, 22, 0.35);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .assessment-dimension-card__title {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .assessment-dimension-card__desc {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        /* =========================================================
+           KILLER ASSET HIGHLIGHT BOX
+        ========================================================= */
+        .killer-asset-highlight {
+            background-color: rgba(132, 204, 22, 0.08);
+            border: 1px solid rgba(132, 204, 22, 0.3);
+            border-left: 4px solid var(--lds-green);
+            padding: 2rem;
+        }
+
+        .killer-asset-highlight__title {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin-bottom: 1.25rem;
+        }
+
+        .killer-asset-highlight__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .killer-asset-highlight__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.875rem;
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .killer-asset-highlight__list li:last-child {
+            border-bottom: none;
+        }
+
+        .killer-asset-highlight__list li i {
+            color: var(--lds-green);
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        /* =========================================================
+           MOCK RESULT / RADAR BARS
+        ========================================================= */
+        .mock-result-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+        }
+
+        .mock-result-panel__title {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .score-bar-item {
+            margin-bottom: 1rem;
+        }
+
+        .score-bar-item__label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.4rem;
+        }
+
+        .score-bar-item__label span {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--lds-green);
+        }
+
+        .score-bar-track {
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            background-color: var(--lds-green);
+            position: relative;
+        }
+
+        .score-bar-fill--low {
+            background-color: var(--lds-orange);
+        }
+
+        .score-bar-fill--mid {
+            background-color: #eab308;
+        }
+
+        .mock-result-cta {
+            margin-top: 1.75rem;
+            padding: 1.25rem;
+            background-color: rgba(249, 115, 22, 0.12);
+            border: 1px solid rgba(249, 115, 22, 0.35);
+            border-left: 4px solid var(--lds-orange);
+        }
+
+        .mock-result-cta p {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .mock-result-cta strong {
+            color: var(--lds-orange);
+        }
+
+        /* =========================================================
+           CASE STUDY CARD — TIER 3
+        ========================================================= */
+        .case-study-card {
+            background-color: var(--lds-white);
+            border: 2px solid var(--lds-navy);
+            padding: 2.5rem;
+        }
+
+        .case-study-stat {
+            padding: 1.5rem;
+            background-color: var(--lds-light);
+            border-top: 4px solid var(--lds-navy);
+            text-align: center;
+        }
+
+        .case-study-stat__number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--lds-navy);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .case-study-stat__label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--lds-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* =========================================================
+           AWARD BADGE
+        ========================================================= */
+        .award-badge {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background-color: rgba(234, 179, 8, 0.06);
+            border: 1px solid rgba(234, 179, 8, 0.35);
+            border-left: 4px solid #d97706;
+            margin-bottom: 1rem;
+            transition: background-color 0.25s;
+        }
+
+        .award-badge:hover {
+            background-color: rgba(234, 179, 8, 0.1);
+        }
+
+        .award-badge__icon {
+            font-size: 1.75rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .award-badge__text {
+            flex: 1;
+        }
+
+        .award-badge__name {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--lds-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .award-badge__org {
+            font-size: 0.875rem;
+            color: var(--lds-muted);
+            margin: 0;
+        }
+
+        /* =========================================================
+           VERTICAL FUNNEL FLOW DIAGRAM
+        ========================================================= */
+        .vertical-funnel {
+            position: relative;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .vertical-funnel__step {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 0;
+        }
+
+        .vertical-funnel__connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            width: 48px;
+        }
+
+        .vertical-funnel__dot {
+            width: 14px;
+            height: 14px;
+            background-color: var(--lds-green);
+            flex-shrink: 0;
+            margin-top: 1.75rem;
+        }
+
+        .vertical-funnel__dot--orange {
+            background-color: var(--lds-orange);
+        }
+
+        .vertical-funnel__dot--white {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .vertical-funnel__line {
+            flex: 1;
+            width: 2px;
+            background-color: rgba(132, 204, 22, 0.3);
+            margin-top: 0;
+        }
+
+        .vertical-funnel__line--orange {
+            background-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .vertical-funnel__step:last-child .vertical-funnel__line {
+            display: none;
+        }
+
+        .vertical-funnel__card {
+            flex: 1;
+            padding: 1.25rem 1.5rem;
+            margin: 0.75rem 0;
+            position: relative;
+        }
+
+        .vertical-funnel__card--green {
+            background-color: rgba(132, 204, 22, 0.08);
+            border: 1px solid rgba(132, 204, 22, 0.25);
+            border-left: 3px solid var(--lds-green);
+        }
+
+        .vertical-funnel__card--orange {
+            background-color: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-left: 3px solid var(--lds-orange);
+        }
+
+        .vertical-funnel__card--white {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 3px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .vertical-funnel__card-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.25rem;
+        }
+
+        .vertical-funnel__card-title {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            margin: 0;
+        }
+
+        .vertical-funnel__card--green .vertical-funnel__card-title {
+            color: var(--lds-green);
+        }
+
+        .vertical-funnel__card--orange .vertical-funnel__card-title {
+            color: var(--lds-orange);
+        }
+
+        .vertical-funnel__card-note {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin: 0.35rem 0 0;
+        }
+
+        .vertical-funnel__magic-note {
+            background-color: rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            padding: 1rem 1.25rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-style: italic;
+        }
+
+        /* =========================================================
+           IMPLEMENTATION PRIORITY CARDS
+        ========================================================= */
+        .priority-card {
+            background-color: var(--lds-white);
+            border: 1px solid rgba(18, 33, 89, 0.1);
+            border-top: 5px solid;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .priority-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(18, 33, 89, 0.1);
+        }
+
+        .priority-card--1 { border-top-color: var(--lds-orange); }
+        .priority-card--2 { border-top-color: var(--lds-navy); }
+        .priority-card--3 { border-top-color: var(--lds-green); }
+
+        .priority-card__number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .priority-card--1 .priority-card__number { color: var(--lds-orange); }
+        .priority-card--2 .priority-card__number { color: var(--lds-navy); }
+        .priority-card--3 .priority-card__number { color: var(--lds-green-dark); }
+
+        .priority-card__timing {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .priority-card--1 .priority-card__timing { color: var(--lds-orange); }
+        .priority-card--2 .priority-card__timing { color: var(--lds-navy); }
+        .priority-card--3 .priority-card__timing { color: var(--lds-green-dark); }
+
+        .priority-card__title {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--lds-dark);
+            margin-bottom: 1rem;
+        }
+
+        .priority-card__desc {
+            font-size: 0.9375rem;
+            color: var(--lds-muted);
+            margin: 0;
+        }
+
+        /* =========================================================
+           SECTION HEADING STYLES
+        ========================================================= */
+        .section-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-eyebrow--dark {
+            color: var(--lds-orange);
+        }
+
+        .section-divider {
+            width: 3rem;
+            height: 3px;
+            background-color: var(--lds-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-divider--orange {
+            background-color: var(--lds-orange);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+        .strategy-footer {
+            background-color: var(--lds-navy-deep);
+            padding: 2.5rem 0;
+            border-top: 3px solid var(--lds-green);
+        }
+
+        .strategy-footer__credit {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        .strategy-footer__credit strong {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .strategy-footer__back {
+            color: var(--lds-green);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .strategy-footer__back:hover {
+            color: rgba(132, 204, 22, 0.75);
+        }
+
+        /* =========================================================
+           UTILITY OVERRIDES
+        ========================================================= */
+        .text-green { color: var(--lds-green) !important; }
+        .text-orange { color: var(--lds-orange) !important; }
+        .text-navy { color: var(--lds-navy) !important; }
+        .text-muted-white { color: rgba(255, 255, 255, 0.65) !important; }
+
+        .bg-navy-glass {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+
+        .border-green { border-color: var(--lds-green) !important; }
+
+        /* Frosted glass panel for use on navy backgrounds */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR
+    ============================================================ -->
+    <nav class="strategy-nav" aria-label="Strategy document navigation">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <span class="strategy-nav__brand">
+                        Learning Design <span>Solutions</span>
+                    </span>
+                    <span class="strategy-nav__badge">Strategy Proposal</span>
+                </div>
+                <a href="index.html" class="strategy-nav__back d-flex align-items-center gap-2">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Landing Page
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ============================================================
+         SECTION 1 — HERO
+    ============================================================ -->
+    <section class="strategy-hero" aria-labelledby="hero-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 strategy-hero__content">
+                    <p class="strategy-hero__doc-label">Confidential · Prepared by Serenichron × LDS · March 2026</p>
+                    <h1 class="strategy-hero__title" id="hero-title">
+                        Lead Magnet &amp;<br>Funnel Strategy
+                    </h1>
+                    <p class="strategy-hero__subtitle">
+                        Moving from newsletter subscribers to qualified strategy calls
+                    </p>
+                    <p class="strategy-hero__intro">
+                        Traditional lead magnets capture emails. But LDS doesn't need 500 subscribers — you need 3–5 qualified conversations per quarter with the right institutions. This strategy replaces the generic PDF playbook with a three-tier system designed to mirror your actual sales process.
+                    </p>
+
+                    <!-- Horizontal Funnel Flow -->
+                    <div class="funnel-flow-horizontal" role="img" aria-label="Funnel flow: Awareness leads to Self-Assessment, then to Evidence, then to Strategy Call">
+                        <div class="funnel-flow-horizontal__step">
+                            <div class="funnel-step-node">Awareness</div>
+                        </div>
+                        <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
+                        <div class="funnel-flow-horizontal__step">
+                            <div class="funnel-step-node funnel-step-node--green">Self-Assessment</div>
+                        </div>
+                        <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
+                        <div class="funnel-flow-horizontal__step">
+                            <div class="funnel-step-node">Evidence</div>
+                        </div>
+                        <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
+                        <div class="funnel-flow-horizontal__step">
+                            <div class="funnel-step-node funnel-step-node--orange">Strategy Call</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 2 — CORE INSIGHT: CURRENT vs PROPOSED
+    ============================================================ -->
+    <section class="section-light" aria-labelledby="insight-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <p class="section-eyebrow section-eyebrow--dark">The Problem</p>
+                    <div class="section-divider section-divider--orange"></div>
+                    <h2 id="insight-title">Why the Current Approach Needs to Evolve</h2>
+                    <p class="text-muted">The existing lead capture mechanism is built around a model that works for volume-driven B2C funnels. LDS operates in a relationship-driven B2B environment where the buyer is a senior HE leader — and they need a different experience.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Current Approach -->
+                <div class="col-lg-6">
+                    <div class="comparison-card comparison-card--current">
+                        <p class="comparison-card__label">Current Approach</p>
+                        <h3 class="comparison-card__title">"Academic Transformation Playbook" PDF</h3>
+                        <ul class="comparison-list">
+                            <li>
+                                <i class="bi bi-x-circle comparison-list__icon"></i>
+                                <span>Gated behind an email form — friction for senior HE audience</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-x-circle comparison-list__icon"></i>
+                                <span>Promises budget templates and cost calculators — commodity content any consultant offers</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-x-circle comparison-list__icon"></i>
+                                <span>One-size-fits-all content — no personalisation to their institution's context</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-x-circle comparison-list__icon"></i>
+                                <span>Generic PDF format — instantly forgettable, hard to share internally</span>
+                            </li>
+                        </ul>
+                        <div class="comparison-card__end-goal">
+                            End goal: newsletter subscriber
+                        </div>
+                    </div>
+                </div>
+                <!-- Proposed Approach -->
+                <div class="col-lg-6">
+                    <div class="comparison-card comparison-card--proposed">
+                        <p class="comparison-card__label">Proposed Approach</p>
+                        <h3 class="comparison-card__title">Three-Tier Funnel Built Around Your Methodology</h3>
+                        <ul class="comparison-list">
+                            <li>
+                                <i class="bi bi-check-circle comparison-list__icon"></i>
+                                <span>Tier 1 ungated, Tier 2 optionally gated — respects the senior audience</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle comparison-list__icon"></i>
+                                <span>Delivers a personalised readiness score mirroring Andrew's actual methodology</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle comparison-list__icon"></i>
+                                <span>Specific and actionable — unique to LDS, not replicable by generic consultants</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle comparison-list__icon"></i>
+                                <span>Interactive web format — shareable, indexable, designed to spread internally</span>
+                            </li>
+                        </ul>
+                        <div class="comparison-card__end-goal">
+                            End goal: qualified strategy call
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 3 — TIER 1: THE AWARENESS PROVOCATION
+    ============================================================ -->
+    <section class="section-white" id="tier-1" aria-labelledby="tier1-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <span class="tier-badge tier-badge--light">Tier 1 · Top of Funnel · Ungated</span>
+                    <p class="section-eyebrow">Awareness Asset</p>
+                    <div class="section-divider"></div>
+                    <h2 id="tier1-title">5 Hidden Pitfalls That Derail Online Learning Projects</h2>
+                    <p class="text-muted">Format: interactive web page (not a PDF) — freely accessible, no gate required.</p>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-7">
+                    <!-- Pitfall Items -->
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">1</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-camera-video"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"Recording lectures and calling it online learning"</p>
+                            <p class="pitfall-item__subtitle">Academic transformation vs. tech migration — why the distinction matters to learner outcomes</p>
+                        </div>
+                    </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">2</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-rulers"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"Underestimating the design work"</p>
+                            <p class="pitfall-item__subtitle">Why it's 10× more than institutions expect — and how that gap kills projects midway</p>
+                        </div>
+                    </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">3</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-people"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"Overloading internal teams"</p>
+                            <p class="pitfall-item__subtitle">The capacity crisis — asking academics to design, build, and teach simultaneously</p>
+                        </div>
+                    </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">4</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-building"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"Losing institutional identity"</p>
+                            <p class="pitfall-item__subtitle">IP and brand protection when outsourcing curriculum development</p>
+                        </div>
+                    </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">5</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-mortarboard"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"Building for a platform, not for learners"</p>
+                            <p class="pitfall-item__subtitle">Why pedagogy-first design outperforms feature-first VLE implementations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Ungated reasoning panel -->
+                <div class="col-lg-5">
+                    <div class="glass-panel" style="background-color: rgba(18, 33, 89, 0.04); border: 1px solid rgba(18, 33, 89, 0.1); padding: 2rem;">
+                        <p class="section-eyebrow section-eyebrow--dark" style="color: var(--lds-navy);">Strategic Rationale</p>
+                        <h3 style="font-size: 1.375rem; color: var(--lds-navy);">Why this must be ungated</h3>
+                        <ul class="comparison-list" style="margin-top: 1rem;">
+                            <li style="border-bottom-color: rgba(18,33,89,0.08);">
+                                <i class="bi bi-person-check" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Senior HE professionals despise form-filling for content that may prove generic</span>
+                            </li>
+                            <li style="border-bottom-color: rgba(18,33,89,0.08);">
+                                <i class="bi bi-shield-check" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Freely sharing valuable insight builds trust before the first conversation</span>
+                            </li>
+                            <li style="border-bottom-color: rgba(18,33,89,0.08);">
+                                <i class="bi bi-search" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">SEO benefit: indexable content that surfaces when HE leaders search for this problem</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-share" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Easy to share — a champion forwards it to their committee without friction</span>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 1.75rem; padding: 1.25rem; background-color: rgba(249, 115, 22, 0.07); border-left: 3px solid var(--lds-orange);">
+                            <p style="font-size: 0.9375rem; color: var(--lds-dark); margin: 0; font-style: italic;">
+                                Ends with: "Recognise any of these? Let's talk." — direct link to strategy call booking.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 4 — TIER 2: THE READINESS ASSESSMENT (STAR ASSET)
+    ============================================================ -->
+    <section class="section-navy" id="tier-2" aria-labelledby="tier2-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-9">
+                    <span class="tier-badge tier-badge--navy">Tier 2 · Middle of Funnel · Key Asset</span>
+                    <p class="section-eyebrow">The Star Asset</p>
+                    <div class="section-divider"></div>
+                    <h2 id="tier2-title" style="color: var(--lds-white);">Academic Transformation Readiness Assessment</h2>
+                    <p class="text-muted-white">An interactive self-assessment tool (8–10 questions) that gives institutional leaders a structured framework to evaluate their online learning readiness — and gives LDS a qualified lead who has already self-diagnosed using your methodology.</p>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Why this is the killer asset -->
+                <div class="col-lg-6">
+                    <div class="killer-asset-highlight">
+                        <p class="killer-asset-highlight__title">Why This Is the Killer Asset</p>
+                        <ul class="killer-asset-highlight__list">
+                            <li>
+                                <i class="bi bi-people-fill"></i>
+                                <span>Your champion inside the institution needs to convince colleagues. This tool gives them a <strong style="color: var(--lds-green);">score they can present to leadership</strong>.</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chat-quote"></i>
+                                <span>It frames the problem using <strong style="color: var(--lds-green);">your language</strong> — academic transformation, not digital transformation.</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-inbound"></i>
+                                <span>It creates a natural reason to talk: <em>"We scored low on X — can you help us think through this?"</em></span>
+                            </li>
+                            <li>
+                                <i class="bi bi-diagram-3"></i>
+                                <span>It mirrors your Stage 1 consulting — <strong style="color: var(--lds-green);">the assessment IS a lightweight version of what you actually do.</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mock Result Output -->
+                <div class="col-lg-6">
+                    <div class="mock-result-panel">
+                        <p class="mock-result-panel__title">Sample Output — What the Prospect Receives</p>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Strategic Clarity
+                                <span>6/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--mid" style="width: 60%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Academic Design Capability
+                                <span>3/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--low" style="width: 30%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Production Capacity
+                                <span>4/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--low" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Platform Readiness
+                                <span>7/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Quality Assurance
+                                <span>4/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--low" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Timeline Realism
+                                <span>5/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--mid" style="width: 50%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="mock-result-cta">
+                            <p><strong>Your results suggest 2–3 critical gaps</strong> before a successful launch. Want to walk through your results with Andrew?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Assessment Dimensions -->
+            <div class="row mb-2">
+                <div class="col-12">
+                    <h3 style="color: var(--lds-white); font-size: 1.375rem; margin-bottom: 1.5rem;">The 6 Assessment Dimensions</h3>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">01</div>
+                        <p class="assessment-dimension-card__title">Strategic Clarity</p>
+                        <p class="assessment-dimension-card__desc">Do you have a clear online learning strategy tied to institutional goals?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">02</div>
+                        <p class="assessment-dimension-card__title">Academic Design Capability</p>
+                        <p class="assessment-dimension-card__desc">Can your team design curricula specifically for online pedagogy — not just adapt face-to-face delivery?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">03</div>
+                        <p class="assessment-dimension-card__title">Production Capacity</p>
+                        <p class="assessment-dimension-card__desc">Video, interactive content, and assessment resources — do you have the bandwidth to produce at scale?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">04</div>
+                        <p class="assessment-dimension-card__title">Platform Readiness</p>
+                        <p class="assessment-dimension-card__desc">Is your VLE configured to deliver the learner experience you're designing towards?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">05</div>
+                        <p class="assessment-dimension-card__title">Quality Assurance</p>
+                        <p class="assessment-dimension-card__desc">Do you have robust frameworks for online course quality — distinct from classroom QA processes?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">06</div>
+                        <p class="assessment-dimension-card__title">Timeline Realism</p>
+                        <p class="assessment-dimension-card__desc">Is your launch timeline achievable with current resources, or is it aspirational by default?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 5 — TIER 3: THE ICAS CASE STUDY
+    ============================================================ -->
+    <section class="section-light" id="tier-3" aria-labelledby="tier3-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <span class="tier-badge tier-badge--light">Tier 3 · Bottom of Funnel · Social Proof</span>
+                    <p class="section-eyebrow section-eyebrow--dark">Authority Proof</p>
+                    <div class="section-divider section-divider--orange"></div>
+                    <h2 id="tier3-title">ICAS Case Study: Full Curriculum Transformation</h2>
+                    <p class="text-muted">In HE procurement, case studies are decision-enablers. The internal champion forwards this to their committee. Independent awards make it unchallengeable.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Stats Panel -->
+                <div class="col-lg-7">
+                    <div class="case-study-card">
+                        <div class="row g-0 mb-4">
+                            <div class="col-4">
+                                <div class="case-study-stat">
+                                    <div class="case-study-stat__number">2.5<span style="font-size: 1.25rem;">yr</span></div>
+                                    <div class="case-study-stat__label">Partnership</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="case-study-stat" style="border-top-color: var(--lds-orange);">
+                                    <div class="case-study-stat__number" style="color: var(--lds-orange);">12</div>
+                                    <div class="case-study-stat__label">Core Modules</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="case-study-stat" style="border-top-color: var(--lds-green-dark);">
+                                    <div class="case-study-stat__number" style="color: var(--lds-green-dark);">89%</div>
+                                    <div class="case-study-stat__label">Student Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 style="font-family: var(--font-body); font-size: 1.125rem; font-weight: 700; color: var(--lds-navy); margin-bottom: 1rem;">The ICAS Transformation</h4>
+                        <p style="font-size: 1rem; color: var(--lds-muted); margin-bottom: 1.25rem;">
+                            ICAS (Institute of Chartered Accountants of Scotland) partnered with LDS to rebuild their professional qualification curriculum for the online environment — not simply migrating content, but fundamentally redesigning the learner journey for accountancy professionals.
+                        </p>
+                        <div style="padding: 1.25rem; background-color: rgba(132, 204, 22, 0.07); border-left: 4px solid var(--lds-green);">
+                            <p style="font-size: 1rem; font-weight: 700; color: var(--lds-dark); margin-bottom: 0.25rem;">The "Backwash Effect"</p>
+                            <p style="font-size: 0.9375rem; color: var(--lds-muted); margin: 0;">Online improvements flowing back to strengthen classroom teaching — an outcome that surprised even the institution and is now a signature of Andrew's methodology.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards Panel -->
+                <div class="col-lg-5">
+                    <div style="padding: 2rem; background-color: var(--lds-white); border: 1px solid rgba(18, 33, 89, 0.1); height: 100%;">
+                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-orange); margin-bottom: 1.5rem;">Independent Recognition</p>
+                        <h3 style="font-size: 1.375rem; color: var(--lds-dark); margin-bottom: 1.5rem;">Learning Technologies Awards</h3>
+
+                        <div class="award-badge">
+                            <div class="award-badge__icon">🏆</div>
+                            <div class="award-badge__text">
+                                <p class="award-badge__name">Best Use of Blended Learning</p>
+                                <p class="award-badge__org">Public &amp; Non-Profit Sector</p>
+                            </div>
+                        </div>
+
+                        <div class="award-badge">
+                            <div class="award-badge__icon">🏆</div>
+                            <div class="award-badge__text">
+                                <p class="award-badge__name">Best Digital Learning Transformation Programme</p>
+                                <p class="award-badge__org">Learning Technologies Awards</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.75rem; padding: 1.25rem; background-color: rgba(18, 33, 89, 0.04); border-left: 3px solid var(--lds-navy);">
+                            <p style="font-size: 0.9375rem; color: var(--lds-muted); margin: 0; font-style: italic;">
+                                "Awards make it unchallengeable. When a procurement committee asks 'but how do we know it works?' — two industry awards answer that question."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 6 — THE COMPLETE FUNNEL FLOW
+    ============================================================ -->
+    <section class="section-navy" id="funnel-flow" aria-labelledby="funnel-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <p class="section-eyebrow">The Full Picture</p>
+                    <div class="section-divider"></div>
+                    <h2 id="funnel-title" style="color: var(--lds-white);">How It All Connects to Your Sales Process</h2>
+                    <p class="text-muted-white">Every touchpoint in this funnel is engineered to advance the relationship — not just capture contact data.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="vertical-funnel" role="img" aria-label="Complete funnel flow diagram from LinkedIn post through to Stage 3 Scale">
+
+                        <!-- Step 1 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--green">
+                                <p class="vertical-funnel__card-label">Entry Point</p>
+                                <p class="vertical-funnel__card-title">LinkedIn Post (Tier 1 Content)</p>
+                                <p class="vertical-funnel__card-note">Each of the 5 pitfalls becomes a standalone post driving warm traffic</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--white">
+                                <p class="vertical-funnel__card-label">Click-through</p>
+                                <p class="vertical-funnel__card-title">Landing Page</p>
+                                <p class="vertical-funnel__card-note">First impression — positions Andrew's unique methodology, not a generic agency</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--green">
+                                <p class="vertical-funnel__card-label">Tier 1 — Ungated</p>
+                                <p class="vertical-funnel__card-title">5 Pitfalls Article</p>
+                                <p class="vertical-funnel__card-note">Builds trust and credibility. No gate. Easily shared internally by the prospect</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 — THE MAGIC STEP -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot vertical-funnel__dot--orange"></div>
+                                <div class="vertical-funnel__line vertical-funnel__line--orange"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--orange">
+                                <p class="vertical-funnel__card-label">Tier 2 — Key Asset</p>
+                                <p class="vertical-funnel__card-title">Readiness Assessment</p>
+                                <p class="vertical-funnel__card-note">Captures qualified lead. Delivers personalised score. Creates natural call trigger.</p>
+                                <div class="vertical-funnel__magic-note">
+                                    <i class="bi bi-star-fill" style="color: var(--lds-orange); margin-right: 0.5rem;"></i>
+                                    This is where the magic happens — by the time they book a call, they've self-diagnosed their gaps using your framework.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot vertical-funnel__dot--orange"></div>
+                                <div class="vertical-funnel__line vertical-funnel__line--orange"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--orange">
+                                <p class="vertical-funnel__card-label">Conversion</p>
+                                <p class="vertical-funnel__card-title">"Walk through your results with Andrew"</p>
+                                <p class="vertical-funnel__card-note">The strategy call CTA. Low friction — they're already invested in their score.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--green">
+                                <p class="vertical-funnel__card-label">Stage 1 — Paid Engagement</p>
+                                <p class="vertical-funnel__card-title">Consulting &amp; Strategy</p>
+                                <p class="vertical-funnel__card-note">The assessment conversation naturally leads here. The prospect already trusts the framework.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 7 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--green">
+                                <p class="vertical-funnel__card-label">Stage 2 → Stage 3</p>
+                                <p class="vertical-funnel__card-title">Pilot → Scale</p>
+                                <p class="vertical-funnel__card-note">The full LDS engagement model — from proof of concept to institution-wide deployment</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 7 — IMPLEMENTATION PRIORITY
+    ============================================================ -->
+    <section class="section-light" id="implementation" aria-labelledby="implementation-title">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <p class="section-eyebrow section-eyebrow--dark">Build Order</p>
+                    <div class="section-divider section-divider--orange"></div>
+                    <h2 id="implementation-title">Recommended Build Order</h2>
+                    <p class="text-muted">Not everything needs to be built at once. Here's the priority sequence based on revenue impact and build effort.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="priority-card priority-card--1">
+                        <div class="priority-card__number">01</div>
+                        <p class="priority-card__timing">Build First</p>
+                        <p class="priority-card__title">Readiness Assessment (Tier 2)</p>
+                        <p class="priority-card__desc">Highest-value asset. Directly replaces the current opt-in. Feeds your pipeline immediately. Can be built as a web form on the landing page — no separate tool required.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="priority-card priority-card--2">
+                        <div class="priority-card__number">02</div>
+                        <p class="priority-card__timing">Build Second</p>
+                        <p class="priority-card__title">ICAS Case Study (Tier 3)</p>
+                        <p class="priority-card__desc">You already have the content. The work here is structuring it as a compelling narrative with the awards front and centre. High-impact for bottom-of-funnel decision-makers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="priority-card priority-card--3">
+                        <div class="priority-card__number">03</div>
+                        <p class="priority-card__timing">Build Third</p>
+                        <p class="priority-card__title">5 Pitfalls Article (Tier 1)</p>
+                        <p class="priority-card__desc">Each pitfall becomes a standalone LinkedIn post. Build the article, then drip the pitfalls over 5 weeks to drive consistent traffic back to the landing page and assessment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="strategy-footer" role="contentinfo">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <p class="strategy-footer__credit">
+                    Strategy prepared by <strong>Serenichron × Learning Design Solutions</strong> · March 2026
+                </p>
+                <a href="index.html" class="strategy-footer__back d-flex align-items-center gap-2">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Landing Page
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
