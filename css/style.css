@@ -19,7 +19,7 @@
             --border-radius: 0;
         }
 
-        * {
+        *, *::before, *::after {
             border-radius: var(--border-radius) !important;
         }
 
@@ -168,11 +168,10 @@
         }
 
         .btn-primary:hover {
-            background-color: rgba(249, 115, 22, 0.13);
-            border-color: var(--lds-orange);
+            background-color: #ea580c;
             color: var(--lds-white);
-            box-shadow: none;
-            transform: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
         }
 
         .btn-primary:active,
