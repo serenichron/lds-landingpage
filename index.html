@@ -764,34 +764,147 @@
     </section>
 
     <!-- Opt-in: Academic Transformation Playbook -->
-    <section id="optin" class="optin-wrapper">
-        <div class="container optin-content">
+    <section id="optin" class="optin-wrapper py-5 py-lg-0">
+        <div class="container optin-content py-5 py-lg-6">
             <div class="row align-items-center g-5">
+
+                <!-- Mock guide cover -->
                 <div class="col-lg-4 text-center">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=600&fit=crop"
-                         alt="Academic Transformation Playbook for 2026"
-                         class="optin-book-img img-fluid">
+                    <div class="optin-guide-cover" aria-hidden="true">
+                        <div class="optin-guide-cover__top-bar"></div>
+                        <div class="optin-guide-cover__inner">
+                            <div class="optin-guide-cover__label">FREE GUIDE · 2026</div>
+                            <p class="optin-guide-cover__title">Scaling Online Programmes Without Compromising Quality</p>
+                            <div class="optin-guide-cover__divider"></div>
+                            <p class="optin-guide-cover__author">Learning Design Solutions</p>
+                            <div class="optin-guide-cover__graphic" aria-hidden="true">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="4" y="8" width="32" height="40" fill="rgba(132,204,22,0.18)" stroke="#84cc16" stroke-width="1.5"/>
+                                    <rect x="12" y="16" width="32" height="40" fill="rgba(18,33,89,0.5)" stroke="rgba(132,204,22,0.4)" stroke-width="1.5"/>
+                                    <line x1="16" y1="26" x2="40" y2="26" stroke="#84cc16" stroke-width="1.5"/>
+                                    <line x1="16" y1="32" x2="36" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                    <line x1="16" y1="38" x2="38" y2="38" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="optin-guide-cover__spine"></div>
+                    </div>
                 </div>
 
+                <!-- Content and CTA -->
                 <div class="col-lg-8">
-                    <div class="optin-badge">FREE GUIDE • 2026 EDITION</div>
-                    <h2 class="optin-title">Academic Transformation Playbook for higher education</h2>
-                    <p class="optin-lead">The complete roadmap for Academic Transformation. Trusted by 20+ leading institutions to successfully launch online programmes.</p>
+                    <div class="optin-badge">FREE GUIDE · 2026</div>
+                    <h2 class="optin-title">Scaling Online Programmes Without Compromising Quality</h2>
+                    <p class="optin-lead">A practical guide for university leaders and programme directors.</p>
 
                     <ul class="optin-benefits">
-                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>How to build institutional buy-in for online learning</span></li>
-                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>The 4-stage implementation timeline</span></li>
-                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Budget planning templates and cost calculators</span></li>
-                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Quality assurance frameworks</span></li>
-                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Real case studies from leading institutions</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Why scaling online programmes is harder than most institutions expect</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>The hidden capacity and quality traps that derail programme development</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>How to scope and plan realistically (timelines, resources, milestones)</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>A proven 4-stage model used with 20+ institutions</span></li>
+                        <li><i class="bi bi-check2" aria-hidden="true"></i><span>Real examples from ICAS, Walbrook Institute, and Dyson Institute</span></li>
                     </ul>
 
-                    <!-- Form plugin will be inserted here -->
-                    <div id="optin-form-plugin"></div>
+                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#guideDownloadModal">
+                        Get Your Free Copy
+                    </button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Guide Download Modal -->
+    <div class="modal fade" id="guideDownloadModal" tabindex="-1" aria-labelledby="guideDownloadModalLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content guide-download-modal">
+                <div class="modal-header guide-download-modal__header">
+                    <h2 class="modal-title guide-download-modal__title" id="guideDownloadModalLabel">Download: Scaling Online Programmes Without Compromising Quality</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body guide-download-modal__body">
+                    <form id="guide-download-form" novalidate>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="guide-first-name" class="form-label guide-download-modal__label">First Name <span class="guide-download-modal__required" aria-hidden="true">*</span></label>
+                                <input type="text" class="form-control guide-download-modal__input" id="guide-first-name" name="firstName" required autocomplete="given-name">
+                                <div class="invalid-feedback">Please enter your first name.</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="guide-last-name" class="form-label guide-download-modal__label">Last Name <span class="guide-download-modal__required" aria-hidden="true">*</span></label>
+                                <input type="text" class="form-control guide-download-modal__input" id="guide-last-name" name="lastName" required autocomplete="family-name">
+                                <div class="invalid-feedback">Please enter your last name.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="guide-email" class="form-label guide-download-modal__label">Work Email <span class="guide-download-modal__required" aria-hidden="true">*</span></label>
+                                <input type="email" class="form-control guide-download-modal__input" id="guide-email" name="email" required autocomplete="email">
+                                <div class="invalid-feedback">Please enter a valid work email address.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="guide-institution" class="form-label guide-download-modal__label">Institution / Organisation <span class="guide-download-modal__required" aria-hidden="true">*</span></label>
+                                <input type="text" class="form-control guide-download-modal__input" id="guide-institution" name="institution" required autocomplete="organization">
+                                <div class="invalid-feedback">Please enter your institution or organisation.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="guide-role" class="form-label guide-download-modal__label">Role / Job Title <span class="guide-download-modal__optional">(optional)</span></label>
+                                <input type="text" class="form-control guide-download-modal__input" id="guide-role" name="role" autocomplete="organization-title">
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check guide-download-modal__gdpr-check">
+                                    <input class="form-check-input" type="checkbox" id="guide-gdpr-consent" name="gdprConsent" required>
+                                    <label class="form-check-label guide-download-modal__gdpr-label" for="guide-gdpr-consent">
+                                        I consent to Learning Design Solutions storing my details and contacting me about online programme development. You can unsubscribe at any time.
+                                    </label>
+                                    <div class="invalid-feedback">You must consent to receive the guide.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="guide-download-modal__submit-row mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 guide-download-modal__submit-btn" id="guide-submit-btn">
+                                Send Me the Guide
+                            </button>
+                            <p class="guide-download-modal__small-print mt-2 mb-0">
+                                <i class="bi bi-shield-lock-fill me-1" aria-hidden="true"></i>We respect your privacy. No spam, ever.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide download form script -->
+    <script>
+        (function () {
+            var form = document.getElementById('guide-download-form');
+            var submitBtn = document.getElementById('guide-submit-btn');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                form.classList.add('was-validated');
+
+                if (!form.checkValidity()) {
+                    // Focus the first invalid field for accessibility
+                    var firstInvalid = form.querySelector(':invalid');
+                    if (firstInvalid) firstInvalid.focus();
+                    return;
+                }
+
+                // Show sending state
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending\u2026';
+
+                // Simulate submission and redirect
+                setTimeout(function () {
+                    window.location.href = 'thank-you.html';
+                }, 1000);
+            });
+        })();
+    </script>
 
     <!-- Footer -->
     <footer role="contentinfo">

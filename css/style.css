@@ -1924,6 +1924,158 @@
             margin-top: 0.2em;
         }
 
+        /* ── Guide Cover (mock book) ──────────────────────── */
+        .optin-guide-cover {
+            display: inline-flex;
+            position: relative;
+            max-width: 260px;
+            width: 100%;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+        }
+
+        .optin-guide-cover__spine {
+            width: 18px;
+            background: linear-gradient(180deg, #0a1540 0%, #1a2f6a 50%, #0a1540 100%);
+            border-left: 2px solid rgba(132, 204, 22, 0.35);
+            flex-shrink: 0;
+        }
+
+        .optin-guide-cover__inner {
+            flex: 1;
+            background: linear-gradient(160deg, #122159 0%, #1a3080 60%, #0d1a45 100%);
+            padding: 2rem 1.75rem 1.75rem;
+            border-top: 4px solid var(--lds-green);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 340px;
+        }
+
+        .optin-guide-cover__top-bar {
+            position: absolute;
+            top: 0;
+            left: 18px;
+            right: 0;
+            height: 4px;
+            background-color: var(--lds-green);
+        }
+
+        .optin-guide-cover__label {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--lds-green);
+        }
+
+        .optin-guide-cover__title {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            line-height: 1.35;
+            margin-bottom: 0;
+        }
+
+        .optin-guide-cover__divider {
+            width: 40px;
+            height: 2px;
+            background-color: var(--lds-orange);
+        }
+
+        .optin-guide-cover__author {
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 0;
+            margin-top: auto;
+        }
+
+        .optin-guide-cover__graphic {
+            margin-top: 0.5rem;
+        }
+
+        /* ── Guide Download Modal ─────────────────────────── */
+        .guide-download-modal {
+            background-color: var(--lds-white);
+            border: none;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .guide-download-modal__header {
+            background-color: var(--lds-navy);
+            padding: 1.5rem 1.75rem;
+            border-bottom: 3px solid var(--lds-green);
+        }
+
+        .guide-download-modal__title {
+            color: var(--lds-white);
+            font-size: 1.1875rem;
+            line-height: 1.35;
+            margin-bottom: 0;
+        }
+
+        .guide-download-modal__body {
+            padding: 2rem 1.75rem;
+        }
+
+        .guide-download-modal__label {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--lds-dark);
+            margin-bottom: 0.375rem;
+        }
+
+        .guide-download-modal__required {
+            color: var(--lds-orange);
+        }
+
+        .guide-download-modal__optional {
+            font-weight: 400;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .guide-download-modal__input {
+            border: 1.5px solid #d1d5db;
+            padding: 0.625rem 0.875rem;
+            font-size: 1rem;
+            color: var(--lds-dark);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .guide-download-modal__input:focus {
+            border-color: var(--lds-navy);
+            box-shadow: 0 0 0 3px rgba(18, 33, 89, 0.12);
+            outline: none;
+        }
+
+        .guide-download-modal__gdpr-check {
+            background-color: var(--lds-light);
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--lds-green);
+        }
+
+        .guide-download-modal__gdpr-label {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--lds-dark);
+        }
+
+        .guide-download-modal__submit-btn {
+            font-size: 1.0625rem;
+            padding: 0.875rem 2rem;
+            letter-spacing: 0.01em;
+        }
+
+        .guide-download-modal__small-print {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
         /* ── Back to Top ───────────────────────────────────── */
         #back-to-top {
             position: fixed;
