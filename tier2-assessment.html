@@ -587,10 +587,7 @@
         .results-dashboard {
             display: grid;
             grid-template-columns: 380px 1fr;
-            grid-template-rows: 1fr auto;
-            grid-template-areas:
-                "left  right"
-                "cta   cta";
+            grid-template-areas: "left right";
             min-height: 100%;
             align-items: start;
         }
@@ -600,7 +597,7 @@
             grid-area: left;
             position: sticky;
             top: 0;
-            height: calc(100vh - 59px); /* viewport minus header+progress */
+            height: calc(100vh - 59px); /* viewport minus header+progress bar */
             display: flex;
             flex-direction: column;
             background: var(--navy);
@@ -732,7 +729,7 @@
         /* ---- RIGHT COLUMN — scrollable cards ---- */
         .results-right-panel {
             grid-area: right;
-            padding: 1.75rem 1.75rem 2rem;
+            padding: 1.75rem 1.75rem 7rem; /* extra bottom padding clears fixed CTA bar */
             background: var(--grey-100);
         }
 
@@ -822,6 +819,16 @@
         .dimension-card.is-open .dimension-card__chevron {
             transform: rotate(180deg);
         }
+
+        /* Persistent visual highlight on open cards */
+        .dimension-card.is-open {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+        }
+
+        .dimension-card--low.is-open       { background: var(--score-red-bg); }
+        .dimension-card--medium.is-open    { background: var(--score-amber-bg); }
+        .dimension-card--high.is-open      { background: #fffbeb; }
+        .dimension-card--excellent.is-open { background: var(--score-green-bg); }
 
         .dimension-card__bar-row {
             padding: 0 1rem 0.75rem;
@@ -951,43 +958,66 @@
         .results-conclusion-text:last-of-type { margin-bottom: 0; }
         .results-conclusion-text strong { color: var(--navy); }
 
-        /* ---- CTA block — full width, split design ---- */
+        /* ---- CTA block — fixed footer bar (visible only on results slide) ---- */
         .results-cta-block {
-            grid-area: cta;
-            background: var(--navy-dark);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            background: rgba(13, 26, 64, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 3px solid var(--orange);
             display: flex;
             align-items: center;
-            gap: 2rem;
-            padding: 1.75rem 2rem;
-            border-top: 4px solid var(--orange);
-            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 0.85rem 1.75rem;
+            flex-wrap: nowrap;
+            /* Hidden until results slide is active — JS adds .results-cta-visible to body */
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        body.results-visible .results-cta-block {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
         .results-cta-block__left {
             flex: 1;
-            min-width: 240px;
+            min-width: 0;
         }
 
         .results-cta-block__title {
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-size: clamp(0.82rem, 1.5vw, 1rem);
             color: var(--white);
-            margin-bottom: 0.35rem;
+            margin-bottom: 0;
             line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .results-cta-block__text {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.55);
-            line-height: 1.5;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.4;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .results-cta-block__right {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            flex-direction: row;
+            align-items: center;
             gap: 0.5rem;
             flex-shrink: 0;
         }
@@ -1081,10 +1111,7 @@
         @media (max-width: 1024px) and (min-width: 768px) {
             .results-dashboard {
                 grid-template-columns: 1fr;
-                grid-template-areas:
-                    "left"
-                    "right"
-                    "cta";
+                grid-template-areas: "left" "right";
             }
 
             .results-left-panel {
@@ -1131,10 +1158,7 @@
         @media (max-width: 767px) {
             .results-dashboard {
                 grid-template-columns: 1fr;
-                grid-template-areas:
-                    "left"
-                    "right"
-                    "cta";
+                grid-template-areas: "left" "right";
             }
 
             .results-left-panel {
@@ -1151,7 +1175,7 @@
             .results-gauge-score { font-size: 2.25rem; }
 
             .results-right-panel {
-                padding: 1.25rem 1rem;
+                padding: 1.25rem 1rem 7rem; /* keep bottom padding for fixed CTA bar */
             }
 
             .results-dimension-grid {
@@ -1160,21 +1184,9 @@
 
             .dimension-card--tech { grid-column: 1; }
 
-            .results-cta-block {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.25rem;
-            }
-
-            .results-cta-block__right {
-                align-items: flex-start;
-                width: 100%;
-            }
-
-            .results-cta-buttons { justify-content: flex-start; }
-            .btn-cta-primary, .btn-cta-outline { justify-content: center; flex: 1; }
-
-            .results-cta-email { text-align: left; }
+            /* Fixed CTA bar stays horizontal on mobile — hide text description */
+            .results-cta-block__text { display: none; }
+            .results-cta-block { gap: 0.75rem; padding: 0.75rem 1rem; }
             .save-feedback { justify-content: flex-start; }
         }
 
@@ -1209,6 +1221,196 @@
            SVG ICONS (inline, no external dependency)
         ============================================================ */
         .icon { display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           BREADCRUMB NAV — journey progress in header
+        ============================================================ */
+        .journey-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .journey-breadcrumb__item {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .journey-breadcrumb__sep {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.7rem;
+            padding: 0 0.35rem;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .journey-breadcrumb__link,
+        .journey-breadcrumb__current,
+        .journey-breadcrumb__future {
+            font-size: 0.78rem;
+            font-weight: 500;
+            white-space: nowrap;
+            text-decoration: none;
+            padding: 0.25rem 0.1rem;
+            transition: color 0.15s;
+        }
+
+        /* Past steps: green, clickable */
+        .journey-breadcrumb__link {
+            color: var(--green);
+        }
+        .journey-breadcrumb__link:hover { color: #a3e635; text-decoration: underline; }
+
+        /* Current step: white + bold */
+        .journey-breadcrumb__current {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        /* Future steps: muted grey, not interactive */
+        .journey-breadcrumb__future {
+            color: rgba(255,255,255,0.28);
+            cursor: default;
+        }
+
+        /* "Book a call" always styled as mini orange CTA */
+        .journey-breadcrumb__cta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--orange);
+            padding: 0.25rem 0.65rem;
+            text-decoration: none;
+            transition: background 0.15s;
+            margin-left: 0.1rem;
+        }
+        .journey-breadcrumb__cta:hover { background: var(--orange-dark); color: var(--white); }
+
+        /* Back arrow before first item */
+        .journey-breadcrumb__back {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-right: 0.75rem;
+            transition: color 0.15s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .journey-breadcrumb__back:hover { color: var(--white); }
+
+        /* Mobile: show only current step + back */
+        @media (max-width: 640px) {
+            .journey-breadcrumb__item--hide-mobile { display: none; }
+            .journey-breadcrumb__sep--hide-mobile  { display: none; }
+        }
+
+        /* ============================================================
+           PRINT STYLES — for PDF export via window.print()
+        ============================================================ */
+        @media print {
+            /* Hide interactive chrome */
+            .app-header,
+            .app-progress-bar,
+            .results-cta-block,
+            .results-left-cta,
+            .slide-nav,
+            .slide--role,
+            .slide--question {
+                display: none !important;
+            }
+
+            /* Reset fixed/overflow layout for print */
+            html, body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .app-shell,
+            .slide-viewport,
+            .slide--results {
+                display: block !important;
+                position: static !important;
+                height: auto !important;
+                overflow: visible !important;
+                transform: none !important;
+            }
+
+            .slide--results .slide-inner {
+                display: block !important;
+            }
+
+            /* Single-column layout */
+            .results-dashboard {
+                display: block !important;
+            }
+
+            .results-left-panel {
+                position: static !important;
+                height: auto !important;
+                overflow: visible !important;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+                padding: 1rem !important;
+                page-break-inside: avoid;
+            }
+
+            .results-right-panel {
+                padding: 1rem !important;
+            }
+
+            .dimension-card__detail {
+                max-height: none !important;
+            }
+
+            .dimension-card.is-open .dimension-card__detail,
+            .dimension-card__detail {
+                max-height: none !important;
+                display: block !important;
+            }
+
+            /* Print header */
+            body::before {
+                content: "Learning Design Solutions — Online Programme Readiness Assessment";
+                display: block;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: #122159;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 0.5rem 1rem;
+                border-bottom: 2px solid #122159;
+                margin-bottom: 1rem;
+            }
+
+            /* Print footer */
+            body::after {
+                content: "learningdesignsolutions.co.uk";
+                display: block;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.7rem;
+                color: #9ca3af;
+                text-align: center;
+                padding: 1rem;
+                margin-top: 2rem;
+                border-top: 1px solid #e5e7eb;
+            }
+
+            /* Ensure cards expand in print */
+            .dimension-card { page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -1221,10 +1423,11 @@
             <a href="index.html" class="app-header__brand">
                 <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions">
             </a>
-            <nav class="app-header__nav" aria-label="Site navigation">
+            <nav class="app-header__nav" aria-label="Assessment journey progress" id="journey-nav">
+                <!-- Breadcrumb injected by JS; fallback for no-JS -->
                 <a href="index.html" class="app-header__nav-link">Home</a>
                 <a href="tier1-course.html" class="app-header__nav-link">Free course</a>
-                <a href="tier2-assessment.html" class="app-header__nav-link app-header__nav-link--active">Assessment</a>
+                <span class="app-header__nav-link app-header__nav-link--active">Assessment</span>
                 <a href="index.html#contact" class="app-header__cta">Talk to Andrew</a>
             </nav>
         </div>
@@ -1874,6 +2077,7 @@
         } else {
             headerMeta.textContent = 'Your results';
         }
+        updateBreadcrumb();
     }
 
     /* ============================================================
@@ -2013,10 +2217,11 @@
     }
 
     function buildRadarSVG(dimScores) {
-        var size = 240;
+        var size = 300;
         var cx = size / 2;
         var cy = size / 2;
-        var radius = 95;
+        var radius = 108;
+        var labelOffset = 26; /* distance beyond radius to place label centres */
         var dims = DIMENSIONS;
         var n = dims.length;
         var angleStep = (2 * Math.PI) / n;
@@ -2029,7 +2234,7 @@
             };
         }
 
-        // Grid rings
+        // Grid rings — lighter stroke so they read on navy
         var gridLines = '';
         [0.25, 0.5, 0.75, 1].forEach(function (frac) {
             var pts = [];
@@ -2037,14 +2242,14 @@
                 var pt = getPoint(i, radius * frac);
                 pts.push(pt.x + ',' + pt.y);
             }
-            gridLines += '<polygon points="' + pts.join(' ') + '" fill="none" stroke="#e5e7eb" stroke-width="1"/>';
+            gridLines += '<polygon points="' + pts.join(' ') + '" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>';
         });
 
         // Axis lines
         var axisLines = '';
         for (var i = 0; i < n; i++) {
             var pt = getPoint(i, radius);
-            axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + pt.x + '" y2="' + pt.y + '" stroke="#e5e7eb" stroke-width="1"/>';
+            axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + pt.x + '" y2="' + pt.y + '" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>';
         }
 
         // Data polygon
@@ -2055,7 +2260,7 @@
             var pt = getPoint(idx, radius * frac);
             dataPoints.push(pt.x + ',' + pt.y);
         });
-        var dataPolygon = '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(132,204,22,0.2)" stroke="#84cc16" stroke-width="2"/>';
+        var dataPolygon = '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(132,204,22,0.22)" stroke="#84cc16" stroke-width="2"/>';
 
         // Data dots
         var dataDots = '';
@@ -2066,14 +2271,13 @@
             dataDots += '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="4" fill="#84cc16"/>';
         });
 
-        // Labels
+        // Labels — white, readable on navy background
         var labels = '';
         dims.forEach(function (dim, idx) {
-            var pt = getPoint(idx, radius + 22);
+            var pt = getPoint(idx, radius + labelOffset);
             var anchor = 'middle';
-            if (pt.x < cx - 5) anchor = 'end';
-            else if (pt.x > cx + 5) anchor = 'start';
-            // Shorten label for radar
+            if (pt.x < cx - 8) anchor = 'end';
+            else if (pt.x > cx + 8) anchor = 'start';
             var shortName = dim.name.replace('Student experience focus', 'Student exp.')
                                     .replace('Scalability planning', 'Scalability')
                                     .replace('Technical capacity', 'Technical')
@@ -2082,10 +2286,15 @@
                                     .replace('Quality framework', 'Quality')
                                     .replace('Strategic clarity', 'Strategy');
 
-            labels += '<text x="' + pt.x + '" y="' + pt.y + '" text-anchor="' + anchor + '" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#374151" dominant-baseline="middle">' + shortName + '</text>';
+            labels += '<text x="' + pt.x + '" y="' + pt.y + '" text-anchor="' + anchor
+                    + '" font-family="Inter, sans-serif" font-size="10" font-weight="600"'
+                    + ' fill="rgba(255,255,255,0.7)" dominant-baseline="middle">'
+                    + shortName + '</text>';
         });
 
-        return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Radar chart showing scores across all 7 dimensions">'
+        /* viewBox has 20px padding on all sides to prevent label clipping */
+        return '<svg width="' + size + '" height="' + size + '" viewBox="-20 -20 340 340"'
+             + ' role="img" aria-label="Radar chart showing scores across all 7 dimensions">'
              + gridLines + axisLines + dataPolygon + dataDots + labels
              + '</svg>';
     }
@@ -2209,12 +2418,17 @@
        CARD ACCORDION
     ============================================================ */
     function initCardAccordion() {
+        /* Each card toggles independently — multiple cards may be open simultaneously.
+           No sibling-closing logic. The is-open class drives both the chevron rotation
+           and the persistent background highlight defined in CSS. */
         var cards = document.querySelectorAll('.dimension-card:not(.dimension-card--tech)');
         cards.forEach(function (card) {
             card.addEventListener('click', function () {
-                var isOpen = card.classList.contains('is-open');
-                card.classList.toggle('is-open', !isOpen);
-                card.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+                var willOpen = !card.classList.contains('is-open');
+                card.classList.toggle('is-open', willOpen);
+                card.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                var detail = card.querySelector('.dimension-card__detail');
+                if (detail) detail.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
             });
             card.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -2351,28 +2565,31 @@
 
         html += '</section>'; /* /right panel */
 
-        /* CTA BLOCK — full width */
+        /* CTA BLOCK — fixed footer bar */
         html += '<div class="results-cta-block" role="complementary" aria-label="Next step">'
               + '<div class="results-cta-block__left">'
-              + '<h2 class="results-cta-block__title">Want to walk through your results?</h2>'
-              + '<p class="results-cta-block__text">Book a free 30-minute strategy call. Andrew will review your scores, discuss your specific challenges, and map out what an engagement could look like.</p>'
+              + '<p class="results-cta-block__title">Want to walk through your results?</p>'
+              + '<p class="results-cta-block__text">Free 30-min strategy call with Andrew</p>'
               + '</div>'
               + '<div class="results-cta-block__right">'
               + '<div class="results-cta-buttons">'
               + '<a href="index.html#contact" class="btn-cta-primary" aria-label="Book a call with Andrew">'
-              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
               + ' Talk to Andrew'
               + '</a>'
-              + '<button class="btn-cta-outline" id="save-results-btn" aria-label="Copy results summary to clipboard">'
-              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4"/></svg>'
-              + ' Save results'
+              + '<button class="btn-cta-outline" id="share-results-btn" aria-label="Copy shareable link to clipboard">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+              + ' Share results'
+              + '</button>'
+              + '<button class="btn-cta-outline" id="pdf-export-btn" aria-label="Download results as PDF">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>'
+              + ' Download PDF'
               + '</button>'
               + '</div>'
               + '<div class="save-feedback" id="save-feedback" role="status">'
               + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'
-              + ' Copied to clipboard'
+              + ' Link copied'
               + '</div>'
-              + '<p class="results-cta-email">Or email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>'
               + '</div>'
               + '</div>';
 
@@ -2386,6 +2603,7 @@
         updateHeaderMeta();
         progressFill.style.right = '0%';
         progressBar.setAttribute('aria-valuenow', '100');
+        document.body.classList.add('results-visible');
 
         // Trigger animations after slide enters
         setTimeout(function () {
@@ -2394,21 +2612,25 @@
             initCardAccordion();
         }, 380);
 
-        // Wire up save button
-        var saveBtn = document.getElementById('save-results-btn');
+        // Wire up Share results button — copies URL with hash-encoded answers
+        var shareBtn = document.getElementById('share-results-btn');
         var saveFeedback = document.getElementById('save-feedback');
-        if (saveBtn) {
-            saveBtn.addEventListener('click', function () {
-                var ds = DIMENSIONS.map(function (d) {
-                    return d.name + ' ' + dimScores[d.id] + '/' + d.max;
-                }).join(', ');
-                var roleStr = state.roleLabel ? ' | Role: ' + state.roleLabel : '';
-                var text = 'Online Programme Readiness Assessment\n'
-                         + 'Score: ' + total + '/48 — ' + category.name + '\n'
-                         + roleStr + '\n'
-                         + 'Dimensions: ' + ds + '\n'
-                         + 'Assessed via Learning Design Solutions (learningdesignsolutions.co.uk)';
-                copyToClipboard(text, saveFeedback);
+        if (shareBtn) {
+            shareBtn.addEventListener('click', function () {
+                var url = shareResultsUrl();
+                /* Update the browser URL to the shareable version */
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', url);
+                }
+                copyToClipboard(url, saveFeedback);
+            });
+        }
+
+        // Wire up PDF export button
+        var pdfBtn = document.getElementById('pdf-export-btn');
+        if (pdfBtn) {
+            pdfBtn.addEventListener('click', function () {
+                exportToPDF();
             });
         }
     }
@@ -2489,9 +2711,207 @@
     }
 
     /* ============================================================
+       JOURNEY BREADCRUMB
+    ============================================================ */
+
+    var JOURNEY_STEPS = [
+        { id: 'landing',    label: 'Landing page',  href: 'index.html' },
+        { id: 'course',     label: 'Free course',   href: 'tier1-course.html' },
+        { id: 'assessment', label: 'Assessment',    href: null },
+        { id: 'results',    label: 'Results',       href: null }
+    ];
+
+    function renderBreadcrumb(currentStepId, questionLabel) {
+        var nav = document.getElementById('journey-nav');
+        if (!nav) return;
+
+        var currentIdx = JOURNEY_STEPS.findIndex(function (s) { return s.id === currentStepId; });
+        if (currentIdx < 0) currentIdx = 2; /* default to assessment */
+
+        var html = '<button class="journey-breadcrumb__back" id="breadcrumb-back-btn" aria-label="Go back">'
+                 + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
+                 + ' Back'
+                 + '</button>';
+
+        html += '<ol class="journey-breadcrumb" aria-label="Your journey">';
+
+        JOURNEY_STEPS.forEach(function (step, idx) {
+            var isFirst = (idx === 0);
+            var isCurrent = (idx === currentIdx);
+            var isPast = (idx < currentIdx);
+            var isFuture = (idx > currentIdx);
+            var hideOnMobile = (!isCurrent && idx !== currentIdx - 1);
+
+            var itemClass = 'journey-breadcrumb__item' + (hideOnMobile ? ' journey-breadcrumb__item--hide-mobile' : '');
+            html += '<li class="' + itemClass + '">';
+
+            if (!isFirst) {
+                var sepClass = 'journey-breadcrumb__sep' + (hideOnMobile ? ' journey-breadcrumb__sep--hide-mobile' : '');
+                html += '<span class="' + sepClass + '" aria-hidden="true">&#8250;</span>';
+            }
+
+            /* Display label — question slides show current Q count */
+            var displayLabel = step.label;
+            if (isCurrent && questionLabel) displayLabel = questionLabel;
+
+            if (isPast && step.href) {
+                html += '<a href="' + step.href + '" class="journey-breadcrumb__link">' + escapeHtml(displayLabel) + '</a>';
+            } else if (isCurrent) {
+                html += '<span class="journey-breadcrumb__current" aria-current="step">' + escapeHtml(displayLabel) + '</span>';
+            } else {
+                html += '<span class="journey-breadcrumb__future" aria-disabled="true">' + escapeHtml(displayLabel) + '</span>';
+            }
+
+            html += '</li>';
+        });
+
+        /* Book a call — always last, styled as mini CTA */
+        html += '<li class="journey-breadcrumb__item">'
+              + '<span class="journey-breadcrumb__sep" aria-hidden="true">&#8250;</span>'
+              + '<a href="index.html#contact" class="journey-breadcrumb__cta" aria-label="Book a call with Andrew">Book a call</a>'
+              + '</li>';
+
+        html += '</ol>';
+
+        nav.innerHTML = html;
+
+        /* Wire up the back button */
+        var backBtn = document.getElementById('breadcrumb-back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', function () {
+                var activeSlide = viewport.querySelector('.slide.is-active');
+                if (!activeSlide) return;
+                if (activeSlide.id === 'slide-role') {
+                    window.location.href = 'index.html';
+                } else if (activeSlide.id === 'slide-results') {
+                    /* Go back to last question */
+                    document.body.classList.remove('results-visible');
+                    var lastIdx = state.questions.length - 1;
+                    var lastSlide = document.getElementById('slide-q' + lastIdx);
+                    if (lastSlide) {
+                        state.slideIndex = lastIdx;
+                        navigateToSlide(lastSlide, 'backward');
+                        updateBreadcrumb();
+                    }
+                } else if (activeSlide.id && activeSlide.id.startsWith('slide-q')) {
+                    var qIdx = parseInt(activeSlide.id.replace('slide-q', ''), 10);
+                    if (qIdx === 0) {
+                        goToRoleSlide();
+                    } else {
+                        goToPrevQuestion(qIdx);
+                    }
+                }
+            });
+        }
+    }
+
+    function updateBreadcrumb() {
+        if (state.slideIndex < 0) {
+            /* Role selection — assessment is current */
+            renderBreadcrumb('assessment', null);
+        } else if (state.slideIndex < state.questions.length) {
+            /* Question slide */
+            var qNum = state.slideIndex + 1;
+            var total = state.questions.length;
+            renderBreadcrumb('assessment', 'Assessment (Q' + qNum + '/' + total + ')');
+        } else {
+            /* Results */
+            renderBreadcrumb('results', null);
+        }
+    }
+
+    /* ============================================================
+       URL HASH — encode/decode results for shareable links
+    ============================================================ */
+
+    function encodeResultsToHash() {
+        var params = ['role=' + encodeURIComponent(state.track || '')];
+        state.questions.forEach(function (q) {
+            var score = state.answers[q.id];
+            if (score !== undefined) {
+                params.push(encodeURIComponent(q.id) + '=' + score);
+            }
+        });
+        return '#' + params.join('&');
+    }
+
+    function decodeHashToState() {
+        var hash = window.location.hash;
+        if (!hash || hash.length < 2) return false;
+
+        var paramStr = hash.slice(1); /* strip leading # */
+        var pairs = paramStr.split('&');
+        var parsed = {};
+        pairs.forEach(function (pair) {
+            var kv = pair.split('=');
+            if (kv.length === 2) {
+                parsed[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1]);
+            }
+        });
+
+        var track = parsed['role'];
+        if (track !== 'strategic' && track !== 'operational') return false;
+
+        var questions = QUESTIONS[track];
+        var answers = {};
+        questions.forEach(function (q) {
+            var val = parseInt(parsed[q.id], 10);
+            if (val >= 1 && val <= 4) answers[q.id] = val;
+        });
+
+        /* Require all questions answered */
+        if (Object.keys(answers).length !== questions.length) return false;
+
+        return { track: track, answers: answers };
+    }
+
+    function shareResultsUrl() {
+        var hash = encodeResultsToHash();
+        var url = window.location.href.split('#')[0] + hash;
+        return url;
+    }
+
+    /* ============================================================
+       PDF EXPORT
+    ============================================================ */
+
+    function exportToPDF() {
+        /* Expand all dimension cards before printing */
+        var cards = document.querySelectorAll('.dimension-card:not(.dimension-card--tech)');
+        cards.forEach(function (card) {
+            card.classList.add('is-open');
+            card.setAttribute('aria-expanded', 'true');
+            var detail = card.querySelector('.dimension-card__detail');
+            if (detail) detail.setAttribute('aria-hidden', 'false');
+        });
+        window.print();
+    }
+
+    /* ============================================================
        INIT
     ============================================================ */
+
+    /* Check for hash-encoded results on page load */
+    var restoredState = decodeHashToState();
+    if (restoredState) {
+        /* Auto-run assessment with decoded answers and jump to results */
+        state.track = restoredState.track;
+        state.roleLabel = restoredState.track === 'strategic' ? 'Shared results (strategic)' : 'Shared results (operational)';
+        state.questions = QUESTIONS[restoredState.track];
+        state.answers = restoredState.answers;
+
+        /* Build question slides (needed by the results navigation) */
+        state.questions.forEach(function (q, idx) {
+            var slide = buildQuestionSlide(idx);
+            viewport.insertBefore(slide, slideResults);
+        });
+
+        state.slideIndex = state.questions.length;
+        showResults(); /* showResults() adds results-visible class to body */
+    }
+
     updateProgress();
+    updateBreadcrumb();
 
 })();
 </script>
