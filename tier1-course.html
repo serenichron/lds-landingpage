@@ -621,8 +621,8 @@
         /* Individual lesson panels */
         .lesson-panel {
             display: none;
-            padding: 2.5rem 2.5rem 4rem;
-            max-width: 800px;
+            padding: 2.5rem 4rem 4rem;
+            max-width: 1100px;
         }
 
         .lesson-panel.is-active {
@@ -801,9 +801,16 @@
             font-family: var(--font-display);
             font-size: 1.125rem;
             font-weight: 700;
-            color: var(--lds-white);
+            color: #ffffff;
             margin: 0;
             line-height: 1.5;
+        }
+
+        /* Force white text on any navy-background element */
+        .lesson-stat,
+        .lesson-stat p,
+        .lesson-stat * {
+            color: #ffffff;
         }
 
         /* Highlight box */
