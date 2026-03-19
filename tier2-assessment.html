@@ -568,75 +568,104 @@
         }
 
         /* ============================================================
-           RESULTS SLIDE
+           RESULTS SLIDE — Dashboard layout
         ============================================================ */
         .results-slide {
             background: var(--grey-100);
             overflow-y: auto;
         }
 
+        /* Override the default slide-inner for results — full width, no centering */
         .results-slide .slide-inner {
             justify-content: flex-start;
-            padding-top: 2.5rem;
-            padding-bottom: 3rem;
-            max-width: 780px;
+            max-width: none;
+            padding: 0;
+            width: 100%;
         }
 
-        /* Score hero */
-        .results-score-hero {
-            background: var(--navy);
-            padding: 2.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            flex-wrap: wrap;
+        /* ---- Dashboard wrapper ---- */
+        .results-dashboard {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            grid-template-rows: 1fr auto;
+            grid-template-areas:
+                "left  right"
+                "cta   cta";
+            min-height: 100%;
+            align-items: start;
         }
 
-        .results-score-hero::before {
-            content: '';
-            position: absolute;
-            left: 0;
+        /* ---- LEFT COLUMN — sticky score panel ---- */
+        .results-left-panel {
+            grid-area: left;
+            position: sticky;
             top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--green);
+            height: calc(100vh - 59px); /* viewport minus header+progress */
+            display: flex;
+            flex-direction: column;
+            background: var(--navy);
+            padding: 2rem 1.75rem 1.5rem;
+            overflow-y: auto;
         }
 
-        .results-score-number-block {
-            text-align: center;
+        /* Score gauge area */
+        .results-gauge-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             flex-shrink: 0;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.25rem;
         }
 
-        .results-score-number {
+        .results-gauge-svg-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 1rem;
+        }
+
+        .results-gauge-svg-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .results-gauge-center-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .results-gauge-score {
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: clamp(3.5rem, 10vw, 5.5rem);
+            font-size: 2.75rem;
             color: var(--white);
             line-height: 1;
             letter-spacing: -0.04em;
-            display: block;
         }
 
-        .results-score-denom {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: rgba(255,255,255,0.35);
+        .results-gauge-denom {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.03em;
+            margin-top: 0.15rem;
         }
-
-        .results-category-block { flex: 1; min-width: 200px; }
 
         .results-category-badge {
             display: inline-block;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 0.3rem 0.75rem;
-            margin-bottom: 0.6rem;
+            padding: 0.25rem 0.65rem;
+            margin-bottom: 0.5rem;
         }
 
         .results-category-badge--early    { background: var(--score-red); color: var(--white); }
@@ -647,88 +676,161 @@
         .results-category-name {
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-size: 1.15rem;
             color: var(--white);
-            margin-bottom: 0.5rem;
+            text-align: center;
             line-height: 1.2;
+            margin-bottom: 0.4rem;
         }
 
         .results-category-desc {
-            font-size: 0.875rem;
-            color: rgba(255,255,255,0.65);
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.55);
             line-height: 1.6;
+            text-align: center;
         }
 
-        /* Radar chart */
-        .results-radar-section {
-            background: var(--white);
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
+        /* Radar in left panel */
+        .results-radar-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
-        .results-section-title {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--navy);
+        .results-radar-panel-title {
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--navy);
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 0.75rem;
         }
 
-        .radar-container {
+        .results-radar-panel .radar-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex: 1;
         }
 
-        /* Dimension breakdown */
-        .results-dimensions-section {
-            margin-bottom: 1.5rem;
+        /* CTA pinned at bottom of left panel */
+        .results-left-cta {
+            flex-shrink: 0;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .dimension-result-item {
+        .results-left-cta__label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+        }
+
+        /* ---- RIGHT COLUMN — scrollable cards ---- */
+        .results-right-panel {
+            grid-area: right;
+            padding: 1.75rem 1.75rem 2rem;
+            background: var(--grey-100);
+        }
+
+        .results-right-panel__eyebrow {
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--grey-400);
+            margin-bottom: 0.85rem;
+        }
+
+        /* Dimension card grid */
+        .results-dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Single dimension card */
+        .dimension-card {
             background: var(--white);
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 0.5rem;
             border-left: 4px solid var(--grey-200);
+            cursor: pointer;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            overflow: hidden;
         }
 
-        .dimension-result-item--low       { border-left-color: var(--score-red); }
-        .dimension-result-item--medium    { border-left-color: var(--score-amber); }
-        .dimension-result-item--high      { border-left-color: #ca8a04; }
-        .dimension-result-item--excellent { border-left-color: var(--score-green); }
-        .dimension-result-item--tech      { border-left-width: 5px; }
+        .dimension-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transform: translateY(-2px);
+        }
 
-        .dimension-result-item__header {
+        .dimension-card:focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 2px;
+        }
+
+        /* Accent colours */
+        .dimension-card--low       { border-left-color: var(--score-red); }
+        .dimension-card--medium    { border-left-color: var(--score-amber); }
+        .dimension-card--high      { border-left-color: #ca8a04; }
+        .dimension-card--excellent { border-left-color: var(--score-green); }
+
+        .dimension-card__header {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.5rem;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1rem 0.5rem;
         }
 
-        .dimension-result-item__name {
+        .dimension-card__icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .dimension-card__name-group {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dimension-card__name {
             font-weight: 700;
-            font-size: 0.875rem;
+            font-size: 0.78rem;
             color: var(--dark);
+            line-height: 1.25;
+            display: block;
         }
 
-        .dimension-result-item__score {
-            font-size: 0.8rem;
+        .dimension-card__score {
+            font-size: 0.72rem;
             font-weight: 700;
-            color: var(--grey-600);
-            white-space: nowrap;
+            color: var(--grey-400);
+        }
+
+        .dimension-card__chevron {
+            flex-shrink: 0;
+            color: var(--grey-400);
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+            line-height: 1;
+            padding-right: 0.25rem;
+        }
+
+        .dimension-card.is-open .dimension-card__chevron {
+            transform: rotate(180deg);
+        }
+
+        .dimension-card__bar-row {
+            padding: 0 1rem 0.75rem;
         }
 
         .dimension-bar-track {
-            height: 6px;
+            height: 5px;
             background: var(--grey-200);
             overflow: hidden;
-            margin-bottom: 0.75rem;
         }
 
         .dimension-bar-fill {
@@ -742,113 +844,166 @@
         .dimension-bar-fill--high      { background: #ca8a04; }
         .dimension-bar-fill--excellent { background: var(--score-green); }
 
-        .dimension-result-item__text {
-            font-size: 0.82rem;
+        /* Expandable detail */
+        .dimension-card__detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dimension-card.is-open .dimension-card__detail {
+            max-height: 600px;
+        }
+
+        .dimension-card__detail-inner {
+            padding: 0 1rem 1rem;
+            border-top: 1px solid var(--grey-200);
+            margin-top: 0;
+        }
+
+        .dimension-card__text {
+            font-size: 0.78rem;
             color: var(--grey-600);
             line-height: 1.65;
+            padding-top: 0.75rem;
         }
 
-        .dimension-result-item__text strong { color: var(--navy); }
+        .dimension-card__text strong { color: var(--navy); }
 
-        /* Tech capacity highlight box */
-        .tech-highlight-box {
+        /* Technical capacity card — full-width, always expanded */
+        .dimension-card--tech {
+            grid-column: 1 / -1;
             background: var(--navy-deep);
-            border: 2px solid var(--green);
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 0.5rem;
+            border-left: 4px solid var(--green);
+            cursor: default;
+            animation: techPulse 2.5s ease-in-out 0.5s 3;
         }
 
-        .tech-highlight-box__label {
-            font-size: 0.65rem;
+        @keyframes techPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(132,204,22,0); }
+            50%       { box-shadow: 0 0 0 6px rgba(132,204,22,0.18); }
+        }
+
+        .dimension-card--tech:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .dimension-card--tech .dimension-card__name  { color: var(--white); }
+        .dimension-card--tech .dimension-card__score { color: var(--green); }
+        .dimension-card--tech .dimension-card__icon  { color: var(--green); }
+
+        .dimension-card--tech .dimension-card__label {
+            font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--green);
-            margin-bottom: 0.35rem;
+            display: block;
+            margin-bottom: 0.2rem;
         }
 
-        .tech-highlight-box__heading {
+        .dimension-card--tech .dimension-bar-track { background: rgba(255,255,255,0.1); }
+
+        .dimension-card--tech .dimension-card__detail-inner { border-top-color: rgba(255,255,255,0.12); }
+
+        .dimension-card--tech .dimension-card__text {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .dimension-card--tech .dimension-card__text strong { color: var(--white); }
+
+        .dimension-card--tech .dimension-card__detail { max-height: 600px; }
+
+        /* ---- Conclusion insight box ---- */
+        .results-insight-box {
+            background: var(--white);
+            border-left: 4px solid var(--green);
+            padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+            margin-bottom: 0;
+        }
+
+        .results-insight-box__eyebrow {
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--grey-400);
+            margin-bottom: 0.4rem;
+        }
+
+        .results-insight-box__headline {
             font-family: var(--font-display);
             font-weight: 700;
             font-size: 0.95rem;
-            color: var(--white);
+            color: var(--navy);
             margin-bottom: 0.5rem;
-        }
-
-        .tech-highlight-box__text {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.65);
-            line-height: 1.6;
-        }
-
-        /* Conclusion */
-        .results-conclusion-section {
-            background: var(--white);
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .results-conclusion-section .results-section-title {
-            border-bottom-color: var(--orange);
+            line-height: 1.3;
         }
 
         .results-conclusion-text {
-            font-size: 0.875rem;
+            font-size: 0.82rem;
             color: var(--grey-700);
             line-height: 1.7;
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.6rem;
         }
 
         .results-conclusion-text:last-of-type { margin-bottom: 0; }
         .results-conclusion-text strong { color: var(--navy); }
 
-        /* CTA block */
+        /* ---- CTA block — full width, split design ---- */
         .results-cta-block {
-            background: var(--navy);
-            padding: 2rem 2rem;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
+            grid-area: cta;
+            background: var(--navy-dark);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.75rem 2rem;
+            border-top: 4px solid var(--orange);
+            flex-wrap: wrap;
         }
 
-        .results-cta-block::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--orange);
+        .results-cta-block__left {
+            flex: 1;
+            min-width: 240px;
         }
 
         .results-cta-block__title {
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
             color: var(--white);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.35rem;
             line-height: 1.25;
         }
 
         .results-cta-block__text {
-            font-size: 0.875rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .results-cta-block__right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+            flex-shrink: 0;
         }
 
         .results-cta-buttons {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.65rem;
             flex-wrap: wrap;
-            margin-bottom: 0.75rem;
+            justify-content: flex-end;
         }
 
         .btn-cta-primary {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.8rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             background: var(--orange);
             border: 2px solid var(--orange);
             color: var(--white);
@@ -865,10 +1020,10 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.8rem 1.25rem;
+            padding: 0.75rem 1.1rem;
             background: transparent;
-            border: 2px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.8);
+            border: 2px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.75);
             font-weight: 600;
             font-size: 0.875rem;
             text-decoration: none;
@@ -877,7 +1032,7 @@
         }
 
         .btn-cta-outline:hover {
-            border-color: rgba(255,255,255,0.65);
+            border-color: rgba(255,255,255,0.6);
             color: var(--white);
         }
 
@@ -888,24 +1043,140 @@
         }
 
         .results-cta-email {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.4);
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.35);
+            text-align: right;
         }
 
-        .results-cta-email a { color: rgba(255,255,255,0.6); }
+        .results-cta-email a { color: rgba(255,255,255,0.55); }
         .results-cta-email a:hover { color: var(--green); }
 
         .save-feedback {
             display: none;
             align-items: center;
             gap: 0.3rem;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--green);
             font-weight: 600;
-            margin-top: 0.5rem;
+            justify-content: flex-end;
         }
 
         .save-feedback.is-visible { display: flex; }
+
+        /* ---- Card fade-in animation ---- */
+        @keyframes cardFadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .dimension-card {
+            animation: cardFadeUp 0.4s ease both;
+        }
+
+        /* ============================================================
+           RESULTS RESPONSIVE
+        ============================================================ */
+
+        /* Tablet: horizontal top bar for score + radar, full-width cards below */
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .results-dashboard {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "left"
+                    "right"
+                    "cta";
+            }
+
+            .results-left-panel {
+                position: static;
+                height: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .results-gauge-wrapper {
+                flex-direction: row;
+                align-items: center;
+                gap: 1.25rem;
+                padding-bottom: 0;
+                border-bottom: none;
+                border-right: 1px solid rgba(255,255,255,0.1);
+                padding-right: 1.5rem;
+                margin-bottom: 0;
+            }
+
+            .results-gauge-svg-container {
+                width: 130px;
+                height: 130px;
+                margin-bottom: 0;
+            }
+
+            .results-gauge-score { font-size: 2rem; }
+
+            .results-category-name,
+            .results-category-desc { text-align: left; }
+
+            .results-radar-panel {
+                flex: 1;
+                min-width: 220px;
+            }
+
+            .results-left-cta { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; margin-top: 0; }
+        }
+
+        /* Mobile: everything stacks */
+        @media (max-width: 767px) {
+            .results-dashboard {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "left"
+                    "right"
+                    "cta";
+            }
+
+            .results-left-panel {
+                position: static;
+                height: auto;
+                padding: 1.5rem 1.25rem;
+            }
+
+            .results-gauge-svg-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .results-gauge-score { font-size: 2.25rem; }
+
+            .results-right-panel {
+                padding: 1.25rem 1rem;
+            }
+
+            .results-dimension-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dimension-card--tech { grid-column: 1; }
+
+            .results-cta-block {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+            }
+
+            .results-cta-block__right {
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .results-cta-buttons { justify-content: flex-start; }
+            .btn-cta-primary, .btn-cta-outline { justify-content: center; flex: 1; }
+
+            .results-cta-email { text-align: left; }
+            .save-feedback { justify-content: flex-start; }
+        }
 
         /* ============================================================
            VISUALLY HIDDEN
@@ -932,17 +1203,6 @@
             .role-card__icon { display: none; }
 
             .answer-option__key-hint { display: none; }
-
-            .results-score-hero {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .results-score-number-block { width: 100%; }
-
-            .results-cta-buttons { flex-direction: column; }
-            .btn-cta-primary, .btn-cta-outline { justify-content: center; }
         }
 
         /* ============================================================
@@ -1864,6 +2124,107 @@
         return paras.join('');
     }
 
+    /* ============================================================
+       DIMENSION ICON MAP
+    ============================================================ */
+    var DIMENSION_ICONS = {
+        strategic:   '🎯',
+        leadership:  '👥',
+        resource:    '🔧',
+        quality:     '✅',
+        student:     '🎓',
+        scalability: '📈',
+        technical:   '⚙️'
+    };
+
+    /* ============================================================
+       GAUGE COLOUR BY CATEGORY
+    ============================================================ */
+    function getGaugeColour(category) {
+        if (category.badgeClass === 'results-category-badge--early')      return '#ef4444';
+        if (category.badgeClass === 'results-category-badge--building')   return '#eab308';
+        if (category.badgeClass === 'results-category-badge--positioned') return '#84cc16';
+        if (category.badgeClass === 'results-category-badge--ready')      return '#16a34a';
+        return '#84cc16';
+    }
+
+    /* ============================================================
+       SVG CIRCULAR GAUGE
+    ============================================================ */
+    function buildGaugeSVG(total, max, colour) {
+        var size = 180;
+        var cx = size / 2;
+        var cy = size / 2;
+        var strokeWidth = 14;
+        var radius = (size - strokeWidth) / 2 - 4;
+        var circumference = 2 * Math.PI * radius;
+        // Start from dash-offset = circumference (empty ring)
+        var dashOffset = circumference;
+
+        return '<svg viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Score gauge: ' + total + ' out of ' + max + '">'
+             + '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '"'
+             + ' fill="none" stroke="#e5e7eb" stroke-width="' + strokeWidth + '"/>'
+             + '<circle id="gauge-ring" cx="' + cx + '" cy="' + cy + '" r="' + radius + '"'
+             + ' fill="none" stroke="' + colour + '" stroke-width="' + strokeWidth + '"'
+             + ' stroke-linecap="butt"'
+             + ' stroke-dasharray="' + circumference + '"'
+             + ' stroke-dashoffset="' + dashOffset + '"'
+             + ' transform="rotate(-90 ' + cx + ' ' + cy + ')"'
+             + ' style="transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1)"/>'
+             + '</svg>';
+    }
+
+    /* ============================================================
+       GENERATE CONCLUSION (compact version)
+    ============================================================ */
+    function generateConclusionCompact(total, dimScores) {
+        var techScore = dimScores['technical'] || 0;
+        var techPct = techScore / 16;
+        var overallPct = total / 48;
+        var parts = [];
+
+        if (overallPct <= 0.44) {
+            parts.push('<p class="results-conclusion-text"><strong>There is significant opportunity here, and the good news is these gaps are addressable.</strong> Several foundational elements need attention before online programmes can be developed with confidence. The difference between institutions that succeed and those that stall is whether they address these gaps systematically or try to push through them.</p>');
+            parts.push('<p class="results-conclusion-text">Focus on two things first: get your strategy formally documented with leadership sign-off and budget, then secure access to the technical expertise needed to build properly.</p>');
+        } else if (overallPct <= 0.69) {
+            parts.push('<p class="results-conclusion-text"><strong>You have real momentum, and the foundations are forming.</strong> The gaps that remain are the ones most likely to create friction during development. A targeted intervention in your lowest-scoring area will unlock progress across the board.</p>');
+        } else if (overallPct <= 0.875) {
+            parts.push('<p class="results-conclusion-text"><strong>You are well-positioned to develop online programmes successfully.</strong> Most structural and strategic elements are in place. Institutions in your position typically get the most value from specialist support in their weakest areas.</p>');
+        } else {
+            parts.push('<p class="results-conclusion-text"><strong>Your institution is in a strong position across the board.</strong> Well-defined strategy, capable teams, clear plans. At this stage, external support accelerates execution and brings battle-tested production processes rather than filling gaps.</p>');
+        }
+
+        if (techPct <= 0.5) {
+            parts.push('<p class="results-conclusion-text"><strong>Technical Capacity is the area requiring most attention.</strong> Learning design, LMS build, online assessment architecture, and multimedia production are specialist disciplines. The right external partner can close this gap immediately — this is exactly the kind of challenge Andrew helps institutions solve.</p>');
+        } else if (techPct <= 0.75) {
+            parts.push('<p class="results-conclusion-text"><strong>Technical Capacity is worth a closer look.</strong> Even with some capability in place, the gap between basic and excellent is where student experience is won or lost.</p>');
+        } else {
+            parts.push('<p class="results-conclusion-text"><strong>Even with strong Technical Capacity, this is where most institutions underestimate the gap at scale.</strong> The institutions that scale most successfully pair strong internal teams with experienced external partners.</p>');
+        }
+
+        return parts.join('');
+    }
+
+    /* ============================================================
+       CARD ACCORDION
+    ============================================================ */
+    function initCardAccordion() {
+        var cards = document.querySelectorAll('.dimension-card:not(.dimension-card--tech)');
+        cards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                var isOpen = card.classList.contains('is-open');
+                card.classList.toggle('is-open', !isOpen);
+                card.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+            });
+            card.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+    }
+
     function showResults() {
         // Check all questions answered
         var unanswered = state.questions.filter(function (q) { return state.answers[q.id] === undefined; });
@@ -1871,6 +2232,7 @@
 
         var total = getTotalScore();
         var category = getScoreCategory(total);
+        var gaugeColour = getGaugeColour(category);
 
         // Calculate dimension scores
         var dimScores = {};
@@ -1878,77 +2240,131 @@
             dimScores[dim.id] = getDimensionScore(dim);
         });
 
-        // Build results HTML
-        var html = '';
+        /* ---- Build dashboard HTML ---- */
+        var html = '<div class="results-dashboard">';
 
-        // Score hero
-        html += '<div class="results-score-hero">'
-              + '<div class="results-score-number-block">'
-              + '<span class="results-score-number" id="results-score-animated">0</span>'
-              + '<span class="results-score-denom">/48</span>'
+        /* LEFT PANEL */
+        html += '<aside class="results-left-panel" aria-label="Score summary">';
+
+        /* Gauge */
+        html += '<div class="results-gauge-wrapper">'
+              + '<div class="results-gauge-svg-container">'
+              + buildGaugeSVG(total, 48, gaugeColour)
+              + '<div class="results-gauge-center-text">'
+              + '<span class="results-gauge-score" id="results-score-animated">0</span>'
+              + '<span class="results-gauge-denom">/48</span>'
               + '</div>'
-              + '<div class="results-category-block">'
+              + '</div>'
               + '<span class="results-category-badge ' + category.badgeClass + '">' + escapeHtml(category.name) + '</span>'
               + '<h2 class="results-category-name" id="results-heading">' + escapeHtml(category.name) + '</h2>'
               + '<p class="results-category-desc">' + escapeHtml(category.desc) + '</p>'
-              + '</div>'
               + '</div>';
 
-        // Radar chart
-        html += '<div class="results-radar-section">'
-              + '<h3 class="results-section-title">Dimension overview</h3>'
+        /* Radar */
+        html += '<div class="results-radar-panel">'
+              + '<p class="results-radar-panel-title">Dimension overview</p>'
               + '<div class="radar-container">' + buildRadarSVG(dimScores) + '</div>'
               + '</div>';
 
-        // Dimension breakdowns
-        html += '<div class="results-dimensions-section">';
-        html += '<h3 class="results-section-title" style="background:transparent;border:none;padding:0;margin-bottom:0.75rem">Dimension-by-dimension breakdown</h3>';
+        /* Left CTA */
+        html += '<div class="results-left-cta">'
+              + '<p class="results-left-cta__label">Ready to walk through this together?</p>'
+              + '<a href="index.html#contact" class="btn-cta-primary" style="width:100%;justify-content:center;" aria-label="Book a call with Andrew">'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + ' Talk to Andrew'
+              + '</a>'
+              + '</div>';
 
-        DIMENSIONS.forEach(function (dim) {
+        html += '</aside>'; /* /left panel */
+
+        /* RIGHT PANEL */
+        html += '<section class="results-right-panel" aria-labelledby="results-heading">';
+        html += '<p class="results-right-panel__eyebrow">Dimension breakdown &mdash; tap any card to expand</p>';
+        html += '<div class="results-dimension-grid">';
+
+        DIMENSIONS.forEach(function (dim, cardIndex) {
             var score = dimScores[dim.id];
             var level = getBarClass(score, dim.max);
             var pct = (score / dim.max) * 100;
+            var icon = DIMENSION_ICONS[dim.id] || '';
             var isTech = dim.id === 'technical';
+            var delay = (cardIndex * 80) + 'ms';
 
             if (isTech) {
-                html += '<div class="tech-highlight-box">'
-                      + '<div class="tech-highlight-box__label">Key dimension</div>'
-                      + '<div class="tech-highlight-box__heading">' + escapeHtml(dim.name) + ' &mdash; ' + score + '/' + dim.max + '</div>'
-                      + '<div class="tech-highlight-box__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                html += '<div class="dimension-card dimension-card--tech is-open"'
+                      + ' style="animation-delay:' + delay + '"'
+                      + ' role="region" aria-label="Technical capacity — key dimension">'
+                      + '<div class="dimension-card__header">'
+                      + '<span class="dimension-card__icon" aria-hidden="true">' + icon + '</span>'
+                      + '<div class="dimension-card__name-group">'
+                      + '<span class="dimension-card__label">Key dimension</span>'
+                      + '<span class="dimension-card__name">' + escapeHtml(dim.name) + '</span>'
+                      + '<span class="dimension-card__score">' + score + '/' + dim.max + '</span>'
+                      + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__bar-row">'
+                      + '<div class="dimension-bar-track" aria-hidden="true">'
+                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" data-bar-pct="' + pct + '" style="width:0%"></div>'
+                      + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__detail">'
+                      + '<div class="dimension-card__detail-inner">'
+                      + '<div class="dimension-card__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>'
+                      + '</div>'
                       + '</div>';
             } else {
-                html += '<div class="dimension-result-item dimension-result-item--' + level + '" data-bar-pct="' + pct + '">'
-                      + '<div class="dimension-result-item__header">'
-                      + '<span class="dimension-result-item__name">' + escapeHtml(dim.name) + '</span>'
-                      + '<span class="dimension-result-item__score">' + score + '/' + dim.max + '</span>'
+                html += '<div class="dimension-card dimension-card--' + level + '"'
+                      + ' style="animation-delay:' + delay + '"'
+                      + ' tabindex="0" role="button" aria-expanded="false"'
+                      + ' aria-label="' + escapeHtml(dim.name) + ': ' + score + ' out of ' + dim.max + '. Click to expand.">'
+                      + '<div class="dimension-card__header">'
+                      + '<span class="dimension-card__icon" aria-hidden="true">' + icon + '</span>'
+                      + '<div class="dimension-card__name-group">'
+                      + '<span class="dimension-card__name">' + escapeHtml(dim.name) + '</span>'
+                      + '<span class="dimension-card__score">' + score + '/' + dim.max + '</span>'
                       + '</div>'
+                      + '<span class="dimension-card__chevron" aria-hidden="true">&#9660;</span>'
+                      + '</div>'
+                      + '<div class="dimension-card__bar-row">'
                       + '<div class="dimension-bar-track" aria-hidden="true">'
-                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" style="width:0%"></div>'
+                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" data-bar-pct="' + pct + '" style="width:0%"></div>'
                       + '</div>'
-                      + '<div class="dimension-result-item__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__detail" aria-hidden="true">'
+                      + '<div class="dimension-card__detail-inner">'
+                      + '<div class="dimension-card__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>'
+                      + '</div>'
                       + '</div>';
             }
         });
 
-        html += '</div>'; // /results-dimensions-section
+        html += '</div>'; /* /results-dimension-grid */
 
-        // Conclusion
-        html += '<div class="results-conclusion-section">'
-              + '<h3 class="results-section-title">What this means for your institution</h3>'
-              + generateConclusion(total, dimScores)
+        /* Conclusion insight box */
+        html += '<div class="results-insight-box" role="region" aria-label="What this means">'
+              + '<p class="results-insight-box__eyebrow">What this means for your institution</p>'
+              + '<p class="results-insight-box__headline">Your readiness in context</p>'
+              + generateConclusionCompact(total, dimScores)
               + '</div>';
 
-        // CTA block
-        html += '<div class="results-cta-block">'
+        html += '</section>'; /* /right panel */
+
+        /* CTA BLOCK — full width */
+        html += '<div class="results-cta-block" role="complementary" aria-label="Next step">'
+              + '<div class="results-cta-block__left">'
               + '<h2 class="results-cta-block__title">Want to walk through your results?</h2>'
-              + '<p class="results-cta-block__text">Book a free 30-minute strategy call with Andrew. He\'ll review your scores, discuss your specific challenges, and map out what an engagement could look like. No sales pressure — just a helpful conversation with someone who has done this 20+ times.</p>'
+              + '<p class="results-cta-block__text">Book a free 30-minute strategy call. Andrew will review your scores, discuss your specific challenges, and map out what an engagement could look like.</p>'
+              + '</div>'
+              + '<div class="results-cta-block__right">'
               + '<div class="results-cta-buttons">'
-              + '<a href="#" class="btn-cta-primary" aria-label="Book a call with Andrew">'
-              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="0" ry="0"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + '<a href="index.html#contact" class="btn-cta-primary" aria-label="Book a call with Andrew">'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
               + ' Talk to Andrew'
               + '</a>'
               + '<button class="btn-cta-outline" id="save-results-btn" aria-label="Copy results summary to clipboard">'
-              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="0" ry="0"/></svg>'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4"/></svg>'
               + ' Save results'
               + '</button>'
               + '</div>'
@@ -1957,7 +2373,10 @@
               + ' Copied to clipboard'
               + '</div>'
               + '<p class="results-cta-email">Or email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>'
+              + '</div>'
               + '</div>';
+
+        html += '</div>'; /* /results-dashboard */
 
         resultsContent.innerHTML = html;
 
@@ -1968,11 +2387,12 @@
         progressFill.style.right = '0%';
         progressBar.setAttribute('aria-valuenow', '100');
 
-        // Animate score counter
+        // Trigger animations after slide enters
         setTimeout(function () {
-            animateScore(total);
+            animateGauge(total, 48, gaugeColour);
             animateDimensionBars();
-        }, 350);
+            initCardAccordion();
+        }, 380);
 
         // Wire up save button
         var saveBtn = document.getElementById('save-results-btn');
@@ -1993,34 +2413,43 @@
         }
     }
 
-    function animateScore(target) {
-        var el = document.getElementById('results-score-animated');
-        if (!el) return;
-        var start = 0;
-        var duration = 1000;
-        var startTime = null;
+    function animateGauge(total, max, colour) {
+        /* Animate the SVG ring fill */
+        var ring = document.getElementById('gauge-ring');
+        var scoreEl = document.getElementById('results-score-animated');
 
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target);
-            if (progress < 1) requestAnimationFrame(step);
+        if (ring) {
+            var radius = parseFloat(ring.getAttribute('r'));
+            var circumference = 2 * Math.PI * radius;
+            var targetOffset = circumference * (1 - total / max);
+            /* Trigger transition by setting the target offset */
+            requestAnimationFrame(function () {
+                ring.style.strokeDashoffset = targetOffset;
+            });
         }
 
-        requestAnimationFrame(step);
+        /* Animate score number counter alongside gauge */
+        if (scoreEl) {
+            var duration = 1500;
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                scoreEl.textContent = Math.round(eased * total);
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
     }
 
     function animateDimensionBars() {
-        var items = document.querySelectorAll('.dimension-result-item');
-        items.forEach(function (item, i) {
-            var pct = parseFloat(item.getAttribute('data-bar-pct'));
-            var fill = item.querySelector('.dimension-bar-fill');
-            if (fill) {
-                setTimeout(function () {
-                    fill.style.width = pct + '%';
-                }, i * 80);
-            }
+        var fills = document.querySelectorAll('.dimension-bar-fill[data-bar-pct]');
+        fills.forEach(function (fill, i) {
+            var pct = parseFloat(fill.getAttribute('data-bar-pct'));
+            setTimeout(function () {
+                fill.style.width = pct + '%';
+            }, i * 100);
         });
     }
 
