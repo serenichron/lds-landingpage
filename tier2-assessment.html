@@ -86,34 +86,98 @@
             overflow: hidden;
         }
 
-        /* ---- Top chrome ---- */
+        /* ---- Top chrome — matches landing page navbar ---- */
         .app-header {
             flex: 0 0 auto;
-            background: var(--navy-dark);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background-color: rgba(18, 33, 89, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(132, 204, 22, 0.25);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 1.5rem;
-            height: 52px;
+            padding: 0.5rem 1.5rem;
+            min-height: 56px;
             z-index: 10;
         }
 
+        .app-header__left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .app-header__brand {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .app-header__brand img {
+            height: 40px;
+        }
+
+        .app-header__brand-text {
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 1.05rem;
             color: var(--white);
             text-decoration: none;
             letter-spacing: -0.01em;
         }
 
-        .app-header__brand:hover { color: var(--green); }
+        .app-header__brand:hover .app-header__brand-text { color: var(--green); }
+
+        .app-header__nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .app-header__nav-link {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .app-header__nav-link:hover { color: var(--green); }
+
+        .app-header__nav-link--active {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .app-header__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--orange);
+            color: var(--white);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            text-decoration: none;
+            border: none;
+            transition: background 0.2s;
+            margin-left: 0.5rem;
+        }
+
+        .app-header__cta:hover { background: var(--orange-dark); color: var(--white); }
 
         .app-header__meta {
             font-size: 0.75rem;
             color: rgba(255,255,255,0.4);
             letter-spacing: 0.04em;
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .app-header__nav { display: none; }
+            .app-header__meta { display: block; }
         }
 
         /* ---- Progress bar (sits directly under header) ---- */
@@ -382,17 +446,23 @@
 
         .answer-option__label-group { flex: 1; }
 
+        .answer-option__label-group {
+            display: flex;
+            flex-direction: column;
+        }
+
         .answer-option__text {
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             color: var(--dark);
             line-height: 1.35;
         }
 
         .answer-option__subtext {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--grey-600);
-            margin-top: 0.1rem;
+            margin-top: 0.2rem;
+            font-style: italic;
         }
 
         .answer-option__check {
@@ -887,8 +957,18 @@
 
     <!-- Fixed header -->
     <header class="app-header">
-        <a href="index.html" class="app-header__brand">Learning Design Solutions</a>
-        <span class="app-header__meta" id="header-meta" aria-live="polite">Readiness Assessment</span>
+        <div class="app-header__left">
+            <a href="index.html" class="app-header__brand">
+                <img src="images/lds-logo-stacked.png" alt="Learning Design Solutions">
+            </a>
+            <nav class="app-header__nav" aria-label="Site navigation">
+                <a href="index.html" class="app-header__nav-link">Home</a>
+                <a href="tier1-course.html" class="app-header__nav-link">Free course</a>
+                <a href="tier2-assessment.html" class="app-header__nav-link app-header__nav-link--active">Assessment</a>
+                <a href="index.html#contact" class="app-header__cta">Talk to Andrew</a>
+            </nav>
+        </div>
+        <span class="app-header__meta" id="header-meta" aria-live="polite">Readiness assessment</span>
     </header>
 
     <!-- Progress bar -->
