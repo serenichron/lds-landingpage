@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Programme Readiness Assessment — Learning Design Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS — LDS brand system
+        ============================================================ */
+        :root {
+            --navy:         #122159;
+            --navy-dark:    #0d1a40;
+            --navy-deep:    #0b163a;
+            --green:        #84cc16;
+            --green-dark:   #65a30d;
+            --orange:       #f97316;
+            --orange-dark:  #ea6c0a;
+            --dark:         #1f2937;
+            --grey-700:     #374151;
+            --grey-600:     #4b5563;
+            --grey-400:     #9ca3af;
+            --grey-200:     #e5e7eb;
+            --grey-100:     #f3f4f6;
+            --white:        #ffffff;
+
+            --score-red:            #ef4444;
+            --score-red-bg:         #fef2f2;
+            --score-red-border:     #fecaca;
+            --score-amber:          #f97316;
+            --score-amber-bg:       #fff7ed;
+            --score-amber-border:   #fed7aa;
+            --score-yg:             #84cc16;
+            --score-yg-bg:          #f7fee7;
+            --score-yg-border:      #d9f99d;
+            --score-green:          #16a34a;
+            --score-green-bg:       #f0fdf4;
+            --score-green-border:   #bbf7d0;
+
+            --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Merriweather', Georgia, serif;
+
+            --slide-transition: 320ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after {
+            border-radius: 0 !important;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            background: var(--navy-dark);
+            font-size: 1rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        button {
+            font-family: var(--font-body);
+            cursor: pointer;
+        }
+
+        /* ============================================================
+           APP SHELL — fixed chrome + scrollable slide viewport
+        ============================================================ */
+        .app-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        /* ---- Top chrome ---- */
+        .app-header {
+            flex: 0 0 auto;
+            background: var(--navy-dark);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            height: 52px;
+            z-index: 10;
+        }
+
+        .app-header__brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .app-header__brand:hover { color: var(--green); }
+
+        .app-header__meta {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.04em;
+        }
+
+        /* ---- Progress bar (sits directly under header) ---- */
+        .app-progress-bar {
+            flex: 0 0 auto;
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-progress-bar__fill {
+            position: absolute;
+            inset: 0 100% 0 0;
+            background: var(--green);
+            transition: right var(--slide-transition);
+        }
+
+        /* ---- Slide viewport ---- */
+        .slide-viewport {
+            flex: 1 1 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ============================================================
+           SLIDES
+        ============================================================ */
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transform: translateX(100%);
+            transition: transform var(--slide-transition);
+            will-change: transform;
+        }
+
+        .slide.is-active {
+            transform: translateX(0);
+        }
+
+        .slide.is-exiting-left {
+            transform: translateX(-100%);
+        }
+
+        /* Centre the slide content in the viewport */
+        .slide-inner {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ---- Slide backgrounds ---- */
+        .slide--role { background: var(--navy); }
+        .slide--question { background: var(--white); }
+        .slide--results { background: var(--grey-100); }
+
+        /* ============================================================
+           ROLE SELECTION SLIDE
+        ============================================================ */
+        .role-slide__eyebrow {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .role-slide__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .role-slide__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+        }
+
+        .role-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .role-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.15s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .role-card:hover {
+            border-color: var(--green);
+            background: rgba(132,204,22,0.08);
+            transform: translateX(4px);
+        }
+
+        .role-card:focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 2px;
+        }
+
+        .role-card__icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(132,204,22,0.12);
+            color: var(--green);
+            font-size: 1.1rem;
+        }
+
+        .role-card__body { flex: 1; }
+
+        .role-card__title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--white);
+            margin-bottom: 0.15rem;
+        }
+
+        .role-card__desc {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.4;
+        }
+
+        .role-card__arrow {
+            color: rgba(255,255,255,0.25);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: color 0.18s, transform 0.18s;
+        }
+
+        .role-card:hover .role-card__arrow {
+            color: var(--green);
+            transform: translateX(3px);
+        }
+
+        /* ============================================================
+           QUESTION SLIDES
+        ============================================================ */
+        .question-slide__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-slide__dimension {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: var(--navy);
+            color: var(--white);
+            padding: 0.25rem 0.65rem;
+            border-left: 3px solid var(--green);
+        }
+
+        .question-slide__counter {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--grey-400);
+            letter-spacing: 0.03em;
+        }
+
+        .question-slide__text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+            line-height: 1.45;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .question-slide__context {
+            font-size: 0.875rem;
+            color: var(--grey-600);
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+            padding-left: 0.75rem;
+            border-left: 2px solid var(--grey-200);
+        }
+
+        .question-slide__context p { margin: 0 0 0.5rem; }
+        .question-slide__context p:last-child { margin: 0; }
+
+        /* ---- Answer options ---- */
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--grey-200);
+            background: var(--white);
+            cursor: pointer;
+            transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.12s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .answer-option:hover {
+            border-color: var(--navy);
+            background: var(--grey-100);
+        }
+
+        .answer-option:focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 2px;
+        }
+
+        .answer-option.is-selected {
+            border-color: var(--green);
+            background: var(--score-yg-bg);
+        }
+
+        .answer-option__dot {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .answer-option__dot-inner {
+            width: 14px;
+            height: 14px;
+            display: block;
+        }
+
+        .answer-option--1 .answer-option__dot-inner { background: var(--score-red); }
+        .answer-option--2 .answer-option__dot-inner { background: var(--score-amber); }
+        .answer-option--3 .answer-option__dot-inner { background: #ca8a04; }
+        .answer-option--4 .answer-option__dot-inner { background: var(--score-green); }
+
+        .answer-option__label-group { flex: 1; }
+
+        .answer-option__text {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--dark);
+            line-height: 1.35;
+        }
+
+        .answer-option__subtext {
+            font-size: 0.75rem;
+            color: var(--grey-600);
+            margin-top: 0.1rem;
+        }
+
+        .answer-option__check {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .answer-option__check svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--green-dark);
+        }
+
+        .answer-option.is-selected .answer-option__check { display: flex; }
+
+        .answer-option__key-hint {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--grey-400);
+            background: var(--grey-100);
+            border: 1px solid var(--grey-200);
+            padding: 0.1rem 0.35rem;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+        }
+
+        /* ---- Nav buttons ---- */
+        .slide-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding-top: 0.5rem;
+        }
+
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            border: 2px solid transparent;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-nav:focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 2px;
+        }
+
+        .btn-nav--back {
+            background: transparent;
+            border-color: var(--grey-200);
+            color: var(--grey-600);
+        }
+
+        .btn-nav--back:hover {
+            border-color: var(--navy);
+            color: var(--navy);
+        }
+
+        .btn-nav--next {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: var(--white);
+            margin-left: auto;
+        }
+
+        .btn-nav--next:hover:not(:disabled) {
+            background: var(--orange-dark);
+            border-color: var(--orange-dark);
+        }
+
+        .btn-nav--next:disabled {
+            background: var(--grey-200);
+            border-color: var(--grey-200);
+            color: var(--grey-400);
+            cursor: not-allowed;
+        }
+
+        .btn-nav--next-auto {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--white);
+            font-size: 0.72rem;
+            padding: 0.4rem 0.85rem;
+            margin-left: auto;
+        }
+
+        .unanswered-hint {
+            font-size: 0.75rem;
+            color: var(--grey-400);
+            font-style: italic;
+            align-self: center;
+        }
+
+        /* ============================================================
+           RESULTS SLIDE
+        ============================================================ */
+        .results-slide {
+            background: var(--grey-100);
+            overflow-y: auto;
+        }
+
+        .results-slide .slide-inner {
+            justify-content: flex-start;
+            padding-top: 2.5rem;
+            padding-bottom: 3rem;
+            max-width: 780px;
+        }
+
+        /* Score hero */
+        .results-score-hero {
+            background: var(--navy);
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .results-score-hero::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--green);
+        }
+
+        .results-score-number-block {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .results-score-number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            display: block;
+        }
+
+        .results-score-denom {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .results-category-block { flex: 1; min-width: 200px; }
+
+        .results-category-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.75rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .results-category-badge--early    { background: var(--score-red); color: var(--white); }
+        .results-category-badge--building { background: #eab308; color: #1a1400; }
+        .results-category-badge--positioned { background: var(--green); color: var(--navy-deep); }
+        .results-category-badge--ready    { background: var(--score-green); color: var(--white); }
+
+        .results-category-name {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .results-category-desc {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* Radar chart */
+        .results-radar-section {
+            background: var(--white);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-section-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--navy);
+        }
+
+        .radar-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dimension breakdown */
+        .results-dimensions-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .dimension-result-item {
+            background: var(--white);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid var(--grey-200);
+        }
+
+        .dimension-result-item--low       { border-left-color: var(--score-red); }
+        .dimension-result-item--medium    { border-left-color: var(--score-amber); }
+        .dimension-result-item--high      { border-left-color: #ca8a04; }
+        .dimension-result-item--excellent { border-left-color: var(--score-green); }
+        .dimension-result-item--tech      { border-left-width: 5px; }
+
+        .dimension-result-item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .dimension-result-item__name {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--dark);
+        }
+
+        .dimension-result-item__score {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--grey-600);
+            white-space: nowrap;
+        }
+
+        .dimension-bar-track {
+            height: 6px;
+            background: var(--grey-200);
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+
+        .dimension-bar-fill {
+            height: 100%;
+            width: 0;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dimension-bar-fill--low       { background: var(--score-red); }
+        .dimension-bar-fill--medium    { background: var(--score-amber); }
+        .dimension-bar-fill--high      { background: #ca8a04; }
+        .dimension-bar-fill--excellent { background: var(--score-green); }
+
+        .dimension-result-item__text {
+            font-size: 0.82rem;
+            color: var(--grey-600);
+            line-height: 1.65;
+        }
+
+        .dimension-result-item__text strong { color: var(--navy); }
+
+        /* Tech capacity highlight box */
+        .tech-highlight-box {
+            background: var(--navy-deep);
+            border: 2px solid var(--green);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-highlight-box__label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 0.35rem;
+        }
+
+        .tech-highlight-box__heading {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-highlight-box__text {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* Conclusion */
+        .results-conclusion-section {
+            background: var(--white);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-conclusion-section .results-section-title {
+            border-bottom-color: var(--orange);
+        }
+
+        .results-conclusion-text {
+            font-size: 0.875rem;
+            color: var(--grey-700);
+            line-height: 1.7;
+            margin-bottom: 0.85rem;
+        }
+
+        .results-conclusion-text:last-of-type { margin-bottom: 0; }
+        .results-conclusion-text strong { color: var(--navy); }
+
+        /* CTA block */
+        .results-cta-block {
+            background: var(--navy);
+            padding: 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-cta-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--orange);
+        }
+
+        .results-cta-block__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            line-height: 1.25;
+        }
+
+        .results-cta-block__text {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .results-cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--orange);
+            border: 2px solid var(--orange);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .btn-cta-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); color: var(--white); }
+
+        .btn-cta-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.8rem 1.25rem;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.8);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .btn-cta-outline:hover {
+            border-color: rgba(255,255,255,0.65);
+            color: var(--white);
+        }
+
+        .btn-cta-primary:focus-visible,
+        .btn-cta-outline:focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 2px;
+        }
+
+        .results-cta-email {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .results-cta-email a { color: rgba(255,255,255,0.6); }
+        .results-cta-email a:hover { color: var(--green); }
+
+        .save-feedback {
+            display: none;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            color: var(--green);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .save-feedback.is-visible { display: flex; }
+
+        /* ============================================================
+           VISUALLY HIDDEN
+        ============================================================ */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0,0,0,0) !important;
+            border: 0 !important;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 600px) {
+            .app-header { padding: 0 1rem; }
+            .slide-inner { padding: 1.25rem 1rem; }
+
+            .role-card { padding: 0.75rem 1rem; }
+            .role-card__icon { display: none; }
+
+            .answer-option__key-hint { display: none; }
+
+            .results-score-hero {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-score-number-block { width: 100%; }
+
+            .results-cta-buttons { flex-direction: column; }
+            .btn-cta-primary, .btn-cta-outline { justify-content: center; }
+        }
+
+        /* ============================================================
+           SVG ICONS (inline, no external dependency)
+        ============================================================ */
+        .icon { display: inline-block; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<div class="app-shell" role="application" aria-label="Online Programme Readiness Assessment">
+
+    <!-- Fixed header -->
+    <header class="app-header">
+        <a href="index.html" class="app-header__brand">Learning Design Solutions</a>
+        <span class="app-header__meta" id="header-meta" aria-live="polite">Readiness Assessment</span>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="app-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Assessment progress" id="progress-bar">
+        <div class="app-progress-bar__fill" id="progress-fill"></div>
+    </div>
+
+    <!-- Slide viewport -->
+    <div class="slide-viewport" id="slide-viewport">
+
+        <!-- =====================================================
+             SLIDE 0: ROLE SELECTION
+        ===================================================== -->
+        <div class="slide slide--role is-active" id="slide-role" role="region" aria-labelledby="role-title" tabindex="-1">
+            <div class="slide-inner">
+                <p class="role-slide__eyebrow">Free assessment &middot; 7 minutes</p>
+                <h1 class="role-slide__title" id="role-title">First, tell us about your role</h1>
+                <p class="role-slide__subtitle">This helps us tailor the questions to your perspective and frame the results in a way that's useful for you.</p>
+
+                <div class="role-options" role="list">
+
+                    <button class="role-card" data-role="strategic" data-role-label="Vice-chancellor / Provost / Principal"
+                            role="listitem" aria-label="Select: Vice-chancellor, Provost or Principal">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Vice-chancellor / Provost / Principal</div>
+                            <div class="role-card__desc">I oversee institutional strategy and major investment decisions</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <button class="role-card" data-role="strategic" data-role-label="Pro-vice-chancellor (Education / Digital)"
+                            role="listitem" aria-label="Select: Pro-vice-chancellor, Education or Digital">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Pro-vice-chancellor (Education / Digital)</div>
+                            <div class="role-card__desc">I lead the education or digital transformation portfolio</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <button class="role-card" data-role="strategic" data-role-label="Dean / Head of faculty"
+                            role="listitem" aria-label="Select: Dean or Head of faculty">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Dean / Head of faculty</div>
+                            <div class="role-card__desc">I manage academic programmes within my faculty</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <button class="role-card" data-role="operational" data-role-label="Director of digital education / Head of online learning"
+                            role="listitem" aria-label="Select: Director of digital education or Head of online learning">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2" y="3" width="20" height="14"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Director of digital education / Head of online learning</div>
+                            <div class="role-card__desc">I lead the operational delivery of online programmes</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <button class="role-card" data-role="operational" data-role-label="Programme director / Course leader"
+                            role="listitem" aria-label="Select: Programme director or Course leader">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Programme director / Course leader</div>
+                            <div class="role-card__desc">I manage specific programme development and delivery</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                    <button class="role-card" data-role="operational" data-role-label="Learning designer / Educational technologist"
+                            role="listitem" aria-label="Select: Learning designer or Educational technologist">
+                        <div class="role-card__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="role-card__body">
+                            <div class="role-card__title">Learning designer / Educational technologist</div>
+                            <div class="role-card__desc">I design and build online learning experiences</div>
+                        </div>
+                        <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Question slides are injected by JS -->
+
+        <!-- Results slide placeholder -->
+        <div class="slide slide--results results-slide" id="slide-results" role="region" aria-labelledby="results-heading" tabindex="-1">
+            <div class="slide-inner">
+                <div id="results-content"></div>
+            </div>
+        </div>
+
+    </div><!-- /slide-viewport -->
+</div><!-- /app-shell -->
+
+<script>
+(function () {
+    'use strict';
+
+    /* ============================================================
+       DATA — questions for both tracks
+    ============================================================ */
+
+    var ANSWER_OPTIONS = [
+        { score: 1, text: 'Not at all', subtext: 'No', colorClass: 'answer-option--1' },
+        { score: 2, text: 'In early stages', subtext: 'Partially', colorClass: 'answer-option--2' },
+        { score: 3, text: 'Mostly in place', subtext: 'Largely yes', colorClass: 'answer-option--3' },
+        { score: 4, text: 'Fully established', subtext: 'Yes, comprehensively', colorClass: 'answer-option--4' }
+    ];
+
+    var QUESTIONS = {
+        strategic: [
+            // Dimension 1a — Strategic clarity
+            {
+                id: 'q1',
+                dimension: 'Strategic clarity',
+                text: 'Does your institution have a formally approved strategy for online programme development, with defined goals and timelines?',
+                context: '<p>Without a formally approved strategy, online learning initiatives tend to stall at the first governance hurdle. Boards and finance committees need to see documented intent with clear targets before they authorise the investment required to build properly.</p><p>A formal strategy also protects the initiative during leadership changes — which are common in HE. When the strategy is on paper and approved, it outlasts the individuals who championed it.</p>'
+            },
+            // Dimension 1b — Strategic clarity
+            {
+                id: 'q2',
+                dimension: 'Strategic clarity',
+                text: 'Has leadership allocated a ring-fenced budget for online programme development, separate from general teaching funds?',
+                context: '<p>Ring-fenced budget is the single strongest indicator of strategic commitment. When online learning competes for funds from the same pot as day-to-day teaching costs, it almost always loses to immediate operational pressures.</p><p>Institutions that treat online development as a capital investment — with its own budget line, business case, and ROI target — are far more likely to reach launch and to generate the commercial returns that justify continued investment.</p>'
+            },
+            // Dimension 2 — Leadership alignment
+            {
+                id: 'q3',
+                dimension: 'Leadership alignment',
+                text: 'How aligned is the senior leadership team on the priority and direction of online programme development?',
+                context: '<p>Misalignment at senior level is the most common cause of stalled online programmes. If the VC champions it but the CFO is sceptical, or the academic board is divided, the initiative will face constant friction that slows every decision and approval.</p><p>True alignment means leadership can articulate a consistent answer to: why online, why now, and which programmes first. If that answer varies depending on who you ask, there is work to do before development begins.</p>'
+            },
+            // Dimension 3 — Resource readiness
+            {
+                id: 'q4',
+                dimension: 'Resource readiness',
+                text: 'Does the institution have access to the specialist roles needed — learning designers, media producers, platform administrators?',
+                context: '<p>These specialist roles are consistently the hardest gap to close. Most institutions have subject matter experts (academics) and generalist IT support, but very few have in-house learning designers and media producers with real experience in online course production.</p><p>The cost of building this capability from scratch is significant and takes 12–18 months before you reach consistent quality. Knowing your current position clearly is the starting point for a realistic build or buy decision.</p>'
+            },
+            // Dimension 4 — Quality framework
+            {
+                id: 'q5',
+                dimension: 'Quality framework',
+                text: 'Is there an institutional quality framework specifically adapted for online programme design, delivery, and assessment?',
+                context: '<p>Standard HE quality processes were built for face-to-face delivery. They check the right things for campus teaching, but they miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance.</p><p>Without online-specific quality criteria, development teams have no shared standard to build to — which means every module gets reviewed differently, and the student experience is inconsistent.</p>'
+            },
+            // Dimension 5a — Student experience focus
+            {
+                id: 'q6',
+                dimension: 'Student experience focus',
+                text: 'Has the institution conducted research into what online learners actually need — beyond just digitising existing materials?',
+                context: '<p>The most common mistake institutions make is assuming that online students need the same things as campus students, delivered through a screen. In practice, online learners have fundamentally different needs: they study in shorter bursts, across multiple devices, often alongside work and family commitments.</p><p>Programmes built without this understanding tend to replicate lecture structures online — and then wonder why completion rates are low. Research upfront saves significant rework later.</p>'
+            },
+            // Dimension 5b — Student experience focus
+            {
+                id: 'q7',
+                dimension: 'Student experience focus',
+                text: 'Are there defined success metrics for student outcomes in online programmes, and is someone accountable for them?',
+                context: '<p>Online programmes that lack defined outcome metrics drift. Without clear targets for completion rates, engagement levels, and student satisfaction — and without a named individual responsible for tracking them — there is no mechanism to identify problems before they compound across multiple cohorts.</p><p>The accountability question is as important as the metrics themselves. Institutional data often exists, but if nobody owns the numbers, they do not drive improvement.</p>'
+            },
+            // Dimension 6 — Scalability planning
+            {
+                id: 'q8',
+                dimension: 'Scalability planning',
+                text: 'Is there a plan for how online programme development scales beyond a pilot — including staffing, technology, and cross-faculty coordination?',
+                context: '<p>Pilots succeed; scale-ups fail. This is one of the most consistent patterns in online HE. The resources, relationships, and decision-making processes that work for a single pilot programme break down when you try to run five or ten simultaneously across multiple faculties.</p><p>Planning for scale from the outset — even if you start with a single programme — means your processes, templates, and governance structures are designed to grow rather than to be rebuilt from scratch at every expansion.</p>'
+            },
+            // Dimension 7a — Technical capacity
+            {
+                id: 'q9',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have in-house learning design expertise — not lecturers with a side interest, but specialists who do this full-time?',
+                context: '<p>This distinction matters enormously. A lecturer who is enthusiastic about online learning and a professional learning designer with five years of experience produce very different results — and the gap shows directly in student engagement and completion rates.</p><p>Specialist learning designers bring a discipline that does not come from academic training: learning outcomes mapping, activity sequencing, cognitive load management, and multimedia pedagogy. These are learnable, but only with dedicated practice and professional development time that academics simply do not have.</p>'
+            },
+            // Dimension 7b — Technical capacity
+            {
+                id: 'q10',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have hands-on LMS configuration and customisation capability — people who can build, not just administer?',
+                context: '<p>Most institutions have someone who can manage LMS users, run reports, and upload content. Very few have people who can configure the platform to deliver a genuinely engaging online experience: custom course structures, integrated assessment workflows, adaptive release conditions, and analytics dashboards for student tracking.</p><p>The difference between a well-configured LMS and a default installation is the difference between a professional online course and a digital filing cabinet. This capability is almost always underinvested because it is invisible until it is missing.</p>'
+            },
+            // Dimension 7c — Technical capacity
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Has the institution successfully built proper online assessments with digital submission workflows, rubrics, and academic integrity measures?',
+                context: '<p>Online assessment is far more complex than uploading an exam paper to a shared drive. Effective online assessment requires digital submission workflows, automated rubric tools, plagiarism detection integration, and processes that maintain academic integrity without the physical supervision of a campus exam hall.</p><p>Getting this right takes significant technical and pedagogical effort. Getting it wrong in the first cohort causes complaints, grade disputes, and reputational damage that is difficult to recover from.</p>'
+            },
+            // Dimension 7d — Technical capacity
+            {
+                id: 'q12',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have in-house multimedia production capability — video, animation, interactive content?',
+                context: '<p>Quality online programmes require professionally produced learning materials: well-shot and edited video, interactive activities, and polished presentation design. This does not mean broadcast-quality production for everything, but it does mean a standard that fee-paying online students consider professional.</p><p>In-house multimedia capability is rare. Most institutions either rely on academics filming themselves at their desks — which students find underwhelming — or commission external production at significant cost. Knowing your position clearly determines your production strategy.</p>'
+            }
+        ],
+
+        operational: [
+            // Dimension 1a — Strategic clarity
+            {
+                id: 'q1',
+                dimension: 'Strategic clarity',
+                text: 'Is there a documented strategy for online programme development that your team can reference and align to?',
+                context: '<p>A documented strategy gives your team a shared reference point for decision-making. Without it, every design choice — from content format to assessment type — gets made in isolation, and the programme loses coherence across modules and contributors.</p><p>Documentation also protects your team from shifting priorities. When leadership direction changes (as it does), a written strategy provides a stable baseline and a basis for managing scope changes formally rather than absorbing them silently.</p>'
+            },
+            // Dimension 1b — Strategic clarity
+            {
+                id: 'q2',
+                dimension: 'Strategic clarity',
+                text: 'Do you have a confirmed budget and resource allocation for the online programmes you\'re developing?',
+                context: '<p>Confirmed budget and resource allocation are the foundations of realistic project planning. Without both, delivery teams are constantly at risk of having timelines overridden by budget constraints that were never clearly defined at the start.</p><p>Resource allocation is often the more critical of the two. Even with adequate budget, if the people doing the work are not ring-fenced from other institutional demands, delivery timelines become aspirational rather than realistic.</p>'
+            },
+            // Dimension 2 — Leadership alignment
+            {
+                id: 'q3',
+                dimension: 'Leadership alignment',
+                text: 'How clear and consistent is the direction you receive from leadership about online programme priorities?',
+                context: '<p>Inconsistent direction from leadership creates rework. When priorities shift mid-development — different stakeholders pushing for different approaches — the people doing the build absorb the cost in time, quality, and morale.</p><p>Clear direction does not mean no flexibility; it means decisions are made at the right level, communicated clearly, and do not reverse without proper change management. The best-resourced teams still fail when the direction above them is muddled.</p>'
+            },
+            // Dimension 3 — Resource readiness
+            {
+                id: 'q4',
+                dimension: 'Resource readiness',
+                text: 'Does your team currently include or have access to dedicated learning designers, media production, and LMS administration?',
+                context: '<p>These three capabilities — learning design, media production, and LMS configuration — are the core production engine for online programmes. When any one of them is missing or inadequate, the others are constrained: great design cannot be produced without production capacity; great content is wasted in a poorly configured LMS.</p><p>The keyword is "dedicated". People carrying these responsibilities alongside a full academic or administrative workload cannot deliver at the quality or pace that a funded online programme requires.</p>'
+            },
+            // Dimension 4 — Quality framework
+            {
+                id: 'q5',
+                dimension: 'Quality framework',
+                text: 'Do you work within a defined quality framework that covers online learning design standards, assessment integrity, and learner support?',
+                context: '<p>A quality framework for your team serves two functions: it sets the standard that every module is built to, and it provides a shared language for review and sign-off. Without it, quality becomes a matter of individual judgement — which means inconsistency across the programme and difficult conversations with reviewers who are applying different criteria.</p><p>Online-specific quality criteria should include accessibility standards, cognitive load benchmarks for multimedia content, assessment integrity requirements, and minimum engagement design expectations. Generic institutional quality processes rarely cover these adequately.</p>'
+            },
+            // Dimension 5a — Student experience focus
+            {
+                id: 'q6',
+                dimension: 'Student experience focus',
+                text: 'Has your team conducted learner research or gathered feedback to understand what online students need from the experience?',
+                context: '<p>Design decisions made without learner insight tend to reflect the preferences of the people building the programme rather than the people who will use it. Online learners have specific needs — study flexibility, mobile accessibility, clear weekly structure, fast feedback on assessments — that are easy to miss when designing from an academic perspective.</p><p>Even lightweight learner research — interviews with a handful of prospective students, analysis of comparable programmes, review of existing completion data — produces significant improvements in design quality relative to building blind.</p>'
+            },
+            // Dimension 5b — Student experience focus
+            {
+                id: 'q7',
+                dimension: 'Student experience focus',
+                text: 'Do you track completion rates, engagement, and learner satisfaction for your online programmes, with clear targets?',
+                context: '<p>Tracking without targets is reporting without accountability. Completion rates and engagement data tell you what is happening; targets tell you whether it is good enough. Without targets, teams have no basis for escalating problems or justifying investment in improvements.</p><p>The right tracking setup also enables early intervention. Students who are disengaging — logging in less frequently, missing submission deadlines — can be supported before they withdraw, but only if someone is looking at the data in something close to real time.</p>'
+            },
+            // Dimension 6 — Scalability planning
+            {
+                id: 'q8',
+                dimension: 'Scalability planning',
+                text: 'Do you have processes and templates that could scale to support multiple programme developments running simultaneously?',
+                context: '<p>Teams that build without templates and documented processes become the bottleneck as volume increases. If every new programme requires the same decisions to be made from scratch — about content format, assessment type, platform configuration, review workflow — delivery speed stays low regardless of how many people you add.</p><p>Templates, style guides, and production workflows are investments that pay dividends across every subsequent programme. They also make quality consistent without requiring constant supervision from senior team members.</p>'
+            },
+            // Dimension 7a — Technical capacity
+            {
+                id: 'q9',
+                dimension: 'Technical capacity',
+                text: 'Do you have dedicated learning designers on your team — not academics wearing a second hat, but specialists focused on online course design?',
+                context: '<p>The distinction between a subject matter expert and a learning designer is not about intelligence or commitment — it is about training, methodology, and focus. Professional learning designers apply specific frameworks to structure content for online learning: they think in learning objectives, activity sequences, and cognitive load. Academics think in subject domains.</p><p>The practical difference shows up in student engagement and completion. Programmes designed by specialists consistently outperform those adapted from academic presentations, even when the academic content is identical.</p>'
+            },
+            // Dimension 7b — Technical capacity
+            {
+                id: 'q10',
+                dimension: 'Technical capacity',
+                text: 'Can your team configure, customise, and build within your LMS platform — not just manage users and upload content?',
+                context: '<p>There is a wide gap between LMS administration and LMS build capability. Administration means managing enrolments, running reports, and uploading files. Build capability means configuring course structures, setting up assessment workflows, creating conditional release logic, and integrating third-party tools.</p><p>Most institutional LMS setups are operated at the administration level because build capability is rare and takes time to develop. The result is that the platform\'s potential to deliver a genuinely engaging online experience goes largely unrealised.</p>'
+            },
+            // Dimension 7c — Technical capacity
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Have you designed and implemented online assessments with digital submission, automated rubrics, and plagiarism detection?',
+                context: '<p>Online assessment design is a specialist skill that sits at the intersection of pedagogy, technology, and academic integrity. Getting the submission workflow right, building rubrics that can be applied consistently by multiple markers, and integrating plagiarism detection properly all require experience that is distinct from standard assessment design.</p><p>Teams that have done this before have production templates and tested workflows. Teams doing it for the first time typically take three to four times as long and require significantly more revision cycles. This experience gap directly affects delivery timelines.</p>'
+            },
+            // Dimension 7d — Technical capacity
+            {
+                id: 'q12',
+                dimension: 'Technical capacity',
+                text: 'Does your team have access to multimedia production — professional video, animation, or interactive content creation?',
+                context: '<p>The production quality bar for online learning has risen significantly as learners compare professional-quality content from commercial e-learning providers with institutional course materials. This does not mean cinematic production values for every piece of content, but it does mean video that is well-lit, clearly edited, and properly captioned; interactions that actually work on mobile; and presentation design that does not look like a PowerPoint from 2008.</p><p>Without multimedia production access — whether in-house or through a reliable external partner — design ambitions consistently get scaled back to whatever the team can produce with basic tools, which limits the learning experience you can offer.</p>'
+            }
+        ]
+    };
+
+    var DIMENSIONS = [
+        { id: 'strategic',    name: 'Strategic clarity',       questionIds: ['q1','q2'], max: 8 },
+        { id: 'leadership',   name: 'Leadership alignment',    questionIds: ['q3'],      max: 4 },
+        { id: 'resource',     name: 'Resource readiness',      questionIds: ['q4'],      max: 4 },
+        { id: 'quality',      name: 'Quality framework',       questionIds: ['q5'],      max: 4 },
+        { id: 'student',      name: 'Student experience focus',questionIds: ['q6','q7'], max: 8 },
+        { id: 'scalability',  name: 'Scalability planning',    questionIds: ['q8'],      max: 4 },
+        { id: 'technical',    name: 'Technical capacity',      questionIds: ['q9','q10','q11','q12'], max: 16 }
+    ];
+
+    var SCORE_CATEGORIES = [
+        { min: 12, max: 21, name: 'Early stage',          badgeClass: 'results-category-badge--early',       desc: 'Your institution is at the beginning of its online learning journey. Significant groundwork is needed across multiple dimensions before launching programmes.' },
+        { min: 22, max: 33, name: 'Building foundations', badgeClass: 'results-category-badge--building',    desc: 'You have some elements in place but meaningful gaps remain. A structured approach with the right support will help you move forward efficiently.' },
+        { min: 34, max: 42, name: 'Well positioned',      badgeClass: 'results-category-badge--positioned',  desc: 'Strong foundations across most dimensions. With targeted support in your weaker areas — particularly Technical Capacity — you could launch programmes confidently.' },
+        { min: 43, max: 48, name: 'Launch ready',         badgeClass: 'results-category-badge--ready',       desc: 'Your institution has excellent readiness across most dimensions. The right specialist partnership could help you move faster and avoid the pitfalls that even well-prepared institutions encounter.' }
+    ];
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+    var state = {
+        track: null,          // 'strategic' | 'operational'
+        roleLabel: '',
+        currentSlide: 'role', // 'role' | 'q0'..'q11' | 'results'
+        slideIndex: -1,       // -1 = role slide, 0..11 = questions, 12 = results
+        answers: {},          // { q1: 3, q2: 1, ... }
+        questions: []         // active question array (set after role selection)
+    };
+
+    /* ============================================================
+       DOM references
+    ============================================================ */
+    var viewport = document.getElementById('slide-viewport');
+    var progressFill = document.getElementById('progress-fill');
+    var progressBar = document.getElementById('progress-bar');
+    var headerMeta = document.getElementById('header-meta');
+
+    var slideRole = document.getElementById('slide-role');
+    var slideResults = document.getElementById('slide-results');
+    var resultsContent = document.getElementById('results-content');
+
+    /* ============================================================
+       SLIDE MANAGEMENT
+    ============================================================ */
+
+    function getAllSlides() {
+        return Array.from(viewport.querySelectorAll('.slide'));
+    }
+
+    function navigateToSlide(targetSlide, direction) {
+        // direction: 'forward' | 'backward'
+        var current = viewport.querySelector('.slide.is-active');
+
+        if (current === targetSlide) return;
+
+        // Set entering slide position
+        if (direction === 'forward') {
+            targetSlide.style.transform = 'translateX(100%)';
+        } else {
+            targetSlide.style.transform = 'translateX(-100%)';
+        }
+
+        // Force reflow
+        void targetSlide.offsetHeight;
+
+        // Make both animate
+        current.style.transition = 'transform ' + getComputedStyle(document.documentElement).getPropertyValue('--slide-transition');
+        targetSlide.style.transition = 'transform ' + getComputedStyle(document.documentElement).getPropertyValue('--slide-transition');
+
+        if (direction === 'forward') {
+            current.style.transform = 'translateX(-100%)';
+        } else {
+            current.style.transform = 'translateX(100%)';
+        }
+        targetSlide.style.transform = 'translateX(0)';
+
+        // Swap active class
+        current.classList.remove('is-active');
+        targetSlide.classList.add('is-active');
+
+        // Focus the new slide for screen readers
+        setTimeout(function () {
+            targetSlide.focus();
+        }, 50);
+    }
+
+    /* ============================================================
+       QUESTION SLIDE FACTORY
+    ============================================================ */
+
+    function buildQuestionSlide(qIndex) {
+        var q = state.questions[qIndex];
+        var totalQ = state.questions.length;
+        var slideId = 'slide-q' + qIndex;
+
+        var slide = document.createElement('div');
+        slide.className = 'slide slide--question';
+        slide.id = slideId;
+        slide.setAttribute('role', 'region');
+        slide.setAttribute('aria-labelledby', slideId + '-text');
+        slide.setAttribute('tabindex', '-1');
+        slide.style.transform = 'translateX(100%)';
+
+        var inner = document.createElement('div');
+        inner.className = 'slide-inner';
+
+        // Meta row
+        var meta = document.createElement('div');
+        meta.className = 'question-slide__meta';
+        meta.innerHTML = '<span class="question-slide__dimension">' + escapeHtml(q.dimension) + '</span>'
+                       + '<span class="question-slide__counter">Question ' + (qIndex + 1) + ' of ' + totalQ + '</span>';
+
+        // Question text
+        var qText = document.createElement('h2');
+        qText.className = 'question-slide__text';
+        qText.id = slideId + '-text';
+        qText.textContent = q.text;
+
+        // Context
+        var ctx = document.createElement('div');
+        ctx.className = 'question-slide__context';
+        ctx.setAttribute('aria-label', 'Context for this question');
+        ctx.innerHTML = q.context;
+
+        // Answer options
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'answer-options';
+        optionsDiv.setAttribute('role', 'radiogroup');
+        optionsDiv.setAttribute('aria-label', 'Answer options for: ' + q.text);
+
+        ANSWER_OPTIONS.forEach(function (opt, optIdx) {
+            var btn = document.createElement('button');
+            btn.className = 'answer-option ' + opt.colorClass;
+            btn.setAttribute('role', 'radio');
+            btn.setAttribute('aria-checked', 'false');
+            btn.setAttribute('data-score', opt.score);
+            btn.setAttribute('data-q', q.id);
+            btn.setAttribute('aria-label', 'Score ' + opt.score + ': ' + opt.text + ' — ' + opt.subtext);
+
+            btn.innerHTML = '<span class="answer-option__dot" aria-hidden="true"><span class="answer-option__dot-inner"></span></span>'
+                          + '<span class="answer-option__label-group"><span class="answer-option__text">' + escapeHtml(opt.text) + '</span>'
+                          + '<span class="answer-option__subtext">' + escapeHtml(opt.subtext) + '</span></span>'
+                          + '<span class="answer-option__key-hint" aria-hidden="true">' + (optIdx + 1) + '</span>'
+                          + '<span class="answer-option__check" aria-hidden="true">'
+                          + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><polyline points="20 6 9 17 4 12"/></svg>'
+                          + '</span>';
+
+            btn.addEventListener('click', function () {
+                selectAnswer(q.id, opt.score, optionsDiv, qIndex);
+            });
+
+            optionsDiv.appendChild(btn);
+        });
+
+        // Navigation
+        var nav = document.createElement('div');
+        nav.className = 'slide-nav';
+
+        if (qIndex > 0) {
+            var backBtn = document.createElement('button');
+            backBtn.className = 'btn-nav btn-nav--back';
+            backBtn.setAttribute('aria-label', 'Go back to previous question');
+            backBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back';
+            backBtn.addEventListener('click', function () { goToPrevQuestion(qIndex); });
+            nav.appendChild(backBtn);
+        } else {
+            var backRoleBtn = document.createElement('button');
+            backRoleBtn.className = 'btn-nav btn-nav--back';
+            backRoleBtn.setAttribute('aria-label', 'Go back to role selection');
+            backRoleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back';
+            backRoleBtn.addEventListener('click', function () { goToRoleSlide(); });
+            nav.appendChild(backRoleBtn);
+        }
+
+        var hint = document.createElement('span');
+        hint.className = 'unanswered-hint';
+        hint.id = slideId + '-hint';
+        hint.textContent = 'Select an answer to continue';
+        hint.setAttribute('aria-live', 'polite');
+        nav.appendChild(hint);
+
+        var nextBtn = document.createElement('button');
+        nextBtn.className = 'btn-nav btn-nav--next';
+        nextBtn.disabled = true;
+        nextBtn.setAttribute('aria-describedby', slideId + '-hint');
+
+        if (qIndex < totalQ - 1) {
+            nextBtn.setAttribute('aria-label', 'Next question');
+            nextBtn.innerHTML = 'Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+            nextBtn.addEventListener('click', function () { goToNextQuestion(qIndex); });
+        } else {
+            nextBtn.setAttribute('aria-label', 'See my results');
+            nextBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> See my results';
+            nextBtn.addEventListener('click', function () { showResults(); });
+        }
+
+        nav.appendChild(nextBtn);
+        slide.dataset.nextBtn = slideId + '-next';
+
+        inner.appendChild(meta);
+        inner.appendChild(qText);
+        inner.appendChild(ctx);
+        inner.appendChild(optionsDiv);
+        inner.appendChild(nav);
+        slide.appendChild(inner);
+
+        // Store refs on the slide element for quick access
+        slide._nextBtn = nextBtn;
+        slide._hint = hint;
+
+        return slide;
+    }
+
+    /* ============================================================
+       ANSWER HANDLING
+    ============================================================ */
+
+    function selectAnswer(qId, score, optionsDiv, qIndex) {
+        state.answers[qId] = score;
+
+        // Update UI
+        var allOpts = optionsDiv.querySelectorAll('.answer-option');
+        allOpts.forEach(function (btn) {
+            var isSelected = parseInt(btn.getAttribute('data-score'), 10) === score;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        });
+
+        // Enable next button
+        var slide = document.getElementById('slide-q' + qIndex);
+        if (slide) {
+            slide._nextBtn.disabled = false;
+            slide._hint.textContent = '';
+        }
+
+        updateProgress();
+
+        // Auto-advance after short delay if not last question
+        if (qIndex < state.questions.length - 1) {
+            setTimeout(function () {
+                goToNextQuestion(qIndex);
+            }, 420);
+        }
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+
+    function goToRoleSlide() {
+        var currentSlide = viewport.querySelector('.slide.is-active');
+        navigateToSlide(slideRole, 'backward');
+        state.slideIndex = -1;
+        updateHeaderMeta();
+        updateProgress();
+    }
+
+    function startAssessment(track, roleLabel) {
+        state.track = track;
+        state.roleLabel = roleLabel;
+        state.questions = QUESTIONS[track];
+        state.answers = {};
+
+        // Build all question slides
+        var existingQSlides = viewport.querySelectorAll('[id^="slide-q"]');
+        existingQSlides.forEach(function (s) { s.remove(); });
+
+        state.questions.forEach(function (q, idx) {
+            var slide = buildQuestionSlide(idx);
+            // Insert before results slide
+            viewport.insertBefore(slide, slideResults);
+        });
+
+        // Restore any previous answers if user is coming back
+        state.questions.forEach(function (q, idx) {
+            if (state.answers[q.id] !== undefined) {
+                restoreAnswer(idx, state.answers[q.id]);
+            }
+        });
+
+        state.slideIndex = 0;
+        var firstQSlide = document.getElementById('slide-q0');
+        navigateToSlide(firstQSlide, 'forward');
+        updateHeaderMeta();
+        updateProgress();
+    }
+
+    function restoreAnswer(qIndex, score) {
+        var slide = document.getElementById('slide-q' + qIndex);
+        if (!slide) return;
+        var optionsDiv = slide.querySelector('.answer-options');
+        var allOpts = optionsDiv.querySelectorAll('.answer-option');
+        allOpts.forEach(function (btn) {
+            var isSelected = parseInt(btn.getAttribute('data-score'), 10) === score;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        });
+        if (slide._nextBtn) slide._nextBtn.disabled = false;
+        if (slide._hint) slide._hint.textContent = '';
+    }
+
+    function goToNextQuestion(currentIndex) {
+        if (state.answers[state.questions[currentIndex].id] === undefined) return;
+        var nextIndex = currentIndex + 1;
+        var nextSlide = document.getElementById('slide-q' + nextIndex);
+        if (!nextSlide) return;
+        state.slideIndex = nextIndex;
+        navigateToSlide(nextSlide, 'forward');
+        updateHeaderMeta();
+    }
+
+    function goToPrevQuestion(currentIndex) {
+        var prevIndex = currentIndex - 1;
+        var prevSlide = prevIndex >= 0 ? document.getElementById('slide-q' + prevIndex) : slideRole;
+        if (!prevSlide) return;
+        state.slideIndex = prevIndex;
+        navigateToSlide(prevSlide, 'backward');
+        updateHeaderMeta();
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+    ============================================================ */
+
+    function updateProgress() {
+        var total = state.questions.length;
+        if (total === 0) {
+            progressFill.style.right = '100%';
+            progressBar.setAttribute('aria-valuenow', '0');
+            return;
+        }
+        var answered = Object.keys(state.answers).length;
+        var pct = (answered / total) * 100;
+        progressFill.style.right = (100 - pct) + '%';
+        progressBar.setAttribute('aria-valuenow', Math.round(pct));
+    }
+
+    function updateHeaderMeta() {
+        if (state.slideIndex < 0) {
+            headerMeta.textContent = 'Readiness Assessment';
+        } else if (state.slideIndex < state.questions.length) {
+            headerMeta.textContent = 'Question ' + (state.slideIndex + 1) + ' of ' + state.questions.length;
+        } else {
+            headerMeta.textContent = 'Your results';
+        }
+    }
+
+    /* ============================================================
+       KEYBOARD NAVIGATION
+    ============================================================ */
+
+    document.addEventListener('keydown', function (e) {
+        var activeSlide = viewport.querySelector('.slide.is-active');
+        if (!activeSlide) return;
+
+        // Number keys 1-4 to select answer on question slides
+        if (activeSlide.id && activeSlide.id.startsWith('slide-q')) {
+            var qIndex = parseInt(activeSlide.id.replace('slide-q', ''), 10);
+            var keyNum = parseInt(e.key, 10);
+            if (keyNum >= 1 && keyNum <= 4) {
+                var optionsDiv = activeSlide.querySelector('.answer-options');
+                var opts = optionsDiv.querySelectorAll('.answer-option');
+                if (opts[keyNum - 1]) opts[keyNum - 1].click();
+                return;
+            }
+
+            // Arrow right / Enter to go next if answered
+            if ((e.key === 'ArrowRight' || e.key === 'Enter') && document.activeElement === document.body) {
+                var nextBtn = activeSlide._nextBtn;
+                if (nextBtn && !nextBtn.disabled) nextBtn.click();
+                return;
+            }
+
+            // Arrow left to go back
+            if (e.key === 'ArrowLeft' && document.activeElement === document.body) {
+                var backBtn = activeSlide.querySelector('.btn-nav--back');
+                if (backBtn) backBtn.click();
+            }
+        }
+    });
+
+    /* ============================================================
+       ROLE SELECTION
+    ============================================================ */
+
+    slideRole.querySelectorAll('.role-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            startAssessment(card.getAttribute('data-role'), card.getAttribute('data-role-label'));
+        });
+    });
+
+    /* ============================================================
+       RESULTS
+    ============================================================ */
+
+    function getTotalScore() {
+        return state.questions.reduce(function (sum, q) {
+            return sum + (state.answers[q.id] || 0);
+        }, 0);
+    }
+
+    function getDimensionScore(dim) {
+        return dim.questionIds.reduce(function (sum, qId) {
+            return sum + (state.answers[qId] || 0);
+        }, 0);
+    }
+
+    function getScoreCategory(total) {
+        return SCORE_CATEGORIES.find(function (c) { return total >= c.min && total <= c.max; }) || SCORE_CATEGORIES[0];
+    }
+
+    function getBarClass(score, max) {
+        var p = score / max;
+        if (p <= 0.35) return 'low';
+        if (p <= 0.60) return 'medium';
+        if (p <= 0.85) return 'high';
+        return 'excellent';
+    }
+
+    function getDimensionResultText(dimId, score, max) {
+        var p = score / max;
+        var track = state.track;
+
+        var texts = {
+            strategic: {
+                low:       '<strong>Your online strategy needs a defined foundation before you begin building.</strong> Without a documented plan and leadership sign-off, development efforts stall at the first governance hurdle or budget review. Secure a written commitment from senior leadership that names target programmes, intended audience, and the commercial model. Assign a single senior sponsor who owns the initiative end-to-end. Institutions that skip this step typically burn three to six months in false starts.',
+                medium:    '<strong>You have strategic intent, but it needs to be sharpened into an actionable plan.</strong> The risk at this stage is that online learning sits as a line item in a broader strategy document without specific targets, timelines, or accountable owners. Translate your strategic direction into a delivery roadmap: which programmes launch first, what does success look like at six and twelve months, and who makes the day-to-day decisions? Confirm that your budget covers not just content creation but also platform costs, marketing, and ongoing maintenance.',
+                high:      '<strong>Your strategic foundations are solid.</strong> You have leadership buy-in, allocated budget, and a clear direction. Ensure the strategy connects to operational reality: confirm that the people doing the work understand the priorities, and that decision-making authority is clear enough to avoid bottlenecks during development. Revisit your strategy quarterly during the build phase.',
+                excellent: '<strong>You have an unusually strong strategic foundation.</strong> Your direction is clear, approved, and resourced. Focus now on protecting this clarity as you enter development — scope creep and mid-build priority changes are the main risks at this stage, not strategic ambiguity.'
+            },
+            leadership: {
+                low:       '<strong>Leadership misalignment will create friction at every decision point.</strong> If the people with authority over resources, approvals, and direction are not consistently aligned, your development team will absorb that uncertainty in rework, delays, and conflicting briefs. Address alignment explicitly — not by assuming it — before development begins.',
+                medium:    '<strong>Partial alignment is better than none, but gaps remain that will surface during development.</strong> The moments when leadership disagreement becomes costly are typically around scope changes, budget requests, and go-live decisions. Map out where the disagreements lie and address them through structured conversations now, not during a crisis mid-build.',
+                high:      '<strong>Leadership is broadly aligned, and that provides a stable platform for development.</strong> Protect this alignment by maintaining clear, regular communication with all senior stakeholders throughout the build — not just at milestone reviews. Alignment is easier to maintain than it is to repair once it breaks.',
+                excellent: '<strong>Strong and consistent leadership alignment is one of the clearest predictors of successful programme delivery.</strong> Your position here is genuinely uncommon. Keep it by ensuring the alignment extends downward through the organisation to the teams doing the work.'
+            },
+            resource: {
+                low:       '<strong>Resource gaps at this level will directly limit your delivery quality and speed.</strong> Without access to specialist roles — learning designers, media producers, platform administrators — you are asking generalists to do specialist work, which produces predictably inconsistent results. Decide now whether to build internal capability, commission externally, or partner with a specialist. Each route has different cost and timeline implications.',
+                medium:    '<strong>You have some resource in place, but gaps in specific areas will create bottlenecks.</strong> The most common pattern is having one person who covers multiple roles at reduced depth in each. Identify specifically which specialist skills are thin or absent, and address those gaps before committing to a launch date that assumes full capacity.',
+                high:      '<strong>Your resource base is broadly adequate for online programme development.</strong> The question to monitor is whether your capacity matches your ambition — both in terms of volume (number of modules) and speed (time to launch). Resource constraints become visible quickly when development is under way.',
+                excellent: '<strong>Strong resource readiness gives you a significant advantage in delivery pace and quality.</strong> Focus on ensuring your specialist roles have sufficient protected time — ring-fenced from other institutional demands — so that your capacity on paper translates to capacity in practice.'
+            },
+            quality: {
+                low:       '<strong>Without online-specific quality criteria, your development team is building to an undefined standard.</strong> Your existing face-to-face quality processes do not translate directly — they check the right things for campus teaching but miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance. Adopt a recognised framework before development begins.',
+                medium:    '<strong>You have quality processes, but they need to be adapted for online.</strong> The most dangerous gap is typically in student experience monitoring — in a physical classroom, a struggling student is visible; online, they simply stop logging in. Add specific, measurable criteria for online delivery that your content producers and reviewers can actually apply. Vague standards like "high-quality learning materials" are not useful at the production level.',
+                high:      '<strong>Your quality framework covers the main bases for online delivery.</strong> Ensure that quality data from one cohort feeds directly into improvements for the next — the feedback loop is where many otherwise strong quality frameworks fall short. Consider periodic external benchmarking as regulatory expectations for online provision continue to evolve.',
+                excellent: '<strong>Robust, online-specific quality assurance is rare and genuinely valuable.</strong> Your frameworks include the criteria that matter for digital delivery. The next level is real-time quality monitoring during live delivery — not just retrospective review at the end of each cohort.'
+            },
+            student: {
+                low:       '<strong>Building without learner insight produces programmes that serve the institution\'s assumptions rather than learners\' actual needs.</strong> The result is typically low completion rates, poor satisfaction scores, and the kind of reputation damage that takes years to recover from. Even lightweight research — interviews with prospective students, review of comparable programmes — produces significant improvement in design quality relative to building blind.',
+                medium:    '<strong>You have some learner insight but there are gaps in how systematically it informs design decisions.</strong> The risk is that learner research gets done once at the start and then forgotten as development pressures mount. Build learner perspective into every major design decision: what would a working professional studying at 10pm on a Thursday actually need from this activity?',
+                high:      '<strong>Good learner research and outcome tracking gives your programme a strong foundation for continuous improvement.</strong> The next step is closing the loop more tightly: ensuring that satisfaction data and completion trends feed back into design decisions for subsequent cohorts within weeks, not at the end of an academic year.',
+                excellent: '<strong>Systematic learner focus is one of the most reliable differentiators between average and excellent online programmes.</strong> Your position here is strong. Protect it by ensuring that learner insight remains a live, ongoing input rather than a project phase that gets completed and set aside.'
+            },
+            scalability: {
+                low:       '<strong>Building without scalability in mind creates a ceiling on your ambition.</strong> The processes, templates, and governance structures that work for a single pilot programme need to be redesigned from scratch to support multiple simultaneous developments. Starting with scalability principles — even for your first programme — means you build once and extend, rather than rebuild repeatedly.',
+                medium:    '<strong>You have some scalability thinking in place, but gaps will emerge as volume increases.</strong> The most common gap at this stage is templates: teams that have produced some content but not documented their process find that institutional knowledge is locked in individuals rather than in transferable systems. Document your production process while you are building your first programme, not after.',
+                high:      '<strong>Your scalability foundations are solid and will support growth without the structural rebuild that many institutions face at expansion.</strong> Focus on testing your processes under realistic load — running two or three developments simultaneously reveals bottlenecks that a single programme never surfaces.',
+                excellent: '<strong>Strong scalability planning positions you to grow online provision systematically rather than reactively.</strong> Your processes and templates are designed for volume. The next challenge is typically governance at scale: ensuring that decision-making speed does not become the constraint as you add more programmes and stakeholders.'
+            },
+            technical: {
+                low:       '<strong>This is where your readiness gap is most significant.</strong> Building online programmes requires a specific blend of technical skills that most institutions do not have in-house: learning design methodology, LMS configuration and build expertise, online assessment architecture, and multimedia production. These are not skills that academic staff or general IT teams typically possess, and expecting them to pick it up as they go leads to poor outcomes and burnt-out staff. This is the dimension where external specialist support makes the most measurable difference.',
+                medium:    '<strong>You have some technical capability, but gaps remain in critical areas.</strong> Most institutions at this stage have people who can work within the LMS but lack the depth needed for complex builds: branching assessment pathways, integrated multimedia learning activities, or sophisticated gradebook configurations. Identify specifically which technical skills you have in-house and which you need to source externally. A common and cost-effective model is to partner with an external specialist for the complex build work while developing your internal team\'s capabilities on the job.',
+                high:      '<strong>Your technical capacity is strong relative to most institutions.</strong> You have learning designers, LMS expertise, assessment design experience, and at least some multimedia production capability. This is genuinely unusual and puts you ahead of many peers. Even well-resourced internal teams face constraints when scaling — consider where an external partner could add value as a force multiplier rather than a replacement for your team.',
+                excellent: '<strong>Excellent technical capacity across all four areas of the dimension is rare.</strong> You have the specialist skills needed to build quality online programmes in-house. The question at this level is whether your capacity matches your volume ambitions — even strong teams hit throughput limits when running multiple simultaneous programme builds.'
+            }
+        };
+
+        var level = getBarClass(score, max);
+        var dimTexts = texts[dimId];
+        if (!dimTexts) return '<strong>Score recorded.</strong> See the overall conclusion below for interpretation.';
+
+        // Operational track uses same interpretive logic but addresses team rather than institution
+        var text = dimTexts[level] || dimTexts['medium'];
+
+        if (track === 'operational') {
+            // Light framing shift — operational language is already embedded in most entries
+            text = text; // Same text works — it was written for both frames
+        }
+
+        return text;
+    }
+
+    function buildRadarSVG(dimScores) {
+        var size = 240;
+        var cx = size / 2;
+        var cy = size / 2;
+        var radius = 95;
+        var dims = DIMENSIONS;
+        var n = dims.length;
+        var angleStep = (2 * Math.PI) / n;
+
+        function getPoint(idx, r) {
+            var angle = (idx * angleStep) - (Math.PI / 2);
+            return {
+                x: cx + r * Math.cos(angle),
+                y: cy + r * Math.sin(angle)
+            };
+        }
+
+        // Grid rings
+        var gridLines = '';
+        [0.25, 0.5, 0.75, 1].forEach(function (frac) {
+            var pts = [];
+            for (var i = 0; i < n; i++) {
+                var pt = getPoint(i, radius * frac);
+                pts.push(pt.x + ',' + pt.y);
+            }
+            gridLines += '<polygon points="' + pts.join(' ') + '" fill="none" stroke="#e5e7eb" stroke-width="1"/>';
+        });
+
+        // Axis lines
+        var axisLines = '';
+        for (var i = 0; i < n; i++) {
+            var pt = getPoint(i, radius);
+            axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + pt.x + '" y2="' + pt.y + '" stroke="#e5e7eb" stroke-width="1"/>';
+        }
+
+        // Data polygon
+        var dataPoints = [];
+        dims.forEach(function (dim, idx) {
+            var score = dimScores[dim.id] || 0;
+            var frac = score / dim.max;
+            var pt = getPoint(idx, radius * frac);
+            dataPoints.push(pt.x + ',' + pt.y);
+        });
+        var dataPolygon = '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(132,204,22,0.2)" stroke="#84cc16" stroke-width="2"/>';
+
+        // Data dots
+        var dataDots = '';
+        dims.forEach(function (dim, idx) {
+            var score = dimScores[dim.id] || 0;
+            var frac = score / dim.max;
+            var pt = getPoint(idx, radius * frac);
+            dataDots += '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="4" fill="#84cc16"/>';
+        });
+
+        // Labels
+        var labels = '';
+        dims.forEach(function (dim, idx) {
+            var pt = getPoint(idx, radius + 22);
+            var anchor = 'middle';
+            if (pt.x < cx - 5) anchor = 'end';
+            else if (pt.x > cx + 5) anchor = 'start';
+            // Shorten label for radar
+            var shortName = dim.name.replace('Student experience focus', 'Student exp.')
+                                    .replace('Scalability planning', 'Scalability')
+                                    .replace('Technical capacity', 'Technical')
+                                    .replace('Leadership alignment', 'Leadership')
+                                    .replace('Resource readiness', 'Resources')
+                                    .replace('Quality framework', 'Quality')
+                                    .replace('Strategic clarity', 'Strategy');
+
+            labels += '<text x="' + pt.x + '" y="' + pt.y + '" text-anchor="' + anchor + '" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#374151" dominant-baseline="middle">' + shortName + '</text>';
+        });
+
+        return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Radar chart showing scores across all 7 dimensions">'
+             + gridLines + axisLines + dataPolygon + dataDots + labels
+             + '</svg>';
+    }
+
+    function generateConclusion(total, dimScores) {
+        var techScore = dimScores['technical'] || 0;
+        var techPct = techScore / 16;
+        var overallPct = total / 48;
+        var track = state.track;
+        var paras = [];
+
+        if (overallPct <= 0.44) {
+            paras.push('<p class="results-conclusion-text"><strong>There is significant opportunity here, and the good news is these gaps are addressable.</strong> Your assessment reveals that several foundational elements need attention before you can develop online programmes with confidence. This is not unusual — most institutions that are new to online learning score in this range. The difference between institutions that succeed and those that stall is whether they address these gaps systematically or try to push through them.</p>');
+            paras.push('<p class="results-conclusion-text">Focus on two things before anything else: get your strategy formally documented with leadership sign-off and budget, and secure access to the technical expertise needed to build properly. Attempting to develop content before these foundations are in place will result in rework and delays that cost more than getting it right from the start.</p>');
+        } else if (overallPct <= 0.69) {
+            paras.push('<p class="results-conclusion-text"><strong>You have real momentum, and the foundations are forming.</strong> Your institution has made progress in several areas, but the gaps that remain are the ones most likely to cause problems during development. Institutions at this stage often feel ready to start building — but the dimensions where you scored lower will create friction that slows everything down if they are not addressed first.</p>');
+            paras.push('<p class="results-conclusion-text">The most productive next step is to address your weakest dimension directly. A targeted intervention in your lowest-scoring area will unlock progress across the board, because these dimensions are interconnected: weak quality assurance affects timelines, limited production capacity affects design ambitions, and so on.</p>');
+        } else if (overallPct <= 0.875) {
+            paras.push('<p class="results-conclusion-text"><strong>You are well-positioned to develop online programmes successfully.</strong> Your scores indicate that most of the structural and strategic elements are in place. The areas where you scored lower are worth targeted attention — at this level of readiness, addressing a specific gap can be the difference between a good programme and an excellent one.</p>');
+            paras.push('<p class="results-conclusion-text">Institutions in your position typically get the most value from specialist support in their weakest areas rather than a broad consulting engagement. Identify the one or two dimensions holding you back and seek focused expertise there.</p>');
+        } else {
+            paras.push('<p class="results-conclusion-text"><strong>Your institution is in a strong position across the board.</strong> Scores at this level indicate genuine organisational readiness: well-defined strategy, capable teams, and clear plans. This is relatively rare, and you should move forward with confidence.</p>');
+            paras.push('<p class="results-conclusion-text">At this stage, the value of external support is less about filling gaps and more about accelerating execution and bringing battle-tested production processes. Even the strongest internal teams benefit from a partner who has delivered dozens of programmes and can anticipate the issues that first-time programmes encounter.</p>');
+        }
+
+        if (techPct <= 0.5) {
+            paras.push('<p class="results-conclusion-text"><strong>Your Technical Capacity score is the area requiring the most attention.</strong> This is the dimension where the gap between what institutions think they can handle internally and what is actually required is widest. Learning design, LMS build, online assessment architecture, and multimedia production are specialist disciplines. The right external partner can close this gap immediately while your internal teams develop capability over time — and this is exactly the kind of challenge Andrew helps institutions solve.</p>');
+        } else if (techPct <= 0.75) {
+            paras.push('<p class="results-conclusion-text"><strong>Technical Capacity is worth a closer look.</strong> Even with some capability in place, the gap between basic and excellent is where student experience is won or lost. A focused conversation about where external expertise would have the most impact could save you months of trial and error.</p>');
+        } else {
+            paras.push('<p class="results-conclusion-text"><strong>Even with your strong Technical Capacity, this is where most institutions underestimate the gap at scale.</strong> Building one module well is different from maintaining quality across an entire programme while managing deadlines, stakeholder feedback, and mid-project changes. The institutions that scale most successfully are those that pair strong internal teams with experienced external partners who bring production discipline and capacity for peak periods.</p>');
+        }
+
+        paras.push('<p class="results-conclusion-text">A 30-minute conversation with Andrew would give you a clearer picture of what your specific scores mean in practice and what the most productive next steps look like. He has worked with institutions at every stage of this journey and can give you a straight answer about where you stand.</p>');
+
+        return paras.join('');
+    }
+
+    function showResults() {
+        // Check all questions answered
+        var unanswered = state.questions.filter(function (q) { return state.answers[q.id] === undefined; });
+        if (unanswered.length > 0) return;
+
+        var total = getTotalScore();
+        var category = getScoreCategory(total);
+
+        // Calculate dimension scores
+        var dimScores = {};
+        DIMENSIONS.forEach(function (dim) {
+            dimScores[dim.id] = getDimensionScore(dim);
+        });
+
+        // Build results HTML
+        var html = '';
+
+        // Score hero
+        html += '<div class="results-score-hero">'
+              + '<div class="results-score-number-block">'
+              + '<span class="results-score-number" id="results-score-animated">0</span>'
+              + '<span class="results-score-denom">/48</span>'
+              + '</div>'
+              + '<div class="results-category-block">'
+              + '<span class="results-category-badge ' + category.badgeClass + '">' + escapeHtml(category.name) + '</span>'
+              + '<h2 class="results-category-name" id="results-heading">' + escapeHtml(category.name) + '</h2>'
+              + '<p class="results-category-desc">' + escapeHtml(category.desc) + '</p>'
+              + '</div>'
+              + '</div>';
+
+        // Radar chart
+        html += '<div class="results-radar-section">'
+              + '<h3 class="results-section-title">Dimension overview</h3>'
+              + '<div class="radar-container">' + buildRadarSVG(dimScores) + '</div>'
+              + '</div>';
+
+        // Dimension breakdowns
+        html += '<div class="results-dimensions-section">';
+        html += '<h3 class="results-section-title" style="background:transparent;border:none;padding:0;margin-bottom:0.75rem">Dimension-by-dimension breakdown</h3>';
+
+        DIMENSIONS.forEach(function (dim) {
+            var score = dimScores[dim.id];
+            var level = getBarClass(score, dim.max);
+            var pct = (score / dim.max) * 100;
+            var isTech = dim.id === 'technical';
+
+            if (isTech) {
+                html += '<div class="tech-highlight-box">'
+                      + '<div class="tech-highlight-box__label">Key dimension</div>'
+                      + '<div class="tech-highlight-box__heading">' + escapeHtml(dim.name) + ' &mdash; ' + score + '/' + dim.max + '</div>'
+                      + '<div class="tech-highlight-box__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>';
+            } else {
+                html += '<div class="dimension-result-item dimension-result-item--' + level + '" data-bar-pct="' + pct + '">'
+                      + '<div class="dimension-result-item__header">'
+                      + '<span class="dimension-result-item__name">' + escapeHtml(dim.name) + '</span>'
+                      + '<span class="dimension-result-item__score">' + score + '/' + dim.max + '</span>'
+                      + '</div>'
+                      + '<div class="dimension-bar-track" aria-hidden="true">'
+                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" style="width:0%"></div>'
+                      + '</div>'
+                      + '<div class="dimension-result-item__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>';
+            }
+        });
+
+        html += '</div>'; // /results-dimensions-section
+
+        // Conclusion
+        html += '<div class="results-conclusion-section">'
+              + '<h3 class="results-section-title">What this means for your institution</h3>'
+              + generateConclusion(total, dimScores)
+              + '</div>';
+
+        // CTA block
+        html += '<div class="results-cta-block">'
+              + '<h2 class="results-cta-block__title">Want to walk through your results?</h2>'
+              + '<p class="results-cta-block__text">Book a free 30-minute strategy call with Andrew. He\'ll review your scores, discuss your specific challenges, and map out what an engagement could look like. No sales pressure — just a helpful conversation with someone who has done this 20+ times.</p>'
+              + '<div class="results-cta-buttons">'
+              + '<a href="#" class="btn-cta-primary" aria-label="Book a call with Andrew">'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="0" ry="0"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + ' Talk to Andrew'
+              + '</a>'
+              + '<button class="btn-cta-outline" id="save-results-btn" aria-label="Copy results summary to clipboard">'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="0" ry="0"/></svg>'
+              + ' Save results'
+              + '</button>'
+              + '</div>'
+              + '<div class="save-feedback" id="save-feedback" role="status">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'
+              + ' Copied to clipboard'
+              + '</div>'
+              + '<p class="results-cta-email">Or email: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>'
+              + '</div>';
+
+        resultsContent.innerHTML = html;
+
+        // Navigate to results
+        state.slideIndex = state.questions.length;
+        navigateToSlide(slideResults, 'forward');
+        updateHeaderMeta();
+        progressFill.style.right = '0%';
+        progressBar.setAttribute('aria-valuenow', '100');
+
+        // Animate score counter
+        setTimeout(function () {
+            animateScore(total);
+            animateDimensionBars();
+        }, 350);
+
+        // Wire up save button
+        var saveBtn = document.getElementById('save-results-btn');
+        var saveFeedback = document.getElementById('save-feedback');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function () {
+                var ds = DIMENSIONS.map(function (d) {
+                    return d.name + ' ' + dimScores[d.id] + '/' + d.max;
+                }).join(', ');
+                var roleStr = state.roleLabel ? ' | Role: ' + state.roleLabel : '';
+                var text = 'Online Programme Readiness Assessment\n'
+                         + 'Score: ' + total + '/48 — ' + category.name + '\n'
+                         + roleStr + '\n'
+                         + 'Dimensions: ' + ds + '\n'
+                         + 'Assessed via Learning Design Solutions (learningdesignsolutions.co.uk)';
+                copyToClipboard(text, saveFeedback);
+            });
+        }
+    }
+
+    function animateScore(target) {
+        var el = document.getElementById('results-score-animated');
+        if (!el) return;
+        var start = 0;
+        var duration = 1000;
+        var startTime = null;
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    function animateDimensionBars() {
+        var items = document.querySelectorAll('.dimension-result-item');
+        items.forEach(function (item, i) {
+            var pct = parseFloat(item.getAttribute('data-bar-pct'));
+            var fill = item.querySelector('.dimension-bar-fill');
+            if (fill) {
+                setTimeout(function () {
+                    fill.style.width = pct + '%';
+                }, i * 80);
+            }
+        });
+    }
+
+    function copyToClipboard(text, feedbackEl) {
+        function showFeedback() {
+            if (feedbackEl) {
+                feedbackEl.classList.add('is-visible');
+                setTimeout(function () { feedbackEl.classList.remove('is-visible'); }, 3000);
+            }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(showFeedback).catch(function () { fallbackCopy(text, showFeedback); });
+        } else {
+            fallbackCopy(text, showFeedback);
+        }
+    }
+
+    function fallbackCopy(text, cb) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); if (cb) cb(); } catch (e) {}
+        document.body.removeChild(ta);
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+
+    function escapeHtml(str) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+    }
+
+    /* ============================================================
+       INIT
+    ============================================================ */
+    updateProgress();
+
+})();
+</script>
+</body>
+</html>
