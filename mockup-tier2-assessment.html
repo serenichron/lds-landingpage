@@ -1,23 +1,20 @@
-<!DOCTYPE html>
+<\!DOCTYPE html>
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Transformation Readiness Assessment — Learning Design Solutions</title>
 
-    <!-- Bootstrap 5.3 CSS -->
+    <\!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <\!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
+    <\!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================================
-           DESIGN SYSTEM
-        ============================================================ */
         :root {
             --lds-navy: #122159;
             --lds-navy-deep: #0b163a;
@@ -33,8 +30,6 @@
             --lds-grey-400: #9ca3af;
             --lds-grey-600: #4b5563;
             --lds-grey-700: #374151;
-
-            /* Score colours */
             --score-red: #ef4444;
             --score-red-bg: #fef2f2;
             --score-red-border: #fecaca;
@@ -47,791 +42,135 @@
             --score-green: #16a34a;
             --score-green-bg: #f0fdf4;
             --score-green-border: #bbf7d0;
-
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Merriweather', serif;
         }
-
-        /* Sharp corners globally */
-        *, *::before, *::after {
-            border-radius: 0 !important;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--lds-dark);
-            background-color: var(--lds-white);
-            font-size: 1.125rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================================
-           TYPOGRAPHY
-        ============================================================ */
-        .font-display {
-            font-family: var(--font-display);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-display);
-        }
-
-        /* ============================================================
-           NAVIGATION
-        ============================================================ */
-        .assessment-nav {
-            background-color: var(--lds-navy);
-            border-bottom: 3px solid var(--lds-green);
-        }
-
-        .assessment-nav__brand {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--lds-white);
-            text-decoration: none;
-            letter-spacing: -0.01em;
-        }
-
-        .assessment-nav__brand:hover {
-            color: var(--lds-green);
-        }
-
-        .assessment-nav__breadcrumb {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.55);
-            letter-spacing: 0.02em;
-        }
-
-        .assessment-nav__breadcrumb a {
-            color: rgba(255,255,255,0.55);
-            text-decoration: none;
-        }
-
-        .assessment-nav__breadcrumb a:hover {
-            color: var(--lds-green);
-        }
-
-        .assessment-nav__breadcrumb .sep {
-            margin: 0 0.4rem;
-            opacity: 0.4;
-        }
-
-        .assessment-nav__breadcrumb .current {
-            color: rgba(255,255,255,0.85);
-        }
-
-        /* ============================================================
-           HERO
-        ============================================================ */
-        .assessment-hero {
-            background-color: var(--lds-navy);
-            padding: 5rem 0 4.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Subtle texture — left-edge accent line */
-        .assessment-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--lds-green);
-        }
-
-        .assessment-hero__badge {
-            display: inline-block;
-            background-color: var(--lds-green);
-            color: var(--lds-navy-deep);
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 0.35rem 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .assessment-hero__title {
-            font-family: var(--font-display);
-            font-weight: 900;
-            font-size: clamp(1.85rem, 4vw, 2.8rem);
-            line-height: 1.15;
-            color: var(--lds-white);
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.02em;
-        }
-
-        .assessment-hero__subtitle {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.65;
-            max-width: 600px;
-            margin-bottom: 1.5rem;
-        }
-
-        .assessment-hero__trust {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.45);
-            letter-spacing: 0.02em;
-        }
-
-        .assessment-hero__trust i {
-            color: var(--lds-green);
-            margin-right: 0.4rem;
-        }
-
-        /* ============================================================
-           HOW IT WORKS
-        ============================================================ */
-        .how-it-works {
-            background-color: var(--lds-light);
-            padding: 3.5rem 0;
-            border-bottom: 1px solid var(--lds-grey-200);
-        }
-
-        .how-it-works__step {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.1rem;
-        }
-
-        .how-it-works__icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            background-color: var(--lds-navy);
-            color: var(--lds-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .how-it-works__step-title {
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--lds-navy);
-            margin-bottom: 0.3rem;
-        }
-
-        .how-it-works__step-desc {
-            font-size: 0.87rem;
-            color: var(--lds-grey-600);
-            line-height: 1.55;
-            margin: 0;
-        }
-
-        .how-it-works__divider {
-            width: 1px;
-            background-color: var(--lds-grey-200);
-            align-self: stretch;
-            margin: 0 1.5rem;
-        }
-
-        /* ============================================================
-           ASSESSMENT FORM SECTION
-        ============================================================ */
-        .assessment-section {
-            background-color: var(--lds-white);
-            padding: 4rem 0 5rem;
-        }
-
-        .assessment-form-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Progress bar */
-        .assessment-progress {
-            margin-bottom: 3rem;
-        }
-
-        .assessment-progress__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.6rem;
-        }
-
-        .assessment-progress__label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--lds-grey-600);
-        }
-
-        .assessment-progress__count {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--lds-navy);
-        }
-
-        .assessment-progress__track {
-            height: 5px;
-            background-color: var(--lds-grey-200);
-            overflow: hidden;
-        }
-
-        .assessment-progress__fill {
-            height: 100%;
-            background-color: var(--lds-green);
-            width: 0%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Question blocks */
-        .question-block {
-            margin-bottom: 3rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--lds-grey-200);
-        }
-
-        .question-block:last-of-type {
-            border-bottom: none;
-        }
-
-        .question-block__meta {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.85rem;
-        }
-
-        .question-block__number {
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--lds-grey-400);
-        }
-
-        .question-block__dimension {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--lds-navy);
-            background-color: var(--lds-grey-100);
-            padding: 0.2rem 0.6rem;
-            border-left: 3px solid var(--lds-navy);
-        }
-
-        .question-block__text {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 700;
-            line-height: 1.45;
-            color: var(--lds-dark);
-            margin-bottom: 1.25rem;
-        }
-
-        /* Option cards */
-        .option-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.6rem;
-        }
-
-        @media (max-width: 767px) {
-            .option-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .option-card {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .option-card input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .option-card__label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 1rem 0.75rem;
-            border: 2px solid var(--lds-grey-200);
-            background-color: var(--lds-white);
-            cursor: pointer;
-            transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.15s ease;
-            text-align: center;
-            user-select: none;
-        }
-
-        .option-card__label:hover {
-            border-color: var(--lds-navy);
-            background-color: var(--lds-grey-100);
-        }
-
-        .option-card__score {
-            font-size: 1.4rem;
-            font-weight: 800;
-            font-family: var(--font-body);
-            line-height: 1;
-        }
-
-        .option-card__text {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            color: var(--lds-grey-600);
-            line-height: 1.3;
-        }
-
-        .option-card__check {
-            font-size: 0.85rem;
-            display: none;
-        }
-
-        /* Score-specific colours (unselected) */
+        *, *::before, *::after { border-radius: 0 \!important; box-sizing: border-box; }
+        body { font-family: var(--font-body); color: var(--lds-dark); background-color: var(--lds-white); font-size: 1.125rem; line-height: 1.7; }
+        .font-display { font-family: var(--font-display); }
+        h1, h2, h3 { font-family: var(--font-display); }
+        .assessment-nav { background-color: var(--lds-navy); border-bottom: 3px solid var(--lds-green); }
+        .assessment-nav__brand { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--lds-white); text-decoration: none; letter-spacing: -0.01em; }
+        .assessment-nav__brand:hover { color: var(--lds-green); }
+        .assessment-nav__breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.55); letter-spacing: 0.02em; }
+        .assessment-nav__breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; }
+        .assessment-nav__breadcrumb a:hover { color: var(--lds-green); }
+        .assessment-nav__breadcrumb .sep { margin: 0 0.4rem; opacity: 0.4; }
+        .assessment-nav__breadcrumb .current { color: rgba(255,255,255,0.85); }
+        .assessment-hero { background-color: var(--lds-navy); padding: 5rem 0 4.5rem; position: relative; overflow: hidden; }
+        .assessment-hero::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--lds-green); }
+        .assessment-hero__badge { display: inline-block; background-color: var(--lds-green); color: var(--lds-navy-deep); font-family: var(--font-body); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 1.5rem; }
+        .assessment-hero__title { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.85rem, 4vw, 2.8rem); line-height: 1.15; color: var(--lds-white); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+        .assessment-hero__subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 600px; margin-bottom: 1.5rem; }
+        .assessment-hero__trust { font-size: 0.82rem; color: rgba(255,255,255,0.45); letter-spacing: 0.02em; }
+        .assessment-hero__trust i { color: var(--lds-green); margin-right: 0.4rem; }
+        .how-it-works { background-color: var(--lds-light); padding: 3.5rem 0; border-bottom: 1px solid var(--lds-grey-200); }
+        .how-it-works__step { display: flex; align-items: flex-start; gap: 1.1rem; }
+        .how-it-works__icon { width: 44px; height: 44px; min-width: 44px; background-color: var(--lds-navy); color: var(--lds-green); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+        .how-it-works__step-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--lds-navy); margin-bottom: 0.3rem; }
+        .how-it-works__step-desc { font-size: 0.87rem; color: var(--lds-grey-600); line-height: 1.55; margin: 0; }
+        .how-it-works__divider { width: 1px; background-color: var(--lds-grey-200); align-self: stretch; margin: 0 1.5rem; }
+        .assessment-section { background-color: var(--lds-white); padding: 4rem 0 5rem; }
+        .assessment-form-wrapper { max-width: 800px; margin: 0 auto; }
+        .assessment-progress { margin-bottom: 3rem; }
+        .assessment-progress__header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; }
+        .assessment-progress__label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lds-grey-600); }
+        .assessment-progress__count { font-size: 0.82rem; font-weight: 600; color: var(--lds-navy); }
+        .assessment-progress__track { height: 5px; background-color: var(--lds-grey-200); overflow: hidden; }
+        .assessment-progress__fill { height: 100%; background-color: var(--lds-green); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .question-block { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--lds-grey-200); }
+        .question-block:last-of-type { border-bottom: none; }
+        .question-block__meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
+        .question-block__number { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lds-grey-400); }
+        .question-block__dimension { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lds-navy); background-color: var(--lds-grey-100); padding: 0.2rem 0.6rem; border-left: 3px solid var(--lds-navy); }
+        .question-block__text { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; line-height: 1.45; color: var(--lds-dark); margin-bottom: 1.25rem; }
+        .option-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+        @media (max-width: 767px) { .option-grid { grid-template-columns: repeat(2, 1fr); } }
+        .option-card { position: relative; cursor: pointer; }
+        .option-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .option-card__label { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 1rem 0.75rem; border: 2px solid var(--lds-grey-200); background-color: var(--lds-white); cursor: pointer; transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.15s ease; text-align: center; user-select: none; }
+        .option-card__label:hover { border-color: var(--lds-navy); background-color: var(--lds-grey-100); }
+        .option-card__score { font-size: 1.4rem; font-weight: 800; font-family: var(--font-body); line-height: 1; }
+        .option-card__text { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em; color: var(--lds-grey-600); line-height: 1.3; }
+        .option-card__check { font-size: 0.85rem; display: none; }
         .option-card--1 .option-card__score { color: var(--score-red); }
         .option-card--2 .option-card__score { color: var(--score-amber); }
         .option-card--3 .option-card__score { color: #ca8a04; }
         .option-card--4 .option-card__score { color: var(--score-green); }
-
-        /* Selected states */
-        .option-card input[type="radio"]:checked + .option-card__label {
-            transform: scale(1.02);
-        }
-
-        .option-card--1 input[type="radio"]:checked + .option-card__label {
-            background-color: var(--score-red-bg);
-            border-color: var(--score-red);
-        }
-
-        .option-card--2 input[type="radio"]:checked + .option-card__label {
-            background-color: var(--score-amber-bg);
-            border-color: var(--score-amber);
-        }
-
-        .option-card--3 input[type="radio"]:checked + .option-card__label {
-            background-color: #fefce8;
-            border-color: #ca8a04;
-        }
-
-        .option-card--4 input[type="radio"]:checked + .option-card__label {
-            background-color: var(--score-green-bg);
-            border-color: var(--score-green);
-        }
-
-        .option-card input[type="radio"]:checked + .option-card__label .option-card__check {
-            display: block;
-        }
-
-        .option-card input[type="radio"]:checked + .option-card__label .option-card__text {
-            color: var(--lds-dark);
-        }
-
-        /* Submit button area */
-        .assessment-submit-area {
-            padding-top: 2rem;
-            text-align: center;
-        }
-
-        .btn-submit-assessment {
-            background-color: var(--lds-orange);
-            color: var(--lds-white);
-            border: none;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            padding: 1rem 2.5rem;
-            cursor: pointer;
-            transition: background-color 0.18s ease, opacity 0.18s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .btn-submit-assessment:hover:not(:disabled) {
-            background-color: var(--lds-orange-dark);
-            color: var(--lds-white);
-        }
-
-        .btn-submit-assessment:disabled {
-            background-color: var(--lds-grey-200);
-            color: var(--lds-grey-400);
-            cursor: not-allowed;
-        }
-
-        .submit-hint {
-            font-size: 0.82rem;
-            color: var(--lds-grey-400);
-            margin-top: 0.75rem;
-        }
-
-        /* ============================================================
-           RESULTS SECTION
-        ============================================================ */
-        .results-section {
-            display: none;
-        }
-
-        .results-section.is-visible {
-            display: block;
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Overall score panel */
-        .results-overall {
-            background-color: var(--lds-navy);
-            padding: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .results-overall::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--lds-green);
-        }
-
-        .results-overall__score-number {
-            font-family: var(--font-display);
-            font-weight: 900;
-            font-size: clamp(4rem, 10vw, 7rem);
-            color: var(--lds-white);
-            line-height: 1;
-            letter-spacing: -0.04em;
-        }
-
-        .results-overall__score-denom {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            color: rgba(255,255,255,0.4);
-            letter-spacing: -0.02em;
-        }
-
-        .results-overall__category-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.4rem 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .results-overall__category-badge--early {
-            background-color: var(--score-amber);
-            color: white;
-        }
-
-        .results-overall__category-badge--building {
-            background-color: #eab308;
-            color: #1a1a00;
-        }
-
-        .results-overall__category-badge--positioned {
-            background-color: var(--lds-green);
-            color: var(--lds-navy-deep);
-        }
-
-        .results-overall__category-badge--ready {
-            background-color: var(--score-green);
-            color: white;
-        }
-
-        .results-overall__category-name {
-            font-family: var(--font-display);
-            font-weight: 900;
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            color: var(--lds-white);
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
-        }
-
-        .results-overall__category-desc {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.97rem;
-            line-height: 1.6;
-            max-width: 480px;
-        }
-
-        /* Dimension breakdown */
-        .results-dimensions {
-            background-color: var(--lds-light);
-            padding: 4rem 0;
-        }
-
-        .results-dimensions__title {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--lds-navy);
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--lds-navy);
-        }
-
-        .dimension-item {
-            background-color: var(--lds-white);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--lds-grey-200);
-            transition: border-color 0.3s ease;
-        }
-
-        .dimension-item__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.6rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .dimension-item__name {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--lds-dark);
-            letter-spacing: 0.01em;
-        }
-
-        .dimension-item__score-text {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--lds-grey-600);
-        }
-
-        .dimension-bar-track {
-            height: 8px;
-            background-color: var(--lds-grey-200);
-            overflow: hidden;
-            margin-bottom: 0.85rem;
-        }
-
-        .dimension-bar-fill {
-            height: 100%;
-            width: 0%;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        .option-card input[type="radio"]:checked + .option-card__label { transform: scale(1.02); }
+        .option-card--1 input[type="radio"]:checked + .option-card__label { background-color: var(--score-red-bg); border-color: var(--score-red); }
+        .option-card--2 input[type="radio"]:checked + .option-card__label { background-color: var(--score-amber-bg); border-color: var(--score-amber); }
+        .option-card--3 input[type="radio"]:checked + .option-card__label { background-color: #fefce8; border-color: #ca8a04; }
+        .option-card--4 input[type="radio"]:checked + .option-card__label { background-color: var(--score-green-bg); border-color: var(--score-green); }
+        .option-card input[type="radio"]:checked + .option-card__label .option-card__check { display: block; }
+        .option-card input[type="radio"]:checked + .option-card__label .option-card__text { color: var(--lds-dark); }
+        .assessment-submit-area { padding-top: 2rem; text-align: center; }
+        .btn-submit-assessment { background-color: var(--lds-orange); color: var(--lds-white); border: none; font-family: var(--font-body); font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; padding: 1rem 2.5rem; cursor: pointer; transition: background-color 0.18s ease, opacity 0.18s ease; display: inline-flex; align-items: center; gap: 0.6rem; }
+        .btn-submit-assessment:hover:not(:disabled) { background-color: var(--lds-orange-dark); color: var(--lds-white); }
+        .btn-submit-assessment:disabled { background-color: var(--lds-grey-200); color: var(--lds-grey-400); cursor: not-allowed; }
+        .submit-hint { font-size: 0.82rem; color: var(--lds-grey-400); margin-top: 0.75rem; }
+        .results-section { display: none; }
+        .results-section.is-visible { display: block; animation: fadeInUp 0.5s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .results-overall { background-color: var(--lds-navy); padding: 4rem 0; position: relative; overflow: hidden; }
+        .results-overall::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--lds-green); }
+        .results-overall__score-number { font-family: var(--font-display); font-weight: 900; font-size: clamp(4rem, 10vw, 7rem); color: var(--lds-white); line-height: 1; letter-spacing: -0.04em; }
+        .results-overall__score-denom { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.5rem); color: rgba(255,255,255,0.4); letter-spacing: -0.02em; }
+        .results-overall__category-badge { display: inline-block; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; margin-bottom: 1rem; }
+        .results-overall__category-badge--early { background-color: var(--score-amber); color: white; }
+        .results-overall__category-badge--building { background-color: #eab308; color: #1a1a00; }
+        .results-overall__category-badge--positioned { background-color: var(--lds-green); color: var(--lds-navy-deep); }
+        .results-overall__category-badge--ready { background-color: var(--score-green); color: white; }
+        .results-overall__category-name { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--lds-white); margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .results-overall__category-desc { color: rgba(255,255,255,0.7); font-size: 0.97rem; line-height: 1.6; max-width: 480px; }
+        .results-dimensions { background-color: var(--lds-light); padding: 4rem 0; }
+        .results-dimensions__title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; color: var(--lds-navy); margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 3px solid var(--lds-navy); }
+        .dimension-item { background-color: var(--lds-white); padding: 1.5rem; margin-bottom: 1rem; border-left: 4px solid var(--lds-grey-200); transition: border-color 0.3s ease; }
+        .dimension-item__header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem; }
+        .dimension-item__name { font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; color: var(--lds-dark); letter-spacing: 0.01em; }
+        .dimension-item__score-text { font-size: 0.82rem; font-weight: 700; color: var(--lds-grey-600); }
+        .dimension-bar-track { height: 8px; background-color: var(--lds-grey-200); overflow: hidden; margin-bottom: 0.85rem; }
+        .dimension-bar-fill { height: 100%; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .dimension-bar-fill--low { background-color: var(--score-red); }
         .dimension-bar-fill--medium { background-color: var(--score-amber); }
         .dimension-bar-fill--high { background-color: #ca8a04; }
         .dimension-bar-fill--excellent { background-color: var(--score-green); }
-
         .dimension-item--low { border-left-color: var(--score-red); }
         .dimension-item--medium { border-left-color: var(--score-amber); }
         .dimension-item--high { border-left-color: #ca8a04; }
         .dimension-item--excellent { border-left-color: var(--score-green); }
-
-        .dimension-item__recommendation {
-            font-size: 0.85rem;
-            color: var(--lds-grey-600);
-            line-height: 1.55;
-            margin: 0;
-        }
-
-        .dimension-item__recommendation strong {
-            color: var(--lds-navy);
-        }
-
-        /* Results CTA */
-        .results-cta {
-            background-color: var(--lds-navy);
-            padding: 4rem 0;
-            position: relative;
-        }
-
-        .results-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--lds-orange);
-        }
-
-        .results-cta__title {
-            font-family: var(--font-display);
-            font-weight: 900;
-            font-size: clamp(1.4rem, 3vw, 2rem);
-            color: var(--lds-white);
-            margin-bottom: 1rem;
-        }
-
-        .results-cta__text {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.97rem;
-            line-height: 1.65;
-            margin-bottom: 0.75rem;
-        }
-
-        .btn-cta-primary {
-            background-color: var(--lds-orange);
-            color: var(--lds-white);
-            border: none;
-            font-weight: 700;
-            font-size: 0.97rem;
-            padding: 0.9rem 2rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background-color 0.18s ease;
-        }
-
-        .btn-cta-primary:hover {
-            background-color: var(--lds-orange-dark);
-            color: var(--lds-white);
-        }
-
-        .results-cta__email {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 1rem;
-        }
-
-        .results-cta__email a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: underline;
-        }
-
-        .results-cta__email a:hover {
-            color: var(--lds-green);
-        }
-
-        /* Save results */
-        .save-results-section {
-            background-color: var(--lds-grey-100);
-            padding: 2rem 0;
-            border-top: 1px solid var(--lds-grey-200);
-        }
-
-        .btn-save-results {
-            background-color: transparent;
-            border: 2px solid var(--lds-navy);
-            color: var(--lds-navy);
-            font-weight: 600;
-            font-size: 0.87rem;
-            padding: 0.6rem 1.25rem;
-            cursor: pointer;
-            transition: background-color 0.18s ease, color 0.18s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-save-results:hover {
-            background-color: var(--lds-navy);
-            color: var(--lds-white);
-        }
-
-        .save-results-feedback {
-            font-size: 0.82rem;
-            color: var(--score-green);
-            font-weight: 600;
-            display: none;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .save-results-feedback.is-visible {
-            display: inline-flex;
-        }
-
-        /* ============================================================
-           FOOTER
-        ============================================================ */
-        .assessment-footer {
-            background-color: var(--lds-dark);
-            padding: 1.5rem 0;
-            border-top: 3px solid var(--lds-navy);
-        }
-
-        .assessment-footer__copy {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.45);
-            margin: 0;
-        }
-
-        .assessment-footer__back {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: color 0.15s ease;
-        }
-
-        .assessment-footer__back:hover {
-            color: var(--lds-green);
-        }
-
-        /* ============================================================
-           UTILITIES
-        ============================================================ */
-        .section-label {
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--lds-grey-400);
-            margin-bottom: 1.5rem;
-        }
-
-        .visually-hidden {
-            position: absolute !important;
-            width: 1px !important;
-            height: 1px !important;
-            padding: 0 !important;
-            margin: -1px !important;
-            overflow: hidden !important;
-            clip: rect(0,0,0,0) !important;
-            border: 0 !important;
-        }
-
-        /* Focus visible */
-        .option-card__label:focus-visible,
-        .btn-submit-assessment:focus-visible,
-        .btn-cta-primary:focus-visible,
-        .btn-save-results:focus-visible {
-            outline: 3px solid var(--lds-orange);
-            outline-offset: 2px;
-        }
+        .dimension-item__recommendation { font-size: 0.85rem; color: var(--lds-grey-600); line-height: 1.65; margin: 0; }
+        .dimension-item__recommendation strong { color: var(--lds-navy); }
+        .results-conclusion { background-color: var(--lds-white); padding: 3.5rem 0; border-top: 1px solid var(--lds-grey-200); }
+        .results-conclusion__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--lds-navy); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid var(--lds-orange); }
+        .results-conclusion__text { font-size: 0.95rem; color: var(--lds-grey-700); line-height: 1.7; margin-bottom: 1rem; }
+        .results-conclusion__text:last-of-type { margin-bottom: 0; }
+        .results-conclusion__text strong { color: var(--lds-navy); }
+        .results-cta { background-color: var(--lds-navy); padding: 4rem 0; position: relative; }
+        .results-cta::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--lds-orange); }
+        .results-cta__title { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--lds-white); margin-bottom: 1rem; }
+        .results-cta__text { color: rgba(255,255,255,0.75); font-size: 0.97rem; line-height: 1.65; margin-bottom: 0.75rem; }
+        .btn-cta-primary { background-color: var(--lds-orange); color: var(--lds-white); border: none; font-weight: 700; font-size: 0.97rem; padding: 0.9rem 2rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background-color 0.18s ease; }
+        .btn-cta-primary:hover { background-color: var(--lds-orange-dark); color: var(--lds-white); }
+        .results-cta__email { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 1rem; }
+        .results-cta__email a { color: rgba(255,255,255,0.7); text-decoration: underline; }
+        .results-cta__email a:hover { color: var(--lds-green); }
+        .save-results-section { background-color: var(--lds-grey-100); padding: 2rem 0; border-top: 1px solid var(--lds-grey-200); }
+        .btn-save-results { background-color: transparent; border: 2px solid var(--lds-navy); color: var(--lds-navy); font-weight: 600; font-size: 0.87rem; padding: 0.6rem 1.25rem; cursor: pointer; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-save-results:hover { background-color: var(--lds-navy); color: var(--lds-white); }
+        .save-results-feedback { font-size: 0.82rem; color: var(--score-green); font-weight: 600; display: none; align-items: center; gap: 0.35rem; }
+        .save-results-feedback.is-visible { display: inline-flex; }
+        .assessment-footer { background-color: var(--lds-dark); padding: 1.5rem 0; border-top: 3px solid var(--lds-navy); }
+        .assessment-footer__copy { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin: 0; }
+        .assessment-footer__back { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.15s ease; }
+        .assessment-footer__back:hover { color: var(--lds-green); }
+        .section-label { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lds-grey-400); margin-bottom: 1.5rem; }
+        .visually-hidden { position: absolute \!important; width: 1px \!important; height: 1px \!important; padding: 0 \!important; margin: -1px \!important; overflow: hidden \!important; clip: rect(0,0,0,0) \!important; border: 0 \!important; }
+        .option-card__label:focus-visible, .btn-submit-assessment:focus-visible, .btn-cta-primary:focus-visible, .btn-save-results:focus-visible { outline: 3px solid var(--lds-orange); outline-offset: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-         NAVIGATION
-    ============================================================ -->
     <nav class="assessment-nav py-3" aria-label="Site navigation">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -845,469 +184,202 @@
         </div>
     </nav>
 
-    <!-- ============================================================
-         HERO
-    ============================================================ -->
     <section class="assessment-hero" aria-labelledby="hero-title">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="assessment-hero__badge" aria-label="Free assessment, 5 minutes">FREE ASSESSMENT &middot; 5 MINUTES</div>
-                    <h1 class="assessment-hero__title" id="hero-title">
-                        How Ready Is Your Institution for Online Programme Development?
-                    </h1>
-                    <p class="assessment-hero__subtitle">
-                        Answer 8 questions to assess your academic transformation readiness. Get a personalised score with actionable recommendations.
-                    </p>
-                    <p class="assessment-hero__trust">
-                        <i class="bi bi-building" aria-hidden="true"></i>
-                        Based on insights from 20+ institutional partnerships
-                    </p>
+                    <div class="assessment-hero__badge" aria-label="Free assessment, 7 minutes">FREE ASSESSMENT &middot; 7 MINUTES</div>
+                    <h1 class="assessment-hero__title" id="hero-title">How Ready Is Your Institution for Online Programme Development?</h1>
+                    <p class="assessment-hero__subtitle">Answer 12 questions to assess your academic transformation readiness across seven key dimensions. Get a personalised score with actionable recommendations.</p>
+                    <p class="assessment-hero__trust"><i class="bi bi-building" aria-hidden="true"></i> Based on insights from 20+ institutional partnerships</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         HOW IT WORKS
-    ============================================================ -->
     <section class="how-it-works" aria-labelledby="how-it-works-heading">
         <div class="container">
             <p class="section-label" id="how-it-works-heading">How it works</p>
             <div class="d-flex flex-column flex-md-row gap-4 gap-md-0">
-
                 <div class="how-it-works__step flex-fill">
-                    <div class="how-it-works__icon" aria-hidden="true">
-                        <i class="bi bi-pencil-square"></i>
-                    </div>
-                    <div>
-                        <p class="how-it-works__step-title">Answer 8 Questions</p>
-                        <p class="how-it-works__step-desc">Rate your institution across six key dimensions of online learning readiness.</p>
-                    </div>
+                    <div class="how-it-works__icon" aria-hidden="true"><i class="bi bi-pencil-square"></i></div>
+                    <div><p class="how-it-works__step-title">Answer 12 Questions</p><p class="how-it-works__step-desc">Rate your institution across seven key dimensions of online learning readiness.</p></div>
                 </div>
-
                 <div class="how-it-works__divider d-none d-md-block" aria-hidden="true"></div>
-
                 <div class="how-it-works__step flex-fill">
-                    <div class="how-it-works__icon" aria-hidden="true">
-                        <i class="bi bi-graph-up"></i>
-                    </div>
-                    <div>
-                        <p class="how-it-works__step-title">Get Your Score</p>
-                        <p class="how-it-works__step-desc">Receive an instant readiness assessment with dimension-by-dimension breakdown.</p>
-                    </div>
+                    <div class="how-it-works__icon" aria-hidden="true"><i class="bi bi-graph-up"></i></div>
+                    <div><p class="how-it-works__step-title">Get Your Score</p><p class="how-it-works__step-desc">Receive an instant readiness assessment with dimension-by-dimension breakdown.</p></div>
                 </div>
-
                 <div class="how-it-works__divider d-none d-md-block" aria-hidden="true"></div>
-
                 <div class="how-it-works__step flex-fill">
-                    <div class="how-it-works__icon" aria-hidden="true">
-                        <i class="bi bi-chat-dots"></i>
-                    </div>
-                    <div>
-                        <p class="how-it-works__step-title">Talk It Through</p>
-                        <p class="how-it-works__step-desc">Optionally walk through your results with Andrew in a free 30-minute call.</p>
-                    </div>
+                    <div class="how-it-works__icon" aria-hidden="true"><i class="bi bi-chat-dots"></i></div>
+                    <div><p class="how-it-works__step-title">Talk It Through</p><p class="how-it-works__step-desc">Optionally walk through your results with Andrew in a free 30-minute call.</p></div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         ASSESSMENT FORM
-    ============================================================ -->
     <section class="assessment-section" aria-labelledby="assessment-form-heading">
         <div class="container">
             <div class="assessment-form-wrapper">
-
                 <div class="assessment-progress" role="status" aria-live="polite" aria-label="Assessment progress">
                     <div class="assessment-progress__header">
                         <span class="assessment-progress__label">Your progress</span>
-                        <span class="assessment-progress__count" id="progress-count">0 of 8 answered</span>
+                        <span class="assessment-progress__count" id="progress-count">0 of 12 answered</span>
                     </div>
-                    <div class="assessment-progress__track" aria-hidden="true">
-                        <div class="assessment-progress__fill" id="progress-fill"></div>
-                    </div>
+                    <div class="assessment-progress__track" aria-hidden="true"><div class="assessment-progress__fill" id="progress-fill"></div></div>
                 </div>
-
                 <h2 class="visually-hidden" id="assessment-form-heading">Assessment Questions</h2>
-
                 <form id="assessment-form" novalidate>
 
-                    <!-- Q1 -->
                     <div class="question-block" data-question="1">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q1</span>
-                            <span class="question-block__dimension">Strategic Clarity</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q1</span><span class="question-block__dimension">Strategic Clarity</span></div>
                         <p class="question-block__text">Does your institution have a documented strategy for online learning?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 1 — Strategic Clarity">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q1" value="1" id="q1-1">
-                                <label class="option-card__label" for="q1-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q1" value="2" id="q1-2">
-                                <label class="option-card__label" for="q1-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q1" value="3" id="q1-3">
-                                <label class="option-card__label" for="q1-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q1" value="4" id="q1-4">
-                                <label class="option-card__label" for="q1-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 1 &mdash; Strategic Clarity">
+                            <div class="option-card option-card--1"><input type="radio" name="q1" value="1" id="q1-1"><label class="option-card__label" for="q1-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q1" value="2" id="q1-2"><label class="option-card__label" for="q1-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q1" value="3" id="q1-3"><label class="option-card__label" for="q1-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q1" value="4" id="q1-4"><label class="option-card__label" for="q1-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q2 -->
                     <div class="question-block" data-question="2">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q2</span>
-                            <span class="question-block__dimension">Strategic Clarity</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q2</span><span class="question-block__dimension">Strategic Clarity</span></div>
                         <p class="question-block__text">Is there senior leadership buy-in and budget allocated for online programme development?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 2 — Strategic Clarity">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q2" value="1" id="q2-1">
-                                <label class="option-card__label" for="q2-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q2" value="2" id="q2-2">
-                                <label class="option-card__label" for="q2-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q2" value="3" id="q2-3">
-                                <label class="option-card__label" for="q2-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q2" value="4" id="q2-4">
-                                <label class="option-card__label" for="q2-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 2 &mdash; Strategic Clarity">
+                            <div class="option-card option-card--1"><input type="radio" name="q2" value="1" id="q2-1"><label class="option-card__label" for="q2-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q2" value="2" id="q2-2"><label class="option-card__label" for="q2-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q2" value="3" id="q2-3"><label class="option-card__label" for="q2-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q2" value="4" id="q2-4"><label class="option-card__label" for="q2-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q3 -->
                     <div class="question-block" data-question="3">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q3</span>
-                            <span class="question-block__dimension">Academic Design Capability</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q3</span><span class="question-block__dimension">Academic Design Capability</span></div>
                         <p class="question-block__text">Does your team have experience designing courses specifically for online delivery (not repurposing lectures)?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 3 — Academic Design Capability">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q3" value="1" id="q3-1">
-                                <label class="option-card__label" for="q3-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q3" value="2" id="q3-2">
-                                <label class="option-card__label" for="q3-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q3" value="3" id="q3-3">
-                                <label class="option-card__label" for="q3-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q3" value="4" id="q3-4">
-                                <label class="option-card__label" for="q3-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 3 &mdash; Academic Design Capability">
+                            <div class="option-card option-card--1"><input type="radio" name="q3" value="1" id="q3-1"><label class="option-card__label" for="q3-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q3" value="2" id="q3-2"><label class="option-card__label" for="q3-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q3" value="3" id="q3-3"><label class="option-card__label" for="q3-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q3" value="4" id="q3-4"><label class="option-card__label" for="q3-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q4 -->
                     <div class="question-block" data-question="4">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q4</span>
-                            <span class="question-block__dimension">Production Capacity</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q4</span><span class="question-block__dimension">Production Capacity</span></div>
                         <p class="question-block__text">Do you have access to video production, interactive content development, and assessment design resources?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 4 — Production Capacity">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q4" value="1" id="q4-1">
-                                <label class="option-card__label" for="q4-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q4" value="2" id="q4-2">
-                                <label class="option-card__label" for="q4-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q4" value="3" id="q4-3">
-                                <label class="option-card__label" for="q4-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q4" value="4" id="q4-4">
-                                <label class="option-card__label" for="q4-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 4 &mdash; Production Capacity">
+                            <div class="option-card option-card--1"><input type="radio" name="q4" value="1" id="q4-1"><label class="option-card__label" for="q4-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q4" value="2" id="q4-2"><label class="option-card__label" for="q4-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q4" value="3" id="q4-3"><label class="option-card__label" for="q4-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q4" value="4" id="q4-4"><label class="option-card__label" for="q4-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q5 -->
                     <div class="question-block" data-question="5">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q5</span>
-                            <span class="question-block__dimension">Platform Readiness</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q5</span><span class="question-block__dimension">Platform Readiness</span></div>
                         <p class="question-block__text">Is your VLE/LMS configured and supported for the kind of online learning experience you want to offer?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 5 — Platform Readiness">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q5" value="1" id="q5-1">
-                                <label class="option-card__label" for="q5-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q5" value="2" id="q5-2">
-                                <label class="option-card__label" for="q5-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q5" value="3" id="q5-3">
-                                <label class="option-card__label" for="q5-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q5" value="4" id="q5-4">
-                                <label class="option-card__label" for="q5-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 5 &mdash; Platform Readiness">
+                            <div class="option-card option-card--1"><input type="radio" name="q5" value="1" id="q5-1"><label class="option-card__label" for="q5-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q5" value="2" id="q5-2"><label class="option-card__label" for="q5-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q5" value="3" id="q5-3"><label class="option-card__label" for="q5-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q5" value="4" id="q5-4"><label class="option-card__label" for="q5-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q6 -->
                     <div class="question-block" data-question="6">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q6</span>
-                            <span class="question-block__dimension">Quality Assurance</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q6</span><span class="question-block__dimension">Quality Assurance</span></div>
                         <p class="question-block__text">Do you have established quality frameworks or benchmarks specifically for online courses?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 6 — Quality Assurance">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q6" value="1" id="q6-1">
-                                <label class="option-card__label" for="q6-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q6" value="2" id="q6-2">
-                                <label class="option-card__label" for="q6-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q6" value="3" id="q6-3">
-                                <label class="option-card__label" for="q6-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q6" value="4" id="q6-4">
-                                <label class="option-card__label" for="q6-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 6 &mdash; Quality Assurance">
+                            <div class="option-card option-card--1"><input type="radio" name="q6" value="1" id="q6-1"><label class="option-card__label" for="q6-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q6" value="2" id="q6-2"><label class="option-card__label" for="q6-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q6" value="3" id="q6-3"><label class="option-card__label" for="q6-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q6" value="4" id="q6-4"><label class="option-card__label" for="q6-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q7 -->
                     <div class="question-block" data-question="7">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q7</span>
-                            <span class="question-block__dimension">Timeline &amp; Resources</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q7</span><span class="question-block__dimension">Timeline &amp; Resources</span></div>
                         <p class="question-block__text">Is your target launch timeline realistic given your current team capacity?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 7 — Timeline and Resources">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q7" value="1" id="q7-1">
-                                <label class="option-card__label" for="q7-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q7" value="2" id="q7-2">
-                                <label class="option-card__label" for="q7-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q7" value="3" id="q7-3">
-                                <label class="option-card__label" for="q7-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q7" value="4" id="q7-4">
-                                <label class="option-card__label" for="q7-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 7 &mdash; Timeline and Resources">
+                            <div class="option-card option-card--1"><input type="radio" name="q7" value="1" id="q7-1"><label class="option-card__label" for="q7-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q7" value="2" id="q7-2"><label class="option-card__label" for="q7-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q7" value="3" id="q7-3"><label class="option-card__label" for="q7-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q7" value="4" id="q7-4"><label class="option-card__label" for="q7-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Q8 -->
                     <div class="question-block" data-question="8">
-                        <div class="question-block__meta">
-                            <span class="question-block__number">Q8</span>
-                            <span class="question-block__dimension">Timeline &amp; Resources</span>
-                        </div>
+                        <div class="question-block__meta"><span class="question-block__number">Q8</span><span class="question-block__dimension">Timeline &amp; Resources</span></div>
                         <p class="question-block__text">Have you mapped the full scope of work required (content, media, assessment, platform build, QA)?</p>
-                        <div class="option-grid" role="radiogroup" aria-label="Question 8 — Timeline and Resources">
-                            <div class="option-card option-card--1">
-                                <input type="radio" name="q8" value="1" id="q8-1">
-                                <label class="option-card__label" for="q8-1">
-                                    <span class="option-card__score">1</span>
-                                    <span class="option-card__text">Not at all</span>
-                                    <i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--2">
-                                <input type="radio" name="q8" value="2" id="q8-2">
-                                <label class="option-card__label" for="q8-2">
-                                    <span class="option-card__score">2</span>
-                                    <span class="option-card__text">Early stages</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-amber);" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--3">
-                                <input type="radio" name="q8" value="3" id="q8-3">
-                                <label class="option-card__label" for="q8-3">
-                                    <span class="option-card__score">3</span>
-                                    <span class="option-card__text">Partially in place</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: #ca8a04;" aria-hidden="true"></i>
-                                </label>
-                            </div>
-                            <div class="option-card option-card--4">
-                                <input type="radio" name="q8" value="4" id="q8-4">
-                                <label class="option-card__label" for="q8-4">
-                                    <span class="option-card__score">4</span>
-                                    <span class="option-card__text">Fully established</span>
-                                    <i class="bi bi-check-circle-fill option-card__check" style="color: var(--score-green);" aria-hidden="true"></i>
-                                </label>
-                            </div>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 8 &mdash; Timeline and Resources">
+                            <div class="option-card option-card--1"><input type="radio" name="q8" value="1" id="q8-1"><label class="option-card__label" for="q8-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q8" value="2" id="q8-2"><label class="option-card__label" for="q8-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q8" value="3" id="q8-3"><label class="option-card__label" for="q8-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q8" value="4" id="q8-4"><label class="option-card__label" for="q8-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
                         </div>
                     </div>
 
-                    <!-- Submit -->
-                    <div class="assessment-submit-area">
-                        <button type="submit" class="btn-submit-assessment" id="submit-btn" disabled aria-describedby="submit-hint">
-                            <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
-                            See My Results
-                        </button>
-                        <p class="submit-hint" id="submit-hint">Answer all 8 questions to unlock your results.</p>
+                    <div class="question-block" data-question="9">
+                        <div class="question-block__meta"><span class="question-block__number">Q9</span><span class="question-block__dimension">Technical Capacity</span></div>
+                        <p class="question-block__text">Do you have dedicated learning designers (not lecturers wearing a second hat) who build online courses?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 9 &mdash; Technical Capacity">
+                            <div class="option-card option-card--1"><input type="radio" name="q9" value="1" id="q9-1"><label class="option-card__label" for="q9-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q9" value="2" id="q9-2"><label class="option-card__label" for="q9-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q9" value="3" id="q9-3"><label class="option-card__label" for="q9-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q9" value="4" id="q9-4"><label class="option-card__label" for="q9-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
+                        </div>
                     </div>
 
+                    <div class="question-block" data-question="10">
+                        <div class="question-block__meta"><span class="question-block__number">Q10</span><span class="question-block__dimension">Technical Capacity</span></div>
+                        <p class="question-block__text">Does your team have hands-on experience configuring and building within your LMS (e.g. Moodle, Canvas, Blackboard)?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 10 &mdash; Technical Capacity">
+                            <div class="option-card option-card--1"><input type="radio" name="q10" value="1" id="q10-1"><label class="option-card__label" for="q10-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q10" value="2" id="q10-2"><label class="option-card__label" for="q10-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q10" value="3" id="q10-3"><label class="option-card__label" for="q10-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q10" value="4" id="q10-4"><label class="option-card__label" for="q10-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-question="11">
+                        <div class="question-block__meta"><span class="question-block__number">Q11</span><span class="question-block__dimension">Technical Capacity</span></div>
+                        <p class="question-block__text">Have you built online assessments before (not just uploading exam papers, but designing for digital submission, rubrics, and academic integrity)?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 11 &mdash; Technical Capacity">
+                            <div class="option-card option-card--1"><input type="radio" name="q11" value="1" id="q11-1"><label class="option-card__label" for="q11-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q11" value="2" id="q11-2"><label class="option-card__label" for="q11-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q11" value="3" id="q11-3"><label class="option-card__label" for="q11-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q11" value="4" id="q11-4"><label class="option-card__label" for="q11-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-question="12">
+                        <div class="question-block__meta"><span class="question-block__number">Q12</span><span class="question-block__dimension">Technical Capacity</span></div>
+                        <p class="question-block__text">Do you have in-house multimedia production capability (video editing, graphic design, animation, interactive content authoring)?</p>
+                        <div class="option-grid" role="radiogroup" aria-label="Question 12 &mdash; Technical Capacity">
+                            <div class="option-card option-card--1"><input type="radio" name="q12" value="1" id="q12-1"><label class="option-card__label" for="q12-1"><span class="option-card__score">1</span><span class="option-card__text">Not at all</span><i class="bi bi-check-circle-fill option-card__check text-danger" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--2"><input type="radio" name="q12" value="2" id="q12-2"><label class="option-card__label" for="q12-2"><span class="option-card__score">2</span><span class="option-card__text">Early stages</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-amber)" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--3"><input type="radio" name="q12" value="3" id="q12-3"><label class="option-card__label" for="q12-3"><span class="option-card__score">3</span><span class="option-card__text">Partially in place</span><i class="bi bi-check-circle-fill option-card__check" style="color:#ca8a04" aria-hidden="true"></i></label></div>
+                            <div class="option-card option-card--4"><input type="radio" name="q12" value="4" id="q12-4"><label class="option-card__label" for="q12-4"><span class="option-card__score">4</span><span class="option-card__text">Fully established</span><i class="bi bi-check-circle-fill option-card__check" style="color:var(--score-green)" aria-hidden="true"></i></label></div>
+                        </div>
+                    </div>
+
+                    <div class="assessment-submit-area">
+                        <button type="submit" class="btn-submit-assessment" id="submit-btn" disabled aria-describedby="submit-hint"><i class="bi bi-bar-chart-line" aria-hidden="true"></i> See My Results</button>
+                        <p class="submit-hint" id="submit-hint">Answer all 12 questions to unlock your results.</p>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         RESULTS SECTION
-    ============================================================ -->
     <div class="results-section" id="results-section" aria-live="polite" aria-label="Your assessment results">
-
-        <!-- Overall Score -->
         <section class="results-overall" aria-labelledby="results-score-heading">
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-md-4 text-center text-md-start">
-                        <p class="section-label" style="color: rgba(255,255,255,0.4);">Your overall score</p>
-                        <div>
-                            <span class="results-overall__score-number" id="result-score-number">--</span>
-                            <span class="results-overall__score-denom">/32</span>
-                        </div>
+                        <p class="section-label" style="color:rgba(255,255,255,0.4)">Your overall score</p>
+                        <div><span class="results-overall__score-number" id="result-score-number">--</span><span class="results-overall__score-denom">/48</span></div>
                     </div>
                     <div class="col-md-8">
                         <div class="results-overall__category-badge" id="result-category-badge"></div>
@@ -1317,465 +389,221 @@
                 </div>
             </div>
         </section>
-
-        <!-- Dimension Breakdown -->
         <section class="results-dimensions" aria-labelledby="dimension-breakdown-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <h3 class="results-dimensions__title" id="dimension-breakdown-heading">Dimension-by-Dimension Breakdown</h3>
-
-                        <div id="dimension-results">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="container"><div class="row"><div class="col-lg-9">
+                <h3 class="results-dimensions__title" id="dimension-breakdown-heading">Dimension-by-Dimension Breakdown</h3>
+                <div id="dimension-results"></div>
+            </div></div></div>
         </section>
-
-        <!-- CTA -->
+        <section class="results-conclusion" aria-labelledby="conclusion-heading">
+            <div class="container"><div class="row"><div class="col-lg-9">
+                <h3 class="results-conclusion__title" id="conclusion-heading">What This Means for Your Institution</h3>
+                <div id="conclusion-text"></div>
+            </div></div></div>
+        </section>
         <section class="results-cta" aria-labelledby="results-cta-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <h2 class="results-cta__title" id="results-cta-heading">Want to Walk Through Your Results?</h2>
-                        <p class="results-cta__text">
-                            Book a free 30-minute strategy call with Andrew. He'll review your scores, discuss your specific challenges, and map out what an engagement could look like.
-                        </p>
-                        <p class="results-cta__text">
-                            No sales pressure — just a helpful conversation with someone who's done this 20+ times.
-                        </p>
-                        <a href="#" class="btn-cta-primary">
-                            <i class="bi bi-calendar-check" aria-hidden="true"></i>
-                            Book a Strategy Call
-                        </a>
-                        <p class="results-cta__email">
-                            Or email us: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a>
-                        </p>
-                        <div style="text-align:center; margin-top:2rem;">
-                            <a href="mockup-tier1-pitfalls.html" style="color:rgba(255,255,255,0.7); text-decoration:underline; margin-right:1.5rem;">Read: 5 Hidden Pitfalls</a>
-                            <a href="mockup-tier3-case-study.html" style="color:rgba(255,255,255,0.7); text-decoration:underline;">See: ICAS Case Study</a>
-                        </div>
-                    </div>
+            <div class="container"><div class="row"><div class="col-lg-7">
+                <h2 class="results-cta__title" id="results-cta-heading">Want to Walk Through Your Results?</h2>
+                <p class="results-cta__text" id="results-cta-dynamic-text">Book a free 30-minute strategy call with Andrew. He'll review your scores, discuss your specific challenges, and map out what an engagement could look like.</p>
+                <p class="results-cta__text">No sales pressure &mdash; just a helpful conversation with someone who's done this 20+ times.</p>
+                <a href="#" class="btn-cta-primary"><i class="bi bi-calendar-check" aria-hidden="true"></i> Talk to Andrew</a>
+                <p class="results-cta__email">Or email us: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
+                <div style="text-align:center;margin-top:2rem">
+                    <a href="mockup-tier1-pitfalls.html" style="color:rgba(255,255,255,0.7);text-decoration:underline;margin-right:1.5rem">Read: 5 Hidden Pitfalls</a>
+                    <a href="mockup-tier3-case-study.html" style="color:rgba(255,255,255,0.7);text-decoration:underline">See: ICAS Case Study</a>
                 </div>
-            </div>
+            </div></div></div>
         </section>
-
-        <!-- Save Results -->
         <section class="save-results-section" aria-label="Save your results">
             <div class="container">
                 <div class="d-flex align-items-center gap-3 flex-wrap">
-                    <span class="section-label mb-0" style="color: var(--lds-grey-600);">Save your results</span>
-                    <button class="btn-save-results" id="save-results-btn" aria-label="Copy results summary to clipboard">
-                        <i class="bi bi-clipboard" aria-hidden="true"></i>
-                        Copy to clipboard
-                    </button>
-                    <span class="save-results-feedback" id="save-results-feedback" role="status">
-                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
-                        Copied to clipboard
-                    </span>
+                    <span class="section-label mb-0" style="color:var(--lds-grey-600)">Save your results</span>
+                    <button class="btn-save-results" id="save-results-btn" aria-label="Copy results summary to clipboard"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy to clipboard</button>
+                    <span class="save-results-feedback" id="save-results-feedback" role="status"><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Copied to clipboard</span>
                 </div>
             </div>
         </section>
-
     </div>
 
-    <!-- ============================================================
-         FOOTER
-    ============================================================ -->
     <footer class="assessment-footer" role="contentinfo">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <p class="assessment-footer__copy">&copy; 2026 Learning Design Solutions</p>
-                <a href="index.html" class="assessment-footer__back">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>
-                    Back to main site
-                </a>
+                <a href="index.html" class="assessment-footer__back"><i class="bi bi-arrow-left" aria-hidden="true"></i> Back to main site</a>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-    (function () {
+    (function(){
         'use strict';
+        var QUESTIONS=['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12'];
+        var TOTAL_QUESTIONS=QUESTIONS.length;
+        var MAX_SCORE=48;
 
-        // ============================================================
-        // DATA: Questions and dimensions
-        // ============================================================
-
-        const QUESTIONS = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'];
-        const TOTAL_QUESTIONS = QUESTIONS.length;
-
-        const DIMENSIONS = [
-            {
-                id: 'strategic',
-                name: 'Strategic Clarity',
-                questions: ['q1', 'q2'],
-                max: 8,
-                recommendations: function (score) {
-                    if (score <= 3) return 'Your institution would benefit from developing a formal online learning strategy before beginning development.';
-                    if (score <= 5) return 'Strategy is emerging. Consider a focused consultancy engagement to crystallise goals and build the business case.';
-                    if (score <= 7) return 'Good strategic foundation. Ensure budget and timeline are formally approved.';
-                    return 'Excellent. Clear strategic direction and leadership support are in place.';
-                }
-            },
-            {
-                id: 'academic-design',
-                name: 'Academic Design Capability',
-                questions: ['q3'],
-                max: 4,
-                recommendations: function (score) {
-                    if (score === 1) return 'This is the most critical gap. Online pedagogy is fundamentally different from classroom teaching — specialist expertise is essential.';
-                    if (score === 2) return 'Some awareness exists but dedicated learning design capability is needed for quality outcomes.';
-                    if (score === 3) return 'Good capability. Additional specialist support could accelerate development.';
-                    return 'Strong internal capability. External support may still add value for scale and fresh perspective.';
-                }
-            },
-            {
-                id: 'production',
-                name: 'Production Capacity',
-                questions: ['q4'],
-                max: 4,
-                recommendations: function (score) {
-                    if (score === 1) return 'No production resources in place. This will need to be outsourced or built.';
-                    if (score === 2) return 'Basic resources available. Professional media production will significantly improve quality.';
-                    if (score === 3) return 'Reasonable capacity. May need augmentation for large-scale projects.';
-                    return 'Well-resourced. Focus on efficient deployment.';
-                }
-            },
-            {
-                id: 'platform',
-                name: 'Platform Readiness',
-                questions: ['q5'],
-                max: 4,
-                recommendations: function (score) {
-                    if (score === 1) return 'VLE needs significant configuration work before it can support quality online learning.';
-                    if (score === 2) return 'Platform exists but may need enhancement for the experience you want.';
-                    if (score === 3) return 'Platform is mostly ready. Configuration and testing needed.';
-                    return 'Platform is well-configured and supported.';
-                }
-            },
-            {
-                id: 'quality',
-                name: 'Quality Assurance',
-                questions: ['q6'],
-                max: 4,
-                recommendations: function (score) {
-                    if (score === 1) return 'No online-specific quality frameworks. This is a risk area — quality can slip without clear benchmarks.';
-                    if (score === 2) return 'Some quality processes exist. Formalising these for online specifically will protect your brand.';
-                    if (score === 3) return 'Good frameworks. Ensure they cover online-specific considerations.';
-                    return 'Comprehensive quality assurance in place.';
-                }
-            },
-            {
-                id: 'timeline',
-                name: 'Timeline & Resources',
-                questions: ['q7', 'q8'],
-                max: 8,
-                recommendations: function (score) {
-                    if (score <= 3) return 'Significant risk of timeline overrun. The scope of work is likely underestimated.';
-                    if (score <= 5) return 'Some planning done but gaps likely remain. A detailed scoping exercise is recommended.';
-                    if (score <= 7) return 'Good planning. Validate assumptions with someone who\'s done this before.';
-                    return 'Realistic and well-planned. Proceed with confidence.';
-                }
-            }
+        var DIMENSIONS=[
+            {id:'strategic',name:'Strategic Clarity',questions:['q1','q2'],max:8,
+                getResultText:function(s){
+                    if(s<=3)return'<strong>Your online strategy needs a defined foundation before you begin building.</strong> Without a documented plan and leadership alignment, development efforts tend to stall at the first governance hurdle or budget review. Before commissioning any content, secure a written commitment from senior leadership that names the target programmes, the intended audience, and the commercial model. Assign a single senior sponsor who owns the initiative end-to-end.<br><br>Institutions that skip this step typically burn 3\u20136 months in false starts. Get the strategy on paper first, then resource the build.';
+                    if(s<=6)return'<strong>You have strategic intent, but it needs to be sharpened into an actionable plan.</strong> The risk at this stage is that online learning sits as a line item in a broader strategy document without specific targets, timelines, or accountable owners. Translate your strategic direction into a delivery roadmap: which programmes launch first, what does success look like at 6 and 12 months, and who makes the day-to-day decisions.<br><br>Confirm that your budget covers not just content creation but also platform costs, marketing, and ongoing maintenance. Many institutions budget for the build but forget the run.';
+                    return'<strong>Your strategic foundations are solid.</strong> You have leadership buy-in, allocated budget, and a clear direction. The next step is ensuring your strategy connects to operational reality: confirm that the people who will do the work understand the priorities, and that decision-making authority is clear enough to avoid bottlenecks during development.<br><br>Revisit your strategy quarterly during the build phase. The market for online professional education moves quickly, and your initial assumptions about audience and pricing will benefit from validation against early enrolment data.';
+                }},
+            {id:'academic-design',name:'Academic Design Capability',questions:['q3'],max:4,
+                getResultText:function(s){
+                    if(s<=1)return'<strong>This is a critical gap.</strong> Designing for online delivery is a distinct discipline from classroom teaching. Lecture capture and PDF uploads do not constitute online learning; they produce high dropout rates and damage your institution\u2019s reputation with fee-paying online students. You need access to someone who understands learning outcomes mapping, activity-based design, and how to create genuine student engagement without a physical classroom.<br><br>Prioritise securing learning design expertise before beginning any content development. The cost of retrofitting a poorly designed programme is typically 2\u20133 times the cost of designing it properly from the start.';
+                    if(s<=3)return'<strong>You have some awareness of online pedagogy, but your capability needs strengthening.</strong> The difference between adequate and excellent online design shows up directly in student satisfaction scores, completion rates, and ultimately re-enrolment. Review your existing online courses honestly: are students actively doing things each week, or mostly reading and watching? Are assessments designed for the online context, or adapted from face-to-face formats?<br><br>Consider bringing in specialist learning design support for your flagship programmes. Internal teams can develop capability over time, but your first online offerings set the standard that everything else gets measured against.';
+                    return'<strong>You have strong internal design capability.</strong> Your team understands the difference between putting content online and designing for online learning. To maintain this edge, ensure your designers stay current with emerging approaches: adaptive learning pathways, authentic assessment in digital environments, and AI-assisted personalisation are all areas where best practice is evolving rapidly.<br><br>Even strong internal teams benefit from external perspective on new programme designs. A fresh pair of expert eyes during the design phase catches blind spots that familiarity with your own institution can create.';
+                }},
+            {id:'production',name:'Production Capacity',questions:['q4'],max:4,
+                getResultText:function(s){
+                    if(s<=1)return'<strong>You currently lack the production resources needed for quality online programmes.</strong> Students paying for online courses expect professional-quality materials: well-produced video, polished interactive content, and assessments that work seamlessly on their devices. This does not mean Hollywood production values, but it does mean more than a webcam recording of a lecture.<br><br>Decide now whether you will build internal production capability or partner with an external provider. Building in-house is a 12\u201318 month investment before you reach consistent quality. External partnerships can have you producing within weeks.';
+                    if(s<=3)return'<strong>You have some production resources, but gaps will slow you down.</strong> The most common bottleneck at this stage is that institutions have one or two people who can produce basic content but lack the capacity for the volume and variety that a full online programme demands. A single 20-credit module typically requires 15\u201325 video segments, multiple interactive activities, and a complete assessment suite.<br><br>Audit your current capacity against the actual volume of content your programme requires. If there is a shortfall, address it before you commit to a launch date. Rushed production is the single most common cause of quality problems in new online programmes.';
+                    return'<strong>Your production capability is well-established.</strong> You have the resources to create professional-quality learning materials at the volume your programmes require. Focus on efficiency: establish templates and production workflows that allow your team to maintain quality while scaling output.<br><br>As you scale, watch for the bottleneck shifting from production to review and approval. Many institutions can produce content quickly but lose weeks in the sign-off process. Build approval workflows that match your production pace.';
+                }},
+            {id:'platform',name:'Platform Readiness',questions:['q5'],max:4,
+                getResultText:function(s){
+                    if(s<=1)return'<strong>Your learning platform is not ready for the online experience you want to deliver.</strong> This does not necessarily mean you need a new platform, but your current setup likely needs significant configuration work. Out-of-the-box VLE installations are designed for blended learning support, not as the primary delivery mechanism for a fully online programme.<br><br>Before investing in content production, get your platform assessed by someone who has configured it for fully online delivery elsewhere. The gap between what your VLE can do and what it is currently set up to do is usually larger than institutions expect.';
+                    if(s<=3)return'<strong>Your platform exists but probably needs work to support the student experience you are aiming for.</strong> Common gaps at this stage include: no clear student dashboard, limited mobile responsiveness for your specific content types, assessment tools not configured for online submission workflows, and analytics that do not tell you which students are falling behind.<br><br>Create a specific list of what your online students need to be able to do on the platform, then test each of those journeys end-to-end. The issues you find now are far cheaper to fix than the complaints you will receive after launch.';
+                    return'<strong>Your platform is well-configured for online delivery.</strong> You have a VLE that supports the student experience you want to offer, with appropriate integrations and support structures in place. Ensure you have a maintenance plan: platforms need regular updates, and the integrations between your VLE, student records system, and any third-party tools need ongoing attention.<br><br>Consider load testing before your first large cohort enrols. Many platform configurations work perfectly for 30 students but develop issues at 300.';
+                }},
+            {id:'quality',name:'Quality Assurance',questions:['q6'],max:4,
+                getResultText:function(s){
+                    if(s<=1)return'<strong>Without online-specific quality frameworks, you are flying blind.</strong> Your existing face-to-face quality processes do not translate directly. Online programmes need quality criteria that address: consistency of the digital student experience, accessibility compliance (this is a legal requirement, not optional), assessment integrity in unsupervised environments, and response time standards for student support.<br><br>Adopt a recognised online quality framework such as QAA guidance for online provision or the UK Quality Code\u2019s expectations for digital learning. Do not try to invent your own from scratch.';
+                    if(s<=3)return'<strong>You have some quality processes, but they need to be adapted for online.</strong> The most dangerous gap is usually in student experience monitoring. In a physical classroom, a struggling student is visible. Online, they simply stop logging in. Your quality framework needs to include early warning indicators: login frequency, assessment submission patterns, and engagement metrics that trigger intervention before students withdraw.<br><br>Review your current quality benchmarks and add specific, measurable criteria for online delivery. Vague standards like \u201chigh-quality learning materials\u201d are not useful; define what high quality looks like in terms your content producers and reviewers can actually apply.';
+                    return'<strong>You have robust quality assurance for online provision.</strong> Your frameworks include online-specific criteria, and you have processes for monitoring and improving the digital student experience. The next level is closing the feedback loop: ensure that quality data from one cohort directly informs improvements for the next.<br><br>Consider external benchmarking. Even strong internal QA benefits from periodic comparison against what leading institutions are doing, particularly as regulatory expectations for online provision continue to evolve.';
+                }},
+            {id:'timeline',name:'Timeline & Resources',questions:['q7','q8'],max:8,
+                getResultText:function(s){
+                    if(s<=3)return'<strong>Your timeline is at serious risk.</strong> The scope of building a quality online programme is almost certainly larger than your current planning assumes. A single module from scratch typically takes 8\u201312 weeks of focused work across design, content creation, media production, platform build, and testing. Multiply that by your number of modules, then add time for review cycles, revisions, and the inevitable delays.<br><br>Before committing to a launch date, map every deliverable against actual team capacity. Account for the fact that your team likely has other responsibilities. Institutions that launch with half-finished content damage their reputation with the first cohort and spend the next year recovering.';
+                    if(s<=6)return'<strong>You have done some planning, but there are likely gaps in your scope estimate.</strong> The items most commonly underestimated are: the review and revision cycle (plan for at least two rounds per module), accessibility compliance work, assessment design and rubric creation, student onboarding materials, and the time needed for staff training on the new platform setup.<br><br>Build contingency into your timeline. A 20% buffer is the minimum for a first online programme. If your launch date is externally fixed (e.g. tied to a recruitment cycle), define now what constitutes a viable minimum launch and what can follow in subsequent iterations.';
+                    return'<strong>Your planning is thorough and your timeline appears realistic.</strong> You have mapped the scope and aligned it with team capacity. Protect this plan from scope creep: new ideas and feature requests will emerge during development, and each one needs to be assessed against your timeline before being accepted.<br><br>Establish a clear change control process. When a stakeholder asks for something new mid-build, the answer should be: yes, and here is what it costs in time and what it displaces. This discipline is what separates programmes that launch on time from those that drift.';
+                }},
+            {id:'technical',name:'Technical Capacity',questions:['q9','q10','q11','q12'],max:16,
+                getResultText:function(s){
+                    if(s<=7)return'<strong>This is where your readiness gap is most significant.</strong> Building online programmes requires a specific blend of technical skills that most institutions do not have in-house: learning design methodology, LMS configuration and build expertise, online assessment architecture, and multimedia production. These are not skills that academic staff or general IT teams typically possess, and expecting them to pick it up as they go leads to poor outcomes and burnt-out staff.<br><br>This is the dimension where external specialist support makes the most measurable difference. An experienced learning design partner brings not just the technical skills but also the production workflows, quality templates, and project management discipline that turn a strategy into a finished programme. Institutions that try to build this capability from scratch typically need 12\u201318 months before they reach the consistency and efficiency that an experienced partner delivers from day one.';
+                    if(s<=12)return'<strong>You have some technical capability, but gaps remain in critical areas.</strong> Most institutions at this stage have people who can work within the LMS but lack the depth needed for complex builds: branching assessment pathways, integrated multimedia learning activities, or sophisticated gradebook configurations. Similarly, multimedia production may be possible at a basic level but not at the quality or volume that a full programme demands.<br><br>Identify specifically which technical skills you have in-house and which you need to source externally. A common and cost-effective model is to partner with an external specialist for the complex build work while developing your internal team\u2019s capabilities on the job. This way you get quality output now and build long-term capacity simultaneously.';
+                    return'<strong>Your technical capacity is strong relative to most institutions.</strong> You have learning designers, LMS expertise, assessment design experience, and at least some multimedia production capability. This is genuinely unusual and puts you ahead of many peers. The question to ask is whether your capacity matches your ambition in terms of volume and speed.<br><br>Even well-resourced internal teams face constraints when scaling: key people become bottlenecks, production quality can dip under time pressure, and innovation stalls when the team is fully absorbed in delivery. Consider where an external partner could add value not as a replacement for your team but as a force multiplier, handling overflow capacity or bringing specialist expertise for particularly complex modules.';
+                }}
         ];
 
-        const SCORE_CATEGORIES = [
-            {
-                min: 8,  max: 14,
-                name: 'Early Stage',
-                badgeClass: 'results-overall__category-badge--early',
-                description: 'Your institution is at the beginning of its online learning journey. Significant groundwork is needed before launching programmes.'
-            },
-            {
-                min: 15, max: 22,
-                name: 'Building Foundations',
-                badgeClass: 'results-overall__category-badge--building',
-                description: 'You have some elements in place but gaps remain. A structured approach will help you move forward efficiently.'
-            },
-            {
-                min: 23, max: 28,
-                name: 'Well Positioned',
-                badgeClass: 'results-overall__category-badge--positioned',
-                description: 'Strong foundations are in place. With targeted support in your weaker areas, you could launch programmes confidently.'
-            },
-            {
-                min: 29, max: 32,
-                name: 'Launch Ready',
-                badgeClass: 'results-overall__category-badge--ready',
-                description: 'Your institution has excellent readiness across all dimensions. You may benefit from specialist support to accelerate timelines.'
-            }
+        var SCORE_CATEGORIES=[
+            {min:12,max:21,name:'Early Stage',badgeClass:'results-overall__category-badge--early',description:'Your institution is at the beginning of its online learning journey. Significant groundwork is needed across multiple dimensions before launching programmes.'},
+            {min:22,max:33,name:'Building Foundations',badgeClass:'results-overall__category-badge--building',description:'You have some elements in place but meaningful gaps remain. A structured approach with the right support will help you move forward efficiently.'},
+            {min:34,max:42,name:'Well Positioned',badgeClass:'results-overall__category-badge--positioned',description:'Strong foundations across most dimensions. With targeted support in your weaker areas, particularly Technical Capacity, you could launch programmes confidently.'},
+            {min:43,max:48,name:'Launch Ready',badgeClass:'results-overall__category-badge--ready',description:'Your institution has excellent readiness across most dimensions. The right specialist partnership could help you move faster and avoid the pitfalls that even well-prepared institutions encounter.'}
         ];
 
-        // ============================================================
-        // STATE
-        // ============================================================
+        var answers={};
+        var form=document.getElementById('assessment-form');
+        var submitBtn=document.getElementById('submit-btn');
+        var submitHint=document.getElementById('submit-hint');
+        var progressFill=document.getElementById('progress-fill');
+        var progressCount=document.getElementById('progress-count');
+        var resultsSection=document.getElementById('results-section');
+        var saveBtn=document.getElementById('save-results-btn');
+        var saveFeedback=document.getElementById('save-results-feedback');
 
-        const answers = {};
+        function getAnsweredCount(){return Object.keys(answers).length;}
+        function allAnswered(){return getAnsweredCount()===TOTAL_QUESTIONS;}
+        function getDimensionBarClass(score,max){var p=score/max;if(p<=0.35)return'dimension-bar-fill--low';if(p<=0.6)return'dimension-bar-fill--medium';if(p<=0.85)return'dimension-bar-fill--high';return'dimension-bar-fill--excellent';}
+        function getDimensionItemClass(score,max){var p=score/max;if(p<=0.35)return'dimension-item--low';if(p<=0.6)return'dimension-item--medium';if(p<=0.85)return'dimension-item--high';return'dimension-item--excellent';}
+        function getScoreCategory(t){return SCORE_CATEGORIES.find(function(c){return t>=c.min&&t<=c.max;})||SCORE_CATEGORIES[0];}
+        function getTotalScore(){return QUESTIONS.reduce(function(s,q){return s+(answers[q]||0);},0);}
+        function getDimensionScore(d){return d.questions.reduce(function(s,q){return s+(answers[q]||0);},0);}
 
-        // ============================================================
-        // DOM REFS
-        // ============================================================
-
-        const form = document.getElementById('assessment-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const submitHint = document.getElementById('submit-hint');
-        const progressFill = document.getElementById('progress-fill');
-        const progressCount = document.getElementById('progress-count');
-        const resultsSection = document.getElementById('results-section');
-        const saveBtn = document.getElementById('save-results-btn');
-        const saveFeedback = document.getElementById('save-results-feedback');
-
-        // ============================================================
-        // HELPERS
-        // ============================================================
-
-        function getAnsweredCount() {
-            return Object.keys(answers).length;
+        function updateProgress(){
+            var c=getAnsweredCount(),p=(c/TOTAL_QUESTIONS)*100;
+            progressFill.style.width=p+'%';
+            progressCount.textContent=c+' of '+TOTAL_QUESTIONS+' answered';
+            if(allAnswered()){submitBtn.disabled=false;submitHint.textContent='All questions answered. Ready to see your results.';}
+            else{submitBtn.disabled=true;var r=TOTAL_QUESTIONS-c;submitHint.textContent=r+' question'+(r>1?'s':'')+' remaining.';}
         }
 
-        function allAnswered() {
-            return getAnsweredCount() === TOTAL_QUESTIONS;
-        }
+        form.addEventListener('change',function(e){if(e.target.type==='radio'){answers[e.target.name]=parseInt(e.target.value,10);updateProgress();}});
+        form.addEventListener('submit',function(e){e.preventDefault();if(\!allAnswered())return;showResults();});
 
-        function getDimensionBarClass(score, max) {
-            const pct = score / max;
-            if (pct <= 0.35) return 'dimension-bar-fill--low';
-            if (pct <= 0.6)  return 'dimension-bar-fill--medium';
-            if (pct <= 0.85) return 'dimension-bar-fill--high';
-            return 'dimension-bar-fill--excellent';
-        }
-
-        function getDimensionItemClass(score, max) {
-            const pct = score / max;
-            if (pct <= 0.35) return 'dimension-item--low';
-            if (pct <= 0.6)  return 'dimension-item--medium';
-            if (pct <= 0.85) return 'dimension-item--high';
-            return 'dimension-item--excellent';
-        }
-
-        function getScoreCategory(totalScore) {
-            return SCORE_CATEGORIES.find(c => totalScore >= c.min && totalScore <= c.max) || SCORE_CATEGORIES[0];
-        }
-
-        function getTotalScore() {
-            return QUESTIONS.reduce(function (sum, q) {
-                return sum + (answers[q] || 0);
-            }, 0);
-        }
-
-        function getDimensionScore(dimension) {
-            return dimension.questions.reduce(function (sum, q) {
-                return sum + (answers[q] || 0);
-            }, 0);
-        }
-
-        // ============================================================
-        // PROGRESS UPDATE
-        // ============================================================
-
-        function updateProgress() {
-            const count = getAnsweredCount();
-            const pct = (count / TOTAL_QUESTIONS) * 100;
-            progressFill.style.width = pct + '%';
-            progressCount.textContent = count + ' of ' + TOTAL_QUESTIONS + ' answered';
-
-            if (allAnswered()) {
-                submitBtn.disabled = false;
-                submitHint.textContent = 'All questions answered. Ready to see your results.';
-            } else {
-                submitBtn.disabled = true;
-                const remaining = TOTAL_QUESTIONS - count;
-                submitHint.textContent = remaining + ' question' + (remaining > 1 ? 's' : '') + ' remaining.';
+        function generateConclusion(total,dimScores){
+            var techScore=dimScores['technical']||0,techPct=techScore/16,overallPct=total/MAX_SCORE,paras=[];
+            if(overallPct<=0.44){
+                paras.push('<p class="results-conclusion__text"><strong>There is significant opportunity here, and the good news is these gaps are addressable.</strong> Your assessment reveals that several foundational elements need attention before you can develop online programmes with confidence. This is not unusual; most institutions that are new to online learning score in this range. The difference between institutions that succeed and those that stall is whether they address these gaps systematically or try to push through them.</p>');
+                paras.push('<p class="results-conclusion__text">Focus on two things before anything else: get your strategy formally documented with leadership sign-off and budget, and secure access to the technical expertise needed to build properly. Attempting to develop content before these foundations are in place will result in rework and delays that cost more than getting it right from the start.</p>');
+            }else if(overallPct<=0.69){
+                paras.push('<p class="results-conclusion__text"><strong>You have real momentum, and the foundations are forming.</strong> Your institution has made progress in several areas, but the gaps that remain are the ones most likely to cause problems during development. Institutions at this stage often feel ready to start building, but the dimensions where you scored lower will create friction that slows everything down if they are not addressed first.</p>');
+                paras.push('<p class="results-conclusion__text">The most productive next step is to address your weakest dimension head-on. A targeted intervention in your lowest-scoring area will unlock progress across the board, because these dimensions are interconnected: weak quality assurance affects timelines, limited production capacity affects design ambitions, and so on.</p>');
+            }else if(overallPct<=0.875){
+                paras.push('<p class="results-conclusion__text"><strong>You are well-positioned to develop online programmes successfully.</strong> Your scores indicate that most of the structural and strategic elements are in place. The areas where you scored lower are worth targeted attention, because at this level of readiness, addressing a specific gap can be the difference between a good programme and an excellent one.</p>');
+                paras.push('<p class="results-conclusion__text">Institutions in your position typically get the most value from specialist support in their weakest areas rather than broad consulting engagement. Identify the one or two dimensions holding you back and seek focused expertise there.</p>');
+            }else{
+                paras.push('<p class="results-conclusion__text"><strong>Your institution is in a strong position across the board.</strong> Scores at this level indicate genuine organisational readiness: well-defined strategy, capable teams, and clear plans. This is relatively rare, and you should move forward with confidence.</p>');
+                paras.push('<p class="results-conclusion__text">At this stage, the value of external support is less about filling gaps and more about accelerating execution and bringing battle-tested production processes. Even the strongest internal teams benefit from a partner who has delivered dozens of programmes and can anticipate the issues that first-time programmes encounter.</p>');
             }
+            if(techPct<=0.5){
+                paras.push('<p class="results-conclusion__text"><strong>Your Technical Capacity score stands out as the area requiring the most attention.</strong> This is the dimension where the gap between what institutions think they can handle internally and what is actually required is widest. Learning design, LMS build, online assessment architecture, and multimedia production are specialist disciplines. The right external partner can close this gap immediately while your internal teams develop capability over time. This is exactly the kind of challenge Andrew helps institutions solve.</p>');
+            }else if(techPct<=0.75){
+                paras.push('<p class="results-conclusion__text"><strong>Technical Capacity is worth a closer look.</strong> Even with some capability in place, the gap between basic and excellent is where student experience is won or lost. The institutions that deliver the best online programmes treat the technical build as a specialist discipline, not something that gets distributed across existing staff on top of their current roles. A focused conversation about where external expertise would have the most impact could save you months of trial and error.</p>');
+            }else{
+                paras.push('<p class="results-conclusion__text"><strong>Even with your strong Technical Capacity, this is where most institutions underestimate the gap at scale.</strong> Building one module well is different from maintaining quality across an entire programme while managing deadlines, stakeholder feedback, and the inevitable mid-project changes. The institutions that scale most successfully are those that pair strong internal teams with experienced external partners who bring production discipline and capacity for peak periods.</p>');
+            }
+            paras.push('<p class="results-conclusion__text">A 30-minute conversation with Andrew would give you a clearer picture of what your specific scores mean in practice and what the most productive next steps look like. He has worked with institutions at every stage of this journey and can give you a straight answer about where you stand.</p>');
+            return paras.join('');
         }
 
-        // ============================================================
-        // EVENT: Answer selection
-        // ============================================================
-
-        form.addEventListener('change', function (e) {
-            if (e.target.type === 'radio') {
-                const name = e.target.name;
-                answers[name] = parseInt(e.target.value, 10);
-                updateProgress();
-            }
-        });
-
-        // ============================================================
-        // EVENT: Form submit
-        // ============================================================
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            if (!allAnswered()) return;
-            showResults();
-        });
-
-        // ============================================================
-        // RESULTS RENDERING
-        // ============================================================
-
-        function showResults() {
-            const total = getTotalScore();
-            const category = getScoreCategory(total);
-
-            // Overall score
-            document.getElementById('result-score-number').textContent = total;
-
-            const badge = document.getElementById('result-category-badge');
-            badge.className = 'results-overall__category-badge ' + category.badgeClass;
-            badge.textContent = category.name;
-
-            document.getElementById('result-category-name').textContent = category.name;
-            document.getElementById('result-category-desc').textContent = category.description;
-
-            // Dimensions
-            renderDimensions();
-
-            // Show results
+        function showResults(){
+            var total=getTotalScore(),category=getScoreCategory(total);
+            document.getElementById('result-score-number').textContent=total;
+            var badge=document.getElementById('result-category-badge');
+            badge.className='results-overall__category-badge '+category.badgeClass;
+            badge.textContent=category.name;
+            document.getElementById('result-category-name').textContent=category.name;
+            document.getElementById('result-category-desc').textContent=category.description;
+            var dimScores={};
+            renderDimensions(dimScores);
+            document.getElementById('conclusion-text').innerHTML=generateConclusion(total,dimScores);
             resultsSection.classList.add('is-visible');
-
-            // Smooth scroll to results
-            setTimeout(function () {
-                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-
-            // Animate bars after a short delay (allow DOM to paint)
-            setTimeout(function () {
-                animateDimensionBars();
-            }, 400);
+            setTimeout(function(){resultsSection.scrollIntoView({behavior:'smooth',block:'start'});},100);
+            setTimeout(function(){animateDimensionBars();},400);
         }
 
-        function renderDimensions() {
-            const container = document.getElementById('dimension-results');
-            container.innerHTML = '';
-
-            DIMENSIONS.forEach(function (dim) {
-                const score = getDimensionScore(dim);
-                const pct = (score / dim.max) * 100;
-                const itemClass = getDimensionItemClass(score, dim.max);
-                const barClass = getDimensionBarClass(score, dim.max);
-                const recommendation = dim.recommendations(score);
-                const scoreLabel = dim.max === 4 ? score + '/4' : score + '/8';
-
-                const el = document.createElement('div');
-                el.className = 'dimension-item ' + itemClass;
-                el.setAttribute('data-bar-pct', pct);
-
-                el.innerHTML = [
-                    '<div class="dimension-item__header">',
-                        '<span class="dimension-item__name">' + escapeHtml(dim.name) + '</span>',
-                        '<span class="dimension-item__score-text">' + scoreLabel + '</span>',
-                    '</div>',
-                    '<div class="dimension-bar-track" aria-hidden="true">',
-                        '<div class="dimension-bar-fill ' + barClass + '" style="width: 0%"></div>',
-                    '</div>',
-                    '<p class="dimension-item__recommendation">' + escapeHtml(recommendation) + '</p>'
-                ].join('');
-
+        function renderDimensions(dimScores){
+            var container=document.getElementById('dimension-results');
+            container.innerHTML='';
+            DIMENSIONS.forEach(function(dim){
+                var score=getDimensionScore(dim);
+                dimScores[dim.id]=score;
+                var pct=(score/dim.max)*100;
+                var el=document.createElement('div');
+                el.className='dimension-item '+getDimensionItemClass(score,dim.max);
+                el.setAttribute('data-bar-pct',pct);
+                el.innerHTML='<div class="dimension-item__header"><span class="dimension-item__name">'+escapeHtml(dim.name)+'</span><span class="dimension-item__score-text">'+score+'/'+dim.max+'</span></div><div class="dimension-bar-track" aria-hidden="true"><div class="dimension-bar-fill '+getDimensionBarClass(score,dim.max)+'" style="width:0%"></div></div><div class="dimension-item__recommendation">'+dim.getResultText(score)+'</div>';
                 container.appendChild(el);
             });
         }
 
-        function animateDimensionBars() {
-            const items = document.querySelectorAll('.dimension-item');
-            items.forEach(function (item, index) {
-                const pct = parseFloat(item.getAttribute('data-bar-pct'));
-                const fill = item.querySelector('.dimension-bar-fill');
-                // Stagger
-                setTimeout(function () {
-                    fill.style.width = pct + '%';
-                }, index * 100);
+        function animateDimensionBars(){
+            document.querySelectorAll('.dimension-item').forEach(function(item,i){
+                var pct=parseFloat(item.getAttribute('data-bar-pct'));
+                var fill=item.querySelector('.dimension-bar-fill');
+                setTimeout(function(){fill.style.width=pct+'%';},i*100);
             });
         }
 
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.appendChild(document.createTextNode(str));
-            return div.innerHTML;
-        }
+        function escapeHtml(str){var d=document.createElement('div');d.appendChild(document.createTextNode(str));return d.innerHTML;}
 
-        // ============================================================
-        // SAVE RESULTS
-        // ============================================================
-
-        saveBtn.addEventListener('click', function () {
-            const total = getTotalScore();
-            const category = getScoreCategory(total);
-
-            const dimensionSummary = DIMENSIONS.map(function (dim) {
-                const score = getDimensionScore(dim);
-                return dim.name + ' ' + score + '/' + dim.max;
-            }).join(', ');
-
-            const text = [
-                'Academic Transformation Readiness Assessment',
-                'Score: ' + total + '/32 — ' + category.name,
-                'Dimensions: ' + dimensionSummary,
-                'Assessed via Learning Design Solutions (learningdesignsolutions.co.uk)'
-            ].join('\n');
-
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(function () {
-                    showCopiedFeedback();
-                }).catch(function () {
-                    fallbackCopy(text);
-                });
-            } else {
-                fallbackCopy(text);
-            }
+        saveBtn.addEventListener('click',function(){
+            var total=getTotalScore(),category=getScoreCategory(total);
+            var ds=DIMENSIONS.map(function(d){return d.name+' '+getDimensionScore(d)+'/'+d.max;}).join(', ');
+            var text='Academic Transformation Readiness Assessment\nScore: '+total+'/48 \u2014 '+category.name+'\nDimensions: '+ds+'\nAssessed via Learning Design Solutions (learningdesignsolutions.co.uk)';
+            if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(showCopiedFeedback).catch(function(){fallbackCopy(text);});}
+            else{fallbackCopy(text);}
         });
 
-        function fallbackCopy(text) {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            try {
-                document.execCommand('copy');
-                showCopiedFeedback();
-            } catch (e) {
-                // Silent fail — clipboard access not available
-            }
-            document.body.removeChild(ta);
-        }
+        function fallbackCopy(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');showCopiedFeedback();}catch(e){}document.body.removeChild(ta);}
+        function showCopiedFeedback(){saveFeedback.classList.add('is-visible');setTimeout(function(){saveFeedback.classList.remove('is-visible');},3000);}
 
-        function showCopiedFeedback() {
-            saveFeedback.classList.add('is-visible');
-            setTimeout(function () {
-                saveFeedback.classList.remove('is-visible');
-            }, 3000);
-        }
+        (function(){document.querySelectorAll('input[type="radio"]').forEach(function(input){var q=input.closest('.question-block');if(\!q)return;var n='q'+q.getAttribute('data-question');if(input.name\!==n)input.name=n;});})();
 
-        // ============================================================
-        // FIX: Correct the radio name typo in Q2 option 3
-        // (The HTML has name="q3" on q2's third option — fix via JS)
-        // ============================================================
-        (function fixRadioNames() {
-            document.querySelectorAll('input[type="radio"]').forEach(function (input) {
-                const question = input.closest('.question-block');
-                if (!question) return;
-                const qNum = question.getAttribute('data-question');
-                const expectedName = 'q' + qNum;
-                if (input.name !== expectedName) {
-                    input.name = expectedName;
-                }
-            });
-        })();
-
-        // ============================================================
-        // INIT
-        // ============================================================
         updateProgress();
-
     })();
     </script>
 </body>

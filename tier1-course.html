@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Hidden Pitfalls — Free Course | Learning Design Solutions</title>
+    <meta name="description" content="A free interactive course from Learning Design Solutions. Learn the 5 hidden pitfalls that derail online learning projects in higher education.">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS — matched to LDS design system
+        ============================================================ */
+        :root {
+            --lds-navy:   #122159;
+            --lds-navy-dark: #0d1a40;
+            --lds-green:  #84cc16;
+            --lds-orange: #f97316;
+            --lds-dark:   #1f2937;
+            --lds-mid:    #374151;
+            --lds-muted:  #6b7280;
+            --lds-border: #e5e7eb;
+            --lds-light:  #f9fafb;
+            --lds-white:  #ffffff;
+            --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Merriweather', serif;
+
+            /* Platform layout dimensions */
+            --sidebar-width: 280px;
+            --topbar-height: 56px;
+        }
+
+        /* Sharp corners everywhere — LDS brand identity */
+        *, *::before, *::after {
+            border-radius: 0 !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--lds-dark);
+            background-color: var(--lds-light);
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            line-height: 1.25;
+        }
+
+        /* ============================================================
+           GATE SCREEN — email capture
+        ============================================================ */
+        #gate-screen {
+            min-height: 100vh;
+            background: linear-gradient(155deg, var(--lds-navy) 0%, #0d1a40 55%, #1a2e6b 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Subtle grid texture */
+        #gate-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(132,204,22,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(132,204,22,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .gate-card {
+            position: relative;
+            z-index: 1;
+            background-color: var(--lds-white);
+            border-top: 4px solid var(--lds-green);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+            max-width: 560px;
+            width: 100%;
+            padding: 3rem 2.5rem;
+        }
+
+        @media (max-width: 575.98px) {
+            .gate-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .gate-card__logo {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--lds-navy);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gate-card__logo span {
+            color: var(--lds-green);
+        }
+
+        .gate-card__badge {
+            display: inline-block;
+            background-color: var(--lds-green);
+            color: var(--lds-dark);
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .gate-card__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.375rem, 3.5vw, 1.875rem);
+            color: var(--lds-navy);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .gate-card__subtitle {
+            font-size: 0.9375rem;
+            color: var(--lds-muted);
+            margin-bottom: 1.75rem;
+        }
+
+        .gate-card__features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+        }
+
+        .gate-card__features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.625rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--lds-dark);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--lds-border);
+        }
+
+        .gate-card__features li:last-child {
+            border-bottom: none;
+        }
+
+        .gate-card__features li i {
+            color: var(--lds-green);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2em;
+        }
+
+        .gate-card__divider {
+            border: none;
+            border-top: 2px solid var(--lds-border);
+            margin: 1.75rem 0;
+        }
+
+        .gate-card__form-label {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--lds-dark);
+            margin-bottom: 0.375rem;
+            display: block;
+        }
+
+        .gate-card__input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--lds-border);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--lds-dark);
+            background-color: var(--lds-white);
+            transition: border-color 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .gate-card__input:focus {
+            outline: none;
+            border-color: var(--lds-navy);
+            box-shadow: 0 0 0 3px rgba(18,33,89,0.1);
+        }
+
+        .gate-card__submit {
+            width: 100%;
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.875rem 2rem;
+            border: 2px solid var(--lds-orange);
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .gate-card__submit:hover {
+            background-color: #ea6c0a;
+            border-color: #ea6c0a;
+        }
+
+        .gate-card__privacy {
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--lds-muted);
+            margin-top: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        .gate-card__author {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            margin-bottom: 1.75rem;
+            padding: 1rem;
+            background-color: var(--lds-light);
+            border-left: 4px solid var(--lds-orange);
+        }
+
+        .gate-card__author-avatar {
+            width: 48px;
+            height: 48px;
+            background-color: var(--lds-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--lds-green);
+            font-size: 1.25rem;
+        }
+
+        .gate-card__author-name {
+            font-weight: 700;
+            font-size: 0.9375rem;
+            color: var(--lds-navy);
+            margin-bottom: 0.125rem;
+        }
+
+        .gate-card__author-role {
+            font-size: 0.8125rem;
+            color: var(--lds-muted);
+        }
+
+        /* ============================================================
+           COURSE PLATFORM — top bar
+        ============================================================ */
+        #course-platform {
+            display: none; /* shown after gate */
+            min-height: 100vh;
+        }
+
+        .platform-topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topbar-height);
+            background-color: var(--lds-navy);
+            border-bottom: 3px solid var(--lds-green);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 1.25rem;
+            gap: 1rem;
+        }
+
+        .platform-topbar__logo {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .platform-topbar__logo span {
+            color: var(--lds-green);
+        }
+
+        .platform-topbar__divider {
+            width: 1px;
+            height: 20px;
+            background-color: rgba(255,255,255,0.2);
+            flex-shrink: 0;
+        }
+
+        .platform-topbar__course-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+
+        /* Progress bar in top bar */
+        .platform-topbar__progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            flex-shrink: 0;
+        }
+
+        .platform-topbar__progress-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.65);
+            white-space: nowrap;
+        }
+
+        .platform-topbar__progress-bar-track {
+            width: 120px;
+            height: 6px;
+            background-color: rgba(255,255,255,0.15);
+            position: relative;
+        }
+
+        .platform-topbar__progress-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: var(--lds-green);
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        /* Mobile sidebar toggle */
+        .platform-topbar__menu-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: var(--lds-white);
+            padding: 0.375rem 0.625rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .platform-topbar__menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .platform-topbar__progress-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+           COURSE PLATFORM — layout shell
+        ============================================================ */
+        .platform-shell {
+            display: flex;
+            margin-top: var(--topbar-height);
+            min-height: calc(100vh - var(--topbar-height));
+        }
+
+        /* ============================================================
+           SIDEBAR — lesson navigation
+        ============================================================ */
+        .course-sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            background-color: var(--lds-navy-dark);
+            position: fixed;
+            top: var(--topbar-height);
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .course-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .course-sidebar::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .course-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .course-sidebar__header {
+            padding: 1.25rem 1.25rem 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .course-sidebar__course-label {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin-bottom: 0.375rem;
+        }
+
+        .course-sidebar__course-name {
+            font-family: var(--font-display);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        /* Progress summary in sidebar */
+        .course-sidebar__progress-summary {
+            padding: 0.875rem 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .course-sidebar__progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-sidebar__progress-track {
+            height: 4px;
+            background-color: rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .course-sidebar__progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: var(--lds-green);
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        /* Nav items */
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.625rem 0;
+            margin: 0;
+        }
+
+        .sidebar-nav__item {
+            position: relative;
+        }
+
+        .sidebar-nav__btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1.25rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: rgba(255,255,255,0.6);
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            line-height: 1.4;
+            transition: background-color 0.15s, color 0.15s;
+            position: relative;
+        }
+
+        .sidebar-nav__btn:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.9);
+        }
+
+        .sidebar-nav__btn.is-active {
+            background-color: rgba(132,204,22,0.1);
+            color: var(--lds-white);
+        }
+
+        .sidebar-nav__btn.is-active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--lds-green);
+        }
+
+        /* Lesson icon / status indicator */
+        .sidebar-nav__icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.4);
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            margin-top: 0.05em;
+        }
+
+        .sidebar-nav__btn.is-active .sidebar-nav__icon {
+            border-color: var(--lds-green);
+            color: var(--lds-green);
+        }
+
+        .sidebar-nav__btn.is-complete .sidebar-nav__icon {
+            background-color: var(--lds-green);
+            border-color: var(--lds-green);
+            color: var(--lds-navy);
+        }
+
+        .sidebar-nav__btn.is-complete {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .sidebar-nav__item-title {
+            flex: 1;
+        }
+
+        .sidebar-nav__item-subtitle {
+            display: block;
+            font-size: 0.6875rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.35);
+            margin-top: 0.125rem;
+            line-height: 1.3;
+        }
+
+        .sidebar-nav__btn.is-active .sidebar-nav__item-subtitle {
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Section separator in sidebar */
+        .sidebar-nav__section-label {
+            padding: 1rem 1.25rem 0.375rem;
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* Mobile overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 850;
+        }
+
+        @media (max-width: 991.98px) {
+            .course-sidebar {
+                transform: translateX(-100%);
+            }
+
+            .course-sidebar.is-open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.is-visible {
+                display: block;
+            }
+        }
+
+        /* ============================================================
+           MAIN CONTENT AREA
+        ============================================================ */
+        .course-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 991.98px) {
+            .course-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Individual lesson panels */
+        .lesson-panel {
+            display: none;
+            padding: 2.5rem 2.5rem 4rem;
+            max-width: 800px;
+        }
+
+        .lesson-panel.is-active {
+            display: block;
+        }
+
+        @media (max-width: 767.98px) {
+            .lesson-panel {
+                padding: 1.5rem 1.25rem 3rem;
+            }
+        }
+
+        /* Lesson header breadcrumb */
+        .lesson-breadcrumb {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--lds-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-breadcrumb__sep {
+            margin: 0 0.5rem;
+            color: var(--lds-border);
+        }
+
+        .lesson-breadcrumb__current {
+            color: var(--lds-orange);
+        }
+
+        /* Lesson eyebrow */
+        .lesson-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(18,33,89,0.07);
+            border-left: 3px solid var(--lds-orange);
+            padding: 0.375rem 0.875rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--lds-navy);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Lesson title */
+        .lesson-title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            color: var(--lds-navy);
+            line-height: 1.15;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================================
+           VIDEO PLACEHOLDER
+        ============================================================ */
+        .lesson-video-area {
+            background-color: #1a2038;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 ratio */
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(18,33,89,0.15);
+            overflow: hidden;
+        }
+
+        /* Subtle grid on video */
+        .lesson-video-area::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(132,204,22,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(132,204,22,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .lesson-video-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .lesson-video-play-icon {
+            width: 72px;
+            height: 72px;
+            background-color: var(--lds-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--lds-white);
+            font-size: 2rem;
+            padding-left: 0.25rem; /* optical centering of play triangle */
+            opacity: 0.92;
+        }
+
+        .lesson-video-title {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 0.04em;
+        }
+
+        .lesson-video-author {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .lesson-video-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--lds-navy);
+            border: 1px solid rgba(132,204,22,0.3);
+            color: var(--lds-green);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.625rem;
+        }
+
+        /* ============================================================
+           LESSON BODY CONTENT
+        ============================================================ */
+        .lesson-body p {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: var(--lds-dark);
+            margin-bottom: 1.25rem;
+        }
+
+        .lesson-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Pullquote */
+        .lesson-pullquote {
+            border-left: 5px solid var(--lds-green);
+            padding: 1.125rem 1.625rem;
+            margin: 2rem 0;
+            background-color: rgba(132,204,22,0.05);
+        }
+
+        .lesson-pullquote__text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1875rem;
+            font-style: italic;
+            color: var(--lds-navy);
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        /* Stat callout */
+        .lesson-stat {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+            padding: 1.75rem 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--lds-orange);
+        }
+
+        .lesson-stat__text {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--lds-white);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Highlight box */
+        .lesson-highlight {
+            background-color: #f0fdf4;
+            border-left: 5px solid var(--lds-green);
+            padding: 1.25rem 1.625rem;
+            margin: 2rem 0;
+        }
+
+        .lesson-highlight__text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--lds-dark);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        /* Principle callout */
+        .lesson-principle {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--lds-navy);
+            border-left: 5px solid var(--lds-green);
+            padding: 0.875rem 1.375rem;
+            margin: 2rem 0;
+            background-color: rgba(132,204,22,0.06);
+        }
+
+        /* ============================================================
+           KEY TAKEAWAYS BOX
+        ============================================================ */
+        .lesson-takeaways {
+            background-color: var(--lds-navy);
+            padding: 2rem;
+            margin-top: 2.5rem;
+            border-top: 4px solid var(--lds-green);
+        }
+
+        .lesson-takeaways__header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .lesson-takeaways__icon {
+            color: var(--lds-green);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .lesson-takeaways__title {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin: 0;
+        }
+
+        .lesson-takeaways__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lesson-takeaways__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.625rem 0;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.88);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            line-height: 1.55;
+        }
+
+        .lesson-takeaways__list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .lesson-takeaways__list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            background-color: var(--lds-orange);
+            margin-top: 0.45em;
+        }
+
+        /* ============================================================
+           MARK AS COMPLETE
+        ============================================================ */
+        .lesson-complete-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1.25rem 1.5rem;
+            background-color: var(--lds-white);
+            border: 2px solid var(--lds-border);
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .lesson-complete-row:hover {
+            border-color: var(--lds-green);
+        }
+
+        .lesson-complete-row.is-checked {
+            border-color: var(--lds-green);
+            background-color: #f0fdf4;
+        }
+
+        .lesson-complete-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--lds-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background-color 0.2s, border-color 0.2s;
+            color: transparent;
+        }
+
+        .lesson-complete-row.is-checked .lesson-complete-checkbox {
+            background-color: var(--lds-green);
+            border-color: var(--lds-green);
+            color: var(--lds-navy);
+        }
+
+        .lesson-complete-label {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--lds-mid);
+        }
+
+        .lesson-complete-row.is-checked .lesson-complete-label {
+            color: #166534;
+        }
+
+        /* ============================================================
+           LESSON NAVIGATION BUTTONS
+        ============================================================ */
+        .lesson-nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .lesson-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            text-decoration: none;
+        }
+
+        .lesson-nav-btn--next {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            border-color: var(--lds-orange);
+        }
+
+        .lesson-nav-btn--next:hover {
+            background-color: #ea6c0a;
+            border-color: #ea6c0a;
+            color: var(--lds-white);
+        }
+
+        .lesson-nav-btn--prev {
+            background-color: transparent;
+            color: var(--lds-navy);
+            border-color: var(--lds-navy);
+        }
+
+        .lesson-nav-btn--prev:hover {
+            background-color: var(--lds-navy);
+            color: var(--lds-white);
+        }
+
+        /* ============================================================
+           INTRODUCTION PANEL — special styling
+        ============================================================ */
+        .lesson-intro-hero {
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1a2e6b 100%);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--lds-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-intro-hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132,204,22,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .lesson-intro-hero__eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--lds-green);
+            margin-bottom: 1rem;
+        }
+
+        .lesson-intro-hero__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.375rem, 3vw, 2rem);
+            color: var(--lds-white);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-intro-hero__meta {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* What you'll learn box */
+        .lesson-overview-box {
+            background-color: var(--lds-white);
+            border: 2px solid var(--lds-border);
+            border-top: 4px solid var(--lds-navy);
+            padding: 1.75rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-overview-box__title {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-navy);
+            margin-bottom: 1.25rem;
+        }
+
+        .lesson-overview-box__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lesson-overview-box__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--lds-dark);
+            border-bottom: 1px solid var(--lds-border);
+        }
+
+        .lesson-overview-box__list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .lesson-overview-box__list li i {
+            color: var(--lds-orange);
+            font-size: 0.9375rem;
+            flex-shrink: 0;
+            margin-top: 0.2em;
+        }
+
+        /* ============================================================
+           END SCREEN — congratulations + CTAs
+        ============================================================ */
+        #end-screen-panel {
+            display: none; /* shown after lesson 5 */
+        }
+
+        .end-screen {
+            padding: 2.5rem;
+            max-width: 800px;
+        }
+
+        @media (max-width: 767.98px) {
+            .end-screen {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        .end-screen__congrats-banner {
+            background: linear-gradient(135deg, var(--lds-navy) 0%, #1a2e6b 100%);
+            border-top: 4px solid var(--lds-green);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .end-screen__congrats-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(132,204,22,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(132,204,22,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .end-screen__congrats-icon {
+            font-size: 3rem;
+            color: var(--lds-green);
+            margin-bottom: 1rem;
+            display: block;
+            position: relative;
+        }
+
+        .end-screen__congrats-title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            color: var(--lds-white);
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .end-screen__congrats-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        /* Pitfall summary cards */
+        .end-screen__summary-title {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .end-screen__pitfall-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2.5rem;
+        }
+
+        .end-screen__pitfall-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background-color: var(--lds-white);
+            border: 1px solid var(--lds-border);
+            border-left: 4px solid var(--lds-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .end-screen__pitfall-num {
+            flex-shrink: 0;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--lds-green);
+            opacity: 0.5;
+            line-height: 1;
+            margin-top: 0.1em;
+        }
+
+        .end-screen__pitfall-text {
+            font-weight: 700;
+            font-size: 0.9375rem;
+            color: var(--lds-navy);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .end-screen__pitfall-sub {
+            font-size: 0.8125rem;
+            font-weight: 400;
+            color: var(--lds-muted);
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* CTA section */
+        .end-screen__cta-box {
+            background-color: var(--lds-navy);
+            padding: 2.5rem 2rem;
+            border-top: 4px solid var(--lds-orange);
+        }
+
+        .end-screen__cta-title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+            color: var(--lds-white);
+            margin-bottom: 0.75rem;
+        }
+
+        .end-screen__cta-text {
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 1.75rem;
+            line-height: 1.7;
+        }
+
+        .end-screen__cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-lds-orange {
+            background-color: var(--lds-orange);
+            color: var(--lds-white);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            padding: 0.8125rem 1.75rem;
+            border: 2px solid var(--lds-orange);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn-lds-orange:hover {
+            background-color: #ea6c0a;
+            border-color: #ea6c0a;
+            color: var(--lds-white);
+        }
+
+        .btn-lds-outline-white {
+            background-color: transparent;
+            color: var(--lds-white);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            padding: 0.8125rem 1.75rem;
+            border: 2px solid rgba(255,255,255,0.45);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn-lds-outline-white:hover {
+            background-color: rgba(255,255,255,0.08);
+            border-color: var(--lds-white);
+            color: var(--lds-white);
+        }
+
+        /* ============================================================
+           RESPONSIVE ADJUSTMENTS
+        ============================================================ */
+        @media (max-width: 767.98px) {
+            .lesson-takeaways {
+                padding: 1.5rem;
+            }
+
+            .lesson-stat {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .end-screen__cta-buttons {
+                flex-direction: column;
+            }
+
+            .lesson-nav-buttons {
+                flex-direction: column-reverse;
+            }
+
+            .lesson-nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         GATE SCREEN — shown first
+    ============================================================ -->
+    <div id="gate-screen" role="main" aria-label="Course registration">
+        <div class="gate-card" role="region" aria-labelledby="gate-title">
+
+            <a href="index.html" class="gate-card__logo">
+                Learning Design <span>Solutions</span>
+            </a>
+
+            <div class="gate-card__badge" aria-label="Free interactive course">
+                Free Interactive Course
+            </div>
+
+            <h1 class="gate-card__title" id="gate-title">
+                Scaling online programs without compromising quality
+            </h1>
+
+            <p class="gate-card__subtitle">
+                A free interactive course from Learning Design Solutions
+            </p>
+
+            <div class="gate-card__author" role="note" aria-label="Course author">
+                <div class="gate-card__author-avatar" aria-hidden="true">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div>
+                    <p class="gate-card__author-name">Andrew Doig</p>
+                    <p class="gate-card__author-role">Founder, Learning Design Solutions &middot; 30 years in HE</p>
+                </div>
+            </div>
+
+            <ul class="gate-card__features" aria-label="What this course covers">
+                <li>
+                    <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                    <span>5 video lessons with Andrew Doig</span>
+                </li>
+                <li>
+                    <i class="bi bi-check2-circle" aria-hidden="true"></i>
+                    <span>The 5 hidden pitfalls that derail online learning projects</span>
+                </li>
+                <li>
+                    <i class="bi bi-lightbulb-fill" aria-hidden="true"></i>
+                    <span>Key takeaways and practical guidance per lesson</span>
+                </li>
+                <li>
+                    <i class="bi bi-clock-fill" aria-hidden="true"></i>
+                    <span>15–20 minutes total &middot; Self-paced</span>
+                </li>
+            </ul>
+
+            <hr class="gate-card__divider" aria-hidden="true">
+
+            <form id="gate-form" novalidate>
+                <label class="gate-card__form-label" for="gate-email">
+                    Work email address
+                </label>
+                <input
+                    type="email"
+                    id="gate-email"
+                    class="gate-card__input"
+                    placeholder="you@institution.ac.uk"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="gate-email-error"
+                >
+                <div id="gate-email-error" role="alert" aria-live="polite" style="font-size:0.8125rem;color:var(--lds-orange);margin-top:-0.5rem;margin-bottom:0.875rem;display:none;">
+                    Please enter a valid email address.
+                </div>
+
+                <button type="submit" class="gate-card__submit" id="gate-submit">
+                    Start the course &nbsp;&rarr;
+                </button>
+
+                <p class="gate-card__privacy">
+                    <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+                    We respect your privacy. No spam, ever. Unsubscribe at any time.
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- ============================================================
+         COURSE PLATFORM — revealed after gate
+    ============================================================ -->
+    <div id="course-platform" aria-label="Course platform">
+
+        <!-- Top bar -->
+        <header class="platform-topbar" role="banner">
+            <button
+                class="platform-topbar__menu-btn"
+                id="sidebar-toggle"
+                aria-expanded="false"
+                aria-controls="course-sidebar"
+                aria-label="Toggle lesson navigation"
+            >
+                <i class="bi bi-list" style="font-size:1.25rem;" aria-hidden="true"></i>
+            </button>
+
+            <a href="index.html" class="platform-topbar__logo" aria-label="Learning Design Solutions — home">
+                LDS <span>Courses</span>
+            </a>
+
+            <div class="platform-topbar__divider" aria-hidden="true"></div>
+
+            <p class="platform-topbar__course-title" aria-label="Course: 5 hidden pitfalls that derail online learning projects">
+                5 Hidden Pitfalls That Derail Online Learning Projects
+            </p>
+
+            <!-- Progress bar -->
+            <div class="platform-topbar__progress-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Course completion">
+                <span class="platform-topbar__progress-label" id="topbar-progress-label" aria-live="polite">0% complete</span>
+                <div class="platform-topbar__progress-bar-track" aria-hidden="true">
+                    <div class="platform-topbar__progress-bar-fill" id="topbar-progress-fill"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar overlay (mobile) -->
+        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+        <!-- Platform shell: sidebar + content -->
+        <div class="platform-shell">
+
+            <!-- ============================================================
+                 LEFT SIDEBAR — lesson list
+            ============================================================ -->
+            <nav class="course-sidebar" id="course-sidebar" aria-label="Lesson navigation">
+
+                <div class="course-sidebar__header">
+                    <p class="course-sidebar__course-label" aria-hidden="true">Course Contents</p>
+                    <h2 class="course-sidebar__course-name">5 Hidden Pitfalls</h2>
+                </div>
+
+                <div class="course-sidebar__progress-summary" aria-hidden="true">
+                    <div class="course-sidebar__progress-text">
+                        <span>Your progress</span>
+                        <span id="sidebar-progress-pct">0%</span>
+                    </div>
+                    <div class="course-sidebar__progress-track">
+                        <div class="course-sidebar__progress-fill" id="sidebar-progress-fill"></div>
+                    </div>
+                </div>
+
+                <ul class="sidebar-nav" role="list">
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn is-active"
+                            data-lesson="intro"
+                            aria-current="true"
+                            aria-label="Introduction: Welcome to the course"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">
+                                <i class="bi bi-house-door"></i>
+                            </span>
+                            <span class="sidebar-nav__item-title">
+                                Introduction
+                                <span class="sidebar-nav__item-subtitle">Welcome to the course</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__section-label" aria-hidden="true">The 5 Pitfalls</li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="lesson-1"
+                            aria-label="Lesson 1: Recording lectures and calling it online learning"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">1</span>
+                            <span class="sidebar-nav__item-title">
+                                Recording lectures and calling it online learning
+                                <span class="sidebar-nav__item-subtitle">Pitfall 1</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="lesson-2"
+                            aria-label="Lesson 2: Underestimating the design work by a factor of ten"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">2</span>
+                            <span class="sidebar-nav__item-title">
+                                Underestimating the expertise required
+                                <span class="sidebar-nav__item-subtitle">Pitfall 2</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="lesson-3"
+                            aria-label="Lesson 3: Overloading internal teams"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">3</span>
+                            <span class="sidebar-nav__item-title">
+                                Overloading internal teams who are already stretched
+                                <span class="sidebar-nav__item-subtitle">Pitfall 3</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="lesson-4"
+                            aria-label="Lesson 4: Losing your institutional identity online"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">4</span>
+                            <span class="sidebar-nav__item-title">
+                                Losing your institutional identity online
+                                <span class="sidebar-nav__item-subtitle">Pitfall 4</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="lesson-5"
+                            aria-label="Lesson 5: Building for a platform instead of building for learners"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">5</span>
+                            <span class="sidebar-nav__item-title">
+                                Building for a platform instead of learners
+                                <span class="sidebar-nav__item-subtitle">Pitfall 5</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="sidebar-nav__section-label" aria-hidden="true">Wrap-up</li>
+
+                    <li class="sidebar-nav__item" role="listitem">
+                        <button
+                            class="sidebar-nav__btn"
+                            data-lesson="summary"
+                            aria-label="Course summary and next steps"
+                        >
+                            <span class="sidebar-nav__icon" aria-hidden="true">
+                                <i class="bi bi-flag"></i>
+                            </span>
+                            <span class="sidebar-nav__item-title">
+                                Summary &amp; next steps
+                                <span class="sidebar-nav__item-subtitle">What comes next</span>
+                            </span>
+                        </button>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- ============================================================
+                 MAIN CONTENT — lesson panels
+            ============================================================ -->
+            <main class="course-content" id="course-content" role="main">
+
+                <!-- ==================== INTRODUCTION ==================== -->
+                <div class="lesson-panel is-active" id="panel-intro" role="region" aria-labelledby="intro-heading">
+
+                    <div class="lesson-intro-hero" role="banner">
+                        <p class="lesson-intro-hero__eyebrow">Free course from Learning Design Solutions</p>
+                        <h1 class="lesson-intro-hero__title" id="intro-heading">
+                            5 Hidden Pitfalls That Derail Online Learning Projects in Higher Education
+                        </h1>
+                        <p class="lesson-intro-hero__meta">
+                            By <strong style="color:var(--lds-white);">Andrew Doig</strong> &nbsp;&middot;&nbsp;
+                            Founder, Learning Design Solutions &nbsp;&middot;&nbsp; 30 years in HE &nbsp;&middot;&nbsp;
+                            5 lessons &nbsp;&middot;&nbsp; ~20 minutes
+                        </p>
+                    </div>
+
+                    <div class="lesson-overview-box" role="note" aria-label="What you will learn in this course">
+                        <p class="lesson-overview-box__title">What you'll learn in this course</p>
+                        <ul class="lesson-overview-box__list">
+                            <li>
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                Why recording lectures and uploading them is not online learning
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                How much design work online programmes actually require
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                Why overloading internal teams leads to burnout and poor results
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                How to maintain your institutional identity in the online environment
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                Why pedagogy must always drive technology — not the other way around
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            Every year, universities and professional bodies invest significant resources into taking their programmes online. And every year, many of these projects fall short — not because of technology failures, but because of fundamental misunderstandings about what online learning actually requires.
+                        </p>
+                        <p>
+                            In this lesson, I'll explain what we'll be covering across the five lessons. In each one, we'll explore a specific pitfall we see repeatedly when institutions start this journey without the right expertise alongside them.
+                        </p>
+                        <p>
+                            After 30 years in higher education and having led academic transformation projects for institutions like ICAS, Dyson Institute, and Walbrook, these are the pitfalls we see most often. Understanding them is the first step to avoiding them.
+                        </p>
+                        <p>
+                            <strong>Use the lesson menu on the left to navigate between lessons.</strong> You can mark each lesson as complete using the checkbox at the bottom of each one. Work through them in order, or jump to the pitfall most relevant to where you are right now.
+                        </p>
+                    </div>
+
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-1" aria-label="Go to Lesson 1: Recording lectures and calling it online learning">
+                            Start Lesson 1: Recording lectures &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== LESSON 1 ==================== -->
+                <div class="lesson-panel" id="panel-lesson-1" role="region" aria-labelledby="lesson-1-heading">
+
+                    <p class="lesson-breadcrumb" aria-label="Course navigation">
+                        5 Hidden Pitfalls
+                        <span class="lesson-breadcrumb__sep" aria-hidden="true">/</span>
+                        <span class="lesson-breadcrumb__current">Pitfall 1</span>
+                    </p>
+
+                    <div class="lesson-eyebrow" aria-label="Lesson label">
+                        <i class="bi bi-camera-video" aria-hidden="true"></i>
+                        Lesson 1 of 5
+                    </div>
+
+                    <h2 class="lesson-title" id="lesson-1-heading">
+                        Recording lectures and calling it online learning
+                    </h2>
+
+                    <!-- Video placeholder -->
+                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — video by Andrew Doig coming soon">
+                        <div class="lesson-video-inner">
+                            <div class="lesson-video-play-icon" aria-hidden="true">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <p class="lesson-video-title">Pitfall 1: Recording lectures</p>
+                            <p class="lesson-video-author">Video lesson by Andrew Doig &nbsp;&middot;&nbsp; Coming soon</p>
+                        </div>
+                        <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            In this lesson, we'll explore the most common mistake we see when institutions decide to 'go online': recording existing lectures and uploading them to the VLE. The assumption is that what works in a lecture theatre will work on a screen. It doesn't.
+                        </p>
+                        <p>
+                            Online learning is a fundamentally different pedagogical experience. Students aren't sitting in a room with social cues, peer pressure to stay engaged, and a lecturer reading the room. They're alone, often distracted, and need entirely different kinds of engagement — structured activities, purposeful interactions, and content designed specifically for the medium.
+                        </p>
+                        <p>
+                            What we're describing here isn't digital transformation. It's <strong>academic transformation</strong> — rethinking how teaching and learning work when the classroom disappears. That's a far more significant undertaking than most institutions initially realise.
+                        </p>
+
+                        <blockquote class="lesson-pullquote" aria-label="Key insight">
+                            <p class="lesson-pullquote__text">
+                                "Taking courses online isn't a technology project. It's a teaching project."
+                            </p>
+                        </blockquote>
+
+                        <p>
+                            Next, we'll look at what that teaching project actually involves in terms of design effort — because the gap between expectations and reality here is often the largest single shock for programme teams.
+                        </p>
+                    </div>
+
+                    <!-- Key takeaways -->
+                    <div class="lesson-takeaways" role="note" aria-label="Key takeaways for Lesson 1">
+                        <div class="lesson-takeaways__header">
+                            <i class="bi bi-bookmark-star-fill lesson-takeaways__icon" aria-hidden="true"></i>
+                            <p class="lesson-takeaways__title">Key takeaways</p>
+                        </div>
+                        <ul class="lesson-takeaways__list">
+                            <li>Recorded lectures are a starting point, not a finished online course</li>
+                            <li>Online learners need structured activities, interactions, and purpose-built content</li>
+                            <li>Going online requires academic transformation, not just technology</li>
+                            <li>The pedagogical design is what determines whether students engage and complete</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mark as complete -->
+                    <div class="lesson-complete-row" id="complete-lesson-1" role="checkbox" aria-checked="false" aria-label="Mark lesson 1 as complete" tabindex="0">
+                        <div class="lesson-complete-checkbox" aria-hidden="true">
+                            <i class="bi bi-check2" style="font-size:1rem;"></i>
+                        </div>
+                        <span class="lesson-complete-label">Mark lesson as complete</span>
+                    </div>
+
+                    <!-- Lesson navigation -->
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="intro" aria-label="Go back to Introduction">
+                            &larr; Introduction
+                        </button>
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-2" aria-label="Go to Lesson 2: Underestimating the expertise required">
+                            Lesson 2: Underestimating expertise &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== LESSON 2 ==================== -->
+                <div class="lesson-panel" id="panel-lesson-2" role="region" aria-labelledby="lesson-2-heading">
+
+                    <p class="lesson-breadcrumb" aria-label="Course navigation">
+                        5 Hidden Pitfalls
+                        <span class="lesson-breadcrumb__sep" aria-hidden="true">/</span>
+                        <span class="lesson-breadcrumb__current">Pitfall 2</span>
+                    </p>
+
+                    <div class="lesson-eyebrow" aria-label="Lesson label">
+                        <i class="bi bi-rulers" aria-hidden="true"></i>
+                        Lesson 2 of 5
+                    </div>
+
+                    <h2 class="lesson-title" id="lesson-2-heading">
+                        Underestimating the design work by a factor of ten
+                    </h2>
+
+                    <!-- Video placeholder -->
+                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — video by Andrew Doig coming soon">
+                        <div class="lesson-video-inner">
+                            <div class="lesson-video-play-icon" aria-hidden="true">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <p class="lesson-video-title">Pitfall 2: Underestimating the expertise required</p>
+                            <p class="lesson-video-author">Video lesson by Andrew Doig &nbsp;&middot;&nbsp; Coming soon</p>
+                        </div>
+                        <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            In this lesson, we'll explore the second major pitfall: dramatically underestimating how much work building online courses actually involves. Most institutions budget for 'some content development' when what they actually need is a complete course architecture.
+                        </p>
+                        <p>
+                            That architecture includes: learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, and quality assurance testing. The design work for a single online module typically requires 3–5 times the effort of preparing the equivalent face-to-face teaching.
+                        </p>
+                        <p>
+                            For a full programme, multiply that across every module. The numbers quickly become significant — and they're numbers that catch most institutions off guard when they first see a realistic project plan.
+                        </p>
+
+                        <aside class="lesson-stat" aria-label="Key statistic">
+                            <p class="lesson-stat__text">
+                                A single online module typically requires 3–5 times the effort of preparing equivalent face-to-face teaching. For a full programme, multiply that across every module.
+                            </p>
+                        </aside>
+
+                        <p>
+                            We've seen projects stall not because of lack of ambition, but because the initial scoping dramatically underestimated what 'building an online course' actually involves. Getting the scope right at the outset — with realistic timelines and resource commitments — is one of the highest-value things you can do before committing to a programme.
+                        </p>
+                        <p>
+                            Next, we'll look at what happens when institutions try to absorb this effort into teams that are already running at capacity.
+                        </p>
+                    </div>
+
+                    <!-- Key takeaways -->
+                    <div class="lesson-takeaways" role="note" aria-label="Key takeaways for Lesson 2">
+                        <div class="lesson-takeaways__header">
+                            <i class="bi bi-bookmark-star-fill lesson-takeaways__icon" aria-hidden="true"></i>
+                            <p class="lesson-takeaways__title">Key takeaways</p>
+                        </div>
+                        <ul class="lesson-takeaways__list">
+                            <li>A complete online course requires full course architecture, not just content</li>
+                            <li>Expect 3–5x more design effort than equivalent face-to-face teaching</li>
+                            <li>Scope and resource planning at the outset prevents costly mid-project stalls</li>
+                            <li>Underscoping is the single most common cause of quality compromise</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mark as complete -->
+                    <div class="lesson-complete-row" id="complete-lesson-2" role="checkbox" aria-checked="false" aria-label="Mark lesson 2 as complete" tabindex="0">
+                        <div class="lesson-complete-checkbox" aria-hidden="true">
+                            <i class="bi bi-check2" style="font-size:1rem;"></i>
+                        </div>
+                        <span class="lesson-complete-label">Mark lesson as complete</span>
+                    </div>
+
+                    <!-- Lesson navigation -->
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-1" aria-label="Go back to Lesson 1">
+                            &larr; Lesson 1: Recording lectures
+                        </button>
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-3" aria-label="Go to Lesson 3: Overloading internal teams">
+                            Lesson 3: Overloading your team &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== LESSON 3 ==================== -->
+                <div class="lesson-panel" id="panel-lesson-3" role="region" aria-labelledby="lesson-3-heading">
+
+                    <p class="lesson-breadcrumb" aria-label="Course navigation">
+                        5 Hidden Pitfalls
+                        <span class="lesson-breadcrumb__sep" aria-hidden="true">/</span>
+                        <span class="lesson-breadcrumb__current">Pitfall 3</span>
+                    </p>
+
+                    <div class="lesson-eyebrow" aria-label="Lesson label">
+                        <i class="bi bi-people" aria-hidden="true"></i>
+                        Lesson 3 of 5
+                    </div>
+
+                    <h2 class="lesson-title" id="lesson-3-heading">
+                        Overloading internal teams who are already stretched
+                    </h2>
+
+                    <!-- Video placeholder -->
+                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — video by Andrew Doig coming soon">
+                        <div class="lesson-video-inner">
+                            <div class="lesson-video-play-icon" aria-hidden="true">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <p class="lesson-video-title">Pitfall 3: Ignoring the student experience</p>
+                            <p class="lesson-video-author">Video lesson by Andrew Doig &nbsp;&middot;&nbsp; Coming soon</p>
+                        </div>
+                        <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            In this lesson, we'll explore a pitfall that's often invisible until it's too late: asking existing teams to absorb a major online programme development project on top of everything else they're already doing.
+                        </p>
+                        <p>
+                            Your internal learning design team — if you have one — is already supporting the entire institution. Asking them to also lead a major online programme development, on top of their existing responsibilities, leads to one outcome: burnout, missed deadlines, and compromised quality.
+                        </p>
+                        <p>
+                            The capacity problem isn't about capability. Your team may be excellent. It's about bandwidth. Large-scale academic transformation requires dedicated, focused resource that most institutions simply cannot free up internally without sacrificing something else.
+                        </p>
+
+                        <div class="lesson-highlight" role="note" aria-label="Key question to consider">
+                            <p class="lesson-highlight__text">
+                                The question isn't "can our team do this?" — it's "can our team do this AND everything else they're already responsible for?"
+                            </p>
+                        </div>
+
+                        <p>
+                            We'll also look at how this connects to quality. When teams are stretched, quality assurance is the first thing that gets cut — and that's precisely when the problems we covered in Lessons 1 and 2 compound. Next, we'll look at a subtler pitfall: what happens to your institutional identity when courses are built under pressure.
+                        </p>
+                    </div>
+
+                    <!-- Key takeaways -->
+                    <div class="lesson-takeaways" role="note" aria-label="Key takeaways for Lesson 3">
+                        <div class="lesson-takeaways__header">
+                            <i class="bi bi-bookmark-star-fill lesson-takeaways__icon" aria-hidden="true"></i>
+                            <p class="lesson-takeaways__title">Key takeaways</p>
+                        </div>
+                        <ul class="lesson-takeaways__list">
+                            <li>Internal team capability is not the issue — available capacity is</li>
+                            <li>Overloaded teams produce burnout, delays, and quality shortcuts</li>
+                            <li>Quality assurance is the first thing to fall when teams are stretched</li>
+                            <li>Dedicated resource for programme development protects both quality and your team's wellbeing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mark as complete -->
+                    <div class="lesson-complete-row" id="complete-lesson-3" role="checkbox" aria-checked="false" aria-label="Mark lesson 3 as complete" tabindex="0">
+                        <div class="lesson-complete-checkbox" aria-hidden="true">
+                            <i class="bi bi-check2" style="font-size:1rem;"></i>
+                        </div>
+                        <span class="lesson-complete-label">Mark lesson as complete</span>
+                    </div>
+
+                    <!-- Lesson navigation -->
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-2" aria-label="Go back to Lesson 2">
+                            &larr; Lesson 2: Underestimating expertise
+                        </button>
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-4" aria-label="Go to Lesson 4: Losing your institutional identity">
+                            Lesson 4: Institutional identity &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== LESSON 4 ==================== -->
+                <div class="lesson-panel" id="panel-lesson-4" role="region" aria-labelledby="lesson-4-heading">
+
+                    <p class="lesson-breadcrumb" aria-label="Course navigation">
+                        5 Hidden Pitfalls
+                        <span class="lesson-breadcrumb__sep" aria-hidden="true">/</span>
+                        <span class="lesson-breadcrumb__current">Pitfall 4</span>
+                    </p>
+
+                    <div class="lesson-eyebrow" aria-label="Lesson label">
+                        <i class="bi bi-building" aria-hidden="true"></i>
+                        Lesson 4 of 5
+                    </div>
+
+                    <h2 class="lesson-title" id="lesson-4-heading">
+                        Losing your institutional identity in the online version
+                    </h2>
+
+                    <!-- Video placeholder -->
+                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — video by Andrew Doig coming soon">
+                        <div class="lesson-video-inner">
+                            <div class="lesson-video-play-icon" aria-hidden="true">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <p class="lesson-video-title">Pitfall 4: Failing to plan for scale</p>
+                            <p class="lesson-video-author">Video lesson by Andrew Doig &nbsp;&middot;&nbsp; Coming soon</p>
+                        </div>
+                        <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            In this lesson, we'll explore a pitfall that becomes visible only after the course is live: the loss of the institutional identity that makes your programmes distinctive. This is one of the most underappreciated risks in the entire process.
+                        </p>
+                        <p>
+                            Your institution has a teaching philosophy, an academic culture, a distinct identity that students and the market recognise. When courses go online through generic templates or are outsourced to vendors who don't understand academia, that identity gets lost.
+                        </p>
+                        <p>
+                            The online version of your programme should feel unmistakably yours. Your content. Your academic voice. Your intellectual property. Your pedagogical approach. Not a white-label product that could belong to any institution.
+                        </p>
+
+                        <blockquote class="lesson-pullquote" aria-label="Key insight">
+                            <p class="lesson-pullquote__text">
+                                "Your content. Your identity. Your IP."
+                            </p>
+                        </blockquote>
+
+                        <p>
+                            When institutions work with vendors who treat online learning as a production process rather than an academic one, the result is often technically competent but institutionally anonymous. Students notice. And in a competitive market for online learners, that distinction matters enormously.
+                        </p>
+                        <p>
+                            Next, we'll look at the fifth and final pitfall — one that's deceptively easy to fall into even when you've done everything else well.
+                        </p>
+                    </div>
+
+                    <!-- Key takeaways -->
+                    <div class="lesson-takeaways" role="note" aria-label="Key takeaways for Lesson 4">
+                        <div class="lesson-takeaways__header">
+                            <i class="bi bi-bookmark-star-fill lesson-takeaways__icon" aria-hidden="true"></i>
+                            <p class="lesson-takeaways__title">Key takeaways</p>
+                        </div>
+                        <ul class="lesson-takeaways__list">
+                            <li>Your institutional identity is a competitive advantage — protect it online</li>
+                            <li>Generic templates and outsourced production erase what makes you distinctive</li>
+                            <li>Online courses should reflect your academic voice, values, and intellectual property</li>
+                            <li>Students and the market recognise authenticity — and its absence</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mark as complete -->
+                    <div class="lesson-complete-row" id="complete-lesson-4" role="checkbox" aria-checked="false" aria-label="Mark lesson 4 as complete" tabindex="0">
+                        <div class="lesson-complete-checkbox" aria-hidden="true">
+                            <i class="bi bi-check2" style="font-size:1rem;"></i>
+                        </div>
+                        <span class="lesson-complete-label">Mark lesson as complete</span>
+                    </div>
+
+                    <!-- Lesson navigation -->
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-3" aria-label="Go back to Lesson 3">
+                            &larr; Lesson 3: Overloading your team
+                        </button>
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-5" aria-label="Go to Lesson 5: Building for a platform instead of learners">
+                            Lesson 5: Platform vs learners &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== LESSON 5 ==================== -->
+                <div class="lesson-panel" id="panel-lesson-5" role="region" aria-labelledby="lesson-5-heading">
+
+                    <p class="lesson-breadcrumb" aria-label="Course navigation">
+                        5 Hidden Pitfalls
+                        <span class="lesson-breadcrumb__sep" aria-hidden="true">/</span>
+                        <span class="lesson-breadcrumb__current">Pitfall 5</span>
+                    </p>
+
+                    <div class="lesson-eyebrow" aria-label="Lesson label">
+                        <i class="bi bi-mortarboard" aria-hidden="true"></i>
+                        Lesson 5 of 5
+                    </div>
+
+                    <h2 class="lesson-title" id="lesson-5-heading">
+                        Building for a platform instead of building for learners
+                    </h2>
+
+                    <!-- Video placeholder -->
+                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — video by Andrew Doig coming soon">
+                        <div class="lesson-video-inner">
+                            <div class="lesson-video-play-icon" aria-hidden="true">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <p class="lesson-video-title">Pitfall 5: Neglecting ongoing quality assurance</p>
+                            <p class="lesson-video-author">Video lesson by Andrew Doig &nbsp;&middot;&nbsp; Coming soon</p>
+                        </div>
+                        <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
+                    </div>
+
+                    <div class="lesson-body">
+                        <p>
+                            In this final lesson, we'll explore the pitfall that's easiest to fall into even when you've navigated the first four successfully: making technology decisions first and fitting the learning design around the platform's capabilities.
+                        </p>
+                        <p>
+                            We see institutions choose or upgrade their VLE and then try to fit the learning design around what the platform supports. This is backwards. The pedagogy should drive the technology, not the other way around.
+                        </p>
+                        <p>
+                            A well-designed online course can work on virtually any modern VLE. The platform is a delivery mechanism, not the product. When you start with "what does Moodle support?" instead of "what do our learners need?", you end up with courses that are technically functional but pedagogically mediocre.
+                        </p>
+
+                        <div class="lesson-principle" role="note" aria-label="Guiding principle">
+                            Pedagogy first. Platform second. Always.
+                        </div>
+
+                        <p>
+                            This principle holds across every decision point in the course design process — from content structure and activity design, through to assessment and quality assurance. When you start with learner needs and let those drive your technology choices, you end up with courses that actually work.
+                        </p>
+                        <p>
+                            That's the core insight across all five lessons: online learning succeeds when institutions treat it as a teaching challenge first, and a technology challenge second.
+                        </p>
+                    </div>
+
+                    <!-- Key takeaways -->
+                    <div class="lesson-takeaways" role="note" aria-label="Key takeaways for Lesson 5">
+                        <div class="lesson-takeaways__header">
+                            <i class="bi bi-bookmark-star-fill lesson-takeaways__icon" aria-hidden="true"></i>
+                            <p class="lesson-takeaways__title">Key takeaways</p>
+                        </div>
+                        <ul class="lesson-takeaways__list">
+                            <li>Pedagogy must drive technology decisions — not the other way around</li>
+                            <li>Start with "what do our learners need?", not "what does our platform support?"</li>
+                            <li>A well-designed course works on any modern VLE — the platform is the delivery vehicle</li>
+                            <li>Technology-first thinking produces courses that are functional but pedagogically weak</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mark as complete -->
+                    <div class="lesson-complete-row" id="complete-lesson-5" role="checkbox" aria-checked="false" aria-label="Mark lesson 5 as complete" tabindex="0">
+                        <div class="lesson-complete-checkbox" aria-hidden="true">
+                            <i class="bi bi-check2" style="font-size:1rem;"></i>
+                        </div>
+                        <span class="lesson-complete-label">Mark lesson as complete</span>
+                    </div>
+
+                    <!-- Lesson navigation -->
+                    <div class="lesson-nav-buttons">
+                        <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-4" aria-label="Go back to Lesson 4">
+                            &larr; Lesson 4: Institutional identity
+                        </button>
+                        <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="summary" aria-label="Go to course summary and next steps">
+                            See course summary &rarr;
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==================== END / SUMMARY SCREEN ==================== -->
+                <div class="lesson-panel" id="panel-summary" role="region" aria-labelledby="summary-heading">
+                    <div class="end-screen">
+
+                        <!-- Congratulations banner -->
+                        <div class="end-screen__congrats-banner" role="status" aria-label="Congratulations, you have completed the course">
+                            <i class="bi bi-trophy-fill end-screen__congrats-icon" aria-hidden="true"></i>
+                            <h2 class="end-screen__congrats-title" id="summary-heading">
+                                You've completed the course
+                            </h2>
+                            <p class="end-screen__congrats-subtitle">
+                                Here's a summary of the five pitfalls — and what to do next.
+                            </p>
+                        </div>
+
+                        <!-- Summary of all 5 pitfalls -->
+                        <p class="end-screen__summary-title">The 5 pitfalls — at a glance</p>
+
+                        <ul class="end-screen__pitfall-list" aria-label="Summary of the 5 pitfalls">
+                            <li class="end-screen__pitfall-item">
+                                <span class="end-screen__pitfall-num" aria-hidden="true">01</span>
+                                <div>
+                                    <p class="end-screen__pitfall-text">Recording lectures and calling it online learning</p>
+                                    <span class="end-screen__pitfall-sub">Online learning requires purpose-built pedagogy, not recorded face-to-face teaching</span>
+                                </div>
+                            </li>
+                            <li class="end-screen__pitfall-item">
+                                <span class="end-screen__pitfall-num" aria-hidden="true">02</span>
+                                <div>
+                                    <p class="end-screen__pitfall-text">Underestimating the design work by a factor of ten</p>
+                                    <span class="end-screen__pitfall-sub">Online modules require 3–5x the effort of equivalent face-to-face preparation</span>
+                                </div>
+                            </li>
+                            <li class="end-screen__pitfall-item">
+                                <span class="end-screen__pitfall-num" aria-hidden="true">03</span>
+                                <div>
+                                    <p class="end-screen__pitfall-text">Overloading internal teams who are already stretched</p>
+                                    <span class="end-screen__pitfall-sub">Capacity, not capability, is the constraint — dedicated resource is essential</span>
+                                </div>
+                            </li>
+                            <li class="end-screen__pitfall-item">
+                                <span class="end-screen__pitfall-num" aria-hidden="true">04</span>
+                                <div>
+                                    <p class="end-screen__pitfall-text">Losing your institutional identity in the online version</p>
+                                    <span class="end-screen__pitfall-sub">Generic templates erase what makes your institution distinctive to students and the market</span>
+                                </div>
+                            </li>
+                            <li class="end-screen__pitfall-item">
+                                <span class="end-screen__pitfall-num" aria-hidden="true">05</span>
+                                <div>
+                                    <p class="end-screen__pitfall-text">Building for a platform instead of building for learners</p>
+                                    <span class="end-screen__pitfall-sub">Pedagogy must drive technology decisions — always start with what learners need</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- CTA box -->
+                        <div class="end-screen__cta-box" role="complementary" aria-label="Next steps">
+                            <h3 class="end-screen__cta-title">Recognise any of these?</h3>
+                            <p class="end-screen__cta-text">
+                                If your institution is facing one or more of these challenges, you're not alone. Most of the 20+ institutions we've worked with started in exactly this position. The good news: these pitfalls are entirely avoidable with the right approach and the right expertise alongside your team.
+                            </p>
+                            <div class="end-screen__cta-buttons">
+                                <a href="mockup-tier2-assessment.html" class="btn-lds-outline-white" aria-label="Take the readiness assessment">
+                                    Take the readiness assessment &rarr;
+                                </a>
+                                <a href="#" class="btn-lds-orange" aria-label="Talk to Andrew Doig">
+                                    Talk to Andrew &rarr;
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Navigation back -->
+                        <div class="lesson-nav-buttons" style="margin-top:1.5rem;">
+                            <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-5" aria-label="Go back to Lesson 5">
+                                &larr; Lesson 5: Platform vs learners
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+            /* ============================================================
+               LESSON ORDER — determines progress calculation
+            ============================================================ */
+            var LESSONS = ['intro', 'lesson-1', 'lesson-2', 'lesson-3', 'lesson-4', 'lesson-5', 'summary'];
+
+            /* Completable lessons (intro and summary don't count toward percentage) */
+            var COMPLETABLE = ['lesson-1', 'lesson-2', 'lesson-3', 'lesson-4', 'lesson-5'];
+            var completed = {}; /* e.g. { 'lesson-1': true } */
+
+            /* ============================================================
+               GATE FORM
+            ============================================================ */
+            var gateScreen   = document.getElementById('gate-screen');
+            var coursePlatform = document.getElementById('course-platform');
+            var gateForm     = document.getElementById('gate-form');
+            var gateEmail    = document.getElementById('gate-email');
+            var gateError    = document.getElementById('gate-email-error');
+            var gateSubmit   = document.getElementById('gate-submit');
+
+            gateForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var val = gateEmail.value.trim();
+                /* Basic email validation */
+                var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRe.test(val)) {
+                    gateError.style.display = 'block';
+                    gateEmail.setAttribute('aria-invalid', 'true');
+                    gateEmail.focus();
+                    return;
+                }
+
+                gateError.style.display = 'none';
+                gateEmail.removeAttribute('aria-invalid');
+
+                /* Show loading state briefly, then reveal course */
+                gateSubmit.disabled = true;
+                gateSubmit.textContent = 'Loading your course\u2026';
+
+                setTimeout(function () {
+                    gateScreen.style.display = 'none';
+                    coursePlatform.style.display = 'block';
+                    /* Focus the main content for screen readers */
+                    var firstHeading = document.getElementById('intro-heading');
+                    if (firstHeading) firstHeading.focus();
+                }, 600);
+            });
+
+            /* ============================================================
+               SIDEBAR TOGGLE (mobile)
+            ============================================================ */
+            var sidebarToggle = document.getElementById('sidebar-toggle');
+            var sidebar       = document.getElementById('course-sidebar');
+            var overlay       = document.getElementById('sidebar-overlay');
+
+            function openSidebar() {
+                sidebar.classList.add('is-open');
+                overlay.classList.add('is-visible');
+                overlay.removeAttribute('aria-hidden');
+                sidebarToggle.setAttribute('aria-expanded', 'true');
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+                overlay.setAttribute('aria-hidden', 'true');
+                sidebarToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            sidebarToggle.addEventListener('click', function () {
+                if (sidebar.classList.contains('is-open')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            overlay.addEventListener('click', closeSidebar);
+
+            /* Close sidebar on ESC */
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
+                    closeSidebar();
+                    sidebarToggle.focus();
+                }
+            });
+
+            /* ============================================================
+               LESSON NAVIGATION
+            ============================================================ */
+            var currentLesson = 'intro';
+
+            function showLesson(lessonKey) {
+                if (!document.getElementById('panel-' + lessonKey)) return;
+
+                /* Hide all panels */
+                var panels = document.querySelectorAll('.lesson-panel');
+                panels.forEach(function (p) {
+                    p.classList.remove('is-active');
+                    p.setAttribute('aria-hidden', 'true');
+                });
+
+                /* Show target panel */
+                var target = document.getElementById('panel-' + lessonKey);
+                target.classList.add('is-active');
+                target.removeAttribute('aria-hidden');
+
+                /* Update sidebar nav */
+                var navBtns = document.querySelectorAll('.sidebar-nav__btn');
+                navBtns.forEach(function (btn) {
+                    var isActive = btn.getAttribute('data-lesson') === lessonKey;
+                    btn.classList.toggle('is-active', isActive);
+                    if (isActive) {
+                        btn.setAttribute('aria-current', 'true');
+                    } else {
+                        btn.removeAttribute('aria-current');
+                    }
+                });
+
+                currentLesson = lessonKey;
+
+                /* Scroll content area to top */
+                var content = document.getElementById('course-content');
+                if (content) content.scrollTop = 0;
+                window.scrollTo(0, 0);
+
+                /* Close sidebar on mobile after navigation */
+                if (window.innerWidth < 992) closeSidebar();
+
+                /* Update progress */
+                updateProgress();
+            }
+
+            /* Wire up sidebar nav buttons */
+            document.querySelectorAll('.sidebar-nav__btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    showLesson(btn.getAttribute('data-lesson'));
+                });
+            });
+
+            /* Wire up next/prev lesson buttons */
+            document.querySelectorAll('.lesson-nav-btn[data-goto]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    showLesson(btn.getAttribute('data-goto'));
+                });
+            });
+
+            /* ============================================================
+               MARK AS COMPLETE
+            ============================================================ */
+            function setupCompleteRow(lessonKey) {
+                var row = document.getElementById('complete-' + lessonKey);
+                if (!row) return;
+
+                function toggle() {
+                    var isNowChecked = !completed[lessonKey];
+                    completed[lessonKey] = isNowChecked;
+                    row.classList.toggle('is-checked', isNowChecked);
+                    row.setAttribute('aria-checked', String(isNowChecked));
+
+                    /* Update sidebar icon for this lesson */
+                    var navBtn = document.querySelector('.sidebar-nav__btn[data-lesson="' + lessonKey + '"]');
+                    if (navBtn) {
+                        navBtn.classList.toggle('is-complete', isNowChecked);
+                        var icon = navBtn.querySelector('.sidebar-nav__icon');
+                        if (icon) {
+                            icon.innerHTML = isNowChecked ? '<i class="bi bi-check2" aria-hidden="true"></i>' : lessonKey.replace('lesson-', '');
+                        }
+                    }
+
+                    updateProgress();
+                }
+
+                row.addEventListener('click', toggle);
+                row.addEventListener('keydown', function (e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+            }
+
+            COMPLETABLE.forEach(function (key) {
+                setupCompleteRow(key);
+            });
+
+            /* ============================================================
+               PROGRESS CALCULATION
+            ============================================================ */
+            function updateProgress() {
+                var total = COMPLETABLE.length;
+                var done  = COMPLETABLE.filter(function (k) { return completed[k]; }).length;
+                var pct   = Math.round((done / total) * 100);
+
+                /* Topbar */
+                var topbarFill  = document.getElementById('topbar-progress-fill');
+                var topbarLabel = document.getElementById('topbar-progress-label');
+                var topbarWrap  = topbarFill ? topbarFill.closest('[role="progressbar"]') : null;
+                if (topbarFill)  topbarFill.style.width  = pct + '%';
+                if (topbarLabel) topbarLabel.textContent = pct + '% complete';
+                if (topbarWrap)  topbarWrap.setAttribute('aria-valuenow', pct);
+
+                /* Sidebar */
+                var sidebarFill = document.getElementById('sidebar-progress-fill');
+                var sidebarPct  = document.getElementById('sidebar-progress-pct');
+                if (sidebarFill) sidebarFill.style.width  = pct + '%';
+                if (sidebarPct)  sidebarPct.textContent   = pct + '%';
+            }
+
+            /* ============================================================
+               INITIALISE
+            ============================================================ */
+            /* Ensure all panels except intro start hidden */
+            document.querySelectorAll('.lesson-panel').forEach(function (p) {
+                if (!p.classList.contains('is-active')) {
+                    p.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            /* Initial progress render */
+            updateProgress();
+
+        })();
+    </script>
+
+</body>
+</html>
