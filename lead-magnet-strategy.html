@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LDS lead magnet strategy | Serenichron × Learning Design Solutions</title>
-    <meta name="description" content="A three-tier lead magnet funnel strategy for Learning Design Solutions, moving from newsletter subscribers to qualified strategy calls.">
+    <meta name="description" content="A three-tier lead magnet funnel for Learning Design Solutions — implemented March 2026. Free interactive course, role-based readiness assessment, and ICAS case study.">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -641,6 +641,16 @@
             border-color: rgba(132, 204, 22, 0.4);
         }
 
+        .assessment-dimension-card--hook {
+            background-color: rgba(249, 115, 22, 0.08);
+            border-color: rgba(249, 115, 22, 0.35);
+        }
+
+        .assessment-dimension-card--hook:hover {
+            background-color: rgba(249, 115, 22, 0.13);
+            border-color: rgba(249, 115, 22, 0.6);
+        }
+
         .assessment-dimension-card__number {
             font-family: var(--font-display);
             font-size: 2rem;
@@ -648,6 +658,10 @@
             color: rgba(132, 204, 22, 0.35);
             line-height: 1;
             margin-bottom: 0.5rem;
+        }
+
+        .assessment-dimension-card--hook .assessment-dimension-card__number {
+            color: rgba(249, 115, 22, 0.4);
         }
 
         .assessment-dimension-card__title {
@@ -662,6 +676,20 @@
             font-size: 0.875rem;
             color: rgba(255, 255, 255, 0.6);
             margin: 0;
+        }
+
+        .assessment-dimension-card__hook-label {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lds-orange);
+            background-color: rgba(249, 115, 22, 0.15);
+            border: 1px solid rgba(249, 115, 22, 0.35);
+            padding: 0.2rem 0.6rem;
+            margin-top: 0.75rem;
         }
 
         /* =========================================================
@@ -987,9 +1015,9 @@
         }
 
         /* =========================================================
-           IMPLEMENTATION PRIORITY CARDS
+           IMPLEMENTATION STATUS CARDS
         ========================================================= */
-        .priority-card {
+        .status-card {
             background-color: var(--lds-white);
             border: 1px solid rgba(18, 33, 89, 0.1);
             border-top: 5px solid;
@@ -998,41 +1026,38 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .priority-card:hover {
+        .status-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 32px rgba(18, 33, 89, 0.1);
         }
 
-        .priority-card--1 { border-top-color: var(--lds-orange); }
-        .priority-card--2 { border-top-color: var(--lds-navy); }
-        .priority-card--3 { border-top-color: var(--lds-green); }
+        .status-card--built { border-top-color: var(--lds-green-dark); }
+        .status-card--pending { border-top-color: var(--lds-orange); }
 
-        .priority-card__number {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 0.75rem;
-        }
-
-        .priority-card--1 .priority-card__number { color: var(--lds-orange); }
-        .priority-card--2 .priority-card__number { color: var(--lds-navy); }
-        .priority-card--3 .priority-card__number { color: var(--lds-green-dark); }
-
-        .priority-card__timing {
+        .status-card__badge {
+            display: inline-block;
             font-family: var(--font-body);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .priority-card--1 .priority-card__timing { color: var(--lds-orange); }
-        .priority-card--2 .priority-card__timing { color: var(--lds-navy); }
-        .priority-card--3 .priority-card__timing { color: var(--lds-green-dark); }
+        .status-card--built .status-card__badge {
+            background-color: rgba(101, 163, 13, 0.12);
+            color: var(--lds-green-dark);
+            border: 1px solid rgba(101, 163, 13, 0.35);
+        }
 
-        .priority-card__title {
+        .status-card--pending .status-card__badge {
+            background-color: rgba(249, 115, 22, 0.1);
+            color: var(--lds-orange);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .status-card__title {
             font-family: var(--font-body);
             font-size: 1.125rem;
             font-weight: 700;
@@ -1040,11 +1065,35 @@
             margin-bottom: 1rem;
         }
 
-        .priority-card__desc {
+        .status-card__desc {
             font-size: 0.9375rem;
             color: var(--lds-muted);
             margin: 0;
         }
+
+        .status-card__list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+        }
+
+        .status-card__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.625rem;
+            font-size: 0.9375rem;
+            color: var(--lds-muted);
+            padding: 0.35rem 0;
+        }
+
+        .status-card__list li i {
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .status-card--built .status-card__list li i { color: var(--lds-green-dark); }
+        .status-card--pending .status-card__list li i { color: var(--lds-orange); }
 
         /* =========================================================
            SECTION HEADING STYLES
@@ -1261,28 +1310,28 @@
                         Lead magnet &amp;<br>funnel strategy
                     </h1>
                     <p class="strategy-hero__subtitle">
-                        Moving from newsletter subscribers to qualified strategy calls
+                        Implemented funnel — three interactive tiers from awareness to qualified strategy call
                     </p>
                     <p class="strategy-hero__intro">
-                        Traditional lead magnets capture emails. But LDS doesn't need 500 subscribers — you need 3–5 qualified conversations per quarter with the right institutions. This strategy replaces the generic PDF playbook with a three-tier system designed to mirror your actual sales process.
+                        LDS doesn't need 500 subscribers — you need 3–5 qualified conversations per quarter with the right institutions. This documents the implemented three-tier funnel: a free interactive course, a role-based readiness assessment, and the ICAS case study. Each tier is engineered to advance the relationship, not just capture a contact.
                     </p>
 
                     <!-- Horizontal Funnel Flow -->
-                    <div class="funnel-flow-horizontal" role="img" aria-label="Funnel flow: Awareness leads to Self-Assessment, then to Evidence, then to Strategy Call">
+                    <div class="funnel-flow-horizontal" role="img" aria-label="Funnel flow: Free course leads to gate at lesson 3, then assessment, then strategy call">
                         <div class="funnel-flow-horizontal__step">
-                            <div class="funnel-step-node">Awareness</div>
+                            <div class="funnel-step-node">Free course</div>
                         </div>
                         <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
                         <div class="funnel-flow-horizontal__step">
-                            <div class="funnel-step-node funnel-step-node--green">Self-Assessment</div>
+                            <div class="funnel-step-node funnel-step-node--green">Gate at lesson 3</div>
                         </div>
                         <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
                         <div class="funnel-flow-horizontal__step">
-                            <div class="funnel-step-node">Evidence</div>
+                            <div class="funnel-step-node funnel-step-node--green">Assessment</div>
                         </div>
                         <div class="funnel-flow-arrow"><i class="bi bi-arrow-right"></i></div>
                         <div class="funnel-flow-horizontal__step">
-                            <div class="funnel-step-node funnel-step-node--orange">Strategy Call</div>
+                            <div class="funnel-step-node funnel-step-node--orange">Strategy call</div>
                         </div>
                     </div>
                 </div>
@@ -1292,40 +1341,40 @@
 
 
     <!-- ============================================================
-         SECTION 2 — CORE INSIGHT: CURRENT vs PROPOSED
+         SECTION 2 — WHAT CHANGED AND WHY
     ============================================================ -->
     <section class="section-light" aria-labelledby="insight-title">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8">
-                    <p class="section-eyebrow section-eyebrow--dark">The Problem</p>
+                    <p class="section-eyebrow section-eyebrow--dark">The pivot</p>
                     <div class="section-divider section-divider--orange"></div>
-                    <h2 id="insight-title">Why the current approach needs to evolve</h2>
-                    <p class="text-muted">The existing lead capture mechanism is built around a model that works for volume-driven B2C funnels. LDS operates in a relationship-driven B2B environment where the buyer is a senior HE leader — and they need a different experience.</p>
+                    <h2 id="insight-title">Why the original approach was replaced</h2>
+                    <p class="text-muted">The initial proposal assumed a PDF lead magnet and a front-door email gate. Both were discarded in favour of an interactive web experience that gives value before asking for anything — and a gate placed deep enough to feel earned, not intrusive.</p>
                 </div>
             </div>
             <div class="row g-4">
-                <!-- Current Approach -->
+                <!-- Original Approach -->
                 <div class="col-lg-6">
                     <div class="comparison-card comparison-card--current">
-                        <p class="comparison-card__label">Current Approach</p>
-                        <h3 class="comparison-card__title">"Academic Transformation Playbook" PDF</h3>
+                        <p class="comparison-card__label">Original proposal</p>
+                        <h3 class="comparison-card__title">"Academic Transformation Playbook" PDF, front-door gate</h3>
                         <ul class="comparison-list">
                             <li>
                                 <i class="bi bi-x-circle comparison-list__icon"></i>
-                                <span>Gated behind an email form — friction for senior HE audience</span>
+                                <span>Email gate on the first screen — maximum friction for senior HE audiences who haven't yet seen the value</span>
                             </li>
                             <li>
                                 <i class="bi bi-x-circle comparison-list__icon"></i>
-                                <span>Promises budget templates and cost calculators — commodity content any consultant offers</span>
+                                <span>Static PDF format — not shareable as an internal tool, no personalisation by role or institution</span>
                             </li>
                             <li>
                                 <i class="bi bi-x-circle comparison-list__icon"></i>
-                                <span>One-size-fits-all content — no personalisation to their institution's context</span>
+                                <span>One-size-fits-all content with no routing by seniority or function</span>
                             </li>
                             <li>
                                 <i class="bi bi-x-circle comparison-list__icon"></i>
-                                <span>Generic PDF format — instantly forgettable, hard to share internally</span>
+                                <span>No mechanism for the internal champion to share a personalised result with their committee</span>
                             </li>
                         </ul>
                         <div class="comparison-card__end-goal">
@@ -1333,27 +1382,27 @@
                         </div>
                     </div>
                 </div>
-                <!-- Proposed Approach -->
+                <!-- Implemented Approach -->
                 <div class="col-lg-6">
                     <div class="comparison-card comparison-card--proposed">
-                        <p class="comparison-card__label">Proposed Approach</p>
-                        <h3 class="comparison-card__title">Three-tier funnel built around your methodology</h3>
+                        <p class="comparison-card__label">Implemented funnel</p>
+                        <h3 class="comparison-card__title">Interactive course + role-based assessment, gate at lesson 3</h3>
                         <ul class="comparison-list">
                             <li>
                                 <i class="bi bi-check-circle comparison-list__icon"></i>
-                                <span>Tier 1 ungated, Tier 2 optionally gated — respects the senior audience</span>
+                                <span>Two free lessons before the gate — visitor has already absorbed value and self-selected as interested</span>
                             </li>
                             <li>
                                 <i class="bi bi-check-circle comparison-list__icon"></i>
-                                <span>Delivers a personalised readiness score mirroring Andrew's actual methodology</span>
+                                <span>Simulated enterprise learning platform — not a PDF, an experience that demonstrates Andrew's methodology directly</span>
                             </li>
                             <li>
                                 <i class="bi bi-check-circle comparison-list__icon"></i>
-                                <span>Specific and actionable — unique to LDS, not replicable by generic consultants</span>
+                                <span>Role-based routing in the assessment — VC to learning designer, each on a tailored question track</span>
                             </li>
                             <li>
                                 <i class="bi bi-check-circle comparison-list__icon"></i>
-                                <span>Interactive web format — shareable, indexable, designed to spread internally</span>
+                                <span>Shareable results URL — the champion exports or shares their dashboard with leadership for internal buy-in</span>
                             </li>
                         </ul>
                         <div class="comparison-card__end-goal">
@@ -1362,28 +1411,48 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Key decisions panel -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div style="background-color: rgba(18, 33, 89, 0.04); border: 1px solid rgba(18, 33, 89, 0.12); border-left: 4px solid var(--lds-navy); padding: 1.75rem 2rem;">
+                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-navy); margin-bottom: 1rem;">Key decisions on record</p>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <p style="font-size: 0.9375rem; color: var(--lds-dark); margin: 0;"><strong>Gate placement:</strong> Andrew confirmed gate at lesson 3, not front door (compromise between ungated proposal and full gate). March 2026.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p style="font-size: 0.9375rem; color: var(--lds-dark); margin: 0;"><strong>Course title:</strong> "Scaling online programmes without compromising quality" — Andrew's choice from five options. March 2026.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p style="font-size: 0.9375rem; color: var(--lds-dark); margin: 0;"><strong>Technical Capacity hook:</strong> 4-question dimension in the assessment designed to reliably surface the gap pointing to Andrew's offer. Alex's recommendation, March 2026.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
 
     <!-- ============================================================
-         SECTION 3 — TIER 1: THE AWARENESS PROVOCATION
+         SECTION 3 — TIER 1: FREE INTERACTIVE COURSE
     ============================================================ -->
     <section class="section-white" id="tier-1" aria-labelledby="tier1-title">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8">
-                    <span class="tier-badge tier-badge--light">Tier 1 · Top of Funnel · Ungated</span>
-                    <p class="section-eyebrow">Awareness Asset</p>
+                    <span class="tier-badge tier-badge--light">Tier 1 · Top of funnel · tier1-course.html</span>
+                    <p class="section-eyebrow">Awareness asset</p>
                     <div class="section-divider"></div>
                     <h2 id="tier1-title">7 hidden pitfalls that derail online learning projects</h2>
-                    <p class="text-muted">Format: interactive web page (not a PDF) — freely accessible, no gate required.</p>
+                    <p class="text-muted">Format: simulated enterprise learning platform — 7 video lessons, cover page open to all, gate at lesson 3. Title: "Scaling online programmes without compromising quality."</p>
                 </div>
             </div>
 
             <div class="row g-4 mb-5">
                 <div class="col-lg-7">
-                    <!-- Pitfall Items -->
+                    <!-- Course lessons -->
                     <div class="pitfall-item" role="article">
                         <div class="pitfall-item__number">1</div>
                         <div class="pitfall-item__icon"><i class="bi bi-camera-video"></i></div>
@@ -1402,12 +1471,12 @@
                         </div>
                     </div>
 
-                    <div class="pitfall-item" role="article">
-                        <div class="pitfall-item__number">3</div>
-                        <div class="pitfall-item__icon"><i class="bi bi-people"></i></div>
+                    <div class="pitfall-item" role="article" style="border-left-color: var(--lds-orange); background-color: rgba(249, 115, 22, 0.03);">
+                        <div class="pitfall-item__number" style="background-color: var(--lds-orange);">3</div>
+                        <div class="pitfall-item__icon" style="background-color: rgba(249, 115, 22, 0.1); color: var(--lds-orange);"><i class="bi bi-lock"></i></div>
                         <div class="pitfall-item__content">
-                            <p class="pitfall-item__title">"Overloading internal teams"</p>
-                            <p class="pitfall-item__subtitle">The capacity crisis — asking academics to design, build, and teach simultaneously</p>
+                            <p class="pitfall-item__title">"Overloading internal teams" <span style="font-size: 0.75rem; font-weight: 600; color: var(--lds-orange); margin-left: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase;">Gate here</span></p>
+                            <p class="pitfall-item__subtitle">The capacity crisis — asking academics to design, build, and teach simultaneously. Email + name + institution + role required to unlock.</p>
                         </div>
                     </div>
 
@@ -1428,36 +1497,67 @@
                             <p class="pitfall-item__subtitle">Why pedagogy-first design outperforms feature-first VLE implementations</p>
                         </div>
                     </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">6</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-person-x"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"The champion problem"</p>
+                            <p class="pitfall-item__subtitle">What happens when the internal sponsor moves on — and why the programme stalls without a structural handover plan</p>
+                        </div>
+                    </div>
+
+                    <div class="pitfall-item" role="article">
+                        <div class="pitfall-item__number">7</div>
+                        <div class="pitfall-item__icon"><i class="bi bi-currency-pound"></i></div>
+                        <div class="pitfall-item__content">
+                            <p class="pitfall-item__title">"The cost-per-module fallacy"</p>
+                            <p class="pitfall-item__subtitle">Why pricing online learning by module count misaligns incentives and produces the wrong brief</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Why Ungated reasoning panel -->
+                <!-- Course structure and gate rationale -->
                 <div class="col-lg-5">
-                    <div class="glass-panel" style="background-color: rgba(18, 33, 89, 0.04); border: 1px solid rgba(18, 33, 89, 0.1); padding: 2rem;">
-                        <p class="section-eyebrow section-eyebrow--dark" style="color: var(--lds-navy);">Strategic Rationale</p>
-                        <h3 style="font-size: 1.375rem; color: var(--lds-navy);">Why this must be ungated</h3>
+                    <div class="glass-panel" style="background-color: rgba(18, 33, 89, 0.04); border: 1px solid rgba(18, 33, 89, 0.1); padding: 2rem; margin-bottom: 1.5rem;">
+                        <p class="section-eyebrow section-eyebrow--dark" style="color: var(--lds-navy);">Course structure</p>
+                        <h3 style="font-size: 1.375rem; color: var(--lds-navy);">How the course is built</h3>
                         <ul class="comparison-list" style="margin-top: 1rem;">
                             <li style="border-bottom-color: rgba(18,33,89,0.08);">
-                                <i class="bi bi-person-check" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
-                                <span style="font-size: 1rem;">Senior HE professionals despise form-filling for content that may prove generic</span>
+                                <i class="bi bi-play-circle" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Cover page with no gate — visitors start immediately, no friction</span>
                             </li>
                             <li style="border-bottom-color: rgba(18,33,89,0.08);">
-                                <i class="bi bi-shield-check" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
-                                <span style="font-size: 1rem;">Freely sharing valuable insight builds trust before the first conversation</span>
+                                <i class="bi bi-unlock" style="color: var(--lds-green-dark); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Lessons 1–2 free to access — visitor absorbs real value before being asked for anything</span>
                             </li>
                             <li style="border-bottom-color: rgba(18,33,89,0.08);">
-                                <i class="bi bi-search" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
-                                <span style="font-size: 1rem;">SEO benefit: indexable content that surfaces when HE leaders search for this problem</span>
+                                <i class="bi bi-lock" style="color: var(--lds-orange); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Gate at lesson 3: email, name, institution, and role/position captured</span>
+                            </li>
+                            <li style="border-bottom-color: rgba(18,33,89,0.08);">
+                                <i class="bi bi-cpu" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Role stored in sessionStorage — auto-routes visitor to the matching assessment track</span>
+                            </li>
+                            <li style="border-bottom-color: rgba(18,33,89,0.08);">
+                                <i class="bi bi-layout-sidebar" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Lock icons in sidebar for lessons 3–7 until gate is passed</span>
                             </li>
                             <li>
-                                <i class="bi bi-share" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
-                                <span style="font-size: 1rem;">Easy to share — a champion forwards it to their committee without friction</span>
+                                <i class="bi bi-check2-circle" style="color: var(--lds-navy); flex-shrink: 0; margin-top: 0.2rem;"></i>
+                                <span style="font-size: 1rem;">Summary screen with CTAs to the assessment and to book a call with Andrew</span>
                             </li>
                         </ul>
-                        <div style="margin-top: 1.75rem; padding: 1.25rem; background-color: rgba(249, 115, 22, 0.07); border-left: 3px solid var(--lds-orange);">
-                            <p style="font-size: 0.9375rem; color: var(--lds-dark); margin: 0; font-style: italic;">
-                                Ends with: "Recognise any of these? Let's talk." — direct link to strategy call booking.
-                            </p>
-                        </div>
+                    </div>
+
+                    <div style="padding: 1.5rem; background-color: rgba(132, 204, 22, 0.06); border: 1px solid rgba(132, 204, 22, 0.2); border-left: 4px solid var(--lds-green);">
+                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-green-dark); margin-bottom: 0.75rem;">Each lesson contains</p>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9375rem; color: var(--lds-dark);">
+                            <li style="padding: 0.3rem 0;">Video placeholder (Andrew to record)</li>
+                            <li style="padding: 0.3rem 0;">Course-vocabulary body text</li>
+                            <li style="padding: 0.3rem 0;">Highlighted callout box</li>
+                            <li style="padding: 0.3rem 0;">Key takeaways panel</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1472,11 +1572,11 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-9">
-                    <span class="tier-badge tier-badge--navy">Tier 2 · Middle of Funnel · Key Asset</span>
-                    <p class="section-eyebrow">The Star Asset</p>
+                    <span class="tier-badge tier-badge--navy">Tier 2 · Middle of funnel · tier2-assessment.html</span>
+                    <p class="section-eyebrow">The star asset</p>
                     <div class="section-divider"></div>
                     <h2 id="tier2-title" style="color: var(--lds-white);">Academic transformation readiness assessment</h2>
-                    <p class="text-muted-white">An interactive self-assessment tool (8–10 questions) that gives institutional leaders a structured framework to evaluate their online learning readiness — and gives LDS a qualified lead who has already self-diagnosed using your methodology.</p>
+                    <p class="text-muted-white">A full-screen, slide-per-question single-page application. Role selection first (6 roles from VC to learning designer), then a 12-question track tailored to strategic or operational perspective. Results surface as a dashboard with SVG score gauge, radar chart, and accordion dimension cards — shareable by URL and exportable to PDF.</p>
                 </div>
             </div>
 
@@ -1484,11 +1584,11 @@
                 <!-- Why this is the killer asset -->
                 <div class="col-lg-6">
                     <div class="killer-asset-highlight">
-                        <p class="killer-asset-highlight__title">Why This Is the Killer Asset</p>
+                        <p class="killer-asset-highlight__title">Why this is the killer asset</p>
                         <ul class="killer-asset-highlight__list">
                             <li>
                                 <i class="bi bi-people-fill"></i>
-                                <span>Your champion inside the institution needs to convince colleagues. This tool gives them a <strong style="color: var(--lds-green);">score they can present to leadership</strong>.</span>
+                                <span>Your champion inside the institution needs to convince colleagues. This tool gives them a <strong style="color: var(--lds-green);">score they can present to leadership</strong> — shareable via URL, exportable to PDF.</span>
                             </li>
                             <li>
                                 <i class="bi bi-chat-quote"></i>
@@ -1496,11 +1596,15 @@
                             </li>
                             <li>
                                 <i class="bi bi-telephone-inbound"></i>
-                                <span>It creates a natural reason to talk: <em>"We scored low on X — can you help us think through this?"</em></span>
+                                <span>It creates a natural reason to talk: <em>"We scored low on Technical Capacity — can you help us think through this?"</em></span>
                             </li>
                             <li>
                                 <i class="bi bi-diagram-3"></i>
                                 <span>It mirrors your Stage 1 consulting — <strong style="color: var(--lds-green);">the assessment IS a lightweight version of what you actually do.</strong></span>
+                            </li>
+                            <li>
+                                <i class="bi bi-cpu"></i>
+                                <span>Role auto-selected from sessionStorage when the visitor arrives from the free course — zero re-entry friction.</span>
                             </li>
                         </ul>
                     </div>
@@ -1509,11 +1613,11 @@
                 <!-- Mock Result Output -->
                 <div class="col-lg-6">
                     <div class="mock-result-panel">
-                        <p class="mock-result-panel__title">Sample Output — What the Prospect Receives</p>
+                        <p class="mock-result-panel__title">Sample output — what the prospect receives</p>
 
                         <div class="score-bar-item">
                             <div class="score-bar-item__label">
-                                Strategic Clarity
+                                Strategic clarity
                                 <span>6/10</span>
                             </div>
                             <div class="score-bar-track">
@@ -1523,7 +1627,7 @@
 
                         <div class="score-bar-item">
                             <div class="score-bar-item__label">
-                                Academic Design Capability
+                                Academic design capability
                                 <span>3/10</span>
                             </div>
                             <div class="score-bar-track">
@@ -1533,7 +1637,17 @@
 
                         <div class="score-bar-item">
                             <div class="score-bar-item__label">
-                                Production Capacity
+                                Technical capacity <span style="font-size: 0.7rem; color: var(--lds-orange); margin-left: 0.25rem;">hook</span>
+                                <span style="color: var(--lds-orange);">2/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--low" style="width: 20%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Quality assurance
                                 <span>4/10</span>
                             </div>
                             <div class="score-bar-track">
@@ -1543,27 +1657,7 @@
 
                         <div class="score-bar-item">
                             <div class="score-bar-item__label">
-                                Platform Readiness
-                                <span>7/10</span>
-                            </div>
-                            <div class="score-bar-track">
-                                <div class="score-bar-fill" style="width: 70%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="score-bar-item">
-                            <div class="score-bar-item__label">
-                                Quality Assurance
-                                <span>4/10</span>
-                            </div>
-                            <div class="score-bar-track">
-                                <div class="score-bar-fill score-bar-fill--low" style="width: 40%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="score-bar-item">
-                            <div class="score-bar-item__label">
-                                Timeline Realism
+                                Timeline realism
                                 <span>5/10</span>
                             </div>
                             <div class="score-bar-track">
@@ -1571,17 +1665,38 @@
                             </div>
                         </div>
 
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Stakeholder alignment
+                                <span>6/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--mid" style="width: 60%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="score-bar-item">
+                            <div class="score-bar-item__label">
+                                Change management readiness
+                                <span>4/10</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill score-bar-fill--low" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
                         <div class="mock-result-cta">
-                            <p><strong>Your results suggest 2–3 critical gaps</strong> before a successful launch. Want to walk through your results with Andrew?</p>
+                            <p><strong>Your results suggest 3–4 critical gaps</strong> before a successful launch. Want to walk through your results with Andrew?</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 6 Assessment Dimensions -->
+            <!-- 7 Assessment Dimensions -->
             <div class="row mb-2">
                 <div class="col-12">
-                    <h3 style="color: var(--lds-white); font-size: 1.375rem; margin-bottom: 1.5rem;">The 6 assessment dimensions</h3>
+                    <h3 style="color: var(--lds-white); font-size: 1.375rem; margin-bottom: 0.5rem;">The 7 assessment dimensions</h3>
+                    <p style="color: rgba(255,255,255,0.55); font-size: 0.9375rem; margin-bottom: 1.75rem;">12 questions per track (strategic or operational), with a contextual paragraph per question explaining why the dimension matters. Technical Capacity is the engineered hook.</p>
                 </div>
             </div>
             <div class="row g-3">
@@ -1600,31 +1715,49 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="assessment-dimension-card">
+                    <div class="assessment-dimension-card assessment-dimension-card--hook">
                         <div class="assessment-dimension-card__number">03</div>
-                        <p class="assessment-dimension-card__title">Production capacity</p>
-                        <p class="assessment-dimension-card__desc">Video, interactive content, and assessment resources — do you have the bandwidth to produce at scale?</p>
+                        <p class="assessment-dimension-card__title">Technical capacity</p>
+                        <p class="assessment-dimension-card__desc">Video production, interactive content, accessibility compliance — do you have the in-house technical capability, or is that gap larger than you think?</p>
+                        <span class="assessment-dimension-card__hook-label">Engineered hook — 4 questions</span>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="assessment-dimension-card">
                         <div class="assessment-dimension-card__number">04</div>
-                        <p class="assessment-dimension-card__title">Platform readiness</p>
-                        <p class="assessment-dimension-card__desc">Is your VLE configured to support the learner experience you're designing towards?</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="assessment-dimension-card">
-                        <div class="assessment-dimension-card__number">05</div>
                         <p class="assessment-dimension-card__title">Quality assurance</p>
                         <p class="assessment-dimension-card__desc">Do you have robust frameworks for online course quality — distinct from classroom QA processes?</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="assessment-dimension-card">
-                        <div class="assessment-dimension-card__number">06</div>
+                        <div class="assessment-dimension-card__number">05</div>
                         <p class="assessment-dimension-card__title">Timeline realism</p>
                         <p class="assessment-dimension-card__desc">Is your launch timeline achievable with current resources, or is it aspirational by default?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">06</div>
+                        <p class="assessment-dimension-card__title">Stakeholder alignment</p>
+                        <p class="assessment-dimension-card__desc">Do senior leaders, academic staff, and professional services share a common vision for the online programme?</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="assessment-dimension-card">
+                        <div class="assessment-dimension-card__number">07</div>
+                        <p class="assessment-dimension-card__title">Change management readiness</p>
+                        <p class="assessment-dimension-card__desc">Is there a plan for supporting staff through the behavioural shift that online delivery demands?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role tracks note -->
+            <div class="row mt-4">
+                <div class="col-lg-8">
+                    <div style="background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-left: 4px solid var(--lds-green); padding: 1.5rem 2rem;">
+                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-green); margin-bottom: 0.75rem;">Role-based tracks</p>
+                        <p style="font-size: 0.9375rem; color: rgba(255,255,255,0.75); margin: 0;">Six roles at selection: Vice-Chancellor / Provost, Pro-Vice-Chancellor (Education), Dean or Head of School, Head of Online / Digital Learning, Learning Technologist, Learning Designer. Roles 1–3 follow the strategic track; roles 4–6 follow the operational track. Auto-advance on answer selection — no "next" button required.</p>
                     </div>
                 </div>
             </div>
@@ -1639,10 +1772,10 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8">
-                    <span class="tier-badge tier-badge--light">Tier 3 · Bottom of Funnel · Social Proof</span>
-                    <p class="section-eyebrow section-eyebrow--dark">Authority Proof</p>
+                    <span class="tier-badge tier-badge--light">Tier 3 · Bottom of funnel · mockup-tier3-case-study.html</span>
+                    <p class="section-eyebrow section-eyebrow--dark">Authority proof</p>
                     <div class="section-divider section-divider--orange"></div>
-                    <h2 id="tier3-title">ICAS case study: Full curriculum transformation</h2>
+                    <h2 id="tier3-title">ICAS case study: full curriculum transformation</h2>
                     <p class="text-muted">In HE procurement, case studies are decision-enablers. The internal champion forwards this to their committee. Independent awards make it unchallengeable.</p>
                 </div>
             </div>
@@ -1661,13 +1794,13 @@
                             <div class="col-4">
                                 <div class="case-study-stat" style="border-top-color: var(--lds-orange);">
                                     <div class="case-study-stat__number" style="color: var(--lds-orange);">12</div>
-                                    <div class="case-study-stat__label">Core Modules</div>
+                                    <div class="case-study-stat__label">Modules rebuilt</div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="case-study-stat" style="border-top-color: var(--lds-green-dark);">
                                     <div class="case-study-stat__number" style="color: var(--lds-green-dark);">89%</div>
-                                    <div class="case-study-stat__label">Student Satisfaction</div>
+                                    <div class="case-study-stat__label">Student satisfaction</div>
                                 </div>
                             </div>
                         </div>
@@ -1686,21 +1819,21 @@
                 <!-- Awards Panel -->
                 <div class="col-lg-5">
                     <div style="padding: 2rem; background-color: var(--lds-white); border: 1px solid rgba(18, 33, 89, 0.1); height: 100%;">
-                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-orange); margin-bottom: 1.5rem;">Independent Recognition</p>
+                        <p style="font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lds-orange); margin-bottom: 1.5rem;">Independent recognition</p>
                         <h3 style="font-size: 1.375rem; color: var(--lds-dark); margin-bottom: 1.5rem;">Learning Technologies Awards</h3>
 
                         <div class="award-badge">
                             <div class="award-badge__icon">🏆</div>
                             <div class="award-badge__text">
-                                <p class="award-badge__name">Best Use of Blended Learning</p>
-                                <p class="award-badge__org">Public &amp; Non-Profit Sector</p>
+                                <p class="award-badge__name">Best use of blended learning</p>
+                                <p class="award-badge__org">Public &amp; non-profit sector</p>
                             </div>
                         </div>
 
                         <div class="award-badge">
                             <div class="award-badge__icon">🏆</div>
                             <div class="award-badge__text">
-                                <p class="award-badge__name">Best Digital Learning Transformation Programme</p>
+                                <p class="award-badge__name">Best digital learning transformation programme</p>
                                 <p class="award-badge__org">Learning Technologies Awards</p>
                             </div>
                         </div>
@@ -1724,7 +1857,7 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8">
-                    <p class="section-eyebrow">The Full Picture</p>
+                    <p class="section-eyebrow">The full picture</p>
                     <div class="section-divider"></div>
                     <h2 id="funnel-title" style="color: var(--lds-white);">How it all connects to your sales process</h2>
                     <p class="text-muted-white">Every touchpoint in this funnel is engineered to advance the relationship — not just capture contact data.</p>
@@ -1733,7 +1866,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="vertical-funnel" role="img" aria-label="Complete funnel flow diagram from LinkedIn post through to Stage 3 Scale">
+                    <div class="vertical-funnel" role="img" aria-label="Complete funnel flow diagram from LinkedIn through to Stage 3 Scale">
 
                         <!-- Step 1 -->
                         <div class="vertical-funnel__step">
@@ -1742,9 +1875,9 @@
                                 <div class="vertical-funnel__line"></div>
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--green">
-                                <p class="vertical-funnel__card-label">Entry Point</p>
-                                <p class="vertical-funnel__card-title">LinkedIn Post (Tier 1 Content)</p>
-                                <p class="vertical-funnel__card-note">Each of the 7 pitfalls becomes a standalone post driving warm traffic</p>
+                                <p class="vertical-funnel__card-label">Entry point</p>
+                                <p class="vertical-funnel__card-title">LinkedIn post (each pitfall is standalone content)</p>
+                                <p class="vertical-funnel__card-note">Each of the 7 pitfalls becomes a LinkedIn post driving warm traffic to the course</p>
                             </div>
                         </div>
 
@@ -1756,7 +1889,7 @@
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--white">
                                 <p class="vertical-funnel__card-label">Click-through</p>
-                                <p class="vertical-funnel__card-title">Landing Page</p>
+                                <p class="vertical-funnel__card-title">Landing page</p>
                                 <p class="vertical-funnel__card-note">First impression — positions Andrew's unique methodology, not a generic agency</p>
                             </div>
                         </div>
@@ -1768,30 +1901,60 @@
                                 <div class="vertical-funnel__line"></div>
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--green">
-                                <p class="vertical-funnel__card-label">Tier 1 — Ungated</p>
-                                <p class="vertical-funnel__card-title">5 Pitfalls Article</p>
-                                <p class="vertical-funnel__card-note">Builds trust and credibility. No gate. Easily shared internally by the prospect</p>
+                                <p class="vertical-funnel__card-label">Tier 1 — Free course, no gate</p>
+                                <p class="vertical-funnel__card-title">Cover page + lessons 1–2 (ungated)</p>
+                                <p class="vertical-funnel__card-note">Builds trust and credibility. No gate yet. Easily forwarded by the prospect to colleagues.</p>
                             </div>
                         </div>
 
-                        <!-- Step 4 — THE MAGIC STEP -->
+                        <!-- Step 4 — MID-COURSE GATE -->
                         <div class="vertical-funnel__step">
                             <div class="vertical-funnel__connector">
                                 <div class="vertical-funnel__dot vertical-funnel__dot--orange"></div>
                                 <div class="vertical-funnel__line vertical-funnel__line--orange"></div>
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--orange">
-                                <p class="vertical-funnel__card-label">Tier 2 — Key Asset</p>
-                                <p class="vertical-funnel__card-title">Readiness Assessment</p>
-                                <p class="vertical-funnel__card-note">Captures qualified lead. Delivers personalised score. Creates natural call trigger.</p>
+                                <p class="vertical-funnel__card-label">Gate — lesson 3</p>
+                                <p class="vertical-funnel__card-title">Email + name + institution + role</p>
+                                <p class="vertical-funnel__card-note">Visitor has already absorbed two lessons. Gate feels earned, not intrusive. Role captured here routes them to the correct assessment track.</p>
                                 <div class="vertical-funnel__magic-note">
-                                    <i class="bi bi-star-fill" style="color: var(--lds-orange); margin-right: 0.5rem;"></i>
-                                    This is where the magic happens — by the time they book a call, they've self-diagnosed their gaps using your framework.
+                                    <i class="bi bi-lock-fill" style="color: var(--lds-orange); margin-right: 0.5rem;"></i>
+                                    Gating at lesson 3 was Andrew's decision — a compromise between fully ungated and front-door gate. The visitor is already invested by this point.
                                 </div>
                             </div>
                         </div>
 
                         <!-- Step 5 -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot"></div>
+                                <div class="vertical-funnel__line"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--green">
+                                <p class="vertical-funnel__card-label">Tier 1 — Continues</p>
+                                <p class="vertical-funnel__card-title">Lessons 3–7 + summary screen</p>
+                                <p class="vertical-funnel__card-note">Remaining pitfalls including "The champion problem" and "The cost-per-module fallacy." Summary screen CTA leads to the assessment.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 — THE MAGIC STEP -->
+                        <div class="vertical-funnel__step">
+                            <div class="vertical-funnel__connector">
+                                <div class="vertical-funnel__dot vertical-funnel__dot--orange"></div>
+                                <div class="vertical-funnel__line vertical-funnel__line--orange"></div>
+                            </div>
+                            <div class="vertical-funnel__card vertical-funnel__card--orange">
+                                <p class="vertical-funnel__card-label">Tier 2 — Key asset</p>
+                                <p class="vertical-funnel__card-title">Role-based readiness assessment</p>
+                                <p class="vertical-funnel__card-note">Role auto-selected from course. Slide-per-question SPA. 12 questions on their track. Technical Capacity hook surfaces the gap.</p>
+                                <div class="vertical-funnel__magic-note">
+                                    <i class="bi bi-star-fill" style="color: var(--lds-orange); margin-right: 0.5rem;"></i>
+                                    This is where the magic happens — by the time they book a call, they've self-diagnosed their gaps using your framework. The results dashboard is shareable by URL and exportable to PDF.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 7 -->
                         <div class="vertical-funnel__step">
                             <div class="vertical-funnel__connector">
                                 <div class="vertical-funnel__dot vertical-funnel__dot--orange"></div>
@@ -1800,24 +1963,24 @@
                             <div class="vertical-funnel__card vertical-funnel__card--orange">
                                 <p class="vertical-funnel__card-label">Conversion</p>
                                 <p class="vertical-funnel__card-title">"Walk through your results with Andrew"</p>
-                                <p class="vertical-funnel__card-note">The strategy call CTA. Low friction — they're already invested in their score.</p>
+                                <p class="vertical-funnel__card-note">Sticky CTA footer on the results dashboard. Low friction — they're already invested in their score and want to talk through it.</p>
                             </div>
                         </div>
 
-                        <!-- Step 6 -->
+                        <!-- Step 8 -->
                         <div class="vertical-funnel__step">
                             <div class="vertical-funnel__connector">
                                 <div class="vertical-funnel__dot"></div>
                                 <div class="vertical-funnel__line"></div>
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--green">
-                                <p class="vertical-funnel__card-label">Stage 1 — Paid Engagement</p>
-                                <p class="vertical-funnel__card-title">Consulting &amp; Strategy</p>
+                                <p class="vertical-funnel__card-label">Stage 1 — Paid engagement</p>
+                                <p class="vertical-funnel__card-title">Consulting &amp; strategy</p>
                                 <p class="vertical-funnel__card-note">The assessment conversation naturally leads here. The prospect already trusts the framework.</p>
                             </div>
                         </div>
 
-                        <!-- Step 7 -->
+                        <!-- Step 9 -->
                         <div class="vertical-funnel__step">
                             <div class="vertical-funnel__connector">
                                 <div class="vertical-funnel__dot"></div>
@@ -1825,7 +1988,7 @@
                             </div>
                             <div class="vertical-funnel__card vertical-funnel__card--green">
                                 <p class="vertical-funnel__card-label">Stage 2 → Stage 3</p>
-                                <p class="vertical-funnel__card-title">Pilot → Scale</p>
+                                <p class="vertical-funnel__card-title">Pilot → scale</p>
                                 <p class="vertical-funnel__card-note">The full LDS engagement model — from proof of concept to institution-wide deployment</p>
                             </div>
                         </div>
@@ -1838,41 +2001,94 @@
 
 
     <!-- ============================================================
-         SECTION 7 — IMPLEMENTATION PRIORITY
+         SECTION 7 — BUILD STATUS
     ============================================================ -->
     <section class="section-light" id="implementation" aria-labelledby="implementation-title">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8">
-                    <p class="section-eyebrow section-eyebrow--dark">Build Order</p>
+                    <p class="section-eyebrow section-eyebrow--dark">Build status</p>
                     <div class="section-divider section-divider--orange"></div>
-                    <h2 id="implementation-title">Recommended build order</h2>
-                    <p class="text-muted">Not everything needs to be built at once. Here's the priority sequence based on revenue impact and build effort.</p>
+                    <h2 id="implementation-title">What's built vs. what's still pending</h2>
+                    <p class="text-muted">All three tiers of the funnel are built and live on GitHub Pages. Outstanding items are content and validation tasks, not engineering tasks.</p>
                 </div>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <div class="priority-card priority-card--1">
-                        <div class="priority-card__number">01</div>
-                        <p class="priority-card__timing">Build first</p>
-                        <p class="priority-card__title">Readiness assessment (Tier 2)</p>
-                        <p class="priority-card__desc">Highest-value asset. Directly replaces the current opt-in. Feeds your pipeline immediately. Can be built as a web form on the landing page — no separate tool required.</p>
+                    <div class="status-card status-card--built">
+                        <span class="status-card__badge">Built</span>
+                        <p class="status-card__title">Free interactive course (Tier 1)</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-check-circle-fill"></i> 7-lesson course at tier1-course.html</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Cover page, ungated lessons 1–2</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Gate at lesson 3 (email, name, institution, role)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Sidebar lock icons for lessons 3–7</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Summary screen with assessment CTA</li>
+                            <li><i class="bi bi-check-circle-fill"></i> sessionStorage role passing to assessment</li>
+                        </ul>
+                        <p class="status-card__desc mt-3" style="color: var(--lds-orange); font-weight: 600;">Pending: Andrew to record 7 lesson videos</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="priority-card priority-card--2">
-                        <div class="priority-card__number">02</div>
-                        <p class="priority-card__timing">Build second</p>
-                        <p class="priority-card__title">ICAS case study (Tier 3)</p>
-                        <p class="priority-card__desc">You already have the content. The work here is structuring it as a compelling narrative with the awards front and centre. High-impact for bottom-of-funnel decision-makers.</p>
+                    <div class="status-card status-card--built">
+                        <span class="status-card__badge">Built</span>
+                        <p class="status-card__title">Role-based readiness assessment (Tier 2)</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-check-circle-fill"></i> Full-screen SPA at tier2-assessment.html</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 6-role selector, 2 question tracks</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 7 dimensions, 12 questions per track</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Technical Capacity hook (4 questions)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SVG gauge, radar chart, accordion results</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Shareable URL hash + PDF print stylesheet</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Sticky CTA footer, journey breadcrumbs</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="priority-card priority-card--3">
-                        <div class="priority-card__number">03</div>
-                        <p class="priority-card__timing">Build third</p>
-                        <p class="priority-card__title">7 pitfalls interactive course (Tier 1)</p>
-                        <p class="priority-card__desc">Each pitfall becomes a standalone LinkedIn post. Build the article, then drip the pitfalls over 5 weeks to drive consistent traffic back to the landing page and assessment.</p>
+                    <div class="status-card status-card--built">
+                        <span class="status-card__badge">Built</span>
+                        <p class="status-card__title">ICAS case study (Tier 3)</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-check-circle-fill"></i> Full case study at mockup-tier3-case-study.html</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 2.5yr partnership, 12 modules, 89% satisfaction</li>
+                            <li><i class="bi bi-check-circle-fill"></i> The "backwash effect" narrative</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 2 LT Awards displayed</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Glassmorphism navbar matching brand</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still pending -->
+            <div class="row g-4 mt-2">
+                <div class="col-lg-4">
+                    <div class="status-card status-card--pending">
+                        <span class="status-card__badge">Pending</span>
+                        <p class="status-card__title">Nav restructure — awaiting Andrew's feedback</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-clock"></i> Option A recommended: How it works / Case studies / Meet Andrew / Is this for you?</li>
+                            <li><i class="bi bi-clock"></i> Andrew to confirm preferred option</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="status-card status-card--pending">
+                        <span class="status-card__badge">Pending</span>
+                        <p class="status-card__title">Real testimonials needed</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-clock"></i> Fabricated testimonials on landing page — flagged for replacement</li>
+                            <li><i class="bi bi-clock"></i> Real quotes to be sourced from Andrew's network</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="status-card status-card--pending">
+                        <span class="status-card__badge">Pending</span>
+                        <p class="status-card__title">LinkedIn poll — topic validation</p>
+                        <ul class="status-card__list">
+                            <li><i class="bi bi-clock"></i> Poll approved by Andrew to validate "Scaling at Pace" guide title positioning</li>
+                            <li><i class="bi bi-clock"></i> Awaiting Andrew to post and share results</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1894,10 +2110,11 @@
                 <div class="col-lg-3">
                     <h5 class="footer-heading">Navigation</h5>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#process">How it works</a></li>
+                        <li><a href="mockup-tier3-case-study.html">Case studies</a></li>
+                        <li><a href="index.html#about">Meet Andrew</a></li>
                         <li><a href="tier1-course.html">Free course</a></li>
                         <li><a href="tier2-assessment.html">Readiness assessment</a></li>
-                        <li><a href="mockup-tier3-case-study.html">ICAS case study</a></li>
                     </ul>
                 </div>
 
