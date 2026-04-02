@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk to Andrew — Learning Design Solutions</title>
+    <meta name="description" content="Book a free 30-minute strategy call with Andrew Doig. Discuss your online programme challenges and explore how LDS can help.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --lds-navy:      #122159;
+            --lds-navy-dark: #0d1a40;
+            --lds-green:     #84cc16;
+            --lds-orange:    #f97316;
+            --lds-dark:      #1f2937;
+            --lds-muted:     #6b7280;
+            --lds-border:    #e5e7eb;
+            --lds-light:     #f9fafb;
+            --lds-white:     #ffffff;
+            --font-body:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display:  'Merriweather', serif;
+        }
+
+        *, *::before, *::after { border-radius: 0 !important; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); font-size: 1rem; line-height: 1.7; color: var(--lds-dark); background-color: var(--lds-light); margin: 0; }
+        h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.25; }
+
+        /* ---- App header ---- */
+        .app-header {
+            background-color: rgba(18, 33, 89, 0.92);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(132, 204, 22, 0.25);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.5rem 1.5rem; min-height: 56px; z-index: 10;
+            position: sticky; top: 0;
+        }
+        .app-header__left { display: flex; align-items: center; gap: 1rem; }
+        .app-header__brand { display: flex; align-items: center; text-decoration: none; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 700; color: var(--lds-white); white-space: nowrap; }
+        .app-header__brand span { color: var(--lds-green); }
+        .app-header__brand:hover { color: var(--lds-green); }
+        .app-header__nav { display: flex; align-items: center; gap: 0.25rem; }
+        .app-header__meta { font-size: 0.75rem; color: rgba(255,255,255,0.4); display: none; }
+        @media (max-width: 640px) { .app-header__nav { display: none; } .app-header__meta { display: block; } }
+
+        /* ---- Journey breadcrumb ---- */
+        .journey-breadcrumb { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
+        .journey-breadcrumb__item { display: flex; align-items: center; gap: 0; }
+        .journey-breadcrumb__sep { color: rgba(255,255,255,0.2); font-size: 0.7rem; padding: 0 0.35rem; flex-shrink: 0; user-select: none; }
+        .journey-breadcrumb__link, .journey-breadcrumb__current, .journey-breadcrumb__future { font-size: 0.78rem; font-weight: 500; white-space: nowrap; text-decoration: none; padding: 0.25rem 0.1rem; transition: color 0.15s; }
+        .journey-breadcrumb__link { color: var(--lds-green); }
+        .journey-breadcrumb__link:hover { color: #a3e635; text-decoration: underline; }
+        .journey-breadcrumb__current { color: var(--lds-white); font-weight: 700; }
+        .journey-breadcrumb__future { color: rgba(255,255,255,0.28); cursor: default; }
+        .journey-breadcrumb__back { display: flex; align-items: center; gap: 0.3rem; color: rgba(255,255,255,0.55); font-size: 0.78rem; font-weight: 500; text-decoration: none; margin-right: 0.75rem; transition: color 0.15s; cursor: pointer; background: none; border: none; padding: 0; }
+        .journey-breadcrumb__back:hover { color: var(--lds-white); }
+        @media (max-width: 640px) { .journey-breadcrumb__item--hide-mobile { display: none; } .journey-breadcrumb__sep--hide-mobile { display: none; } }
+
+        /* ---- Hero ---- */
+        .call-hero {
+            background: linear-gradient(155deg, var(--lds-navy) 0%, #0d1a40 55%, #1a2e6b 100%);
+            position: relative; overflow: hidden;
+            padding: 4rem 2rem; text-align: center;
+            color: var(--lds-white);
+        }
+        .call-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(132,204,22,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(132,204,22,0.04) 1px, transparent 1px);
+            background-size: 60px 60px; pointer-events: none;
+        }
+        .call-hero__badge { display: inline-block; background-color: rgba(132,204,22,0.2); color: var(--lds-green); font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; margin-bottom: 1.25rem; position: relative; }
+        .call-hero__title { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.5rem, 4vw, 2.5rem); line-height: 1.15; margin-bottom: 0.75rem; position: relative; }
+        .call-hero__subtitle { font-size: 1.0625rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; position: relative; line-height: 1.7; }
+
+        /* ---- Content sections ---- */
+        .call-section { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+        .call-author {
+            display: flex; align-items: flex-start; gap: 1.5rem;
+            padding: 2rem; background: var(--lds-white);
+            border-left: 4px solid var(--lds-orange);
+            margin-bottom: 2.5rem;
+        }
+        .call-author__avatar { width: 80px; height: 80px; background-color: var(--lds-navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--lds-green); font-size: 2rem; }
+        .call-author__name { font-family: var(--font-display); font-weight: 900; font-size: 1.25rem; color: var(--lds-navy); margin-bottom: 0.25rem; }
+        .call-author__role { font-size: 0.875rem; color: var(--lds-muted); margin-bottom: 0.5rem; }
+        .call-author__bio { font-size: 0.9375rem; color: var(--lds-dark); line-height: 1.7; margin: 0; }
+
+        @media (max-width: 575.98px) { .call-author { flex-direction: column; align-items: center; text-align: center; } }
+
+        .call-what-to-expect { margin-bottom: 2.5rem; }
+        .call-what-to-expect__title { font-family: var(--font-body); font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--lds-navy); margin-bottom: 1.25rem; }
+        .call-what-to-expect__list { list-style: none; padding: 0; margin: 0; }
+        .call-what-to-expect__list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9375rem; color: var(--lds-dark); padding: 0.75rem 0; border-bottom: 1px solid var(--lds-border); line-height: 1.6; }
+        .call-what-to-expect__list li:last-child { border-bottom: none; }
+        .call-what-to-expect__list li i { color: var(--lds-green); flex-shrink: 0; margin-top: 0.2em; font-size: 1rem; }
+
+        .call-reassurance { background-color: rgba(132,204,22,0.05); border-left: 4px solid var(--lds-green); padding: 1.5rem; margin-bottom: 2.5rem; }
+        .call-reassurance p { font-size: 0.9375rem; color: var(--lds-dark); line-height: 1.7; margin: 0; }
+        .call-reassurance strong { color: var(--lds-navy); }
+
+        /* ---- CTA area ---- */
+        .call-cta { text-align: center; padding: 2.5rem 2rem; background: var(--lds-white); border-top: 3px solid var(--lds-green); margin-bottom: 2.5rem; }
+        .call-cta__title { font-family: var(--font-display); font-weight: 900; font-size: 1.375rem; color: var(--lds-navy); margin-bottom: 0.75rem; }
+        .call-cta__text { font-size: 0.9375rem; color: var(--lds-muted); margin-bottom: 1.5rem; }
+
+        .call-cta__btn {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background-color: var(--lds-orange); color: var(--lds-white);
+            padding: 1rem 2.5rem;
+            font-family: var(--font-body); font-size: 1.0625rem; font-weight: 700;
+            text-decoration: none; border: 2px solid var(--lds-orange);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .call-cta__btn:hover { background-color: #ea6c0a; border-color: #ea6c0a; color: var(--lds-white); }
+
+        .call-cta__email { font-size: 0.875rem; color: var(--lds-muted); margin-top: 1rem; }
+        .call-cta__email a { color: var(--lds-navy); text-decoration: underline; }
+
+        /* ---- Alt actions ---- */
+        .call-alternatives { text-align: center; margin-bottom: 3rem; }
+        .call-alternatives__title { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--lds-muted); margin-bottom: 1rem; }
+        .call-alternatives__links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .call-alternatives__link { font-size: 0.9375rem; color: var(--lds-navy); text-decoration: underline; font-weight: 600; }
+        .call-alternatives__link:hover { color: var(--lds-orange); }
+
+        /* ---- Footer ---- */
+        .call-footer { padding: 1.5rem; text-align: center; font-size: 0.8125rem; color: var(--lds-muted); border-top: 1px solid var(--lds-border); }
+    </style>
+</head>
+
+<body>
+
+    <header class="app-header" role="banner">
+        <div class="app-header__left">
+            <a href="index.html" class="app-header__brand">LDS <span>Courses</span></a>
+            <nav class="app-header__nav" aria-label="Journey progress" id="journey-nav"></nav>
+        </div>
+        <span class="app-header__meta">Talk to Andrew</span>
+    </header>
+
+    <section class="call-hero" aria-labelledby="hero-title">
+        <div class="call-hero__badge">Free &middot; 30 minutes &middot; No obligation</div>
+        <h1 class="call-hero__title" id="hero-title">Talk to Andrew</h1>
+        <p class="call-hero__subtitle">A free 30-minute strategy conversation about your online programme challenges. No sales pitch &mdash; just an honest assessment from someone who&rsquo;s done this 20+ times.</p>
+    </section>
+
+    <div class="call-section">
+
+        <div class="call-author">
+            <div class="call-author__avatar" aria-hidden="true"><i class="bi bi-person-fill"></i></div>
+            <div>
+                <p class="call-author__name">Andrew Doig</p>
+                <p class="call-author__role">Associate Professor &amp; Founder, Learning Design Solutions &middot; 30 years in HE</p>
+                <p class="call-author__bio">Andrew has led academic transformation projects for institutions including ICAS, Dyson Institute, and Walbrook. He brings a rare combination of academic rigour and practical delivery experience to every conversation.</p>
+            </div>
+        </div>
+
+        <div class="call-what-to-expect">
+            <p class="call-what-to-expect__title">What to expect</p>
+            <ul class="call-what-to-expect__list">
+                <li><i class="bi bi-chat-dots" aria-hidden="true"></i><span><strong>Your context, understood.</strong> Andrew will ask about your institution, your goals, and where you are in the process.</span></li>
+                <li><i class="bi bi-search" aria-hidden="true"></i><span><strong>An honest assessment.</strong> Based on his experience with 20+ institutions, Andrew will give you a straight view of your readiness and the challenges ahead.</span></li>
+                <li><i class="bi bi-map" aria-hidden="true"></i><span><strong>A practical next step.</strong> Whether that&rsquo;s a formal readiness assessment, a pilot scope, or simply better internal positioning &mdash; you&rsquo;ll leave with something actionable.</span></li>
+                <li><i class="bi bi-shield-check" aria-hidden="true"></i><span><strong>No sales pressure.</strong> This is a conversation, not a pitch. If LDS isn&rsquo;t the right fit, Andrew will tell you.</span></li>
+            </ul>
+        </div>
+
+        <div class="call-reassurance">
+            <p><strong>Who this is for:</strong> Vice-chancellors, pro-vice-chancellors, deans, programme directors, heads of digital education, and learning designers who are planning, scoping, or already building online programmes. If you&rsquo;re wondering whether your institution is ready &mdash; or how to make the case internally &mdash; this conversation is for you.</p>
+        </div>
+
+        <div class="call-cta">
+            <p class="call-cta__title">Ready to talk?</p>
+            <p class="call-cta__text">Choose a time that works for you. Andrew typically responds within 24 hours.</p>
+            <a href="mailto:info@learningdesignsolutions.co.uk?subject=Strategy%20call%20request" class="call-cta__btn">
+                <i class="bi bi-calendar-check" aria-hidden="true"></i>
+                Request a call
+            </a>
+            <p class="call-cta__email">Or email directly: <a href="mailto:info@learningdesignsolutions.co.uk">info@learningdesignsolutions.co.uk</a></p>
+            <p class="call-cta__email">Tel: <a href="tel:+4407780147236">07780 147236</a></p>
+        </div>
+
+        <div class="call-alternatives">
+            <p class="call-alternatives__title">Not ready for a call yet?</p>
+            <div class="call-alternatives__links">
+                <a href="tier1-course.html" class="call-alternatives__link">Take the free course</a>
+                <a href="tier2-assessment.html" class="call-alternatives__link">Try the readiness assessment</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="call-footer" role="contentinfo">
+        &copy; 2026 Learning Design Solutions &middot; <a href="https://www.learningdesignsolutions.co.uk/" style="color:var(--lds-navy);">learningdesignsolutions.co.uk</a>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        var JOURNEY_STEPS = [
+            { id: 'home',       label: 'LDS home',      href: 'index.html' },
+            { id: 'course',     label: 'Free course',   href: 'tier1-course.html' },
+            { id: 'assessment', label: 'Assessment',     href: 'tier2-assessment.html' },
+            { id: 'call',       label: 'Book a call',    href: null }
+        ];
+
+        var currentIdx = 3;
+
+        function renderBreadcrumb() {
+            var nav = document.getElementById('journey-nav');
+            if (!nav) return;
+
+            var html = '<button class="journey-breadcrumb__back" id="breadcrumb-back-btn" aria-label="Go back">'
+                     + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
+                     + ' Back'
+                     + '</button>';
+
+            html += '<ol class="journey-breadcrumb" aria-label="Your journey">';
+
+            JOURNEY_STEPS.forEach(function (step, idx) {
+                var isFirst = (idx === 0);
+                var isCurrent = (idx === currentIdx);
+                var isPast = (idx < currentIdx);
+                var hideOnMobile = (!isCurrent && idx !== currentIdx - 1);
+
+                var itemClass = 'journey-breadcrumb__item' + (hideOnMobile ? ' journey-breadcrumb__item--hide-mobile' : '');
+                html += '<li class="' + itemClass + '">';
+
+                if (!isFirst) {
+                    var sepClass = 'journey-breadcrumb__sep' + (hideOnMobile ? ' journey-breadcrumb__sep--hide-mobile' : '');
+                    html += '<span class="' + sepClass + '" aria-hidden="true">&#8250;</span>';
+                }
+
+                if (isPast && step.href) {
+                    html += '<a href="' + step.href + '" class="journey-breadcrumb__link">' + step.label + '</a>';
+                } else if (isCurrent) {
+                    html += '<span class="journey-breadcrumb__current" aria-current="step">' + step.label + '</span>';
+                } else {
+                    html += '<span class="journey-breadcrumb__future">' + step.label + '</span>';
+                }
+
+                html += '</li>';
+            });
+
+            html += '</ol>';
+            nav.textContent = '';
+            nav.insertAdjacentHTML('beforeend', html);
+
+            var backBtn = document.getElementById('breadcrumb-back-btn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function () {
+                    /* Go back to the previous step — assessment if they came from there, otherwise course */
+                    if (document.referrer && document.referrer.indexOf('tier2-assessment') !== -1) {
+                        window.location.href = 'tier2-assessment.html';
+                    } else if (document.referrer && document.referrer.indexOf('tier1-course') !== -1) {
+                        window.location.href = 'tier1-course.html';
+                    } else {
+                        window.location.href = 'tier1-course.html';
+                    }
+                });
+            }
+        }
+
+        renderBreadcrumb();
+    })();
+    </script>
+
+</body>
+</html>
