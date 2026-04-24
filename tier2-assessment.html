@@ -239,9 +239,97 @@
         }
 
         /* ---- Slide backgrounds ---- */
+        .slide--intro { background: var(--navy); }
         .slide--role { background: var(--navy); }
         .slide--question { background: var(--white); }
         .slide--results { background: var(--grey-100); }
+
+        /* ============================================================
+           INTRO / PREAMBLE SLIDE
+        ============================================================ */
+        .intro-slide__eyebrow {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+        .intro-slide__title {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(1.65rem, 4.2vw, 2.5rem);
+            color: var(--white);
+            line-height: 1.18;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .intro-slide__lede {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            max-width: 620px;
+        }
+        .intro-slide__subtitle {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.58);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.01em;
+        }
+        .intro-slide__deliverables {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.75rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.65rem 1.5rem;
+            max-width: 640px;
+        }
+        .intro-slide__deliverables li {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.45;
+            padding-left: 1.1rem;
+            position: relative;
+        }
+        .intro-slide__deliverables li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 0.55rem;
+            height: 2px;
+            background: var(--green);
+        }
+        .intro-slide__cta {
+            background: var(--green);
+            color: var(--navy);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            padding: 0.95rem 1.75rem;
+            border: 0;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+        .intro-slide__cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        }
+        .intro-slide__trust {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 1.25rem;
+            letter-spacing: 0.02em;
+        }
+        @media (max-width: 640px) {
+            .intro-slide__deliverables { grid-template-columns: 1fr; }
+        }
 
         /* ============================================================
            ROLE SELECTION SLIDE
@@ -958,33 +1046,49 @@
         .results-conclusion-text:last-of-type { margin-bottom: 0; }
         .results-conclusion-text strong { color: var(--navy); }
 
-        /* ---- CTA block — fixed footer bar (visible only on results slide) ---- */
+        /* ---- Case-study stub (sits above CTA) ---- */
+        .results-case-study {
+            grid-column: 1 / -1;
+            margin-top: 1.75rem;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            border-left: 3px solid var(--orange);
+            padding: 1.25rem 1.5rem;
+        }
+        .results-case-study__eyebrow {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin: 0 0 0.6rem 0;
+        }
+        .results-case-study__body {
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--navy);
+            margin: 0 0 0.75rem 0;
+        }
+        .results-case-study__footnote {
+            font-size: 0.82rem;
+            color: var(--grey-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ---- CTA block — inline next-step card at end of results content ---- */
         .results-cta-block {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 20;
+            position: relative;
+            grid-column: 1 / -1;
+            margin-top: 1.5rem;
             background: rgba(13, 26, 64, 0.94);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border-top: 3px solid var(--orange);
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            padding: 0.85rem 1.75rem;
-            flex-wrap: nowrap;
-            /* Hidden until results slide is active — JS adds .results-cta-visible to body */
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(100%);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        body.results-visible .results-cta-block {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
+            padding: 1.25rem 1.75rem;
+            flex-wrap: wrap;
         }
 
         .results-cta-block__left {
@@ -1443,9 +1547,33 @@
     <div class="slide-viewport" id="slide-viewport">
 
         <!-- =====================================================
+             SLIDE -1: INTRO / PREAMBLE
+        ===================================================== -->
+        <div class="slide slide--intro is-active" id="slide-intro" role="region" aria-labelledby="intro-title" tabindex="-1">
+            <div class="slide-inner">
+                <p class="intro-slide__eyebrow">Free diagnostic &middot; 7 minutes</p>
+                <h1 class="intro-slide__title" id="intro-title">Before you commit budget or timelines, know where your institution actually stands.</h1>
+                <p class="intro-slide__lede">Most online programme initiatives stall at predictable points: unclear leadership alignment, under-resourced delivery teams, quality frameworks that weren't built for online, or LMS capability gaps that only surface when the first cohort is live.</p>
+                <p class="intro-slide__subtitle">This diagnostic scores your institution across the seven readiness dimensions that predict whether an online programme reaches launch — and performs commercially once it does.</p>
+                <p class="intro-slide__subtitle" style="color: rgba(255,255,255,0.78); margin-bottom: 0.85rem;"><strong style="color: var(--green); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.75rem;">At the end, you'll get</strong></p>
+                <ul class="intro-slide__deliverables">
+                    <li>A dimension-by-dimension score out of 48</li>
+                    <li>A written interpretation of where the risk sits</li>
+                    <li>Specific recommendations on what to address first</li>
+                    <li>A framing for the internal conversations you need to have</li>
+                </ul>
+                <button class="intro-slide__cta" id="intro-start-btn" type="button" aria-label="Start the diagnostic — go to role selection">
+                    Start the diagnostic
+                    <span aria-hidden="true">&#8594;</span>
+                </button>
+                <p class="intro-slide__trust">No payment, no obligation &middot; 12 questions &middot; 7 minutes</p>
+            </div>
+        </div>
+
+        <!-- =====================================================
              SLIDE 0: ROLE SELECTION
         ===================================================== -->
-        <div class="slide slide--role is-active" id="slide-role" role="region" aria-labelledby="role-title" tabindex="-1">
+        <div class="slide slide--role" id="slide-role" role="region" aria-labelledby="role-title" tabindex="-1">
             <div class="slide-inner">
                 <p class="role-slide__eyebrow">Free assessment &middot; 7 minutes</p>
                 <h1 class="role-slide__title" id="role-title">First, tell us about your role</h1>
@@ -1453,38 +1581,38 @@
 
                 <div class="role-options" role="list">
 
-                    <button class="role-card" data-role="strategic" data-role-label="Vice-chancellor / Provost / Principal"
-                            role="listitem" aria-label="Select: Vice-chancellor, Provost or Principal">
+                    <button class="role-card" data-role="strategic" data-role-label="Vice-chancellor / Provost / Principal / CEO"
+                            role="listitem" aria-label="Select: Vice-chancellor, Provost, Principal or CEO">
                         <div class="role-card__icon" aria-hidden="true">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                         </div>
                         <div class="role-card__body">
-                            <div class="role-card__title">Vice-chancellor / Provost / Principal</div>
+                            <div class="role-card__title">Vice-chancellor / Provost / Principal / CEO</div>
                             <div class="role-card__desc">I oversee institutional strategy and major investment decisions</div>
                         </div>
                         <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
                     </button>
 
-                    <button class="role-card" data-role="strategic" data-role-label="Pro-vice-chancellor (Education / Digital)"
-                            role="listitem" aria-label="Select: Pro-vice-chancellor, Education or Digital">
+                    <button class="role-card" data-role="strategic" data-role-label="Pro-vice-chancellor / Academic Director (Education / Digital)"
+                            role="listitem" aria-label="Select: Pro-vice-chancellor or Academic Director, Education or Digital">
                         <div class="role-card__icon" aria-hidden="true">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
                         </div>
                         <div class="role-card__body">
-                            <div class="role-card__title">Pro-vice-chancellor (Education / Digital)</div>
+                            <div class="role-card__title">Pro-vice-chancellor / Academic Director (Education / Digital)</div>
                             <div class="role-card__desc">I lead the education or digital transformation portfolio</div>
                         </div>
                         <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
                     </button>
 
-                    <button class="role-card" data-role="strategic" data-role-label="Dean / Head of faculty"
-                            role="listitem" aria-label="Select: Dean or Head of faculty">
+                    <button class="role-card" data-role="strategic" data-role-label="Dean / Head of faculty / Head of Programmes"
+                            role="listitem" aria-label="Select: Dean, Head of faculty or Head of Programmes">
                         <div class="role-card__icon" aria-hidden="true">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
                         <div class="role-card__body">
-                            <div class="role-card__title">Dean / Head of faculty</div>
-                            <div class="role-card__desc">I manage academic programmes within my faculty</div>
+                            <div class="role-card__title">Dean / Head of faculty / Head of Programmes</div>
+                            <div class="role-card__desc">I manage academic programmes within my faculty or organisation</div>
                         </div>
                         <span class="role-card__arrow" aria-hidden="true">&#8594;</span>
                     </button>
@@ -1563,21 +1691,21 @@
                 id: 'q1',
                 dimension: 'Strategic clarity',
                 text: 'Does your institution have a formally approved strategy for online programme development, with defined goals and timelines?',
-                context: '<p>Without a formally approved strategy, online learning initiatives tend to stall at the first governance hurdle. Boards and finance committees need to see documented intent with clear targets before they authorise the investment required to build properly.</p><p>A formal strategy also protects the initiative during leadership changes — which are common in HE. When the strategy is on paper and approved, it outlasts the individuals who championed it.</p>'
+                context: '<p>Without a formally approved strategy, online learning initiatives tend to stall at the first governance hurdle. Boards and finance committees need to see documented intent with clear targets before they authorise the investment required to build properly.</p><p>A formal strategy also protects the initiative during leadership changes — which are common. When the strategy is on paper and approved, it outlasts the individuals who championed it.</p>'
             },
             // Dimension 1b — Strategic clarity
             {
                 id: 'q2',
                 dimension: 'Strategic clarity',
                 text: 'Has leadership allocated a ring-fenced budget for online programme development, separate from general teaching funds?',
-                context: '<p>Ring-fenced budget is the single strongest indicator of strategic commitment. When online learning competes for funds from the same pot as day-to-day teaching costs, it almost always loses to immediate operational pressures.</p><p>Institutions that treat online development as a capital investment — with its own budget line, business case, and ROI target — are far more likely to reach launch and to generate the commercial returns that justify continued investment.</p>'
+                context: '<p>Ring-fenced budget is the single strongest indicator of strategic commitment. When online learning competes for funds from the same pot as day-to-day operational or teaching costs, it almost always loses to more immediate pressures.</p><p>Institutions that treat online development as a capital investment — with its own budget line, business case, and ROI target — are far more likely to reach launch and to generate the commercial returns that justify continued investment.</p>'
             },
             // Dimension 2 — Leadership alignment
             {
                 id: 'q3',
                 dimension: 'Leadership alignment',
                 text: 'How aligned is the senior leadership team on the priority and direction of online programme development?',
-                context: '<p>Misalignment at senior level is the most common cause of stalled online programmes. If the VC champions it but the CFO is sceptical, or the academic board is divided, the initiative will face constant friction that slows every decision and approval.</p><p>True alignment means leadership can articulate a consistent answer to: why online, why now, and which programmes first. If that answer varies depending on who you ask, there is work to do before development begins.</p>'
+                context: '<p>Misalignment at senior level is the most common cause of stalled online programmes. If the VC or CEO champions it but the CFO is sceptical, or the academic board is divided, the initiative will face constant friction that slows every decision and approval.</p><p>True alignment means leadership can articulate a consistent answer to: why online, why now, and which programmes first. If that answer varies depending on who you ask, there is work to do before development begins.</p>'
             },
             // Dimension 3 — Resource readiness
             {
@@ -1591,7 +1719,7 @@
                 id: 'q5',
                 dimension: 'Quality framework',
                 text: 'Is there an institutional quality framework specifically adapted for online programme design, delivery, and assessment?',
-                context: '<p>Standard HE quality processes were built for face-to-face delivery. They check the right things for campus teaching, but they miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance.</p><p>Without online-specific quality criteria, development teams have no shared standard to build to — which means every module gets reviewed differently, and the student experience is inconsistent.</p>'
+                context: '<p>Standard institutional quality processes were built for face-to-face delivery. They check the right things for face-to-face teaching, but they miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance.</p><p>Without online-specific quality criteria, development teams have no shared standard to build to — which means every module gets reviewed differently, and the student experience is inconsistent.</p>'
             },
             // Dimension 5a — Student experience focus
             {
@@ -1611,8 +1739,8 @@
             {
                 id: 'q8',
                 dimension: 'Scalability planning',
-                text: 'Is there a plan for how online programme development scales beyond a pilot — including staffing, technology, and cross-faculty coordination?',
-                context: '<p>Pilots succeed; scale-ups fail. This is one of the most consistent patterns in online HE. The resources, relationships, and decision-making processes that work for a single pilot programme break down when you try to run five or ten simultaneously across multiple faculties.</p><p>Planning for scale from the outset — even if you start with a single programme — means your processes, templates, and governance structures are designed to grow rather than to be rebuilt from scratch at every expansion.</p>'
+                text: 'Is there a plan for how online programme development scales beyond a pilot — including staffing, technology, and cross-institutional coordination?',
+                context: '<p>Pilots succeed; scale-ups fail. This is one of the most consistent patterns in online programme development. The resources, relationships, and decision-making processes that work for a single pilot programme break down when you try to run five or ten simultaneously across multiple departments or faculties.</p><p>Planning for scale from the outset — even if you start with a single programme — means your processes, templates, and governance structures are designed to grow rather than to be rebuilt from scratch at every expansion.</p>'
             },
             // Dimension 7a — Technical capacity
             {
@@ -1628,19 +1756,19 @@
                 text: 'Does the institution have hands-on LMS configuration and customisation capability — people who can build, not just administer?',
                 context: '<p>Most institutions have someone who can manage LMS users, run reports, and upload content. Very few have people who can configure the platform to deliver a genuinely engaging online experience: custom course structures, integrated assessment workflows, adaptive release conditions, and analytics dashboards for student tracking.</p><p>The difference between a well-configured LMS and a default installation is the difference between a professional online course and a digital filing cabinet. This capability is almost always underinvested because it is invisible until it is missing.</p>'
             },
-            // Dimension 7c — Technical capacity
-            {
-                id: 'q11',
-                dimension: 'Technical capacity',
-                text: 'Has the institution successfully built proper online assessments with digital submission workflows, rubrics, and academic integrity measures?',
-                context: '<p>Online assessment is far more complex than uploading an exam paper to a shared drive. Effective online assessment requires digital submission workflows, automated rubric tools, plagiarism detection integration, and processes that maintain academic integrity without the physical supervision of a campus exam hall.</p><p>Getting this right takes significant technical and pedagogical effort. Getting it wrong in the first cohort causes complaints, grade disputes, and reputational damage that is difficult to recover from.</p>'
-            },
-            // Dimension 7d — Technical capacity
+            // Dimension 7c — Technical capacity (multimedia — reordered per Andrew, Apr 2026)
             {
                 id: 'q12',
                 dimension: 'Technical capacity',
                 text: 'Does the institution have in-house multimedia production capability — video, animation, interactive content?',
                 context: '<p>Quality online programmes require professionally produced learning materials: well-shot and edited video, interactive activities, and polished presentation design. This does not mean broadcast-quality production for everything, but it does mean a standard that fee-paying online students consider professional.</p><p>In-house multimedia capability is rare. Most institutions either rely on academics filming themselves at their desks — which students find underwhelming — or commission external production at significant cost. Knowing your position clearly determines your production strategy.</p>'
+            },
+            // Dimension 7d — Technical capacity (reframed per Andrew, Apr 2026: was "online assessments built" — replaced with academic regulations for online/flexible study)
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Has the institution established and operationalised clear academic regulations and policies to govern online and flexible study — including assessment integrity, progression, engagement monitoring, and student accountability in a non-campus environment?',
+                context: '<p>Online and flexible provision requires more than adapting existing campus-based regulations. Institutions must ensure that academic rules — such as assessment regulations, progression requirements, attendance and engagement expectations, academic misconduct (including AI use), and appeals processes — are clearly defined, consistently applied, and enforceable in an online context where students may study asynchronously and remotely.</p><p>Without robust and transparent regulatory frameworks, institutions risk inconsistencies in student experience, challenges to academic standards, and increased disputes around fairness and integrity.</p>'
             }
         ],
 
@@ -1715,19 +1843,19 @@
                 text: 'Can your team configure, customise, and build within your LMS platform — not just manage users and upload content?',
                 context: '<p>There is a wide gap between LMS administration and LMS build capability. Administration means managing enrolments, running reports, and uploading files. Build capability means configuring course structures, setting up assessment workflows, creating conditional release logic, and integrating third-party tools.</p><p>Most institutional LMS setups are operated at the administration level because build capability is rare and takes time to develop. The result is that the platform\'s potential to deliver a genuinely engaging online experience goes largely unrealised.</p>'
             },
-            // Dimension 7c — Technical capacity
-            {
-                id: 'q11',
-                dimension: 'Technical capacity',
-                text: 'Have you designed and implemented online assessments with digital submission, automated rubrics, and plagiarism detection?',
-                context: '<p>Online assessment design is a specialist skill that sits at the intersection of pedagogy, technology, and academic integrity. Getting the submission workflow right, building rubrics that can be applied consistently by multiple markers, and integrating plagiarism detection properly all require experience that is distinct from standard assessment design.</p><p>Teams that have done this before have production templates and tested workflows. Teams doing it for the first time typically take three to four times as long and require significantly more revision cycles. This experience gap directly affects delivery timelines.</p>'
-            },
-            // Dimension 7d — Technical capacity
+            // Dimension 7c — Technical capacity (multimedia reordered before assessment build for parity with strategic track, Apr 2026)
             {
                 id: 'q12',
                 dimension: 'Technical capacity',
                 text: 'Does your team have access to multimedia production — professional video, animation, or interactive content creation?',
                 context: '<p>The production quality bar for online learning has risen significantly as learners compare professional-quality content from commercial e-learning providers with institutional course materials. This does not mean cinematic production values for every piece of content, but it does mean video that is well-lit, clearly edited, and properly captioned; interactions that actually work on mobile; and presentation design that does not look like a PowerPoint from 2008.</p><p>Without multimedia production access — whether in-house or through a reliable external partner — design ambitions consistently get scaled back to whatever the team can produce with basic tools, which limits the learning experience you can offer.</p>'
+            },
+            // Dimension 7d — Technical capacity
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Have you designed and implemented online assessments with digital submission, automated rubrics, and plagiarism detection?',
+                context: '<p>Online assessment design is a specialist skill that sits at the intersection of pedagogy, technology, and academic integrity. Getting the submission workflow right, building rubrics that can be applied consistently by multiple markers, and integrating plagiarism detection properly all require experience that is distinct from standard assessment design.</p><p>Teams that have done this before have production templates and tested workflows. Teams doing it for the first time typically take three to four times as long and require significantly more revision cycles. This experience gap directly affects delivery timelines.</p>'
             }
         ]
     };
@@ -2113,6 +2241,18 @@
             }
         }
     });
+
+    /* ============================================================
+       INTRO → ROLE
+    ============================================================ */
+
+    var slideIntro = document.getElementById('slide-intro');
+    var introStartBtn = document.getElementById('intro-start-btn');
+    if (introStartBtn) {
+        introStartBtn.addEventListener('click', function () {
+            navigateToSlide(slideRole, 'forward');
+        });
+    }
 
     /* ============================================================
        ROLE SELECTION
@@ -2565,11 +2705,18 @@
 
         html += '</section>'; /* /right panel */
 
-        /* CTA BLOCK — fixed footer bar */
+        /* CASE STUDY STUB — illustrates LDS track record, sits above CTA */
+        html += '<aside class="results-case-study" role="complementary" aria-label="Related case study">'
+              + '<p class="results-case-study__eyebrow">How LDS has helped institutions like yours</p>'
+              + '<p class="results-case-study__body">Walbrook Institute faced similar friction across leadership alignment and quality-framework readiness. Over a six-month engagement, Andrew worked with their executive team to rebuild the online delivery plan from the governance layer up — resulting in a validated programme architecture ready for first cohort.</p>'
+              + '<p class="results-case-study__footnote">Full Walbrook case study <em>coming soon</em>. In the meantime, Andrew is the best person to walk you through a comparable institutional profile.</p>'
+              + '</aside>';
+
+        /* CTA BLOCK — inline next-step card */
         html += '<div class="results-cta-block" role="complementary" aria-label="Next step">'
               + '<div class="results-cta-block__left">'
-              + '<p class="results-cta-block__title">Want to walk through your results?</p>'
-              + '<p class="results-cta-block__text">Free 30-min strategy call with Andrew</p>'
+              + '<p class="results-cta-block__title">Want to walk through your results with Andrew?</p>'
+              + '<p class="results-cta-block__text">30-minute conversation. We\'ll go through your dimension-by-dimension scores and talk through what to prioritise first for your institution.</p>'
               + '</div>'
               + '<div class="results-cta-block__right">'
               + '<div class="results-cta-buttons">'
@@ -2781,8 +2928,10 @@
             backBtn.addEventListener('click', function () {
                 var activeSlide = viewport.querySelector('.slide.is-active');
                 if (!activeSlide) return;
-                if (activeSlide.id === 'slide-role') {
+                if (activeSlide.id === 'slide-intro') {
                     window.location.href = 'tier1-course.html';
+                } else if (activeSlide.id === 'slide-role') {
+                    navigateToSlide(slideIntro, 'backward');
                 } else if (activeSlide.id === 'slide-results') {
                     /* Go back to last question */
                     document.body.classList.remove('results-visible');
