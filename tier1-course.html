@@ -586,11 +586,13 @@
         }
 
         /* ================================================================
-           LESSON PHASES — 3-phase structure
+           LESSON PHASES — 3-phase structure (Variant 1: chip + tinted card)
         ================================================================ */
         .lesson-phase {
-            padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+            position: relative;
+            padding: 1.75rem 1.75rem 1.5rem;
             margin: 2.5rem 0;
+            border-radius: 12px;
             opacity: 0;
             transform: translateY(16px);
             transition: opacity 0.4s ease, transform 0.4s ease;
@@ -598,32 +600,40 @@
 
         .lesson-phase.is-visible { opacity: 1; transform: translateY(0); }
 
-        .lesson-phase--before { border-left: 4px solid var(--lds-navy); background-color: rgba(18,33,89,0.02); }
-        .lesson-phase--during { border-left: 4px solid var(--lds-orange); background-color: rgba(249,115,22,0.02); }
-        .lesson-phase--after  { border-left: 4px solid var(--lds-green); background-color: rgba(132,204,22,0.02); }
+        .lesson-phase--before { background-color: rgba(18,33,89,0.05); }
+        .lesson-phase--during { background-color: rgba(249,115,22,0.06); }
+        .lesson-phase--after  { background-color: rgba(132,204,22,0.06); }
 
         .lesson-phase__label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
             font-size: 0.6875rem;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: block;
+            margin-bottom: 1.25rem;
         }
 
-        .lesson-phase--before .lesson-phase__label { color: var(--lds-navy); }
-        .lesson-phase--during .lesson-phase__label { color: var(--lds-orange); }
-        .lesson-phase--after  .lesson-phase__label { color: #4d7c0f; }
+        .lesson-phase__label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .lesson-phase--before .lesson-phase__label { background: rgba(18,33,89,0.10); color: var(--lds-navy); }
+        .lesson-phase--during .lesson-phase__label { background: rgba(249,115,22,0.14); color: #c2410c; }
+        .lesson-phase--after  .lesson-phase__label { background: rgba(132,204,22,0.18); color: #4d7c0f; }
 
         .lesson-phase__prompt {
-            background-color: var(--lds-light);
-            padding: 1.25rem 1.5rem;
-            border-left: 3px solid var(--lds-navy);
+            background-color: rgba(255,255,255,0.6);
+            padding: 1.1rem 1.35rem;
+            border-radius: 8px;
             margin-bottom: 1.5rem;
         }
-
-        .lesson-phase--during .lesson-phase__prompt { border-left-color: var(--lds-orange); }
-        .lesson-phase--after  .lesson-phase__prompt { border-left-color: var(--lds-green); }
 
         .lesson-phase__prompt p {
             font-family: var(--font-display);
@@ -671,6 +681,14 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
+        }
+
+        .lesson-video-area iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         .lesson-video-play-icon {
@@ -1693,12 +1711,8 @@
                 <div class="lesson-phase lesson-phase--during" aria-label="During — acquisition phase">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
 
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — Pitfall 1 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 1: Underestimating the design effort — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 1 video — Pitfall 1 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/kXwmrSFewsQ" title="Lesson 1: Pitfall 1 — Underestimating the design effort" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
 
@@ -1836,12 +1850,8 @@
                         <p class="lesson-reflecting__text">In the last lesson, you considered how online programmes are scoped in your institution — and whether the level of effort required is fully recognised. In many cases, even when institutions begin to understand the scale of the work involved, there is an assumption that this can be absorbed within existing teams.</p>
                     </div>
 
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson placeholder — Pitfall 2 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 2: Relying on stretched internal teams — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 2 video — Pitfall 2 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/7ej86rS8koY" title="Lesson 2: Pitfall 2 — Relying on stretched internal teams" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
 
@@ -2019,12 +2029,8 @@
                 <!-- DURING -->
                 <div class="lesson-phase lesson-phase--during">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson — Pitfall 3 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 3: Recording lectures and calling it online learning — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 3 video — Pitfall 3 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/OyQ8f_76tSg" title="Lesson 3: Pitfall 3 — Recording lectures and calling it online learning" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
                     <p class="lesson-video-guidance">As you watch, consider: What actually drives engagement and learning in your context?</p>
@@ -2111,12 +2117,8 @@
                 <!-- DURING -->
                 <div class="lesson-phase lesson-phase--during">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson — Pitfall 4 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 4: Losing your institutional identity — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 4 video — Pitfall 4 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/oWEeoA_V6EY" title="Lesson 4: Pitfall 4 — Losing your institutional identity" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
                     <p class="lesson-video-guidance">As you watch, consider: Which aspects of your institutional identity are currently visible in online provision — and which are missing?</p>
@@ -2203,12 +2205,8 @@
                 <!-- DURING -->
                 <div class="lesson-phase lesson-phase--during">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson — Pitfall 5 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 5: Building for a platform instead of learners — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 5 video — Pitfall 5 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/q2ifPsusJus" title="Lesson 5: Pitfall 5 — Building for a platform instead of learners" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
                     <p class="lesson-video-guidance">As you watch, consider: Where might technology be shaping decisions more than pedagogy in your context?</p>
@@ -2293,12 +2291,8 @@
                 <!-- DURING -->
                 <div class="lesson-phase lesson-phase--during">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson — Pitfall 6 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 6: The champion problem — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 6 video — Pitfall 6 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/HYV1ZNHm56c" title="Lesson 6: Pitfall 6 — The champion problem" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
                     <p class="lesson-video-guidance">As you watch, consider: What typically slows down or blocks progress in your context?</p>
@@ -2385,12 +2379,8 @@
                 <!-- DURING -->
                 <div class="lesson-phase lesson-phase--during">
                     <span class="lesson-phase__label">During &middot; Acquisition + Guidance</span>
-                    <div class="lesson-video-area" role="img" aria-label="Video lesson — Pitfall 7 by Andrew Doig">
-                        <div class="lesson-video-inner">
-                            <div class="lesson-video-play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></div>
-                            <p class="lesson-video-title">Pitfall 7: Why cost-per-module is the wrong metric — video lesson by Andrew Doig</p>
-                            <p class="lesson-video-author">Coming soon</p>
-                        </div>
+                    <div class="lesson-video-area" aria-label="Lesson 7 video — Pitfall 7 by Andrew Doig">
+                        <iframe src="https://www.youtube.com/embed/ZgP_RvmMomY" title="Lesson 7: Pitfall 7 — Why cost-per-module is the wrong metric" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
                         <span class="lesson-video-badge" aria-hidden="true">Video lesson</span>
                     </div>
                     <p class="lesson-video-guidance">As you watch, consider: What do your current metrics prioritise — and what do they ignore?</p>

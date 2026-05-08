@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phase highlight variants — LDS course</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lds-navy: #122159;
+    --lds-orange: #f97316;
+    --lds-green: #84cc16;
+    --lds-white: #ffffff;
+    --lds-bg: #f7f7f4;
+    --lds-mid: #4a5568;
+    --lds-border: #e2e8f0;
+    --lds-ink: #1a202c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--lds-ink);
+    background: var(--lds-bg);
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+  h1 {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    font-size: 2rem;
+    color: var(--lds-navy);
+    margin: 0 0 0.5rem;
+  }
+  .lede { color: var(--lds-mid); margin: 0 0 3rem; max-width: 60ch; }
+
+  .variant {
+    background: var(--lds-white);
+    border: 1px solid var(--lds-border);
+    border-radius: 8px;
+    padding: 2rem 2rem 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .variant > h2 {
+    font-family: 'Source Serif Pro', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--lds-navy);
+    margin: 0 0 0.25rem;
+  }
+  .variant > .note {
+    font-size: 0.875rem;
+    color: var(--lds-mid);
+    margin: 0 0 1.75rem;
+  }
+  .stack > * + * { margin-top: 1.25rem; }
+
+  /* Sample content typography (shared) */
+  .phase-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .phase-prompt p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--lds-mid);
+    font-style: italic;
+  }
+  .phase-body h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+    color: var(--lds-navy);
+  }
+  .phase-body p { margin: 0 0 0.75rem; }
+  .phase-stat {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  /* =====================================================================
+     VARIANT 1 — Stage chip + soft tinted card (no borders, no rules)
+     Stage shown by a small coloured pill in the corner; card has a faint
+     wash of the stage colour. Quiet, modern, plays well in sequence.
+  ===================================================================== */
+  .v1-phase {
+    position: relative;
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: 12px;
+  }
+  .v1-phase__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .v1-phase__chip::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .v1-phase--before { background: rgba(18,33,89,0.05); }
+  .v1-phase--before .v1-phase__chip { background: rgba(18,33,89,0.1); color: var(--lds-navy); }
+  .v1-phase--during { background: rgba(249,115,22,0.06); }
+  .v1-phase--during .v1-phase__chip { background: rgba(249,115,22,0.14); color: #c2410c; }
+  .v1-phase--after  { background: rgba(132,204,22,0.06); }
+  .v1-phase--after  .v1-phase__chip { background: rgba(132,204,22,0.18); color: #4d7c0f; }
+
+  /* =====================================================================
+     VARIANT 2 — Numbered step rail (gutter glyph, single rule connecting)
+     A numbered circle in a left gutter visually connects the three phases
+     into a sequence. No coloured walls; one neutral hairline tying them.
+  ===================================================================== */
+  .v2-stack { position: relative; padding-left: 3.5rem; }
+  .v2-stack::before {
+    content: '';
+    position: absolute;
+    left: 1.25rem; top: 1.25rem; bottom: 1.25rem;
+    width: 1px;
+    background: var(--lds-border);
+  }
+  .v2-phase { position: relative; padding: 0.5rem 0 1.5rem; }
+  .v2-phase__num {
+    position: absolute;
+    left: -3.5rem; top: 0.25rem;
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: var(--lds-white);
+    border: 2px solid var(--lds-border);
+    color: var(--lds-mid);
+  }
+  .v2-phase--before .v2-phase__num { border-color: var(--lds-navy); color: var(--lds-navy); }
+  .v2-phase--during .v2-phase__num { border-color: var(--lds-orange); color: var(--lds-orange); background: #fff7ed; }
+  .v2-phase--after  .v2-phase__num { border-color: var(--lds-green); color: #4d7c0f; background: #f7fee7; }
+  .v2-phase__label {
+    color: var(--lds-mid);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* =====================================================================
+     VARIANT 3 — Top-band accent (horizontal bar instead of vertical)
+     Same stage-colour signal, but as a thin top band. Reads as a card
+     header rather than a margin rule, and stacks cleanly without the
+     "running paint" effect of three vertical borders side by side.
+  ===================================================================== */
+  .v3-phase {
+    border: 1px solid var(--lds-border);
+    border-radius: 6px;
+    background: var(--lds-white);
+    overflow: hidden;
+  }
+  .v3-phase__band {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.25rem;
+    color: var(--lds-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .v3-phase__band i { font-style: normal; opacity: 0.8; }
+  .v3-phase--before .v3-phase__band { background: var(--lds-navy); }
+  .v3-phase--during .v3-phase__band { background: var(--lds-orange); }
+  .v3-phase--after  .v3-phase__band { background: #4d7c0f; }
+  .v3-phase__body { padding: 1.25rem 1.5rem 1.5rem; }
+
+  /* =====================================================================
+     VARIANT 4 — Sectioned with kicker rule (no coloured walls at all)
+     Stage marked only by a small uppercase kicker over a short coloured
+     underline above each phase. Most editorial / least decorated.
+  ===================================================================== */
+  .v4-phase { padding: 0.5rem 0 1.5rem; }
+  .v4-phase__kicker {
+    display: inline-block;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid var(--lds-border);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lds-navy);
+  }
+  .v4-phase--before .v4-phase__kicker { border-bottom-color: var(--lds-navy); }
+  .v4-phase--during .v4-phase__kicker { border-bottom-color: var(--lds-orange); color: #c2410c; }
+  .v4-phase--after  .v4-phase__kicker { border-bottom-color: var(--lds-green); color: #4d7c0f; }
+  .v4-phase + .v4-phase { border-top: 1px solid var(--lds-border); padding-top: 1.5rem; }
+
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Phase highlight — four alternatives</h1>
+  <p class="lede">Same Before / During / After content from Lesson 1, restyled four different ways. Each removes the coloured vertical borders that look noisy when stacked, and signals stage through a different mechanism.</p>
+
+  <!-- ================= VARIANT 1 ================= -->
+  <section class="variant">
+    <h2>Variant 1 — Stage chip on tinted card</h2>
+    <p class="note">Pill tag carries the stage. Card itself sits on a faint wash of the stage colour. Quiet, no rules.</p>
+
+    <div class="stack">
+      <div class="v1-phase v1-phase--before">
+        <span class="v1-phase__chip">Before · Activation</span>
+        <div class="phase-prompt"><p>Think about a recent online programme launch you know about. What was the original timeline? What was the actual one?</p></div>
+      </div>
+      <div class="v1-phase v1-phase--during">
+        <span class="v1-phase__chip">During · Acquisition + Guidance</span>
+        <div class="phase-body">
+          <h3>What is often assumed</h3>
+          <p>Most institutions plan for content development. But effective online learning requires something much more substantial: a fully designed course architecture.</p>
+          <h3>What is actually required</h3>
+          <p>Learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, QA testing.</p>
+          <p class="phase-stat">A single online module typically requires 3–5× the effort of equivalent face-to-face teaching.</p>
+        </div>
+      </div>
+      <div class="v1-phase v1-phase--after">
+        <span class="v1-phase__chip">After · Practice + Reflection</span>
+        <div class="phase-prompt"><p>Where on this scale would you place your own institution's last online build?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANT 2 ================= -->
+  <section class="variant">
+    <h2>Variant 2 — Numbered rail</h2>
+    <p class="note">Single neutral hairline ties the phases together; numbered circles give sequence and stage colour without painting the page.</p>
+
+    <div class="v2-stack">
+      <div class="v2-phase v2-phase--before">
+        <div class="v2-phase__num">1</div>
+        <span class="phase-label v2-phase__label">Before · Activation</span>
+        <div class="phase-prompt"><p>Think about a recent online programme launch you know about. What was the original timeline? What was the actual one?</p></div>
+      </div>
+      <div class="v2-phase v2-phase--during">
+        <div class="v2-phase__num">2</div>
+        <span class="phase-label v2-phase__label">During · Acquisition + Guidance</span>
+        <div class="phase-body">
+          <h3>What is often assumed</h3>
+          <p>Most institutions plan for content development. But effective online learning requires a fully designed course architecture.</p>
+          <h3>What is actually required</h3>
+          <p>Learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, QA testing.</p>
+          <p class="phase-stat">A single online module typically requires 3–5× the effort of equivalent face-to-face teaching.</p>
+        </div>
+      </div>
+      <div class="v2-phase v2-phase--after">
+        <div class="v2-phase__num">3</div>
+        <span class="phase-label v2-phase__label">After · Practice + Reflection</span>
+        <div class="phase-prompt"><p>Where on this scale would you place your own institution's last online build?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANT 3 ================= -->
+  <section class="variant">
+    <h2>Variant 3 — Top-band card</h2>
+    <p class="note">Stage colour becomes a thin header band. Reads as a card with a label rather than a coloured wall in the margin.</p>
+
+    <div class="stack">
+      <div class="v3-phase v3-phase--before">
+        <div class="v3-phase__band"><i>◷</i> Before · Activation</div>
+        <div class="v3-phase__body">
+          <div class="phase-prompt"><p>Think about a recent online programme launch you know about. What was the original timeline? What was the actual one?</p></div>
+        </div>
+      </div>
+      <div class="v3-phase v3-phase--during">
+        <div class="v3-phase__band"><i>▶</i> During · Acquisition + Guidance</div>
+        <div class="v3-phase__body">
+          <div class="phase-body">
+            <h3>What is often assumed</h3>
+            <p>Most institutions plan for content development. But effective online learning requires a fully designed course architecture.</p>
+            <h3>What is actually required</h3>
+            <p>Learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, QA testing.</p>
+            <p class="phase-stat">A single online module typically requires 3–5× the effort of equivalent face-to-face teaching.</p>
+          </div>
+        </div>
+      </div>
+      <div class="v3-phase v3-phase--after">
+        <div class="v3-phase__band"><i>✓</i> After · Practice + Reflection</div>
+        <div class="v3-phase__body">
+          <div class="phase-prompt"><p>Where on this scale would you place your own institution's last online build?</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANT 4 ================= -->
+  <section class="variant">
+    <h2>Variant 4 — Editorial kicker</h2>
+    <p class="note">No cards, no walls. Stage shown only by a small uppercase kicker over a short coloured underline. Maximum calm.</p>
+
+    <div>
+      <div class="v4-phase v4-phase--before">
+        <span class="v4-phase__kicker">Before · Activation</span>
+        <div class="phase-prompt"><p>Think about a recent online programme launch you know about. What was the original timeline? What was the actual one?</p></div>
+      </div>
+      <div class="v4-phase v4-phase--during">
+        <span class="v4-phase__kicker">During · Acquisition + Guidance</span>
+        <div class="phase-body">
+          <h3>What is often assumed</h3>
+          <p>Most institutions plan for content development. But effective online learning requires a fully designed course architecture.</p>
+          <h3>What is actually required</h3>
+          <p>Learning outcomes mapped to activities, assessments aligned to outcomes, multimedia production, accessibility compliance, platform configuration, QA testing.</p>
+          <p class="phase-stat">A single online module typically requires 3–5× the effort of equivalent face-to-face teaching.</p>
+        </div>
+      </div>
+      <div class="v4-phase v4-phase--after">
+        <span class="v4-phase__kicker">After · Practice + Reflection</span>
+        <div class="phase-prompt"><p>Where on this scale would you place your own institution's last online build?</p></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
