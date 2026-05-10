@@ -817,7 +817,7 @@
         /* ---- RIGHT COLUMN — scrollable cards ---- */
         .results-right-panel {
             grid-area: right;
-            padding: 1.75rem 1.75rem 7rem; /* extra bottom padding clears fixed CTA bar */
+            padding: 1.75rem 1.75rem 2rem;
             background: var(--grey-100);
         }
 
@@ -1048,7 +1048,6 @@
 
         /* ---- Case-study stub (sits above CTA) ---- */
         .results-case-study {
-            grid-column: 1 / -1;
             margin-top: 1.75rem;
             background: var(--white);
             border: 1px solid var(--grey-200);
@@ -1080,7 +1079,6 @@
         /* ---- CTA block — inline next-step card at end of results content ---- */
         .results-cta-block {
             position: relative;
-            grid-column: 1 / -1;
             margin-top: 1.5rem;
             background: rgba(13, 26, 64, 0.94);
             border-top: 3px solid var(--orange);
@@ -1279,7 +1277,7 @@
             .results-gauge-score { font-size: 2.25rem; }
 
             .results-right-panel {
-                padding: 1.25rem 1rem 7rem; /* keep bottom padding for fixed CTA bar */
+                padding: 1.25rem 1rem 1.5rem;
             }
 
             .results-dimension-grid {
@@ -2703,8 +2701,6 @@
               + generateConclusionCompact(total, dimScores)
               + '</div>';
 
-        html += '</section>'; /* /right panel */
-
         /* CASE STUDY STUB — illustrates LDS track record, sits above CTA */
         html += '<aside class="results-case-study" role="complementary" aria-label="Related case study">'
               + '<p class="results-case-study__eyebrow">How LDS has helped institutions like yours</p>'
@@ -2739,6 +2735,8 @@
               + '</div>'
               + '</div>'
               + '</div>';
+
+        html += '</section>'; /* /right panel */
 
         html += '</div>'; /* /results-dashboard */
 
