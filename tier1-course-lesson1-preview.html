@@ -506,7 +506,7 @@
             animation: slideUp 0.35s ease;
         }
 
-        /* Two-column layout for lesson panels with the case-study sidekick */
+        /* Lessons opted-in to the 2-col workspace layout */
         .lesson-panel--with-rail.is-active {
             display: grid;
             grid-template-columns: minmax(0, 1fr) 320px;
@@ -527,7 +527,7 @@
         @media (max-width: 767.98px) { .lesson-panel { padding: 1.5rem 1.25rem 3rem; } }
 
         /* ================================================================
-           CASE-STUDY SIDEKICK — quiet editorial proof element, viewport-centered
+           CASE-STUDY SIDEKICK — quiet editorial proof element
         ================================================================ */
         .workspace-rail {
             position: sticky;
@@ -546,10 +546,9 @@
 
         .case-sidekick {
             background: var(--lds-white);
-            border: 1px solid var(--lds-border);
+            border: 1px solid var(--lds-border, #e2e8f0);
             border-top: 3px solid var(--lds-orange);
             padding: 1.5rem 1.5rem 1.4rem;
-            width: 100%;
         }
         .case-sidekick__eyebrow {
             font-size: 0.68rem;
@@ -570,16 +569,16 @@
         .case-sidekick__body {
             font-size: 0.88rem;
             line-height: 1.6;
-            color: var(--lds-mid);
+            color: var(--lds-mid, #4a5568);
             margin: 0 0 0.85rem;
         }
         .case-sidekick__attribution {
             font-size: 0.72rem;
             font-style: italic;
-            color: var(--lds-muted);
+            color: var(--lds-muted, #718096);
             margin: 0 0 1rem;
             padding-top: 0.75rem;
-            border-top: 1px solid var(--lds-border);
+            border-top: 1px solid var(--lds-border, #e2e8f0);
         }
         .case-sidekick__link {
             font-size: 0.8rem;
@@ -589,7 +588,10 @@
             border-bottom: 1px solid currentColor;
             padding-bottom: 1px;
         }
-        .case-sidekick__link:hover { color: var(--lds-orange); }
+        .case-sidekick__link:hover {
+            color: var(--lds-orange);
+        }
+
 
         /* ================================================================
            LESSON HEADER ELEMENTS
@@ -1902,22 +1904,22 @@
 
                 </div><!-- /.lesson-body-col -->
 
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
+                <aside class="workspace-rail" aria-label="Lesson workspace">
+
+                    <article class="case-sidekick" aria-label="Featured case study extract">
                         <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
                         <h3 class="case-sidekick__headline">Their first online module took 14 weeks. Their fifth took four.</h3>
                         <p class="case-sidekick__body">When Walbrook started, they planned online courses like content-creation projects &mdash; same effort estimate as a face-to-face refresh. The architecture work that actually drives quality wasn't budgeted. Module one ran four months over. By module five, with mapped outcomes, aligned assessments, and a tested production template, the team was shipping in a quarter of the time at higher quality.</p>
                         <p class="case-sidekick__attribution">Six-month engagement, governance-up rebuild &mdash; Andrew Doig</p>
                         <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
                     </article>
+
                 </aside>
 
             </div>
 
             <!-- ==================== LESSON 2 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-2" role="region" aria-labelledby="lesson-2-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-2" role="region" aria-labelledby="lesson-2-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 2</span></p>
 
@@ -2049,18 +2051,6 @@
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="gate">Apply your learning &rarr;</button>
                 </div>
 
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">How Walbrook stopped overloading their academics by year two.</h3>
-                        <p class="case-sidekick__body">In year one, programme leads were carrying both subject-matter authorship and production coordination. Two left within nine months. The fix wasn't more hires &mdash; it was role separation. A small in-house design and production cell took the technical and pedagogical load, freeing academics to do the work only they could do. Burnout dropped, output doubled.</p>
-                        <p class="case-sidekick__attribution">Operating-model redesign, year-two intervention</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
-
             </div>
 
             <!-- ==================== GATE PANEL ==================== -->
@@ -2116,9 +2106,7 @@
             </div>
 
             <!-- ==================== LESSON 3 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-3" role="region" aria-labelledby="lesson-3-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-3" role="region" aria-labelledby="lesson-3-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 3</span></p>
                 <div class="lesson-eyebrow"><i class="bi bi-camera-video" aria-hidden="true"></i> Lesson 3 of 7</div>
@@ -2203,24 +2191,10 @@
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-4">Lesson 4: Institutional identity &rarr;</button>
                 </div>
 
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">From 90-minute lectures to 12-minute interactive units &mdash; the Walbrook pivot.</h3>
-                        <p class="case-sidekick__body">The first cohort received recorded lectures pasted into a VLE. Completion was 31 percent. The redesign broke each topic into short concept videos paired with retrieval prompts and an applied task. Same content, different architecture. Completion climbed past 80 percent without adding hours to the curriculum.</p>
-                        <p class="case-sidekick__attribution">Architecture redesign, cohort-three forward</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
-
             </div>
 
             <!-- ==================== LESSON 4 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-4" role="region" aria-labelledby="lesson-4-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-4" role="region" aria-labelledby="lesson-4-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 4</span></p>
                 <div class="lesson-eyebrow"><i class="bi bi-building" aria-hidden="true"></i> Lesson 4 of 7</div>
@@ -2305,24 +2279,10 @@
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-5">Lesson 5: Pedagogy &amp; technology &rarr;</button>
                 </div>
 
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">Keeping Walbrook's distinctive teaching voice across thirty modules.</h3>
-                        <p class="case-sidekick__body">Mid-build, the leadership team worried online delivery would flatten the institution into a generic LMS template. We codified the elements that actually carried the Walbrook character &mdash; case-driven scenarios, named-academic narration, distinctive seminar formats &mdash; and wrote them into the production brief. Reviewers said the online programme felt unmistakably Walbrook from module one.</p>
-                        <p class="case-sidekick__attribution">Brand-pedagogy alignment workstream</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
-
             </div>
 
             <!-- ==================== LESSON 5 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-5" role="region" aria-labelledby="lesson-5-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-5" role="region" aria-labelledby="lesson-5-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 5</span></p>
                 <div class="lesson-eyebrow"><i class="bi bi-mortarboard" aria-hidden="true"></i> Lesson 5 of 7</div>
@@ -2405,24 +2365,10 @@
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-6">Lesson 6: Building buy-in &rarr;</button>
                 </div>
 
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">Why Walbrook chose the platform their pedagogy needed &mdash; and didn't regret it.</h3>
-                        <p class="case-sidekick__body">The technology evaluation started with a feature shootout. We binned it and started over with the pedagogy: what does a typical week of learning look like, and which platform supports it without compromise? The winning platform won not for its bells, but because the assessment integrity and progression rules Walbrook needed were already first-class. Two years on, no platform regret.</p>
-                        <p class="case-sidekick__attribution">Platform decision, pre-build phase</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
-
             </div>
 
             <!-- ==================== LESSON 6 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-6" role="region" aria-labelledby="lesson-6-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-6" role="region" aria-labelledby="lesson-6-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 6</span></p>
                 <div class="lesson-eyebrow"><i class="bi bi-people-fill" aria-hidden="true"></i> Lesson 6 of 7</div>
@@ -2507,24 +2453,10 @@
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="lesson-7">Lesson 7: Metrics &rarr;</button>
                 </div>
 
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">How Walbrook got fourteen academics to commit to a shared online plan.</h3>
-                        <p class="case-sidekick__body">The buy-in problem wasn't doubt about online learning &mdash; it was concern that "online" meant "less mine." We ran four small workshops where each academic mapped their own programme onto the new design framework before any institutional decisions were taken. By the time the executive vote came, the academics were the ones presenting the case.</p>
-                        <p class="case-sidekick__attribution">Stakeholder-alignment programme, pre-launch</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
-
             </div>
 
             <!-- ==================== LESSON 7 ==================== -->
-            <div class="lesson-panel lesson-panel--with-rail" id="panel-lesson-7" role="region" aria-labelledby="lesson-7-heading">
-
-                <div class="lesson-body-col">
+            <div class="lesson-panel" id="panel-lesson-7" role="region" aria-labelledby="lesson-7-heading">
 
                 <p class="lesson-breadcrumb">Scaling online programmes <span class="lesson-breadcrumb__sep">/</span><span class="lesson-breadcrumb__current">Lesson 7</span></p>
                 <div class="lesson-eyebrow"><i class="bi bi-calculator" aria-hidden="true"></i> Lesson 7 of 7</div>
@@ -2611,18 +2543,6 @@
                     <button class="lesson-nav-btn lesson-nav-btn--prev" data-goto="lesson-6">&larr; Lesson 6: Building buy-in</button>
                     <button class="lesson-nav-btn lesson-nav-btn--next" data-goto="summary">See course summary &rarr;</button>
                 </div>
-
-                </div><!-- /.lesson-body-col -->
-
-                <aside class="workspace-rail" aria-label="Featured case study">
-                    <article class="case-sidekick">
-                        <p class="case-sidekick__eyebrow">Case study &middot; Walbrook Institute</p>
-                        <h3 class="case-sidekick__headline">Walbrook's first KPI wasn't completion. It was time-to-feedback.</h3>
-                        <p class="case-sidekick__body">Most institutions optimise online programmes for unit cost. Walbrook flipped the order. The leading metric was how long a learner waited for marked feedback on a substantive task &mdash; because that's what predicted re-enrolment and word-of-mouth. Cost-per-module came down anyway, but as a consequence, not a target.</p>
-                        <p class="case-sidekick__attribution">Measurement framework, year-two retrospective</p>
-                        <a href="#" class="case-sidekick__link">Read the full Walbrook case study &rarr;</a>
-                    </article>
-                </aside>
 
             </div>
 
@@ -3193,5 +3113,12 @@
 })();
 </script>
 
+<script>
+/* Auto-open Lesson 1 on page load */
+(function() {
+    var btn = document.querySelector('[data-lesson="lesson-1"]');
+    if (btn) btn.click();
+})();
+</script>
 </body>
 </html>
