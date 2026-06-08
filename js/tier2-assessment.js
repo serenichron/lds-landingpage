@@ -1,0 +1,1393 @@
+(function () {
+    'use strict';
+
+    /* ============================================================
+       DATA — questions for both tracks
+    ============================================================ */
+
+    var ANSWER_OPTIONS = [
+        { score: 1, text: 'Not at all', subtext: 'No', colorClass: 'answer-option--1' },
+        { score: 2, text: 'In early stages', subtext: 'Partially', colorClass: 'answer-option--2' },
+        { score: 3, text: 'Mostly in place', subtext: 'Largely yes', colorClass: 'answer-option--3' },
+        { score: 4, text: 'Fully established', subtext: 'Yes, comprehensively', colorClass: 'answer-option--4' }
+    ];
+
+    var QUESTIONS = {
+        strategic: [
+            // Dimension 1a — Strategic clarity
+            {
+                id: 'q1',
+                dimension: 'Strategic clarity',
+                text: 'Does your institution have a formally approved strategy for online programme development, with defined goals and timelines?',
+                context: '<p>Without a formally approved strategy, online learning initiatives tend to stall at the first governance hurdle. Boards and finance committees need to see documented intent with clear targets before they authorise the investment required to build properly.</p><p>A formal strategy also protects the initiative during leadership changes — which are common. When the strategy is on paper and approved, it outlasts the individuals who championed it.</p>'
+            },
+            // Dimension 1b — Strategic clarity
+            {
+                id: 'q2',
+                dimension: 'Strategic clarity',
+                text: 'Has leadership allocated a ring-fenced budget for online programme development, separate from general teaching funds?',
+                context: '<p>Ring-fenced budget is the single strongest indicator of strategic commitment. When online learning competes for funds from the same pot as day-to-day operational or teaching costs, it almost always loses to more immediate pressures.</p><p>Institutions that treat online development as a capital investment — with its own budget line, business case, and ROI target — are far more likely to reach launch and to generate the commercial returns that justify continued investment.</p>'
+            },
+            // Dimension 2 — Leadership alignment
+            {
+                id: 'q3',
+                dimension: 'Leadership alignment',
+                text: 'How aligned is the senior leadership team on the priority and direction of online programme development?',
+                context: '<p>Misalignment at senior level is the most common cause of stalled online programmes. If the VC or CEO champions it but the CFO is sceptical, or the academic board is divided, the initiative will face constant friction that slows every decision and approval.</p><p>True alignment means leadership can articulate a consistent answer to: why online, why now, and which programmes first. If that answer varies depending on who you ask, there is work to do before development begins.</p>'
+            },
+            // Dimension 3 — Resource readiness
+            {
+                id: 'q4',
+                dimension: 'Resource readiness',
+                text: 'Does the institution have access to the specialist roles needed — learning designers, media producers, platform administrators?',
+                context: '<p>These specialist roles are consistently the hardest gap to close. Most institutions have subject matter experts (academics) and generalist IT support, but very few have in-house learning designers and media producers with real experience in online course production.</p><p>The cost of building this capability from scratch is significant and takes 12–18 months before you reach consistent quality. Knowing your current position clearly is the starting point for a realistic build or buy decision.</p>'
+            },
+            // Dimension 4 — Quality framework
+            {
+                id: 'q5',
+                dimension: 'Quality framework',
+                text: 'Is there an institutional quality framework specifically adapted for online programme design, delivery, and assessment?',
+                context: '<p>Standard institutional quality processes were built for face-to-face delivery. They check the right things for face-to-face teaching, but they miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance.</p><p>Without online-specific quality criteria, development teams have no shared standard to build to — which means every module gets reviewed differently, and the student experience is inconsistent.</p>'
+            },
+            // Dimension 5a — Student experience focus
+            {
+                id: 'q6',
+                dimension: 'Student experience focus',
+                text: 'Has the institution conducted research into what online learners actually need — beyond just digitising existing materials?',
+                context: '<p>The most common mistake institutions make is assuming that online students need the same things as campus students, delivered through a screen. In practice, online learners have fundamentally different needs: they study in shorter bursts, across multiple devices, often alongside work and family commitments.</p><p>Programmes built without this understanding tend to replicate lecture structures online — and then wonder why completion rates are low. Research upfront saves significant rework later.</p>'
+            },
+            // Dimension 5b — Student experience focus
+            {
+                id: 'q7',
+                dimension: 'Student experience focus',
+                text: 'Are there defined success metrics for student outcomes in online programmes, and is someone accountable for them?',
+                context: '<p>Online programmes that lack defined outcome metrics drift. Without clear targets for completion rates, engagement levels, and student satisfaction — and without a named individual responsible for tracking them — there is no mechanism to identify problems before they compound across multiple cohorts.</p><p>The accountability question is as important as the metrics themselves. Institutional data often exists, but if nobody owns the numbers, they do not drive improvement.</p>'
+            },
+            // Dimension 6 — Scalability planning
+            {
+                id: 'q8',
+                dimension: 'Scalability planning',
+                text: 'Is there a plan for how online programme development scales beyond a pilot — including staffing, technology, and cross-institutional coordination?',
+                context: '<p>Pilots succeed; scale-ups fail. This is one of the most consistent patterns in online programme development. The resources, relationships, and decision-making processes that work for a single pilot programme break down when you try to run five or ten simultaneously across multiple departments or faculties.</p><p>Planning for scale from the outset — even if you start with a single programme — means your processes, templates, and governance structures are designed to grow rather than to be rebuilt from scratch at every expansion.</p>'
+            },
+            // Dimension 7a — Technical capacity
+            {
+                id: 'q9',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have in-house learning design expertise — not lecturers with a side interest, but specialists who do this full-time?',
+                context: '<p>This distinction matters enormously. A lecturer who is enthusiastic about online learning and a professional learning designer with five years of experience produce very different results — and the gap shows directly in student engagement and completion rates.</p><p>Specialist learning designers bring a discipline that does not come from academic training: learning outcomes mapping, activity sequencing, cognitive load management, and multimedia pedagogy. These are learnable, but only with dedicated practice and professional development time that academics simply do not have.</p>'
+            },
+            // Dimension 7b — Technical capacity
+            {
+                id: 'q10',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have hands-on LMS configuration and customisation capability — people who can build, not just administer?',
+                context: '<p>Most institutions have someone who can manage LMS users, run reports, and upload content. Very few have people who can configure the platform to deliver a genuinely engaging online experience: custom course structures, integrated assessment workflows, adaptive release conditions, and analytics dashboards for student tracking.</p><p>The difference between a well-configured LMS and a default installation is the difference between a professional online course and a digital filing cabinet. This capability is almost always underinvested because it is invisible until it is missing.</p>'
+            },
+            // Dimension 7c — Technical capacity (multimedia — reordered per Andrew, Apr 2026)
+            {
+                id: 'q12',
+                dimension: 'Technical capacity',
+                text: 'Does the institution have in-house multimedia production capability — video, animation, interactive content?',
+                context: '<p>Quality online programmes require professionally produced learning materials: well-shot and edited video, interactive activities, and polished presentation design. This does not mean broadcast-quality production for everything, but it does mean a standard that fee-paying online students consider professional.</p><p>In-house multimedia capability is rare. Most institutions either rely on academics filming themselves at their desks — which students find underwhelming — or commission external production at significant cost. Knowing your position clearly determines your production strategy.</p>'
+            },
+            // Dimension 7d — Technical capacity (reframed per Andrew, Apr 2026: was "online assessments built" — replaced with academic regulations for online/flexible study)
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Has the institution established and operationalised clear academic regulations and policies to govern online and flexible study — including assessment integrity, progression, engagement monitoring, and student accountability in a non-campus environment?',
+                context: '<p>Online and flexible provision requires more than adapting existing campus-based regulations. Institutions must ensure that academic rules — such as assessment regulations, progression requirements, attendance and engagement expectations, academic misconduct (including AI use), and appeals processes — are clearly defined, consistently applied, and enforceable in an online context where students may study asynchronously and remotely.</p><p>Without robust and transparent regulatory frameworks, institutions risk inconsistencies in student experience, challenges to academic standards, and increased disputes around fairness and integrity.</p>'
+            }
+        ],
+
+        operational: [
+            // Dimension 1a — Strategic clarity
+            {
+                id: 'q1',
+                dimension: 'Strategic clarity',
+                text: 'Is there a documented strategy for online programme development that your team can reference and align to?',
+                context: '<p>A documented strategy gives your team a shared reference point for decision-making. Without it, every design choice — from content format to assessment type — gets made in isolation, and the programme loses coherence across modules and contributors.</p><p>Documentation also protects your team from shifting priorities. When leadership direction changes (as it does), a written strategy provides a stable baseline and a basis for managing scope changes formally rather than absorbing them silently.</p>'
+            },
+            // Dimension 1b — Strategic clarity
+            {
+                id: 'q2',
+                dimension: 'Strategic clarity',
+                text: 'Do you have a confirmed budget and resource allocation for the online programmes you\'re developing?',
+                context: '<p>Confirmed budget and resource allocation are the foundations of realistic project planning. Without both, delivery teams are constantly at risk of having timelines overridden by budget constraints that were never clearly defined at the start.</p><p>Resource allocation is often the more critical of the two. Even with adequate budget, if the people doing the work are not ring-fenced from other institutional demands, delivery timelines become aspirational rather than realistic.</p>'
+            },
+            // Dimension 2 — Leadership alignment
+            {
+                id: 'q3',
+                dimension: 'Leadership alignment',
+                text: 'How clear and consistent is the direction you receive from leadership about online programme priorities?',
+                context: '<p>Inconsistent direction from leadership creates rework. When priorities shift mid-development — different stakeholders pushing for different approaches — the people doing the build absorb the cost in time, quality, and morale.</p><p>Clear direction does not mean no flexibility; it means decisions are made at the right level, communicated clearly, and do not reverse without proper change management. The best-resourced teams still fail when the direction above them is muddled.</p>'
+            },
+            // Dimension 3 — Resource readiness
+            {
+                id: 'q4',
+                dimension: 'Resource readiness',
+                text: 'Does your team currently include or have access to dedicated learning designers, media production, and LMS administration?',
+                context: '<p>These three capabilities — learning design, media production, and LMS configuration — are the core production engine for online programmes. When any one of them is missing or inadequate, the others are constrained: great design cannot be produced without production capacity; great content is wasted in a poorly configured LMS.</p><p>The keyword is "dedicated". People carrying these responsibilities alongside a full academic or administrative workload cannot deliver at the quality or pace that a funded online programme requires.</p>'
+            },
+            // Dimension 4 — Quality framework
+            {
+                id: 'q5',
+                dimension: 'Quality framework',
+                text: 'Do you work within a defined quality framework that covers online learning design standards, assessment integrity, and learner support?',
+                context: '<p>A quality framework for your team serves two functions: it sets the standard that every module is built to, and it provides a shared language for review and sign-off. Without it, quality becomes a matter of individual judgement — which means inconsistency across the programme and difficult conversations with reviewers who are applying different criteria.</p><p>Online-specific quality criteria should include accessibility standards, cognitive load benchmarks for multimedia content, assessment integrity requirements, and minimum engagement design expectations. Generic institutional quality processes rarely cover these adequately.</p>'
+            },
+            // Dimension 5a — Student experience focus
+            {
+                id: 'q6',
+                dimension: 'Student experience focus',
+                text: 'Has your team conducted learner research or gathered feedback to understand what online students need from the experience?',
+                context: '<p>Design decisions made without learner insight tend to reflect the preferences of the people building the programme rather than the people who will use it. Online learners have specific needs — study flexibility, mobile accessibility, clear weekly structure, fast feedback on assessments — that are easy to miss when designing from an academic perspective.</p><p>Even lightweight learner research — interviews with a handful of prospective students, analysis of comparable programmes, review of existing completion data — produces significant improvements in design quality relative to building blind.</p>'
+            },
+            // Dimension 5b — Student experience focus
+            {
+                id: 'q7',
+                dimension: 'Student experience focus',
+                text: 'Do you track completion rates, engagement, and learner satisfaction for your online programmes, with clear targets?',
+                context: '<p>Tracking without targets is reporting without accountability. Completion rates and engagement data tell you what is happening; targets tell you whether it is good enough. Without targets, teams have no basis for escalating problems or justifying investment in improvements.</p><p>The right tracking setup also enables early intervention. Students who are disengaging — logging in less frequently, missing submission deadlines — can be supported before they withdraw, but only if someone is looking at the data in something close to real time.</p>'
+            },
+            // Dimension 6 — Scalability planning
+            {
+                id: 'q8',
+                dimension: 'Scalability planning',
+                text: 'Do you have processes and templates that could scale to support multiple programme developments running simultaneously?',
+                context: '<p>Teams that build without templates and documented processes become the bottleneck as volume increases. If every new programme requires the same decisions to be made from scratch — about content format, assessment type, platform configuration, review workflow — delivery speed stays low regardless of how many people you add.</p><p>Templates, style guides, and production workflows are investments that pay dividends across every subsequent programme. They also make quality consistent without requiring constant supervision from senior team members.</p>'
+            },
+            // Dimension 7a — Technical capacity
+            {
+                id: 'q9',
+                dimension: 'Technical capacity',
+                text: 'Do you have dedicated learning designers on your team — not academics wearing a second hat, but specialists focused on online course design?',
+                context: '<p>The distinction between a subject matter expert and a learning designer is not about intelligence or commitment — it is about training, methodology, and focus. Professional learning designers apply specific frameworks to structure content for online learning: they think in learning objectives, activity sequences, and cognitive load. Academics think in subject domains.</p><p>The practical difference shows up in student engagement and completion. Programmes designed by specialists consistently outperform those adapted from academic presentations, even when the academic content is identical.</p>'
+            },
+            // Dimension 7b — Technical capacity
+            {
+                id: 'q10',
+                dimension: 'Technical capacity',
+                text: 'Can your team configure, customise, and build within your LMS platform — not just manage users and upload content?',
+                context: '<p>There is a wide gap between LMS administration and LMS build capability. Administration means managing enrolments, running reports, and uploading files. Build capability means configuring course structures, setting up assessment workflows, creating conditional release logic, and integrating third-party tools.</p><p>Most institutional LMS setups are operated at the administration level because build capability is rare and takes time to develop. The result is that the platform\'s potential to deliver a genuinely engaging online experience goes largely unrealised.</p>'
+            },
+            // Dimension 7c — Technical capacity (multimedia reordered before assessment build for parity with strategic track, Apr 2026)
+            {
+                id: 'q12',
+                dimension: 'Technical capacity',
+                text: 'Does your team have access to multimedia production — professional video, animation, or interactive content creation?',
+                context: '<p>The production quality bar for online learning has risen significantly as learners compare professional-quality content from commercial e-learning providers with institutional course materials. This does not mean cinematic production values for every piece of content, but it does mean video that is well-lit, clearly edited, and properly captioned; interactions that actually work on mobile; and presentation design that does not look like a PowerPoint from 2008.</p><p>Without multimedia production access — whether in-house or through a reliable external partner — design ambitions consistently get scaled back to whatever the team can produce with basic tools, which limits the learning experience you can offer.</p>'
+            },
+            // Dimension 7d — Technical capacity (reframed per Andrew, Apr 2026: from "online assessments built" to academic regulations for online/flexible study, mirrored from strategic track)
+            {
+                id: 'q11',
+                dimension: 'Technical capacity',
+                text: 'Do you work to clear academic regulations and policies for online and flexible study — covering assessment integrity, progression, engagement monitoring, and student accountability — that you can apply consistently for online cohorts?',
+                context: '<p>Online and flexible provision requires more than adapting existing campus-based regulations. Delivery teams need the academic rules — assessment regulations, progression requirements, attendance and engagement expectations, academic misconduct (including AI use), and appeals processes — clearly defined, consistently applied, and enforceable in an online context where students may study asynchronously and remotely.</p><p>Without robust and transparent regulatory frameworks, teams end up making case-by-case judgement calls that lead to inconsistent student experience, challenges to academic standards, and increased disputes around fairness and integrity.</p>'
+            }
+        ]
+    };
+
+    var DIMENSIONS = [
+        { id: 'strategic',    name: 'Strategic clarity',       questionIds: ['q1','q2'], max: 8 },
+        { id: 'leadership',   name: 'Leadership alignment',    questionIds: ['q3'],      max: 4 },
+        { id: 'resource',     name: 'Resource readiness',      questionIds: ['q4'],      max: 4 },
+        { id: 'quality',      name: 'Quality framework',       questionIds: ['q5'],      max: 4 },
+        { id: 'student',      name: 'Student experience focus',questionIds: ['q6','q7'], max: 8 },
+        { id: 'scalability',  name: 'Scalability planning',    questionIds: ['q8'],      max: 4 },
+        { id: 'technical',    name: 'Technical capacity',      questionIds: ['q9','q10','q11','q12'], max: 16 }
+    ];
+
+    var SCORE_CATEGORIES = [
+        { min: 12, max: 21, name: 'Early stage',          badgeClass: 'results-category-badge--early',       desc: 'Your institution is at the beginning of its online learning journey. Significant groundwork is needed across multiple dimensions before launching programmes.' },
+        { min: 22, max: 33, name: 'Building foundations', badgeClass: 'results-category-badge--building',    desc: 'You have some elements in place but meaningful gaps remain. A structured approach with the right support will help you move forward efficiently.' },
+        { min: 34, max: 42, name: 'Well positioned',      badgeClass: 'results-category-badge--positioned',  desc: 'Strong foundations across most dimensions. With targeted support in your weaker areas — particularly Technical Capacity — you could launch programmes confidently.' },
+        { min: 43, max: 48, name: 'Launch ready',         badgeClass: 'results-category-badge--ready',       desc: 'Your institution has excellent readiness across most dimensions. The right specialist partnership could help you move faster and avoid the pitfalls that even well-prepared institutions encounter.' }
+    ];
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+    var state = {
+        track: null,          // 'strategic' | 'operational'
+        roleLabel: '',
+        currentSlide: 'role', // 'role' | 'q0'..'q11' | 'results'
+        slideIndex: -1,       // -1 = role slide, 0..11 = questions, 12 = results
+        answers: {},          // { q1: 3, q2: 1, ... }
+        questions: []         // active question array (set after role selection)
+    };
+
+    /* ============================================================
+       DOM references
+    ============================================================ */
+    var viewport = document.getElementById('slide-viewport');
+    var progressFill = document.getElementById('progress-fill');
+    var progressBar = document.getElementById('progress-bar');
+    var headerMeta = document.getElementById('header-meta');
+
+    var slideRole = document.getElementById('slide-role');
+    var slideResults = document.getElementById('slide-results');
+    var resultsContent = document.getElementById('results-content');
+
+    /* ============================================================
+       SLIDE MANAGEMENT
+    ============================================================ */
+
+    function getAllSlides() {
+        return Array.from(viewport.querySelectorAll('.slide'));
+    }
+
+    function navigateToSlide(targetSlide, direction) {
+        // direction: 'forward' | 'backward'
+        var current = viewport.querySelector('.slide.is-active');
+
+        if (current === targetSlide) return;
+
+        // Set entering slide position
+        if (direction === 'forward') {
+            targetSlide.style.transform = 'translateX(100%)';
+        } else {
+            targetSlide.style.transform = 'translateX(-100%)';
+        }
+
+        // Force reflow
+        void targetSlide.offsetHeight;
+
+        // Make both animate
+        current.style.transition = 'transform ' + getComputedStyle(document.documentElement).getPropertyValue('--slide-transition');
+        targetSlide.style.transition = 'transform ' + getComputedStyle(document.documentElement).getPropertyValue('--slide-transition');
+
+        if (direction === 'forward') {
+            current.style.transform = 'translateX(-100%)';
+        } else {
+            current.style.transform = 'translateX(100%)';
+        }
+        targetSlide.style.transform = 'translateX(0)';
+
+        // Swap active class
+        current.classList.remove('is-active');
+        targetSlide.classList.add('is-active');
+
+        // Focus the new slide for screen readers
+        setTimeout(function () {
+            targetSlide.focus();
+        }, 50);
+    }
+
+    /* ============================================================
+       QUESTION SLIDE FACTORY
+    ============================================================ */
+
+    function buildQuestionSlide(qIndex) {
+        var q = state.questions[qIndex];
+        var totalQ = state.questions.length;
+        var slideId = 'slide-q' + qIndex;
+
+        var slide = document.createElement('div');
+        slide.className = 'slide slide--question';
+        slide.id = slideId;
+        slide.setAttribute('role', 'region');
+        slide.setAttribute('aria-labelledby', slideId + '-text');
+        slide.setAttribute('tabindex', '-1');
+        slide.style.transform = 'translateX(100%)';
+
+        var inner = document.createElement('div');
+        inner.className = 'slide-inner';
+
+        // Meta row
+        var meta = document.createElement('div');
+        meta.className = 'question-slide__meta';
+        meta.innerHTML = '<span class="question-slide__dimension">' + escapeHtml(q.dimension) + '</span>'
+                       + '<span class="question-slide__counter">Question ' + (qIndex + 1) + ' of ' + totalQ + '</span>';
+
+        // Question text
+        var qText = document.createElement('h2');
+        qText.className = 'question-slide__text';
+        qText.id = slideId + '-text';
+        qText.textContent = q.text;
+
+        // Context
+        var ctx = document.createElement('div');
+        ctx.className = 'question-slide__context';
+        ctx.setAttribute('aria-label', 'Context for this question');
+        ctx.innerHTML = q.context;
+
+        // Answer options
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'answer-options';
+        optionsDiv.setAttribute('role', 'radiogroup');
+        optionsDiv.setAttribute('aria-label', 'Answer options for: ' + q.text);
+
+        ANSWER_OPTIONS.forEach(function (opt, optIdx) {
+            var btn = document.createElement('button');
+            btn.className = 'answer-option ' + opt.colorClass;
+            btn.setAttribute('role', 'radio');
+            btn.setAttribute('aria-checked', 'false');
+            btn.setAttribute('data-score', opt.score);
+            btn.setAttribute('data-q', q.id);
+            btn.setAttribute('aria-label', 'Score ' + opt.score + ': ' + opt.text + ' — ' + opt.subtext);
+
+            btn.innerHTML = '<span class="answer-option__dot" aria-hidden="true"><span class="answer-option__dot-inner"></span></span>'
+                          + '<span class="answer-option__label-group"><span class="answer-option__text">' + escapeHtml(opt.text) + '</span>'
+                          + '<span class="answer-option__subtext">' + escapeHtml(opt.subtext) + '</span></span>'
+                          + '<span class="answer-option__key-hint" aria-hidden="true">' + (optIdx + 1) + '</span>'
+                          + '<span class="answer-option__check" aria-hidden="true">'
+                          + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><polyline points="20 6 9 17 4 12"/></svg>'
+                          + '</span>';
+
+            btn.addEventListener('click', function () {
+                selectAnswer(q.id, opt.score, optionsDiv, qIndex);
+            });
+
+            optionsDiv.appendChild(btn);
+        });
+
+        // Navigation
+        var nav = document.createElement('div');
+        nav.className = 'slide-nav';
+
+        if (qIndex > 0) {
+            var backBtn = document.createElement('button');
+            backBtn.className = 'btn-nav btn-nav--back';
+            backBtn.setAttribute('aria-label', 'Go back to previous question');
+            backBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back';
+            backBtn.addEventListener('click', function () { goToPrevQuestion(qIndex); });
+            nav.appendChild(backBtn);
+        } else {
+            var backRoleBtn = document.createElement('button');
+            backRoleBtn.className = 'btn-nav btn-nav--back';
+            backRoleBtn.setAttribute('aria-label', 'Go back to role selection');
+            backRoleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back';
+            backRoleBtn.addEventListener('click', function () { goToRoleSlide(); });
+            nav.appendChild(backRoleBtn);
+        }
+
+        var hint = document.createElement('span');
+        hint.className = 'unanswered-hint';
+        hint.id = slideId + '-hint';
+        hint.textContent = 'Select an answer to continue';
+        hint.setAttribute('aria-live', 'polite');
+        nav.appendChild(hint);
+
+        var nextBtn = document.createElement('button');
+        nextBtn.className = 'btn-nav btn-nav--next';
+        nextBtn.disabled = true;
+        nextBtn.setAttribute('aria-describedby', slideId + '-hint');
+
+        if (qIndex < totalQ - 1) {
+            nextBtn.setAttribute('aria-label', 'Next question');
+            nextBtn.innerHTML = 'Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+            nextBtn.addEventListener('click', function () { goToNextQuestion(qIndex); });
+        } else {
+            nextBtn.setAttribute('aria-label', 'See my results');
+            nextBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> See my results';
+            nextBtn.addEventListener('click', function () { showResults(); });
+        }
+
+        nav.appendChild(nextBtn);
+        slide.dataset.nextBtn = slideId + '-next';
+
+        inner.appendChild(meta);
+        inner.appendChild(qText);
+        inner.appendChild(ctx);
+        inner.appendChild(optionsDiv);
+        inner.appendChild(nav);
+        slide.appendChild(inner);
+
+        // Store refs on the slide element for quick access
+        slide._nextBtn = nextBtn;
+        slide._hint = hint;
+
+        return slide;
+    }
+
+    /* ============================================================
+       ANSWER HANDLING
+    ============================================================ */
+
+    function selectAnswer(qId, score, optionsDiv, qIndex) {
+        state.answers[qId] = score;
+
+        // Update UI
+        var allOpts = optionsDiv.querySelectorAll('.answer-option');
+        allOpts.forEach(function (btn) {
+            var isSelected = parseInt(btn.getAttribute('data-score'), 10) === score;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        });
+
+        // Enable next button
+        var slide = document.getElementById('slide-q' + qIndex);
+        if (slide) {
+            slide._nextBtn.disabled = false;
+            slide._hint.textContent = '';
+        }
+
+        updateProgress();
+
+        // Auto-advance after short delay if not last question
+        if (qIndex < state.questions.length - 1) {
+            setTimeout(function () {
+                goToNextQuestion(qIndex);
+            }, 420);
+        }
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+
+    function goToRoleSlide() {
+        var currentSlide = viewport.querySelector('.slide.is-active');
+        navigateToSlide(slideRole, 'backward');
+        state.slideIndex = -1;
+        updateHeaderMeta();
+        updateProgress();
+    }
+
+    function startAssessment(track, roleLabel) {
+        state.track = track;
+        state.roleLabel = roleLabel;
+        state.questions = QUESTIONS[track];
+        state.answers = {};
+
+        // Build all question slides
+        var existingQSlides = viewport.querySelectorAll('[id^="slide-q"]');
+        existingQSlides.forEach(function (s) { s.remove(); });
+
+        state.questions.forEach(function (q, idx) {
+            var slide = buildQuestionSlide(idx);
+            // Insert before results slide
+            viewport.insertBefore(slide, slideResults);
+        });
+
+        // Restore any previous answers if user is coming back
+        state.questions.forEach(function (q, idx) {
+            if (state.answers[q.id] !== undefined) {
+                restoreAnswer(idx, state.answers[q.id]);
+            }
+        });
+
+        state.slideIndex = 0;
+        var firstQSlide = document.getElementById('slide-q0');
+        navigateToSlide(firstQSlide, 'forward');
+        updateHeaderMeta();
+        updateProgress();
+    }
+
+    function restoreAnswer(qIndex, score) {
+        var slide = document.getElementById('slide-q' + qIndex);
+        if (!slide) return;
+        var optionsDiv = slide.querySelector('.answer-options');
+        var allOpts = optionsDiv.querySelectorAll('.answer-option');
+        allOpts.forEach(function (btn) {
+            var isSelected = parseInt(btn.getAttribute('data-score'), 10) === score;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        });
+        if (slide._nextBtn) slide._nextBtn.disabled = false;
+        if (slide._hint) slide._hint.textContent = '';
+    }
+
+    function goToNextQuestion(currentIndex) {
+        if (state.answers[state.questions[currentIndex].id] === undefined) return;
+        var nextIndex = currentIndex + 1;
+        var nextSlide = document.getElementById('slide-q' + nextIndex);
+        if (!nextSlide) return;
+        state.slideIndex = nextIndex;
+        navigateToSlide(nextSlide, 'forward');
+        updateHeaderMeta();
+    }
+
+    function goToPrevQuestion(currentIndex) {
+        var prevIndex = currentIndex - 1;
+        var prevSlide = prevIndex >= 0 ? document.getElementById('slide-q' + prevIndex) : slideRole;
+        if (!prevSlide) return;
+        state.slideIndex = prevIndex;
+        navigateToSlide(prevSlide, 'backward');
+        updateHeaderMeta();
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+    ============================================================ */
+
+    function updateProgress() {
+        var total = state.questions.length;
+        if (total === 0) {
+            progressFill.style.right = '100%';
+            progressBar.setAttribute('aria-valuenow', '0');
+            return;
+        }
+        var answered = Object.keys(state.answers).length;
+        var pct = (answered / total) * 100;
+        progressFill.style.right = (100 - pct) + '%';
+        progressBar.setAttribute('aria-valuenow', Math.round(pct));
+    }
+
+    function updateHeaderMeta() {
+        if (state.slideIndex < 0) {
+            headerMeta.textContent = 'Readiness Assessment';
+        } else if (state.slideIndex < state.questions.length) {
+            headerMeta.textContent = 'Question ' + (state.slideIndex + 1) + ' of ' + state.questions.length;
+        } else {
+            headerMeta.textContent = 'Your results';
+        }
+        updateBreadcrumb();
+    }
+
+    /* ============================================================
+       KEYBOARD NAVIGATION
+    ============================================================ */
+
+    document.addEventListener('keydown', function (e) {
+        var activeSlide = viewport.querySelector('.slide.is-active');
+        if (!activeSlide) return;
+
+        // Number keys 1-4 to select answer on question slides
+        if (activeSlide.id && activeSlide.id.startsWith('slide-q')) {
+            var qIndex = parseInt(activeSlide.id.replace('slide-q', ''), 10);
+            var keyNum = parseInt(e.key, 10);
+            if (keyNum >= 1 && keyNum <= 4) {
+                var optionsDiv = activeSlide.querySelector('.answer-options');
+                var opts = optionsDiv.querySelectorAll('.answer-option');
+                if (opts[keyNum - 1]) opts[keyNum - 1].click();
+                return;
+            }
+
+            // Arrow right / Enter to go next if answered
+            if ((e.key === 'ArrowRight' || e.key === 'Enter') && document.activeElement === document.body) {
+                var nextBtn = activeSlide._nextBtn;
+                if (nextBtn && !nextBtn.disabled) nextBtn.click();
+                return;
+            }
+
+            // Arrow left to go back
+            if (e.key === 'ArrowLeft' && document.activeElement === document.body) {
+                var backBtn = activeSlide.querySelector('.btn-nav--back');
+                if (backBtn) backBtn.click();
+            }
+        }
+    });
+
+    /* ============================================================
+       INTRO → ROLE
+    ============================================================ */
+
+    var slideIntro = document.getElementById('slide-intro');
+    var introStartBtn = document.getElementById('intro-start-btn');
+    if (introStartBtn) {
+        introStartBtn.addEventListener('click', function () {
+            navigateToSlide(slideRole, 'forward');
+        });
+    }
+
+    /* ============================================================
+       ROLE SELECTION
+    ============================================================ */
+
+    slideRole.querySelectorAll('.role-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            startAssessment(card.getAttribute('data-role'), card.getAttribute('data-role-label'));
+        });
+    });
+
+    /* ============================================================
+       RESULTS
+    ============================================================ */
+
+    function getTotalScore() {
+        return state.questions.reduce(function (sum, q) {
+            return sum + (state.answers[q.id] || 0);
+        }, 0);
+    }
+
+    function getDimensionScore(dim) {
+        return dim.questionIds.reduce(function (sum, qId) {
+            return sum + (state.answers[qId] || 0);
+        }, 0);
+    }
+
+    function getScoreCategory(total) {
+        return SCORE_CATEGORIES.find(function (c) { return total >= c.min && total <= c.max; }) || SCORE_CATEGORIES[0];
+    }
+
+    function getBarClass(score, max) {
+        var p = score / max;
+        if (p <= 0.35) return 'low';
+        if (p <= 0.60) return 'medium';
+        if (p <= 0.85) return 'high';
+        return 'excellent';
+    }
+
+    function getDimensionResultText(dimId, score, max) {
+        var p = score / max;
+        var track = state.track;
+
+        var texts = {
+            strategic: {
+                low:       '<strong>Your online strategy needs a defined foundation before you begin building.</strong> Without a documented plan and leadership sign-off, development efforts stall at the first governance hurdle or budget review. Secure a written commitment from senior leadership that names target programmes, intended audience, and the commercial model. Assign a single senior sponsor who owns the initiative end-to-end. Institutions that skip this step typically burn three to six months in false starts.',
+                medium:    '<strong>You have strategic intent, but it needs to be sharpened into an actionable plan.</strong> The risk at this stage is that online learning sits as a line item in a broader strategy document without specific targets, timelines, or accountable owners. Translate your strategic direction into a delivery roadmap: which programmes launch first, what does success look like at six and twelve months, and who makes the day-to-day decisions? Confirm that your budget covers not just content creation but also platform costs, marketing, and ongoing maintenance.',
+                high:      '<strong>Your strategic foundations are solid.</strong> You have leadership buy-in, allocated budget, and a clear direction. Ensure the strategy connects to operational reality: confirm that the people doing the work understand the priorities, and that decision-making authority is clear enough to avoid bottlenecks during development. Revisit your strategy quarterly during the build phase.',
+                excellent: '<strong>You have an unusually strong strategic foundation.</strong> Your direction is clear, approved, and resourced. Focus now on protecting this clarity as you enter development — scope creep and mid-build priority changes are the main risks at this stage, not strategic ambiguity.'
+            },
+            leadership: {
+                low:       '<strong>Leadership misalignment will create friction at every decision point.</strong> If the people with authority over resources, approvals, and direction are not consistently aligned, your development team will absorb that uncertainty in rework, delays, and conflicting briefs. Address alignment explicitly — not by assuming it — before development begins.',
+                medium:    '<strong>Partial alignment is better than none, but gaps remain that will surface during development.</strong> The moments when leadership disagreement becomes costly are typically around scope changes, budget requests, and go-live decisions. Map out where the disagreements lie and address them through structured conversations now, not during a crisis mid-build.',
+                high:      '<strong>Leadership is broadly aligned, and that provides a stable platform for development.</strong> Protect this alignment by maintaining clear, regular communication with all senior stakeholders throughout the build — not just at milestone reviews. Alignment is easier to maintain than it is to repair once it breaks.',
+                excellent: '<strong>Strong and consistent leadership alignment is one of the clearest predictors of successful programme delivery.</strong> Your position here is genuinely uncommon. Keep it by ensuring the alignment extends downward through the organisation to the teams doing the work.'
+            },
+            resource: {
+                low:       '<strong>Resource gaps at this level will directly limit your delivery quality and speed.</strong> Without access to specialist roles — learning designers, media producers, platform administrators — you are asking generalists to do specialist work, which produces predictably inconsistent results. Decide now whether to build internal capability, commission externally, or partner with a specialist. Each route has different cost and timeline implications.',
+                medium:    '<strong>You have some resource in place, but gaps in specific areas will create bottlenecks.</strong> The most common pattern is having one person who covers multiple roles at reduced depth in each. Identify specifically which specialist skills are thin or absent, and address those gaps before committing to a launch date that assumes full capacity.',
+                high:      '<strong>Your resource base is broadly adequate for online programme development.</strong> The question to monitor is whether your capacity matches your ambition — both in terms of volume (number of modules) and speed (time to launch). Resource constraints become visible quickly when development is under way.',
+                excellent: '<strong>Strong resource readiness gives you a significant advantage in delivery pace and quality.</strong> Focus on ensuring your specialist roles have sufficient protected time — ring-fenced from other institutional demands — so that your capacity on paper translates to capacity in practice.'
+            },
+            quality: {
+                low:       '<strong>Without online-specific quality criteria, your development team is building to an undefined standard.</strong> Your existing face-to-face quality processes do not translate directly — they check the right things for face-to-face teaching but miss the criteria that determine whether an online programme actually works: accessibility compliance, digital assessment integrity, weekly engagement patterns, and technical performance. Adopt a recognised framework before development begins.',
+                medium:    '<strong>You have quality processes, but they need to be adapted for online.</strong> The most dangerous gap is typically in student experience monitoring — in a physical classroom, a struggling student is visible; online, they simply stop logging in. Add specific, measurable criteria for online delivery that your content producers and reviewers can actually apply. Vague standards like "high-quality learning materials" are not useful at the production level.',
+                high:      '<strong>Your quality framework covers the main bases for online delivery.</strong> Ensure that quality data from one cohort feeds directly into improvements for the next — the feedback loop is where many otherwise strong quality frameworks fall short. Consider periodic external benchmarking as regulatory expectations for online provision continue to evolve.',
+                excellent: '<strong>Robust, online-specific quality assurance is rare and genuinely valuable.</strong> Your frameworks include the criteria that matter for digital delivery. The next level is real-time quality monitoring during live delivery — not just retrospective review at the end of each cohort.'
+            },
+            student: {
+                low:       '<strong>Building without learner insight produces programmes that serve the institution\'s assumptions rather than learners\' actual needs.</strong> The result is typically low completion rates, poor satisfaction scores, and the kind of reputation damage that takes years to recover from. Even lightweight research — interviews with prospective students, review of comparable programmes — produces significant improvement in design quality relative to building blind.',
+                medium:    '<strong>You have some learner insight but there are gaps in how systematically it informs design decisions.</strong> The risk is that learner research gets done once at the start and then forgotten as development pressures mount. Build learner perspective into every major design decision: what would a working professional studying at 10pm on a Thursday actually need from this activity?',
+                high:      '<strong>Good learner research and outcome tracking gives your programme a strong foundation for continuous improvement.</strong> The next step is closing the loop more tightly: ensuring that satisfaction data and completion trends feed back into design decisions for subsequent cohorts within weeks, not at the end of an academic year.',
+                excellent: '<strong>Systematic learner focus is one of the most reliable differentiators between average and excellent online programmes.</strong> Your position here is strong. Protect it by ensuring that learner insight remains a live, ongoing input rather than a project phase that gets completed and set aside.'
+            },
+            scalability: {
+                low:       '<strong>Building without scalability in mind creates a ceiling on your ambition.</strong> The processes, templates, and governance structures that work for a single pilot programme need to be redesigned from scratch to support multiple simultaneous developments. Starting with scalability principles — even for your first programme — means you build once and extend, rather than rebuild repeatedly.',
+                medium:    '<strong>You have some scalability thinking in place, but gaps will emerge as volume increases.</strong> The most common gap at this stage is templates: teams that have produced some content but not documented their process find that institutional knowledge is locked in individuals rather than in transferable systems. Document your production process while you are building your first programme, not after.',
+                high:      '<strong>Your scalability foundations are solid and will support growth without the structural rebuild that many institutions face at expansion.</strong> Focus on testing your processes under realistic load — running two or three developments simultaneously reveals bottlenecks that a single programme never surfaces.',
+                excellent: '<strong>Strong scalability planning positions you to grow online provision systematically rather than reactively.</strong> Your processes and templates are designed for volume. The next challenge is typically governance at scale: ensuring that decision-making speed does not become the constraint as you add more programmes and stakeholders.'
+            },
+            technical: {
+                low:       '<strong>This is where your readiness gap is most significant.</strong> Building online programmes requires a specific blend of technical skills that most institutions do not have in-house: learning design methodology, LMS configuration and build expertise, online assessment architecture, and multimedia production. These are not skills that academic staff or general IT teams typically possess, and expecting them to pick it up as they go leads to poor outcomes and burnt-out staff. This is the dimension where external specialist support makes the most measurable difference.',
+                medium:    '<strong>You have some technical capability, but gaps remain in critical areas.</strong> Most institutions at this stage have people who can work within the LMS but lack the depth needed for complex builds: branching assessment pathways, integrated multimedia learning activities, or sophisticated gradebook configurations. Identify specifically which technical skills you have in-house and which you need to source externally. A common and cost-effective model is to partner with an external specialist for the complex build work while developing your internal team\'s capabilities on the job.',
+                high:      '<strong>Your technical capacity is strong relative to most institutions.</strong> You have learning designers, LMS expertise, assessment design experience, and at least some multimedia production capability. This is genuinely unusual and puts you ahead of many peers. Even well-resourced internal teams face constraints when scaling — consider where an external partner could add value as a force multiplier rather than a replacement for your team.',
+                excellent: '<strong>Excellent technical capacity across all four areas of the dimension is rare.</strong> You have the specialist skills needed to build quality online programmes in-house. The question at this level is whether your capacity matches your volume ambitions — even strong teams hit throughput limits when running multiple simultaneous programme builds.'
+            }
+        };
+
+        var level = getBarClass(score, max);
+        var dimTexts = texts[dimId];
+        if (!dimTexts) return '<strong>Score recorded.</strong> See the overall conclusion below for interpretation.';
+
+        // Operational track uses same interpretive logic but addresses team rather than institution
+        var text = dimTexts[level] || dimTexts['medium'];
+
+        if (track === 'operational') {
+            // Light framing shift — operational language is already embedded in most entries
+            text = text; // Same text works — it was written for both frames
+        }
+
+        return text;
+    }
+
+    function buildRadarSVG(dimScores) {
+        var size = 300;
+        var cx = size / 2;
+        var cy = size / 2;
+        var radius = 108;
+        var labelOffset = 26; /* distance beyond radius to place label centres */
+        var dims = DIMENSIONS;
+        var n = dims.length;
+        var angleStep = (2 * Math.PI) / n;
+
+        function getPoint(idx, r) {
+            var angle = (idx * angleStep) - (Math.PI / 2);
+            return {
+                x: cx + r * Math.cos(angle),
+                y: cy + r * Math.sin(angle)
+            };
+        }
+
+        // Grid rings — lighter stroke so they read on navy
+        var gridLines = '';
+        [0.25, 0.5, 0.75, 1].forEach(function (frac) {
+            var pts = [];
+            for (var i = 0; i < n; i++) {
+                var pt = getPoint(i, radius * frac);
+                pts.push(pt.x + ',' + pt.y);
+            }
+            gridLines += '<polygon points="' + pts.join(' ') + '" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>';
+        });
+
+        // Axis lines
+        var axisLines = '';
+        for (var i = 0; i < n; i++) {
+            var pt = getPoint(i, radius);
+            axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + pt.x + '" y2="' + pt.y + '" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>';
+        }
+
+        // Data polygon
+        var dataPoints = [];
+        dims.forEach(function (dim, idx) {
+            var score = dimScores[dim.id] || 0;
+            var frac = score / dim.max;
+            var pt = getPoint(idx, radius * frac);
+            dataPoints.push(pt.x + ',' + pt.y);
+        });
+        var dataPolygon = '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(132,204,22,0.22)" stroke="#84cc16" stroke-width="2"/>';
+
+        // Data dots
+        var dataDots = '';
+        dims.forEach(function (dim, idx) {
+            var score = dimScores[dim.id] || 0;
+            var frac = score / dim.max;
+            var pt = getPoint(idx, radius * frac);
+            dataDots += '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="4" fill="#84cc16"/>';
+        });
+
+        // Labels — white, readable on navy background
+        var labels = '';
+        dims.forEach(function (dim, idx) {
+            var pt = getPoint(idx, radius + labelOffset);
+            var anchor = 'middle';
+            if (pt.x < cx - 8) anchor = 'end';
+            else if (pt.x > cx + 8) anchor = 'start';
+            var shortName = dim.name.replace('Student experience focus', 'Student exp.')
+                                    .replace('Scalability planning', 'Scalability')
+                                    .replace('Technical capacity', 'Technical')
+                                    .replace('Leadership alignment', 'Leadership')
+                                    .replace('Resource readiness', 'Resources')
+                                    .replace('Quality framework', 'Quality')
+                                    .replace('Strategic clarity', 'Strategy');
+
+            labels += '<text x="' + pt.x + '" y="' + pt.y + '" text-anchor="' + anchor
+                    + '" font-family="Inter, sans-serif" font-size="10" font-weight="600"'
+                    + ' fill="rgba(255,255,255,0.7)" dominant-baseline="middle">'
+                    + shortName + '</text>';
+        });
+
+        /* viewBox has 20px padding on all sides to prevent label clipping */
+        return '<svg width="' + size + '" height="' + size + '" viewBox="-20 -20 340 340"'
+             + ' role="img" aria-label="Radar chart showing scores across all 7 dimensions">'
+             + gridLines + axisLines + dataPolygon + dataDots + labels
+             + '</svg>';
+    }
+
+    function generateConclusion(total, dimScores) {
+        var techScore = dimScores['technical'] || 0;
+        var techPct = techScore / 16;
+        var overallPct = total / 48;
+        var track = state.track;
+        var paras = [];
+
+        if (overallPct <= 0.44) {
+            paras.push('<p class="results-conclusion-text"><strong>There is significant opportunity here, and the good news is these gaps are addressable.</strong> Your assessment reveals that several foundational elements need attention before you can develop online programmes with confidence. This is not unusual — most institutions that are new to online learning score in this range. The difference between institutions that succeed and those that stall is whether they address these gaps systematically or try to push through them.</p>');
+            paras.push('<p class="results-conclusion-text">Focus on two things before anything else: get your strategy formally documented with leadership sign-off and budget, and secure access to the technical expertise needed to build properly. Attempting to develop content before these foundations are in place will result in rework and delays that cost more than getting it right from the start.</p>');
+        } else if (overallPct <= 0.69) {
+            paras.push('<p class="results-conclusion-text"><strong>You have real momentum, and the foundations are forming.</strong> Your institution has made progress in several areas, but the gaps that remain are the ones most likely to cause problems during development. Institutions at this stage often feel ready to start building — but the dimensions where you scored lower will create friction that slows everything down if they are not addressed first.</p>');
+            paras.push('<p class="results-conclusion-text">The most productive next step is to address your weakest dimension directly. A targeted intervention in your lowest-scoring area will unlock progress across the board, because these dimensions are interconnected: weak quality assurance affects timelines, limited production capacity affects design ambitions, and so on.</p>');
+        } else if (overallPct <= 0.875) {
+            paras.push('<p class="results-conclusion-text"><strong>You are well-positioned to develop online programmes successfully.</strong> Your scores indicate that most of the structural and strategic elements are in place. The areas where you scored lower are worth targeted attention — at this level of readiness, addressing a specific gap can be the difference between a good programme and an excellent one.</p>');
+            paras.push('<p class="results-conclusion-text">Institutions in your position typically get the most value from specialist support in their weakest areas rather than a broad consulting engagement. Identify the one or two dimensions holding you back and seek focused expertise there.</p>');
+        } else {
+            paras.push('<p class="results-conclusion-text"><strong>Your institution is in a strong position across the board.</strong> Scores at this level indicate genuine organisational readiness: well-defined strategy, capable teams, and clear plans. This is relatively rare, and you should move forward with confidence.</p>');
+            paras.push('<p class="results-conclusion-text">At this stage, the value of external support is less about filling gaps and more about accelerating execution and bringing battle-tested production processes. Even the strongest internal teams benefit from a partner who has delivered dozens of programmes and can anticipate the issues that first-time programmes encounter.</p>');
+        }
+
+        if (techPct <= 0.5) {
+            paras.push('<p class="results-conclusion-text"><strong>Your Technical Capacity score is the area requiring the most attention.</strong> This is the dimension where the gap between what institutions think they can handle internally and what is actually required is widest. Learning design, LMS build, online assessment architecture, and multimedia production are specialist disciplines. The right external partner can close this gap immediately while your internal teams develop capability over time — and this is exactly the kind of challenge Andrew helps institutions solve.</p>');
+        } else if (techPct <= 0.75) {
+            paras.push('<p class="results-conclusion-text"><strong>Technical Capacity is worth a closer look.</strong> Even with some capability in place, the gap between basic and excellent is where student experience is won or lost. A focused conversation about where external expertise would have the most impact could save you months of trial and error.</p>');
+        } else {
+            paras.push('<p class="results-conclusion-text"><strong>Even with your strong Technical Capacity, this is where most institutions underestimate the gap at scale.</strong> Building one module well is different from maintaining quality across an entire programme while managing deadlines, stakeholder feedback, and mid-project changes. The institutions that scale most successfully are those that pair strong internal teams with experienced external partners who bring production discipline and capacity for peak periods.</p>');
+        }
+
+        paras.push('<p class="results-conclusion-text">A 30-minute conversation with Andrew would give you a clearer picture of what your specific scores mean in practice and what the most productive next steps look like. He has worked with institutions at every stage of this journey and can give you a straight answer about where you stand.</p>');
+
+        return paras.join('');
+    }
+
+    /* ============================================================
+       DIMENSION ICON MAP
+    ============================================================ */
+    var DIMENSION_ICONS = {
+        strategic:   '🎯',
+        leadership:  '👥',
+        resource:    '🔧',
+        quality:     '✅',
+        student:     '🎓',
+        scalability: '📈',
+        technical:   '⚙️'
+    };
+
+    /* ============================================================
+       GAUGE COLOUR BY CATEGORY
+    ============================================================ */
+    function getGaugeColour(category) {
+        if (category.badgeClass === 'results-category-badge--early')      return '#ef4444';
+        if (category.badgeClass === 'results-category-badge--building')   return '#eab308';
+        if (category.badgeClass === 'results-category-badge--positioned') return '#84cc16';
+        if (category.badgeClass === 'results-category-badge--ready')      return '#16a34a';
+        return '#84cc16';
+    }
+
+    /* ============================================================
+       SVG CIRCULAR GAUGE
+    ============================================================ */
+    function buildGaugeSVG(total, max, colour) {
+        var size = 180;
+        var cx = size / 2;
+        var cy = size / 2;
+        var strokeWidth = 14;
+        var radius = (size - strokeWidth) / 2 - 4;
+        var circumference = 2 * Math.PI * radius;
+        // Start from dash-offset = circumference (empty ring)
+        var dashOffset = circumference;
+
+        return '<svg viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Score gauge: ' + total + ' out of ' + max + '">'
+             + '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '"'
+             + ' fill="none" stroke="#e5e7eb" stroke-width="' + strokeWidth + '"/>'
+             + '<circle id="gauge-ring" cx="' + cx + '" cy="' + cy + '" r="' + radius + '"'
+             + ' fill="none" stroke="' + colour + '" stroke-width="' + strokeWidth + '"'
+             + ' stroke-linecap="butt"'
+             + ' stroke-dasharray="' + circumference + '"'
+             + ' stroke-dashoffset="' + dashOffset + '"'
+             + ' transform="rotate(-90 ' + cx + ' ' + cy + ')"'
+             + ' style="transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1)"/>'
+             + '</svg>';
+    }
+
+    /* ============================================================
+       GENERATE CONCLUSION (compact version)
+    ============================================================ */
+    function generateConclusionCompact(total, dimScores) {
+        var techScore = dimScores['technical'] || 0;
+        var techPct = techScore / 16;
+        var overallPct = total / 48;
+        var parts = [];
+
+        if (overallPct <= 0.44) {
+            parts.push('<p class="results-conclusion-text"><strong>There is significant opportunity here, and the good news is these gaps are addressable.</strong> Several foundational elements need attention before online programmes can be developed with confidence. The difference between institutions that succeed and those that stall is whether they address these gaps systematically or try to push through them.</p>');
+            parts.push('<p class="results-conclusion-text">Focus on two things first: get your strategy formally documented with leadership sign-off and budget, then secure access to the technical expertise needed to build properly.</p>');
+        } else if (overallPct <= 0.69) {
+            parts.push('<p class="results-conclusion-text"><strong>You have real momentum, and the foundations are forming.</strong> The gaps that remain are the ones most likely to create friction during development. A targeted intervention in your lowest-scoring area will unlock progress across the board.</p>');
+        } else if (overallPct <= 0.875) {
+            parts.push('<p class="results-conclusion-text"><strong>You are well-positioned to develop online programmes successfully.</strong> Most structural and strategic elements are in place. Institutions in your position typically get the most value from specialist support in their weakest areas.</p>');
+        } else {
+            parts.push('<p class="results-conclusion-text"><strong>Your institution is in a strong position across the board.</strong> Well-defined strategy, capable teams, clear plans. At this stage, external support accelerates execution and brings battle-tested production processes rather than filling gaps.</p>');
+        }
+
+        if (techPct <= 0.5) {
+            parts.push('<p class="results-conclusion-text"><strong>Technical Capacity is the area requiring most attention.</strong> Learning design, LMS build, online assessment architecture, and multimedia production are specialist disciplines. The right external partner can close this gap immediately — this is exactly the kind of challenge Andrew helps institutions solve.</p>');
+        } else if (techPct <= 0.75) {
+            parts.push('<p class="results-conclusion-text"><strong>Technical Capacity is worth a closer look.</strong> Even with some capability in place, the gap between basic and excellent is where student experience is won or lost.</p>');
+        } else {
+            parts.push('<p class="results-conclusion-text"><strong>Even with strong Technical Capacity, this is where most institutions underestimate the gap at scale.</strong> The institutions that scale most successfully pair strong internal teams with experienced external partners.</p>');
+        }
+
+        return parts.join('');
+    }
+
+    /* ============================================================
+       CARD ACCORDION
+    ============================================================ */
+    function initCardAccordion() {
+        /* Each card toggles independently — multiple cards may be open simultaneously.
+           No sibling-closing logic. The is-open class drives both the chevron rotation
+           and the persistent background highlight defined in CSS. */
+        var cards = document.querySelectorAll('.dimension-card:not(.dimension-card--tech)');
+        cards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                var willOpen = !card.classList.contains('is-open');
+                card.classList.toggle('is-open', willOpen);
+                card.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                var detail = card.querySelector('.dimension-card__detail');
+                if (detail) detail.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+            });
+            card.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+    }
+
+    function showResults() {
+        // Check all questions answered
+        var unanswered = state.questions.filter(function (q) { return state.answers[q.id] === undefined; });
+        if (unanswered.length > 0) return;
+
+        var total = getTotalScore();
+        var category = getScoreCategory(total);
+        var gaugeColour = getGaugeColour(category);
+
+        // Calculate dimension scores
+        var dimScores = {};
+        DIMENSIONS.forEach(function (dim) {
+            dimScores[dim.id] = getDimensionScore(dim);
+        });
+
+        /* ---- Build dashboard HTML ---- */
+        var html = '<div class="results-dashboard">';
+
+        /* LEFT PANEL */
+        html += '<aside class="results-left-panel" aria-label="Score summary">';
+
+        /* Gauge */
+        html += '<div class="results-gauge-wrapper">'
+              + '<div class="results-gauge-svg-container">'
+              + buildGaugeSVG(total, 48, gaugeColour)
+              + '<div class="results-gauge-center-text">'
+              + '<span class="results-gauge-score" id="results-score-animated">0</span>'
+              + '<span class="results-gauge-denom">/48</span>'
+              + '</div>'
+              + '</div>'
+              + '<span class="results-category-badge ' + category.badgeClass + '">' + escapeHtml(category.name) + '</span>'
+              + '<h2 class="results-category-name" id="results-heading">' + escapeHtml(category.name) + '</h2>'
+              + '<p class="results-category-desc">' + escapeHtml(category.desc) + '</p>'
+              + '</div>';
+
+        /* Radar */
+        html += '<div class="results-radar-panel">'
+              + '<p class="results-radar-panel-title">Dimension overview</p>'
+              + '<div class="radar-container">' + buildRadarSVG(dimScores) + '</div>'
+              + '</div>';
+
+        /* Left CTA */
+        html += '<div class="results-left-cta">'
+              + '<p class="results-left-cta__label">Ready to walk through this together?</p>'
+              + '<a href="book-a-call.html" class="btn-cta-primary" style="width:100%;justify-content:center;" aria-label="Book a call with Andrew">'
+              + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + ' Talk to Andrew'
+              + '</a>'
+              + '</div>';
+
+        html += '</aside>'; /* /left panel */
+
+        /* RIGHT PANEL */
+        html += '<section class="results-right-panel" aria-labelledby="results-heading">';
+        html += '<p class="results-right-panel__eyebrow">Dimension breakdown &mdash; tap any card to expand</p>';
+        html += '<div class="results-dimension-grid">';
+
+        DIMENSIONS.forEach(function (dim, cardIndex) {
+            var score = dimScores[dim.id];
+            var level = getBarClass(score, dim.max);
+            var pct = (score / dim.max) * 100;
+            var icon = DIMENSION_ICONS[dim.id] || '';
+            var isTech = dim.id === 'technical';
+            var delay = (cardIndex * 80) + 'ms';
+
+            if (isTech) {
+                html += '<div class="dimension-card dimension-card--tech is-open"'
+                      + ' style="animation-delay:' + delay + '"'
+                      + ' role="region" aria-label="Technical capacity — key dimension">'
+                      + '<div class="dimension-card__header">'
+                      + '<span class="dimension-card__icon" aria-hidden="true">' + icon + '</span>'
+                      + '<div class="dimension-card__name-group">'
+                      + '<span class="dimension-card__label">Key dimension</span>'
+                      + '<span class="dimension-card__name">' + escapeHtml(dim.name) + '</span>'
+                      + '<span class="dimension-card__score">' + score + '/' + dim.max + '</span>'
+                      + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__bar-row">'
+                      + '<div class="dimension-bar-track" aria-hidden="true">'
+                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" data-bar-pct="' + pct + '" style="width:0%"></div>'
+                      + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__detail">'
+                      + '<div class="dimension-card__detail-inner">'
+                      + '<div class="dimension-card__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>'
+                      + '</div>'
+                      + '</div>';
+            } else {
+                html += '<div class="dimension-card dimension-card--' + level + '"'
+                      + ' style="animation-delay:' + delay + '"'
+                      + ' tabindex="0" role="button" aria-expanded="false"'
+                      + ' aria-label="' + escapeHtml(dim.name) + ': ' + score + ' out of ' + dim.max + '. Click to expand.">'
+                      + '<div class="dimension-card__header">'
+                      + '<span class="dimension-card__icon" aria-hidden="true">' + icon + '</span>'
+                      + '<div class="dimension-card__name-group">'
+                      + '<span class="dimension-card__name">' + escapeHtml(dim.name) + '</span>'
+                      + '<span class="dimension-card__score">' + score + '/' + dim.max + '</span>'
+                      + '</div>'
+                      + '<span class="dimension-card__chevron" aria-hidden="true">&#9660;</span>'
+                      + '</div>'
+                      + '<div class="dimension-card__bar-row">'
+                      + '<div class="dimension-bar-track" aria-hidden="true">'
+                      + '<div class="dimension-bar-fill dimension-bar-fill--' + level + '" data-bar-pct="' + pct + '" style="width:0%"></div>'
+                      + '</div>'
+                      + '</div>'
+                      + '<div class="dimension-card__detail" aria-hidden="true">'
+                      + '<div class="dimension-card__detail-inner">'
+                      + '<div class="dimension-card__text">' + getDimensionResultText(dim.id, score, dim.max) + '</div>'
+                      + '</div>'
+                      + '</div>'
+                      + '</div>';
+            }
+        });
+
+        html += '</div>'; /* /results-dimension-grid */
+
+        /* Conclusion insight box */
+        html += '<div class="results-insight-box" role="region" aria-label="What this means">'
+              + '<p class="results-insight-box__eyebrow">What this means for your institution</p>'
+              + '<p class="results-insight-box__headline">Your readiness in context</p>'
+              + generateConclusionCompact(total, dimScores)
+              + '</div>';
+
+        /* CASE STUDY STUB — illustrates LDS track record, sits above CTA */
+        html += '<aside class="results-case-study" role="complementary" aria-label="Related case study">'
+              + '<p class="results-case-study__eyebrow">How LDS has helped institutions like yours</p>'
+              + '<p class="results-case-study__body">Walbrook Institute faced similar friction across leadership alignment and quality-framework readiness. Over a six-month engagement, Andrew worked with their executive team to rebuild the online delivery plan from the governance layer up — resulting in a validated programme architecture ready for first cohort.</p>'
+              + '<p class="results-case-study__footnote">Full Walbrook case study <em>coming soon</em>. In the meantime, Andrew is the best person to walk you through a comparable institutional profile.</p>'
+              + '</aside>';
+
+        /* CTA BLOCK — inline next-step card */
+        html += '<div class="results-cta-block" role="complementary" aria-label="Next step">'
+              + '<div class="results-cta-block__left">'
+              + '<p class="results-cta-block__title">Want to walk through your results with Andrew?</p>'
+              + '<p class="results-cta-block__text">30-minute conversation. We\'ll go through your dimension-by-dimension scores and talk through what to prioritise first for your institution.</p>'
+              + '</div>'
+              + '<div class="results-cta-block__right">'
+              + '<div class="results-cta-buttons">'
+              + '<a href="book-a-call.html" class="btn-cta-primary" aria-label="Book a call with Andrew">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+              + ' Talk to Andrew'
+              + '</a>'
+              + '<button class="btn-cta-outline" id="share-results-btn" aria-label="Copy shareable link to clipboard">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+              + ' Share results'
+              + '</button>'
+              + '<button class="btn-cta-outline" id="pdf-export-btn" aria-label="Download results as PDF">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>'
+              + ' Download PDF'
+              + '</button>'
+              + '</div>'
+              + '<div class="save-feedback" id="save-feedback" role="status">'
+              + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'
+              + ' Link copied'
+              + '</div>'
+              + '</div>'
+              + '</div>';
+
+        html += '</section>'; /* /right panel */
+
+        html += '</div>'; /* /results-dashboard */
+
+        resultsContent.innerHTML = html;
+
+        // Navigate to results
+        state.slideIndex = state.questions.length;
+        navigateToSlide(slideResults, 'forward');
+        updateHeaderMeta();
+        progressFill.style.right = '0%';
+        progressBar.setAttribute('aria-valuenow', '100');
+        document.body.classList.add('results-visible');
+
+        // Trigger animations after slide enters
+        setTimeout(function () {
+            animateGauge(total, 48, gaugeColour);
+            animateDimensionBars();
+            initCardAccordion();
+        }, 380);
+
+        // Wire up Share results button — copies URL with hash-encoded answers
+        var shareBtn = document.getElementById('share-results-btn');
+        var saveFeedback = document.getElementById('save-feedback');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', function () {
+                var url = shareResultsUrl();
+                /* Update the browser URL to the shareable version */
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', url);
+                }
+                copyToClipboard(url, saveFeedback);
+            });
+        }
+
+        // Wire up PDF export button
+        var pdfBtn = document.getElementById('pdf-export-btn');
+        if (pdfBtn) {
+            pdfBtn.addEventListener('click', function () {
+                exportToPDF();
+            });
+        }
+    }
+
+    function animateGauge(total, max, colour) {
+        /* Animate the SVG ring fill */
+        var ring = document.getElementById('gauge-ring');
+        var scoreEl = document.getElementById('results-score-animated');
+
+        if (ring) {
+            var radius = parseFloat(ring.getAttribute('r'));
+            var circumference = 2 * Math.PI * radius;
+            var targetOffset = circumference * (1 - total / max);
+            /* Trigger transition by setting the target offset */
+            requestAnimationFrame(function () {
+                ring.style.strokeDashoffset = targetOffset;
+            });
+        }
+
+        /* Animate score number counter alongside gauge */
+        if (scoreEl) {
+            var duration = 1500;
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                scoreEl.textContent = Math.round(eased * total);
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+    }
+
+    function animateDimensionBars() {
+        var fills = document.querySelectorAll('.dimension-bar-fill[data-bar-pct]');
+        fills.forEach(function (fill, i) {
+            var pct = parseFloat(fill.getAttribute('data-bar-pct'));
+            setTimeout(function () {
+                fill.style.width = pct + '%';
+            }, i * 100);
+        });
+    }
+
+    function copyToClipboard(text, feedbackEl) {
+        function showFeedback() {
+            if (feedbackEl) {
+                feedbackEl.classList.add('is-visible');
+                setTimeout(function () { feedbackEl.classList.remove('is-visible'); }, 3000);
+            }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(showFeedback).catch(function () { fallbackCopy(text, showFeedback); });
+        } else {
+            fallbackCopy(text, showFeedback);
+        }
+    }
+
+    function fallbackCopy(text, cb) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); if (cb) cb(); } catch (e) {}
+        document.body.removeChild(ta);
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+
+    function escapeHtml(str) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+    }
+
+    /* ============================================================
+       JOURNEY BREADCRUMB
+    ============================================================ */
+
+    var JOURNEY_STEPS = [
+        { id: 'landing',    label: 'LDS home',       href: 'index.html' },
+        { id: 'course',     label: 'Free course',   href: 'tier1-course.html' },
+        { id: 'assessment', label: 'Assessment',    href: null },
+        { id: 'results',    label: 'Results',       href: null }
+    ];
+
+    function renderBreadcrumb(currentStepId, questionLabel) {
+        var nav = document.getElementById('journey-nav');
+        if (!nav) return;
+
+        var currentIdx = JOURNEY_STEPS.findIndex(function (s) { return s.id === currentStepId; });
+        if (currentIdx < 0) currentIdx = 2; /* default to assessment */
+
+        var html = '<button class="journey-breadcrumb__back" id="breadcrumb-back-btn" aria-label="Go back">'
+                 + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
+                 + ' Back'
+                 + '</button>';
+
+        html += '<ol class="journey-breadcrumb" aria-label="Your journey">';
+
+        JOURNEY_STEPS.forEach(function (step, idx) {
+            var isFirst = (idx === 0);
+            var isCurrent = (idx === currentIdx);
+            var isPast = (idx < currentIdx);
+            var isFuture = (idx > currentIdx);
+            var hideOnMobile = (!isCurrent && idx !== currentIdx - 1);
+
+            var itemClass = 'journey-breadcrumb__item' + (hideOnMobile ? ' journey-breadcrumb__item--hide-mobile' : '');
+            html += '<li class="' + itemClass + '">';
+
+            if (!isFirst) {
+                var sepClass = 'journey-breadcrumb__sep' + (hideOnMobile ? ' journey-breadcrumb__sep--hide-mobile' : '');
+                html += '<span class="' + sepClass + '" aria-hidden="true">&#8250;</span>';
+            }
+
+            /* Display label — question slides show current Q count */
+            var displayLabel = step.label;
+            if (isCurrent && questionLabel) displayLabel = questionLabel;
+
+            if (isPast && step.href) {
+                html += '<a href="' + step.href + '" class="journey-breadcrumb__link">' + escapeHtml(displayLabel) + '</a>';
+            } else if (isCurrent) {
+                html += '<span class="journey-breadcrumb__current" aria-current="step">' + escapeHtml(displayLabel) + '</span>';
+            } else {
+                html += '<span class="journey-breadcrumb__future" aria-disabled="true">' + escapeHtml(displayLabel) + '</span>';
+            }
+
+            html += '</li>';
+        });
+
+        /* Book a call — always last, styled as mini CTA */
+        html += '<li class="journey-breadcrumb__item">'
+              + '<span class="journey-breadcrumb__sep" aria-hidden="true">&#8250;</span>'
+              + '<a href="book-a-call.html" class="journey-breadcrumb__cta" aria-label="Book a call with Andrew">Book a call</a>'
+              + '</li>';
+
+        html += '</ol>';
+
+        nav.innerHTML = html;
+
+        /* Wire up the back button */
+        var backBtn = document.getElementById('breadcrumb-back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', function () {
+                var activeSlide = viewport.querySelector('.slide.is-active');
+                if (!activeSlide) return;
+                if (activeSlide.id === 'slide-intro') {
+                    window.location.href = 'tier1-course.html';
+                } else if (activeSlide.id === 'slide-role') {
+                    navigateToSlide(slideIntro, 'backward');
+                } else if (activeSlide.id === 'slide-results') {
+                    /* Go back to last question */
+                    document.body.classList.remove('results-visible');
+                    var lastIdx = state.questions.length - 1;
+                    var lastSlide = document.getElementById('slide-q' + lastIdx);
+                    if (lastSlide) {
+                        state.slideIndex = lastIdx;
+                        navigateToSlide(lastSlide, 'backward');
+                        updateBreadcrumb();
+                    }
+                } else if (activeSlide.id && activeSlide.id.startsWith('slide-q')) {
+                    var qIdx = parseInt(activeSlide.id.replace('slide-q', ''), 10);
+                    if (qIdx === 0) {
+                        goToRoleSlide();
+                    } else {
+                        goToPrevQuestion(qIdx);
+                    }
+                }
+            });
+        }
+    }
+
+    function updateBreadcrumb() {
+        if (state.slideIndex < 0) {
+            /* Role selection — assessment is current */
+            renderBreadcrumb('assessment', null);
+        } else if (state.slideIndex < state.questions.length) {
+            /* Question slide */
+            var qNum = state.slideIndex + 1;
+            var total = state.questions.length;
+            renderBreadcrumb('assessment', 'Assessment (Q' + qNum + '/' + total + ')');
+        } else {
+            /* Results */
+            renderBreadcrumb('results', null);
+        }
+    }
+
+    /* ============================================================
+       URL HASH — encode/decode results for shareable links
+    ============================================================ */
+
+    function encodeResultsToHash() {
+        var params = ['role=' + encodeURIComponent(state.track || '')];
+        state.questions.forEach(function (q) {
+            var score = state.answers[q.id];
+            if (score !== undefined) {
+                params.push(encodeURIComponent(q.id) + '=' + score);
+            }
+        });
+        return '#' + params.join('&');
+    }
+
+    function decodeHashToState() {
+        var hash = window.location.hash;
+        if (!hash || hash.length < 2) return false;
+
+        var paramStr = hash.slice(1); /* strip leading # */
+        var pairs = paramStr.split('&');
+        var parsed = {};
+        pairs.forEach(function (pair) {
+            var kv = pair.split('=');
+            if (kv.length === 2) {
+                parsed[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1]);
+            }
+        });
+
+        var track = parsed['role'];
+        if (track !== 'strategic' && track !== 'operational') return false;
+
+        var questions = QUESTIONS[track];
+        var answers = {};
+        questions.forEach(function (q) {
+            var val = parseInt(parsed[q.id], 10);
+            if (val >= 1 && val <= 4) answers[q.id] = val;
+        });
+
+        /* Require all questions answered */
+        if (Object.keys(answers).length !== questions.length) return false;
+
+        return { track: track, answers: answers };
+    }
+
+    function shareResultsUrl() {
+        var hash = encodeResultsToHash();
+        var url = window.location.href.split('#')[0] + hash;
+        return url;
+    }
+
+    /* ============================================================
+       PDF EXPORT
+    ============================================================ */
+
+    function exportToPDF() {
+        /* Expand all dimension cards before printing */
+        var cards = document.querySelectorAll('.dimension-card:not(.dimension-card--tech)');
+        cards.forEach(function (card) {
+            card.classList.add('is-open');
+            card.setAttribute('aria-expanded', 'true');
+            var detail = card.querySelector('.dimension-card__detail');
+            if (detail) detail.setAttribute('aria-hidden', 'false');
+        });
+        window.print();
+    }
+
+    /* ============================================================
+       INIT
+    ============================================================ */
+
+    /* Check for hash-encoded results on page load */
+    var restoredState = decodeHashToState();
+    if (restoredState) {
+        /* Auto-run assessment with decoded answers and jump to results */
+        state.track = restoredState.track;
+        state.roleLabel = restoredState.track === 'strategic' ? 'Shared results (strategic)' : 'Shared results (operational)';
+        state.questions = QUESTIONS[restoredState.track];
+        state.answers = restoredState.answers;
+
+        /* Build question slides (needed by the results navigation) */
+        state.questions.forEach(function (q, idx) {
+            var slide = buildQuestionSlide(idx);
+            viewport.insertBefore(slide, slideResults);
+        });
+
+        state.slideIndex = state.questions.length;
+        showResults(); /* showResults() adds results-visible class to body */
+    }
+
+    updateProgress();
+    updateBreadcrumb();
+
+})();
