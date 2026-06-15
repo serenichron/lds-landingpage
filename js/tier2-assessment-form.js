@@ -1,37 +1,26 @@
 (function () {
     'use strict';
 
-    /* ============================================================
-       SQUARESPACE FORM FIELD IDS
-       These are the stable element IDs from squarespace-form.html.
-       When deployed in Squarespace, the form block must be on the
-       same page as the assessment code block.
-    ============================================================ */
-
     var FORM_FIELD_IDS = {
         firstName: 'name-c0d2b53d-1ed1-4695-97a8-9e526638e04d-fname-field',
         email:     'email-338ec66d-7e47-416b-a6af-fc335a402111-field',
         role:      'select-5fa11568-415a-4aba-a4c1-75243eefab8c-field',
-        /* Questions in quiz display order (positions 0–11).
-           The quiz renders slides in array order: q1,q2,...q10,q12,q11.
-           These selects are mapped by that same positional order. */
         questions: [
-            'select-a93d8af7-9066-4138-90b5-635e1088681a-field',  /* Q1  */
-            'select-ea4bb8d1-45de-4936-95b9-2c1d8bd0bfe7-field',  /* Q2  */
-            'select-c6c3b72c-8d18-4884-a3bf-3c5271d5180b-field',  /* Q3  */
-            'select-60056986-4bcf-4bca-8242-5237bd6f9e64-field',  /* Q4  */
-            'select-3760c9a0-3ee7-41ae-a06d-0e597c2f66ea-field',  /* Q5  */
-            'select-87ad1ecb-7c8f-44c9-a94e-a8ecdcb2ff2a-field',  /* Q6  */
-            'select-ffeee68d-ff40-4777-8e03-89c5d3800835-field',  /* Q7  */
-            'select-a2573e0e-b19e-417d-b42f-333a4034369e-field',  /* Q8  */
-            'select-5a3d3354-6b22-48be-968f-a9cd5edb9cec-field',  /* Q9  */
-            'select-0d52c46a-fae3-4d74-a941-d721f51c9bf4-field',  /* Q10 */
-            'select-21d48a25-ddf5-437a-8045-d84ee1099796-field',  /* Q11 (quiz pos 10 = q12) */
-            'select-54289c13-69ca-41e7-a4e1-7707ee44e07e-field'   /* Q12 (quiz pos 11 = q11) */
+            'select-a93d8af7-9066-4138-90b5-635e1088681a-field',
+            'select-ea4bb8d1-45de-4936-95b9-2c1d8bd0bfe7-field',
+            'select-c6c3b72c-8d18-4884-a3bf-3c5271d5180b-field',
+            'select-60056986-4bcf-4bca-8242-5237bd6f9e64-field',
+            'select-3760c9a0-3ee7-41ae-a06d-0e597c2f66ea-field',
+            'select-87ad1ecb-7c8f-44c9-a94e-a8ecdcb2ff2a-field',
+            'select-ffeee68d-ff40-4777-8e03-89c5d3800835-field',
+            'select-a2573e0e-b19e-417d-b42f-333a4034369e-field',
+            'select-5a3d3354-6b22-48be-968f-a9cd5edb9cec-field',
+            'select-0d52c46a-fae3-4d74-a941-d721f51c9bf4-field',
+            'select-21d48a25-ddf5-437a-8045-d84ee1099796-field',
+            'select-54289c13-69ca-41e7-a4e1-7707ee44e07e-field'
         ]
     };
 
-    /* Answer score → Squarespace option value */
     var SCORE_TO_TEXT = {
         1: 'No',
         2: 'Partially',
@@ -39,7 +28,6 @@
         4: 'Yes, comprehensively'
     };
 
-    /* Role card data-role-label → Squarespace select option value */
     var ROLE_VALUE_MAP = {
         'Vice-chancellor / Provost / Principal / CEO':
             'Vice-chancellor / Provost / Principal / CEO - I oversee institutional strategy and major investment decisions',
@@ -55,28 +43,12 @@
             'Learning designer / Educational technologist - I design and build online learning experiences'
     };
 
-    /* ============================================================
-       UTILITY
-    ============================================================ */
+    /* --- Utility ------------------------------------------------ */
 
-    /* Set a value on a React-controlled input/select without being
-       ignored by React's synthetic event system. */
-    function setFormValue(el, value) {
-        if (!el) return;
-        var proto = el.tagName === 'SELECT'
-            ? window.HTMLSelectElement.prototype
-            : window.HTMLInputElement.prototype;
-        var nativeSetter = Object.getOwnPropertyDescriptor(proto, 'value').set;
-        nativeSetter.call(el, value);
-        el.dispatchEvent(new Event('input',  { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+    /* Reference to our local testing copy — used to EXCLUDE it when
+       looking for the real Squarespace Form Block fields. */
+    var localContainer = document.getElementById('bridge-form-container');
 
-    function getField(id) {
-        return document.getElementById(id);
-    }
-
-    /* Walk up the DOM tree looking for an element matching the predicate. */
     function findAncestor(el, predicate) {
         while (el) {
             if (predicate(el)) return el;
@@ -85,198 +57,195 @@
         return null;
     }
 
-    /* ============================================================
-       VALIDATION — name + email on the intro slide
-    ============================================================ */
+    /* Return the form field, preferring the Squarespace Form Block
+       over our local testing copy (avoids duplicate-ID conflicts). */
+    function getField(id) {
+        var all = document.querySelectorAll('[id="' + id + '"]');
+        for (var i = 0; i < all.length; i++) {
+            if (!localContainer || !localContainer.contains(all[i])) {
+                return all[i];
+            }
+        }
+        return all[0] || null;
+    }
+
+    /* Find the <form>, again preferring the real Squarespace Form Block. */
+    function findForm() {
+        var all = document.querySelectorAll('.react-form-contents');
+        for (var i = 0; i < all.length; i++) {
+            if (!localContainer || !localContainer.contains(all[i])) {
+                return all[i];
+            }
+        }
+        return all[0] || null;
+    }
+
+    /* Set a value on a React-controlled input or select.
+       React wraps the native `value` setter on the element instance;
+       going through the prototype's original setter bypasses that
+       and triggers the native change events that React delegates. */
+    function setFormValue(el, value) {
+        if (!el) return;
+        try {
+            var proto = el.tagName === 'SELECT'
+                ? window.HTMLSelectElement.prototype
+                : window.HTMLInputElement.prototype;
+            var nativeSetter = Object.getOwnPropertyDescriptor(proto, 'value').set;
+            nativeSetter.call(el, value);
+        } catch (err) {
+            el.value = value;
+        }
+        el.dispatchEvent(new Event('input',  { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('[form-bridge] ' + (el.id || el.tagName) + ' ← ' + JSON.stringify(value));
+    }
+
+    /* --- Validation --------------------------------------------- */
 
     function validateIntroFields() {
-        var nameInput  = document.getElementById('bridge-full-name');
-        var emailInput = document.getElementById('bridge-email');
-        var errorEl    = document.getElementById('intro-field-error');
-        var emailRe    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var nameEl  = document.getElementById('bridge-full-name');
+        var emailEl = document.getElementById('bridge-email');
+        var errorEl = document.getElementById('intro-field-error');
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        var name  = nameInput  ? nameInput.value.trim()  : '';
-        var email = emailInput ? emailInput.value.trim() : '';
+        var name  = nameEl  ? nameEl.value.trim()  : '';
+        var email = emailEl ? emailEl.value.trim() : '';
 
         if (!name) {
-            showFieldError('Please enter your full name.', nameInput, errorEl);
+            if (errorEl) errorEl.textContent = 'Please enter your full name.';
+            if (nameEl)  { nameEl.classList.add('is-invalid'); nameEl.focus(); }
             return false;
         }
         if (!email || !emailRe.test(email)) {
-            showFieldError('Please enter a valid email address.', emailInput, errorEl);
+            if (errorEl) errorEl.textContent = 'Please enter a valid email address.';
+            if (emailEl) { emailEl.classList.add('is-invalid'); emailEl.focus(); }
             return false;
         }
 
-        clearFieldError(errorEl);
+        if (errorEl) errorEl.textContent = '';
+        if (nameEl)  nameEl.classList.remove('is-invalid');
+        if (emailEl) emailEl.classList.remove('is-invalid');
         return true;
     }
 
-    function showFieldError(msg, inputEl, errorEl) {
-        if (errorEl) errorEl.textContent = msg;
-        if (inputEl) {
-            inputEl.classList.add('is-invalid');
-            inputEl.focus();
-        }
-    }
-
-    function clearFieldError(errorEl) {
-        if (errorEl) errorEl.textContent = '';
-        var ids = ['bridge-full-name', 'bridge-email'];
-        ids.forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) el.classList.remove('is-invalid');
-        });
-    }
-
-    /* ============================================================
-       FORM POPULATION
-    ============================================================ */
+    /* --- Sync helpers ------------------------------------------- */
 
     function syncNameEmail() {
-        var nameInput  = document.getElementById('bridge-full-name');
-        var emailInput = document.getElementById('bridge-email');
-        setFormValue(getField(FORM_FIELD_IDS.firstName), nameInput  ? nameInput.value.trim()  : '');
-        setFormValue(getField(FORM_FIELD_IDS.email),     emailInput ? emailInput.value.trim() : '');
+        var nameEl  = document.getElementById('bridge-full-name');
+        var emailEl = document.getElementById('bridge-email');
+        setFormValue(getField(FORM_FIELD_IDS.firstName), nameEl  ? nameEl.value.trim()  : '');
+        setFormValue(getField(FORM_FIELD_IDS.email),     emailEl ? emailEl.value.trim() : '');
     }
 
     function syncRole(roleLabel) {
-        var el = getField(FORM_FIELD_IDS.role);
-        var fullValue = ROLE_VALUE_MAP[roleLabel] || roleLabel;
-        setFormValue(el, fullValue);
+        setFormValue(getField(FORM_FIELD_IDS.role), ROLE_VALUE_MAP[roleLabel] || roleLabel);
     }
 
     function syncAnswer(slideIndex, score) {
-        var fieldId = FORM_FIELD_IDS.questions[slideIndex];
-        if (!fieldId) return;
-        setFormValue(getField(fieldId), SCORE_TO_TEXT[score] || '');
+        if (slideIndex < 0 || slideIndex >= FORM_FIELD_IDS.questions.length) return;
+        setFormValue(getField(FORM_FIELD_IDS.questions[slideIndex]), SCORE_TO_TEXT[score] || '');
     }
 
-    /* Clear all question selects back to blank (called when user changes role). */
     function resetFormAnswers() {
-        FORM_FIELD_IDS.questions.forEach(function (fieldId) {
-            var el = getField(fieldId);
+        FORM_FIELD_IDS.questions.forEach(function (id) {
+            var el = getField(id);
             if (el) setFormValue(el, '');
         });
     }
 
-    /* ============================================================
-       START BUTTON — capture-phase listener fires before the quiz's
-       bubble-phase listener, so we can block navigation on bad input.
-    ============================================================ */
+    /* --- Start button (capture phase) --------------------------- */
+    /* Using capture: true means this listener fires BEFORE the quiz's
+       bubble-phase listener. If validation fails we call
+       stopImmediatePropagation() to prevent the quiz from advancing. */
 
     var startBtn = document.getElementById('intro-start-btn');
     if (startBtn) {
         startBtn.addEventListener('click', function (e) {
             if (!validateIntroFields()) {
-                /* Stop the quiz from navigating to the role slide. */
                 e.stopImmediatePropagation();
             } else {
                 syncNameEmail();
+                console.log('[form-bridge] name/email synced');
             }
-        }, true /* capture phase */);
+        }, true);
     }
 
-    /* ============================================================
-       ROLE SELECTION — event delegation on the slide viewport
-    ============================================================ */
+    /* --- Click delegation on viewport --------------------------- */
+    /* Handles role card selection and answer button clicks.
+       Click delegation is simpler and more reliable than
+       MutationObserver for tracking which answer was chosen. */
 
     var viewport = document.getElementById('slide-viewport');
     if (viewport) {
         viewport.addEventListener('click', function (e) {
-            var card = findAncestor(e.target, function (el) {
-                return el.classList && el.classList.contains('role-card');
+
+            /* Role card */
+            var roleCard = findAncestor(e.target, function (n) {
+                return n.classList && n.classList.contains('role-card');
             });
-            if (!card) return;
+            if (roleCard) {
+                var label = roleCard.getAttribute('data-role-label') || '';
+                console.log('[form-bridge] role: ' + label);
+                resetFormAnswers();
+                syncRole(label);
+                return;
+            }
 
-            resetFormAnswers();
-            syncRole(card.getAttribute('data-role-label') || '');
-        });
-    }
-
-    /* ============================================================
-       ANSWER SELECTION — MutationObserver watches for is-selected
-       being added to any .answer-option inside the viewport.
-       This fires every time an answer is chosen or changed via the
-       Back button, so the form always reflects the current state.
-    ============================================================ */
-
-    if (viewport && window.MutationObserver) {
-        var answerObserver = new MutationObserver(function (mutations) {
-            for (var i = 0; i < mutations.length; i++) {
-                var m = mutations[i];
-                if (m.type !== 'attributes' || m.attributeName !== 'class') continue;
-
-                var target = m.target;
-                /* Only care about answer options that are now selected. */
-                if (!target.classList.contains('answer-option')) continue;
-                if (!target.classList.contains('is-selected')) continue;
-
-                /* Walk up to find the parent slide-qN element. */
-                var slideEl = findAncestor(target, function (el) {
-                    return el.id && /^slide-q\d+$/.test(el.id);
+            /* Answer button */
+            var answerBtn = findAncestor(e.target, function (n) {
+                return n.classList && n.classList.contains('answer-option');
+            });
+            if (answerBtn) {
+                var slideEl = findAncestor(answerBtn, function (n) {
+                    return n.id && /^slide-q\d+$/.test(n.id);
                 });
-                if (!slideEl) continue;
-
+                if (!slideEl) return;
                 var qIndex = parseInt(slideEl.id.replace('slide-q', ''), 10);
-                var score  = parseInt(target.getAttribute('data-score'), 10);
+                var score  = parseInt(answerBtn.getAttribute('data-score'), 10);
                 if (!isNaN(qIndex) && !isNaN(score)) {
+                    console.log('[form-bridge] Q' + qIndex + ' score=' + score);
                     syncAnswer(qIndex, score);
                 }
             }
         });
-
-        answerObserver.observe(viewport, {
-            attributes:      true,
-            attributeFilter: ['class'],
-            subtree:         true
-        });
     }
 
-    /* ============================================================
-       FORM SUBMISSION — triggered when the quiz adds results-visible
-       to document.body (happens inside showResults()).
-    ============================================================ */
+    /* --- Body class observer (form submission trigger) ---------- */
+    /* The quiz calls document.body.classList.add('results-visible')
+       inside showResults(). We watch for that to know it's safe to
+       submit — guarantees all 12 answers are in before we fire. */
 
     if (window.MutationObserver) {
-        var bodyObserver = new MutationObserver(function (mutations) {
+        var bodyObs = new MutationObserver(function (mutations) {
             for (var i = 0; i < mutations.length; i++) {
                 if (mutations[i].attributeName !== 'class') continue;
                 if (!document.body.classList.contains('results-visible')) continue;
-
-                bodyObserver.disconnect();
-                /* Small delay to let any pending DOM updates settle. */
-                setTimeout(submitSquarespaceForm, 100);
+                bodyObs.disconnect();
+                setTimeout(function () {
+                    syncNameEmail();
+                    submitForm();
+                }, 300);
                 return;
             }
         });
-        bodyObserver.observe(document.body, {
+        bodyObs.observe(document.body, {
             attributes:      true,
             attributeFilter: ['class']
         });
     }
 
-    function submitSquarespaceForm() {
-        /* Re-sync name/email in case the user changed the fields. */
-        syncNameEmail();
-
-        var form = document.querySelector('#bridge-form-container .react-form-contents');
+    function submitForm() {
+        var form = findForm();
         if (!form) {
-            /* In Squarespace, the form block renders on the page directly.
-               Try finding any react-form-contents on the page. */
-            form = document.querySelector('.react-form-contents');
-        }
-        if (!form) {
-            console.warn('form-bridge: Squarespace form element not found. ' +
-                'Ensure the form block is on the same Squarespace page as the assessment.');
+            console.warn('[form-bridge] No form found. ' +
+                'In Squarespace: add a Form Block to this page. ' +
+                'Locally: keep #bridge-form-container in the HTML.');
             return;
         }
-
-        var submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.click();
-        } else {
-            form.submit();
-        }
+        console.log('[form-bridge] submitting', form);
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) btn.click();
+        else form.submit();
     }
 
-})();
+}());
