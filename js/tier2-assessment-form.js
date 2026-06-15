@@ -1,10 +1,16 @@
 (function () {
     'use strict';
 
+    /* ============================================================
+       SQUARESPACE FORM FIELD IDS
+       Must match the field IDs in your Squarespace Form Block.
+    ============================================================ */
+
     var FORM_FIELD_IDS = {
         firstName: 'name-c0d2b53d-1ed1-4695-97a8-9e526638e04d-fname-field',
         email:     'email-338ec66d-7e47-416b-a6af-fc335a402111-field',
         role:      'select-5fa11568-415a-4aba-a4c1-75243eefab8c-field',
+        /* Questions in quiz display order (both tracks: q1–q10, then q12, then q11) */
         questions: [
             'select-a93d8af7-9066-4138-90b5-635e1088681a-field',
             'select-ea4bb8d1-45de-4936-95b9-2c1d8bd0bfe7-field',
@@ -43,10 +49,16 @@
             'Learning designer / Educational technologist - I design and build online learning experiences'
     };
 
-    /* --- Utility ------------------------------------------------ */
+    /* ============================================================
+       UTILITY
+    ============================================================ */
 
-    /* Reference to our local testing copy — used to EXCLUDE it when
-       looking for the real Squarespace Form Block fields. */
+    /* The HTML includes an off-screen copy of the Squarespace form
+       for local testing. Both the copy and the real Squarespace Form
+       Block have the same field IDs; getElementById always returns
+       the first match in DOM order, which is the copy (it appears
+       earlier in the code block). We must skip the copy and prefer
+       the real form block when both are present. */
     var localContainer = document.getElementById('bridge-form-container');
 
     function findAncestor(el, predicate) {
@@ -57,8 +69,8 @@
         return null;
     }
 
-    /* Return the form field, preferring the Squarespace Form Block
-       over our local testing copy (avoids duplicate-ID conflicts). */
+    /* Return the element with this ID that is NOT inside the local
+       testing copy, falling back to any match if only the copy exists. */
     function getField(id) {
         var all = document.querySelectorAll('[id="' + id + '"]');
         for (var i = 0; i < all.length; i++) {
@@ -69,38 +81,25 @@
         return all[0] || null;
     }
 
-    /* Find the <form>, again preferring the real Squarespace Form Block. */
-    function findForm() {
-        var all = document.querySelectorAll('.react-form-contents');
-        for (var i = 0; i < all.length; i++) {
-            if (!localContainer || !localContainer.contains(all[i])) {
-                return all[i];
-            }
-        }
-        return all[0] || null;
-    }
-
     /* Set a value on a React-controlled input or select.
-       React wraps the native `value` setter on the element instance;
-       going through the prototype's original setter bypasses that
-       and triggers the native change events that React delegates. */
-    function setFormValue(el, value) {
+       React wraps the native value setter so a plain assignment is
+       silently ignored. Using the prototype's original setter and
+       dispatching events forces React to pick up the change.
+       (Same technique used in the working gate form-bridge.js.) */
+    function setNativeValue(el, value) {
         if (!el) return;
-        try {
-            var proto = el.tagName === 'SELECT'
-                ? window.HTMLSelectElement.prototype
-                : window.HTMLInputElement.prototype;
-            var nativeSetter = Object.getOwnPropertyDescriptor(proto, 'value').set;
-            nativeSetter.call(el, value);
-        } catch (err) {
-            el.value = value;
-        }
+        var proto = el.tagName === 'SELECT'
+            ? window.HTMLSelectElement.prototype
+            : window.HTMLInputElement.prototype;
+        Object.getOwnPropertyDescriptor(proto, 'value').set.call(el, value);
         el.dispatchEvent(new Event('input',  { bubbles: true }));
         el.dispatchEvent(new Event('change', { bubbles: true }));
         console.log('[form-bridge] ' + (el.id || el.tagName) + ' ← ' + JSON.stringify(value));
     }
 
-    /* --- Validation --------------------------------------------- */
+    /* ============================================================
+       VALIDATION
+    ============================================================ */
 
     function validateIntroFields() {
         var nameEl  = document.getElementById('bridge-full-name');
@@ -128,35 +127,40 @@
         return true;
     }
 
-    /* --- Sync helpers ------------------------------------------- */
+    /* ============================================================
+       SYNC HELPERS
+    ============================================================ */
 
     function syncNameEmail() {
         var nameEl  = document.getElementById('bridge-full-name');
         var emailEl = document.getElementById('bridge-email');
-        setFormValue(getField(FORM_FIELD_IDS.firstName), nameEl  ? nameEl.value.trim()  : '');
-        setFormValue(getField(FORM_FIELD_IDS.email),     emailEl ? emailEl.value.trim() : '');
+        setNativeValue(getField(FORM_FIELD_IDS.firstName), nameEl  ? nameEl.value.trim()  : '');
+        setNativeValue(getField(FORM_FIELD_IDS.email),     emailEl ? emailEl.value.trim() : '');
     }
 
     function syncRole(roleLabel) {
-        setFormValue(getField(FORM_FIELD_IDS.role), ROLE_VALUE_MAP[roleLabel] || roleLabel);
+        setNativeValue(getField(FORM_FIELD_IDS.role), ROLE_VALUE_MAP[roleLabel] || roleLabel);
     }
 
     function syncAnswer(slideIndex, score) {
         if (slideIndex < 0 || slideIndex >= FORM_FIELD_IDS.questions.length) return;
-        setFormValue(getField(FORM_FIELD_IDS.questions[slideIndex]), SCORE_TO_TEXT[score] || '');
+        setNativeValue(getField(FORM_FIELD_IDS.questions[slideIndex]), SCORE_TO_TEXT[score] || '');
     }
 
     function resetFormAnswers() {
         FORM_FIELD_IDS.questions.forEach(function (id) {
             var el = getField(id);
-            if (el) setFormValue(el, '');
+            if (el) setNativeValue(el, '');
         });
     }
 
-    /* --- Start button (capture phase) --------------------------- */
-    /* Using capture: true means this listener fires BEFORE the quiz's
-       bubble-phase listener. If validation fails we call
-       stopImmediatePropagation() to prevent the quiz from advancing. */
+    /* ============================================================
+       START BUTTON — capture-phase validation gate
+       Capture phase fires before the quiz's bubble-phase listener
+       regardless of when each listener was registered. If validation
+       fails, stopImmediatePropagation() prevents the quiz from
+       advancing to the role slide.
+    ============================================================ */
 
     var startBtn = document.getElementById('intro-start-btn');
     if (startBtn) {
@@ -165,15 +169,18 @@
                 e.stopImmediatePropagation();
             } else {
                 syncNameEmail();
-                console.log('[form-bridge] name/email synced');
+                console.log('[form-bridge] name/email synced, advancing');
             }
-        }, true);
+        }, true /* capture phase */);
     }
 
-    /* --- Click delegation on viewport --------------------------- */
-    /* Handles role card selection and answer button clicks.
-       Click delegation is simpler and more reliable than
-       MutationObserver for tracking which answer was chosen. */
+    /* ============================================================
+       CLICK DELEGATION ON VIEWPORT
+       Handles role card selection and answer button clicks.
+       Delegation catches both initial clicks and Back-button
+       re-selections — re-clicking an answer simply overwrites
+       the previous sync.
+    ============================================================ */
 
     var viewport = document.getElementById('slide-viewport');
     if (viewport) {
@@ -185,7 +192,7 @@
             });
             if (roleCard) {
                 var label = roleCard.getAttribute('data-role-label') || '';
-                console.log('[form-bridge] role: ' + label);
+                console.log('[form-bridge] role selected: ' + label);
                 resetFormAnswers();
                 syncRole(label);
                 return;
@@ -203,17 +210,25 @@
                 var qIndex = parseInt(slideEl.id.replace('slide-q', ''), 10);
                 var score  = parseInt(answerBtn.getAttribute('data-score'), 10);
                 if (!isNaN(qIndex) && !isNaN(score)) {
-                    console.log('[form-bridge] Q' + qIndex + ' score=' + score);
+                    console.log('[form-bridge] Q' + qIndex + ' (slide index) score=' + score);
                     syncAnswer(qIndex, score);
                 }
             }
         });
     }
 
-    /* --- Body class observer (form submission trigger) ---------- */
-    /* The quiz calls document.body.classList.add('results-visible')
-       inside showResults(). We watch for that to know it's safe to
-       submit — guarantees all 12 answers are in before we fire. */
+    /* ============================================================
+       FORM SUBMISSION
+       The quiz adds 'results-visible' to document.body inside
+       showResults() — triggered only after all 12 questions are
+       answered. We watch for that class, sync name/email one final
+       time, then click the Squarespace Form Block's submit button.
+
+       The Squarespace Form Block MUST be on this page for submission
+       to work. Configure its success action to "Show inline message"
+       (not "Redirect to page") — otherwise Squarespace will navigate
+       away after submission and the results will disappear.
+    ============================================================ */
 
     if (window.MutationObserver) {
         var bodyObs = new MutationObserver(function (mutations) {
@@ -223,7 +238,7 @@
                 bodyObs.disconnect();
                 setTimeout(function () {
                     syncNameEmail();
-                    submitForm();
+                    submitSquarespaceForm();
                 }, 300);
                 return;
             }
@@ -234,18 +249,25 @@
         });
     }
 
-    function submitForm() {
-        var form = findForm();
-        if (!form) {
-            console.warn('[form-bridge] No form found. ' +
-                'In Squarespace: add a Form Block to this page. ' +
-                'Locally: keep #bridge-form-container in the HTML.');
+    function submitSquarespaceForm() {
+        /* Find the submit button outside the local testing copy.
+           The copy has onsubmit="return false;" so clicking it won't
+           reload the page, but we still prefer the real form block. */
+        var buttons = document.querySelectorAll('.react-form-contents button[type="submit"]');
+        var ssSubmit = null;
+        for (var i = 0; i < buttons.length; i++) {
+            if (!localContainer || !localContainer.contains(buttons[i])) {
+                ssSubmit = buttons[i];
+                break;
+            }
+        }
+        if (!ssSubmit) {
+            console.warn('[form-bridge] Squarespace Form Block not found. ' +
+                'Add a Form Block to this Squarespace page for live submission.');
             return;
         }
-        console.log('[form-bridge] submitting', form);
-        var btn = form.querySelector('button[type="submit"]');
-        if (btn) btn.click();
-        else form.submit();
+        console.log('[form-bridge] clicking Squarespace submit');
+        ssSubmit.click();
     }
 
 }());
