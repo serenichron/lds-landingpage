@@ -951,7 +951,7 @@
         /* Left CTA */
         html += '<div class="results-left-cta">'
               + '<p class="results-left-cta__label">Ready to walk through this together?</p>'
-              + '<a href="book-a-call.html" class="btn-cta-primary" style="width:100%;justify-content:center;" aria-label="Book a call with Andrew">'
+              + '<a href="https://cal.eu/learnds/meeting-with-andrew" class="btn-cta-primary" style="width:100%;justify-content:center;" aria-label="Book a call with Andrew">'
               + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
               + ' Talk to Andrew'
               + '</a>'
@@ -1046,7 +1046,7 @@
               + '</div>'
               + '<div class="results-cta-block__right">'
               + '<div class="results-cta-buttons">'
-              + '<a href="book-a-call.html" class="btn-cta-primary" aria-label="Book a call with Andrew">'
+              + '<a href="https://cal.eu/learnds/meeting-with-andrew" class="btn-cta-primary" aria-label="Book a call with Andrew">'
               + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
               + ' Talk to Andrew'
               + '</a>'
@@ -1190,8 +1190,8 @@
     ============================================================ */
 
     var JOURNEY_STEPS = [
-        { id: 'landing',    label: 'LDS home',       href: 'index.html' },
-        { id: 'course',     label: 'Free course',   href: 'tier1-course.html' },
+        { id: 'landing',    label: 'LDS home',       href: '/learning-design-solutions' },
+        { id: 'course',     label: 'Free course',   href: '/tier1course' },
         { id: 'assessment', label: 'Assessment',    href: null },
         { id: 'results',    label: 'Results',       href: null }
     ];
@@ -1243,7 +1243,7 @@
         /* Book a call — always last, styled as mini CTA */
         html += '<li class="journey-breadcrumb__item">'
               + '<span class="journey-breadcrumb__sep" aria-hidden="true">&#8250;</span>'
-              + '<a href="book-a-call.html" class="journey-breadcrumb__cta" aria-label="Book a call with Andrew">Book a call</a>'
+              + '<a href="https://cal.eu/learnds/meeting-with-andrew" class="journey-breadcrumb__cta" aria-label="Book a call with Andrew">Book a call</a>'
               + '</li>';
 
         html += '</ol>';
