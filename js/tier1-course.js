@@ -404,10 +404,10 @@
        JOURNEY BREADCRUMB
     ================================================================ */
     var JOURNEY_STEPS = [
-        { id: 'home',       label: 'LDS home',      href: 'index.html' },
+        { id: 'home',       label: 'LDS home',      href: '/learning-design-solutions' },
         { id: 'course',     label: 'Free course',   href: null },
-        { id: 'assessment', label: 'Assessment',     href: 'tier2-assessment.html' },
-        { id: 'call',       label: 'Book a call',    href: 'book-a-call.html' }
+        { id: 'assessment', label: 'Assessment',     href: '/tier2assessment' },
+        { id: 'call',       label: 'Book a call',    href: 'https://cal.eu/learnds/meeting-with-andrew' }
     ];
 
     function renderBreadcrumb() {
@@ -461,7 +461,7 @@
         var backBtn = document.getElementById('breadcrumb-back-btn');
         if (backBtn) {
             backBtn.addEventListener('click', function () {
-                window.location.href = 'index.html';
+                window.location.href = '/learning-design-solutions';
             });
         }
     }
