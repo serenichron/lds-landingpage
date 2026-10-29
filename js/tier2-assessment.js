@@ -1257,7 +1257,7 @@
                 var activeSlide = viewport.querySelector('.slide.is-active');
                 if (!activeSlide) return;
                 if (activeSlide.id === 'slide-intro') {
-                    window.location.href = 'tier1-course.html';
+                    window.location.href = '/scaling-online-programmes-free-course/';
                 } else if (activeSlide.id === 'slide-role') {
                     navigateToSlide(slideIntro, 'backward');
                 } else if (activeSlide.id === 'slide-results') {
