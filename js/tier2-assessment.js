@@ -1191,7 +1191,7 @@
 
     var JOURNEY_STEPS = [
         { id: 'landing',    label: 'LDS home',       href: '/learning-design-solutions' },
-        { id: 'course',     label: 'Free course',   href: '/tier1course' },
+        { id: 'course',     label: 'Free course',   href: '/scaling-online-programmes-free-course' },
         { id: 'assessment', label: 'Assessment',    href: null },
         { id: 'results',    label: 'Results',       href: null }
     ];
