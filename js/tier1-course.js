@@ -406,7 +406,7 @@
     var JOURNEY_STEPS = [
         { id: 'home',       label: 'LDS home',      href: '/learning-design-solutions' },
         { id: 'course',     label: 'Free course',   href: null },
-        { id: 'assessment', label: 'Assessment',     href: '/tier2assessment' },
+        { id: 'assessment', label: 'Assessment',     href: '/online-programme-readiness-assessment' },
         { id: 'call',       label: 'Book a call',    href: 'https://cal.eu/learnds/meeting-with-andrew' }
     ];
 
